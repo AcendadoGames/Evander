@@ -3,6 +3,6 @@ TextContent =
 	ZilchScriptBuilder = 
 	{
 		string Name = "ArcherAI",
-		uint64 ResourceId = 57d89163f69edc36,
+		uint64 ResourceId = 57de7cdd543b39fa,
 	},
 },

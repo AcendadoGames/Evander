@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "VelRotDampening",
-		uint64 ResourceId = 57c6a0fea3dccfff,
-	},
-},

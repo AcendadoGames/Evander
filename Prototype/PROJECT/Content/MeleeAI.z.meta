@@ -3,6 +3,6 @@ TextContent =
 	ZilchScriptBuilder = 
 	{
 		string Name = "MeleeAI",
-		uint64 ResourceId = 57d8ed27f367d9ba,
+		uint64 ResourceId = 57de7c9249526b18,
 	},
 },

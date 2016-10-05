@@ -48,7 +48,7 @@ class ArcherAI : ZilchComponent
             this.Owner.RigidBody.Velocity += normalizeVector* this.Speed;
         }
         
-        while (distanceToPlayer <= 20 && distanceToPlayer >= 5 && this.Timer >= this.FireRate)
+        if (distanceToPlayer <= 20 && distanceToPlayer >= 5 && this.Timer >= this.FireRate)
         {
             this.Fire();
             this.Timer = 0;

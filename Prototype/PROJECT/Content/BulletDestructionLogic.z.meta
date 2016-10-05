@@ -3,6 +3,6 @@ TextContent =
 	ZilchScriptBuilder = 
 	{
 		string Name = "BulletDestructionLogic",
-		uint64 ResourceId = 57d8f38474954db8,
+		uint64 ResourceId = 57de7c8c4f5ab894,
 	},
 },
