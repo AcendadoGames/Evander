@@ -1,0 +1,36 @@
+class MouseInput : ZilchComponent
+{
+    var SendL : Boolean = false;
+    var SendR : Boolean = false;
+    var StopSendingL : Boolean = false;
+    var StopSendingR : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var ev  = ZilchEvent();
+        
+        if(Zero.Mouse.IsButtonDown(MouseButtons.Left) && !this.StopSendingL)
+        {
+            ev.EventId = "L";
+            this.Owner.DispatchEvent("L", ev);
+            this.StopSendingL = true;
+        }
+        if(!Zero.Mouse.IsButtonDown(MouseButtons.Left))
+            this.StopSendingL = false;
+            
+        if(Zero.Mouse.IsButtonDown(MouseButtons.Right) && !this.StopSendingR)
+        {
+            ev.EventId = "R";
+            this.Owner.DispatchEvent("R", ev);
+            this.StopSendingR = true;
+        }
+        if(!Zero.Mouse.IsButtonDown(MouseButtons.Right))
+            this.StopSendingR = false;
+        
+    }
+}
