@@ -4,6 +4,7 @@ Work In Progress :
  -Gladiator IA
  -Combo System
  -Eat some artists' pussies to get art (almost done madarfakas)
+ -Targeting System
 
 To Start :
 ----------------------------------------------------------------
