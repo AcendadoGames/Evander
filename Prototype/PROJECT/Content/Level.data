@@ -104,7 +104,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-15.3469191, 1.73818731, 50],
+			Vec3 Translation = [-1.3943187, 0.564604163, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -124,7 +124,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-15.3469191, 1.73818731, 0],
+			Vec3 LookTarget = [-1.3943187, 0.564604163, 6.09887479e-07],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -237,7 +237,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-15.3469191, 1.73818731, 0],
+			Vec3 Translation = [13.6014624, 1.73818731, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -314,7 +314,6 @@ Level =
 		},
 		ComboLogic = 
 		{
-			float TimeToCancelCombo = 0.699999988,
 		},
 	},
 	ArchetypeInstance = 

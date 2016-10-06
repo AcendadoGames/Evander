@@ -11,6 +11,7 @@ class SpellCast : ZilchComponent
     function CastingSpell(event : ZilchEvent)
     {
         var position = this.Owner.Transform.Translation;
-        this.Space.CreateAtPosition(this.Projectile, position);
+        if(!this.Space.GlobalVariables.NoEnemies)
+            this.Space.CreateAtPosition(this.Projectile, position);
     }
 }

@@ -1,6 +1,5 @@
 class TargetSelector : ZilchComponent
 {
-    var NearestEnemyPos : Real3 = Real3(10000,1000,100000);
     var TargetPosition : Real3 = Real3(0,0,0);
     var Closestenemy : Cog = null;
     
@@ -12,30 +11,71 @@ class TargetSelector : ZilchComponent
     function OnLogicUpdate(event : UpdateEvent)
     {
         var enemyarray = this.Space.FindAllObjectsByName("PrototypeEnemy");
+        var enemyarray2 = this.Space.FindAllObjectsByName("PrototypeEnemy");
         
         if(!enemyarray.IsNotEmpty)
             this.Space.GlobalVariables.NoEnemies = true;
         else
             this.Space.GlobalVariables.NoEnemies = false;
-            
-        while (enemyarray.IsNotEmpty)
+        
+        var enemiesInFront : Array[Cog] = this.GetEnemiesInFrontPlayer(enemyarray);
+        var enemiesInBack : Array[Cog] = this.GetEnemiesInBackPlayer(enemyarray2);
+        
+        if(!this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
         {
-            if(Math.Distance(enemyarray.Current.Transform.Translation, this.Owner.Transform.Translation) < 
-               Math.Distance(this.NearestEnemyPos, this.Owner.Transform.Translation))
+            if(enemiesInFront.Count > 0)
+            {
+                this.Closestenemy = enemiesInFront[0];
+                for(var i = 0; i < enemiesInFront.Count; i += 1)
                 {
-                    
-                    if(!this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
+                    if(Math.Distance(this.Owner.Transform.Translation, this.Closestenemy.Transform.Translation) >
+                    Math.Distance(this.Owner.Transform.Translation, enemiesInFront[i].Transform.Translation))
                     {
-                        this.NearestEnemyPos = enemyarray.Current.Transform.Translation;
-                        this.Closestenemy = enemyarray.Current; 
+                        this.Closestenemy = enemiesInFront[i];
                     }
                 }
-                
-            if(this.Closestenemy != null)
-                this.TargetPosition = this.Closestenemy.Transform.Translation;
-
-            enemyarray.MoveNext();
+            }
+            else if(enemiesInBack.Count > 0)
+            {
+                this.Closestenemy = enemiesInBack[0];
+                for(var i = 0; i < enemiesInBack.Count; i += 1)
+                {
+                    if(Math.Distance(this.Owner.Transform.Translation, this.Closestenemy.Transform.Translation) >
+                    Math.Distance(this.Owner.Transform.Translation, enemiesInBack[i].Transform.Translation))
+                    {
+                        this.Closestenemy = enemiesInBack[i];
+                    }
+                }
+            }
         }
         
+        if(this.Closestenemy != null)
+            this.TargetPosition = this.Closestenemy.Transform.Translation;
+
+    }
+    
+    
+    function GetEnemiesInFrontPlayer (enemies : CogNameRange) : Array[Cog]
+    {
+        var enemiesInFront : Array[Cog] = new Array[Cog]();
+        while (enemies.IsNotEmpty)
+        {
+            if(enemies.Current.Transform.Translation.X > this.Owner.Transform.Translation.X)
+                enemiesInFront.Push(enemies.Current);
+            enemies.MoveNext();   
+        }
+        return enemiesInFront;
+    }
+    function GetEnemiesInBackPlayer (enemies : CogNameRange) : Array[Cog]
+    {
+        var enemiesInBack : Array[Cog] = new Array[Cog]();
+        while (enemies.IsNotEmpty)
+        {
+            if(enemies.Current.Transform.Translation.X < this.Owner.Transform.Translation.X)
+                enemiesInBack.Push(enemies.Current);
+            enemies.MoveNext();   
+        }
+        return enemiesInBack;
     }
 }
+
