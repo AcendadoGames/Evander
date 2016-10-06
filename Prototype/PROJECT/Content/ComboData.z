@@ -1,4 +1,4 @@
-class ComboData : ZilchComponent
+/*class ComboData : ZilchComponent
 {
     var Combos : Array[Combo] = new Array[Combo]();
     
@@ -258,4 +258,4 @@ class RLL : Combo
         Console.WriteLine("Executing", this.ComboName);
     }
 
-}
+}*/

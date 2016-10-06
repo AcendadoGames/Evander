@@ -104,7 +104,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-0.271317393, 1.6876055, 50],
+			Vec3 Translation = [-0.558504939, 2.60878348, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -116,7 +116,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 100,
+			float Size = 32.8893242,
 		},
 		EditorCameraController = 
 		{
@@ -124,7 +124,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-0.271317393, 1.6876055, 6.58975353e-07],
+			Vec3 LookTarget = [-0.558504939, 2.60878348, -1.02089905e-06],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -240,7 +240,7 @@ Level =
 			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
 			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
 			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
+			Vec3 Size = [0.5, 0.5, 50],
 		},
 	},
 	Cog = 
@@ -301,13 +301,15 @@ Level =
 		},
 		KeyboardController = 
 		{
+			float TimeSlowMo = 5,
+			float MaxTimeSlowed = 5,
 			float Spell1Cooldown = 0,
 		},
 		MovementController = 
 		{
 			float MoveSpeed = 3,
 			float DashSpeed = 50,
-			float JumpSpeed = 10,
+			float JumpSpeed = 50,
 			float RotationSpeed = 2,
 		},
 		SpellCast = 
@@ -318,6 +320,7 @@ Level =
 		{
 			float VelocityDampening = 0.899999976,
 			float JumpDampening = 0.899999976,
+			float NegativeJumpDampening = 1.10000002,
 			float RotationDampening = 0.899999976,
 		},
 		TargetSelector = 
@@ -333,12 +336,36 @@ Level =
 		ComboLogic = 
 		{
 		},
+		ComboTree = 
+		{
+		},
+		Hierarchy = 
+		{
+			ArchetypeInstance = 
+			{
+				string Name = "57deb71aa0082a0f:Combo",
+				LinkId = 
+				{
+					uint Id = 6,
+				},
+				Transform = 
+				{
+					Vec3 Translation = [7.78126621, 2.85296631, 0],
+					Vec3 Scale = [1, 1, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Named = 
+				{
+					string Name = "Combo",
+				},
+			},
+		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 6,
+			uint Id = 7,
 		},
 		Named = 
 		{
@@ -398,6 +425,7 @@ Level =
 		{
 			float VelocityDampening = 0.899999976,
 			float JumpDampening = 0.899999976,
+			float NegativeJumpDampening = 1,
 			float RotationDampening = 0.899999976,
 		},
 		GravityEffect = 
@@ -413,7 +441,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 7,
+			uint Id = 8,
 		},
 		Named = 
 		{
@@ -473,6 +501,7 @@ Level =
 		{
 			float VelocityDampening = 0.899999976,
 			float JumpDampening = 0.899999976,
+			float NegativeJumpDampening = 1,
 			float RotationDampening = 0.899999976,
 		},
 		GravityEffect = 
@@ -483,20 +512,20 @@ Level =
 			float Strength = 10,
 			Vec3 Direction = [0, 1, 0],
 		},
-		ArcherAI = 
-		{
-			float FireRate = 1,
-			float Speed = 1,
-			string BulletArchetype = "57d8856f24342cc4:Arrow",
-			float BulletSpeed = 50,
-		},
 	},
-	ArchetypeInstance = 
+	Cog = 
 	{
-		string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		LinkId = 
 		{
-			uint Id = 8,
+			uint Id = 9,
+		},
+		Named = 
+		{
+			string Name = "PrototypeEnemy",
+		},
+		Archetyped = 
+		{
+			string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		},
 		Transform = 
 		{
@@ -504,17 +533,75 @@ Level =
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 0, 0, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		RigidBody = 
+		{
+			bool Static = false,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = true,
+			bool Mode2D = true,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		BoxCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
+			string SerializedGroupName = "57c6b63fee8fbbb0:Enemy",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+		VelRotDampening = 
+		{
+			float VelocityDampening = 0.899999976,
+			float JumpDampening = 0.899999976,
+			float NegativeJumpDampening = 1,
+			float RotationDampening = 0.899999976,
+		},
+		GravityEffect = 
+		{
+			bool Active = true,
+			bool WakeUpOnChange = true,
+			bool LocalSpaceDirection = false,
+			float Strength = 10,
+			Vec3 Direction = [0, 1, 0],
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 10,
+		},
 		Named = 
 		{
 			string Name = "PrototypeEnemy",
 		},
-	},
-	ArchetypeInstance = 
-	{
-		string Name = "57c6f3818ec7874f:PrototypeEnemy",
-		LinkId = 
+		Archetyped = 
 		{
-			uint Id = 9,
+			string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		},
 		Transform = 
 		{
@@ -522,9 +609,60 @@ Level =
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
-		Named = 
+		Sprite = 
 		{
-			string Name = "PrototypeEnemy",
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 0, 0, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		RigidBody = 
+		{
+			bool Static = false,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = true,
+			bool Mode2D = true,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		BoxCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
+			string SerializedGroupName = "57c6b63fee8fbbb0:Enemy",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 0.5],
+		},
+		VelRotDampening = 
+		{
+			float VelocityDampening = 0.899999976,
+			float JumpDampening = 0.899999976,
+			float NegativeJumpDampening = 1,
+			float RotationDampening = 0.899999976,
+		},
+		GravityEffect = 
+		{
+			bool Active = true,
+			bool WakeUpOnChange = true,
+			bool LocalSpaceDirection = false,
+			float Strength = 10,
+			Vec3 Direction = [0, 1, 0],
 		},
 	},
 },

@@ -14,7 +14,7 @@ class MovementController : ZilchComponent
     
     var CanPlay : Boolean =  true;
     
-    var Epsilon : Real = Real(2);
+    var Epsilon : Real = Real(1.5);
 
     function Initialize(init : CogInitializer)
     {

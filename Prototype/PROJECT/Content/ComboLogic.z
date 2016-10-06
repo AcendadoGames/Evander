@@ -1,4 +1,4 @@
-class ComboLogic : ZilchComponent
+/*class ComboLogic : ZilchComponent
 {
     var ComboIndex : Integer = 0;
     var TimeToCancelCombo : Real = 0.7;
@@ -77,3 +77,4 @@ class ComboLogic : ZilchComponent
         return true;
     }
 }
+*/

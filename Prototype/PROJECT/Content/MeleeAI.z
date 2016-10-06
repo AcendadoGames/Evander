@@ -19,7 +19,7 @@ class MeleeAI : ZilchComponent
         
         if (distanceToPlayer <= 25.0)
         {
-            this.Owner.RigidBody.Velocity += normalizeVector* this.Speed;
+            this.Owner.RigidBody.Velocity += Real3(normalizeVector.X, 0, 0)* this.Speed;
         }
     }
 }

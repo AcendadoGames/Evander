@@ -5,6 +5,8 @@ class VelRotDampening : ZilchComponent
     
     [Property]
     var JumpDampening : Real = 0.9;
+    [Property]
+    var NegativeJumpDampening : Real = 1.1;
         
     [Property]
     var RotationDampening : Real = 0.9;
@@ -30,9 +32,20 @@ class VelRotDampening : ZilchComponent
     }
     function JumpDamp()
     {
-        var vel = this.Owner.RigidBody.Velocity;
-        vel.Y *= this.JumpDampening;
-        this.Owner.RigidBody.Velocity = vel;
+        if(this.Owner.RigidBody.Velocity.Y > 0)
+        {
+            var vel = this.Owner.RigidBody.Velocity;
+            vel.Y *= this.JumpDampening;
+            this.Owner.RigidBody.Velocity = vel;
+        }
+        else if(this.Owner.RigidBody.Velocity.Y > -40)
+        {
+            var vel = this.Owner.RigidBody.Velocity;
+            vel.Y *= this.NegativeJumpDampening;
+            this.Owner.RigidBody.Velocity = vel;
+        } 
+        if(this.Space.GlobalVariables.Dashing)
+            this.Owner.RigidBody.Velocity = Real3(0,0,0);
     }
     function RotDampening()
     {

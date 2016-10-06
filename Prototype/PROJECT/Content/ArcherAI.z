@@ -9,7 +9,7 @@ class ArcherAI : ZilchComponent
     var FireRate : Real;
     
     [Property] 
-    var Speed : Real;
+    var Speed : Real = 1.0;
     
     [Property] 
     var BulletArchetype : Archetype = Archetype.Arrow;
@@ -37,15 +37,18 @@ class ArcherAI : ZilchComponent
         this.ShootingAngle = Math.ATan2(vectorToPlayer.Y, vectorToPlayer.X);
         
         //Console.WriteLine("`distanceToPlayer`");
+        Console.WriteLine("`this.Owner.RigidBody.Velocity.X`");
+        Console.WriteLine("`normalizeVector.X`");
         
         if (distanceToPlayer <= 25.0 && distanceToPlayer >=15)
         {
-            this.Owner.RigidBody.Velocity += normalizeVector* this.Speed;
+            this.Owner.RigidBody.Velocity = Real3(normalizeVector.X, 0, 0) * this.Speed;
+            
         }
         
         if (distanceToPlayer <= 4.5)
         {
-            this.Owner.RigidBody.Velocity += normalizeVector* this.Speed;
+            this.Owner.RigidBody.Velocity = Real3(normalizeVector.X, 0, 0)* this.Speed;
         }
         
         if (distanceToPlayer <= 20 && distanceToPlayer >= 5 && this.Timer >= this.FireRate)

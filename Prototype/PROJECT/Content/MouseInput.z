@@ -4,7 +4,7 @@ class MouseInput : ZilchComponent
     var SendR : Boolean = false;
     var StopSendingL : Boolean = false;
     var StopSendingR : Boolean = false;
-    
+
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
