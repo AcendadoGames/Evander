@@ -4,6 +4,7 @@ Work In Progress :
  -Gladiator IA
  -Eat some artists' pussies to get art (almost done madarfakas)
  -Targeting System
+ -When the player jumps too high he falls through the map (TO FIX!!!!)
 
 To Start :
 ----------------------------------------------------------------
