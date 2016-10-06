@@ -32,6 +32,8 @@ class Combo
     var POST_ATTACK : Integer = 2;
     var RECOVER : Integer = 3;
     
+    var InputTiming : Real = 0.2;
+    
     var States : Array[ComboState] = new Array[ComboState]();
     
      constructor()

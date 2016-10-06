@@ -1,5 +1,6 @@
 class ComboLogic : ZilchComponent
 {
+    var ComboIndex : Integer = 0;
     var TimeToCancelCombo : Real = 0.7;
     var Temp1 : Real;
     var CurrentCombo : Array[String] = new Array[String]();
@@ -21,6 +22,7 @@ class ComboLogic : ZilchComponent
             if(this.CompareArrays(this.CurrentCombo, this.Space.ComboData.Combos[i].ComboName) &&
             this.TimeToCancelCombo > 0)
             {
+                this.ComboIndex = i;
                 this.Space.ComboData.Combos[i].ExecuteCombo();
                 break;
             }
@@ -43,17 +45,21 @@ class ComboLogic : ZilchComponent
         if(this.CurrentCombo.Count == 3)
             this.CurrentCombo.Clear();
         
-        this.CurrentCombo.Push("L");
-        this.TimeToCancelCombo = this.Temp1;
+        if(this.TimeToCancelCombo < (this.Temp1 - this.Space.ComboData.Combos[this.ComboIndex].InputTiming))
+        {
+            this.CurrentCombo.Push("L");
+            this.TimeToCancelCombo = this.Temp1;
+        }
     }
     function WriteR (event : ZilchEvent)
     {
         if(this.CurrentCombo.Count == 3)
             this.CurrentCombo.Clear();
-            
-        this.CurrentCombo.Push("R");
-        this.TimeToCancelCombo = this.Temp1;
-            
+        if(this.TimeToCancelCombo < (this.Temp1 - this.Space.ComboData.Combos[this.ComboIndex].InputTiming))
+        {  
+            this.CurrentCombo.Push("R");
+            this.TimeToCancelCombo = this.Temp1;
+        }
     }
     function CompareArrays (x : Array[String], y : Array[String]) : Boolean
     {
