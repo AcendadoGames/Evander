@@ -1,0 +1,79 @@
+class ArcherAI : ZilchComponent
+{
+    var Timer : Real = 0.0;
+    
+    [Dependency]
+    var Transform : Transform;
+    
+    [Property] 
+    var FireRate : Real;
+    
+    [Property] 
+    var Speed : Real;
+    
+    [Property] 
+    var BulletArchetype : Archetype = Archetype.Arrow;
+    
+    [Property] 
+    var BulletSpeed : Real = 20.0;
+    
+    var ShootingAngle : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Timer += event.Dt;
+        
+        var ownerPosition = this.Owner.Transform.Translation;
+        var playerPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+        var vectorToPlayer = playerPosition - ownerPosition;
+        
+        var distanceToPlayer = Math.Distance(ownerPosition, playerPosition);
+        var normalizeVector = Math.Normalize(vectorToPlayer);
+        this.ShootingAngle = Math.ATan2(vectorToPlayer.Y, vectorToPlayer.X);
+        
+        //Console.WriteLine("`distanceToPlayer`");
+        
+        if (distanceToPlayer <= 25.0 && distanceToPlayer >=15)
+        {
+            this.Owner.RigidBody.Velocity += normalizeVector* this.Speed;
+        }
+        
+        if (distanceToPlayer <= 4.5)
+        {
+            this.Owner.RigidBody.Velocity += normalizeVector* this.Speed;
+        }
+        
+        while (distanceToPlayer <= 20 && distanceToPlayer >= 5 && this.Timer >= this.FireRate)
+        {
+            this.Fire();
+            this.Timer = 0;
+        }
+    }
+    function Fire()
+    {
+        //This is creating the bullet in the chosen position and giving it a velocity and direction
+        var bulletPosition = this.Owner.Transform.WorldTranslation;
+        
+        var bullet = this.Space.CreateAtPosition(this.BulletArchetype, bulletPosition);
+        
+        var firingAngle = this.ShootingAngle;
+        
+        var xPart = Math.Cos(firingAngle);
+        var yPart = Math.Sin(firingAngle);
+        var zPart = 0.0;
+        
+        var firingDirection = Real3(xPart, yPart, zPart);
+        
+        var firingAng : Real3 = Real3(0, 0, 0);
+        
+        //firingAngle = Math.ToDegrees(radians :firingAngle);
+        firingAng = Real3(0, 0, firingAngle + Math.Pi);
+        bullet.Transform.EulerAngles = firingAng;
+        bullet.RigidBody.Velocity = firingDirection * this.BulletSpeed;
+    }
+}
