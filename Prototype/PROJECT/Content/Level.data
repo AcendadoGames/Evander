@@ -104,7 +104,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-0.558504939, 2.60878348, 50],
+			Vec3 Translation = [-8.94890022, 5.66931009, 69.9990005],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -124,7 +124,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-0.558504939, 2.60878348, -1.02089905e-06],
+			Vec3 LookTarget = [-8.94890022, 5.66931009, 19.9990005],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -185,12 +185,50 @@ Level =
 				CogPathPreference PathPreference2 = Absolute,
 			},
 		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 5,
+				},
+				Named = 
+				{
+					string Name = "TimeBar",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-12.3778, 10.0208998, -40],
+					Vec3 Scale = [0.689999998, 0.69126302, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 1, 1, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "577c78613abeb18a:timebardown",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 5,
+			uint Id = 6,
 		},
 		Named = 
 		{
@@ -346,7 +384,7 @@ Level =
 				string Name = "57deb71aa0082a0f:Combo",
 				LinkId = 
 				{
-					uint Id = 6,
+					uint Id = 7,
 				},
 				Transform = 
 				{
@@ -365,7 +403,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 7,
+			uint Id = 8,
 		},
 		Named = 
 		{
@@ -441,7 +479,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 8,
+			uint Id = 9,
 		},
 		Named = 
 		{
@@ -517,7 +555,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 9,
+			uint Id = 10,
 		},
 		Named = 
 		{
@@ -593,7 +631,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 10,
+			uint Id = 11,
 		},
 		Named = 
 		{
@@ -663,6 +701,48 @@ Level =
 			bool LocalSpaceDirection = false,
 			float Strength = 10,
 			Vec3 Direction = [0, 1, 0],
+		},
+		MeleeAI = 
+		{
+			float Speed = 1,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 12,
+		},
+		Named = 
+		{
+			string Name = "ChargeBar",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-11.3500004, 9.89694023, 1],
+			Vec3 Scale = [0.689999998, 0.69126302, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "577c786f3c86d3bb:bar",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		TimeBar = 
+		{
 		},
 	},
 },
