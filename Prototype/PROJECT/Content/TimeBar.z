@@ -10,10 +10,10 @@ class TimeBar : ZilchComponent
         var timeLim : Real = this.Space.FindObjectByName("PrototypePlayer").TimeLapse.TimeLim;
         var scale: Real = (timeLim/ 120);
         var counter: Real = 120;
-        var timePos : Real = ((5.97 * (0.69 - (0.69 * scale))) );
-        var timeBar = this.Space.FindObjectByName("Camera").Transform.Translation.X - 19.35;
+        var timePos : Real = ((4.93 * (0.69 - (0.69 * scale))) );
+        var timeBar = this.Space.FindObjectByName("Camera").Transform.Translation.X -20.1927;
         
-        this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Space.FindObjectByName("Camera").Transform.Translation.Y + 12.94, 1);
+        this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Space.FindObjectByName("Camera").Transform.Translation.Y + 12.4833, 1);
         
         if (timeLim != counter)
         {
