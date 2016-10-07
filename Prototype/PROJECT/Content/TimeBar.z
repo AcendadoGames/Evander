@@ -11,9 +11,9 @@ class TimeBar : ZilchComponent
         var scale: Real = (timeLim/ 120);
         var counter: Real = 120;
         var timePos : Real = ((5.97 * (0.69 - (0.69 * scale))) );
-        var timeBar = this.Space.FindObjectByName("Camera").Transform.Translation.X - 11.35;
+        var timeBar = this.Space.FindObjectByName("Camera").Transform.Translation.X - 19.35;
         
-        this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Space.FindObjectByName("Camera").Transform.Translation.Y + 9.97, 1);
+        this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Space.FindObjectByName("Camera").Transform.Translation.Y + 12.94, 1);
         
         if (timeLim != counter)
         {
