@@ -22,7 +22,6 @@ class TimeBar : ZilchComponent
             this.Owner.Transform.Scale = Real3(0.69 * scale, this.Owner.Transform.Scale.Y, 1); 
             this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Owner.Transform.Translation.Y, 1);
             counter -= 1;
-            Console.WriteLine("`timeLim != counter `");
         }
     }
 }
