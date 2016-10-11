@@ -37,8 +37,8 @@ class ArcherAI : ZilchComponent
         this.ShootingAngle = Math.ATan2(vectorToPlayer.Y, vectorToPlayer.X);
         
         //Console.WriteLine("`distanceToPlayer`");
-        Console.WriteLine("`this.Owner.RigidBody.Velocity.X`");
-        Console.WriteLine("`normalizeVector.X`");
+        //Console.WriteLine("`this.Owner.RigidBody.Velocity.X`");
+        //Console.WriteLine("`normalizeVector.X`");
         
         if (distanceToPlayer <= 25.0 && distanceToPlayer >=15)
         {
