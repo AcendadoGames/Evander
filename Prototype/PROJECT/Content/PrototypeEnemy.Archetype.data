@@ -8,13 +8,9 @@ Cog =
 	{
 		string Name = "PrototypeEnemy",
 	},
-	Archetyped = 
-	{
-		string Name = "57c6f3818ec7874f:PrototypeEnemy",
-	},
 	Transform = 
 	{
-		Vec3 Translation = [-6.56538677, 4.30336332, 0],
+		Vec3 Translation = [12.2520905, 4.5193224, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -62,7 +58,6 @@ Cog =
 	{
 		float VelocityDampening = 0.899999976,
 		float JumpDampening = 0.899999976,
-		float NegativeJumpDampening = 1,
 		float RotationDampening = 0.899999976,
 	},
 	GravityEffect = 

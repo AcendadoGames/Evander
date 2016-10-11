@@ -42,5 +42,6 @@ class Spell1Logic : ZilchComponent
         this.Owner.SphereCollider.CollisionGroup = CollisionGroup.Null;
         this.Space.GlobalVariables.CanSpell1 = true;
         this.Owner.Destroy();
+
     }
 }

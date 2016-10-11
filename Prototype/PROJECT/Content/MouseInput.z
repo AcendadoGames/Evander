@@ -4,9 +4,12 @@ class MouseInput : ZilchComponent
     var SendR : Boolean = false;
     var StopSendingL : Boolean = false;
     var StopSendingR : Boolean = false;
+    
+    var Controller:Gamepad = null;
 
     function Initialize(init : CogInitializer)
     {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
 
@@ -14,22 +17,22 @@ class MouseInput : ZilchComponent
     {
         var ev  = ZilchEvent();
         
-        if(Zero.Mouse.IsButtonDown(MouseButtons.Left) && !this.StopSendingL)
+        if((Zero.Mouse.IsButtonDown(MouseButtons.Left) || this.Controller.IsButtonPressed(Buttons.X)) && !this.StopSendingL)
         {
             ev.EventId = "L";
             this.Owner.DispatchEvent("L", ev);
             this.StopSendingL = true;
         }
-        if(!Zero.Mouse.IsButtonDown(MouseButtons.Left))
+        if((!Zero.Mouse.IsButtonDown(MouseButtons.Left) && !this.Controller.IsButtonPressed(Buttons.X)))
             this.StopSendingL = false;
             
-        if(Zero.Mouse.IsButtonDown(MouseButtons.Right) && !this.StopSendingR)
+        if((Zero.Mouse.IsButtonDown(MouseButtons.Right) || this.Controller.IsButtonPressed(Buttons.Y)) && !this.StopSendingR)
         {
             ev.EventId = "R";
             this.Owner.DispatchEvent("R", ev);
             this.StopSendingR = true;
         }
-        if(!Zero.Mouse.IsButtonDown(MouseButtons.Right))
+        if((!Zero.Mouse.IsButtonDown(MouseButtons.Right) && !this.Controller.IsButtonPressed(Buttons.Y)))
             this.StopSendingR = false;
         
     }

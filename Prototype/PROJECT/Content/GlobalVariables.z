@@ -3,9 +3,11 @@ class GlobalVariables : ZilchComponent
     var CanDash : Boolean = false;
     var Dashing : Boolean = false;
     var CanSpell1 : Boolean = true;
+    var CanJump : Boolean = false;
     var NoEnemies : Boolean = true;
     var Spell1TimeToJump : Real = 3.0;
     var Temp : Real;
+    var WallDampening : Boolean = false;
     
     var Temp1 : Real;
     
@@ -32,6 +34,7 @@ class GlobalVariables : ZilchComponent
                 this.CanDash = false;
             }
         }
+
     }
     
     function Spell1Dash(event : ZilchEvent)

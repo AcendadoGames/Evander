@@ -15,9 +15,12 @@ class MovementController : ZilchComponent
     var CanPlay : Boolean =  true;
     
     var Epsilon : Real = Real(1.5);
+    
+    var Controller:Gamepad = null;
 
     function Initialize(init : CogInitializer)
     {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
         Zero.Connect(this.Owner, "MoveLeft", this.OnKeyboardEvent);
         Zero.Connect(this.Owner, "MoveRight", this.OnKeyboardEvent);
@@ -26,6 +29,9 @@ class MovementController : ZilchComponent
         Zero.Connect(this.Owner, "Jump", this.OnKeyboardEvent);
         Zero.Connect(this.Owner, "MoveDown", this.OnKeyboardEvent);
         Zero.Connect(this.Owner, "PlayerDead", this.AllowPlay);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.CanJump);
+        Zero.Connect(this.Owner, Events.CollisionPersisted, this.WallJump);
+        Zero.Connect(this.Owner, Events.CollisionEnded, this.WallJumpEnded);
     }
     function AllowPlay(event : ZilchEvent)
     {
@@ -75,20 +81,25 @@ class MovementController : ZilchComponent
             if(event.EventId == "Jump")
             {
                 //movement
-                move = Real3(0,1,0) * this.JumpSpeed;
+                if(this.Owner.RigidBody.Velocity.X > 0)
+                    move = Real3(0.5,1,0) * this.JumpSpeed;
+                else if(this.Owner.RigidBody.Velocity.X < 0)
+                    move = Real3(-0.5,1,0) * this.JumpSpeed;
+                else
+                    move = Real3(0,1,0) * this.JumpSpeed;
                 //rotation
                 rotation = Real3(-1,0,0) * this.RotationSpeed;      
                 this.Owner.RigidBody.AngularVelocity += rotation;
             }
             
-            if(event.EventId == "MoveDown")
+            /*if(event.EventId == "MoveDown")
             {
                 //movement
                 move = Real3(0,-1,0) * this.MoveSpeed;
                 //rotation
                 rotation = Real3(-1,0,0) * this.RotationSpeed;      
                 this.Owner.RigidBody.AngularVelocity += rotation;
-            }
+            }*/
             
             //movement
             this.Owner.RigidBody.Velocity += move;
@@ -114,6 +125,74 @@ class MovementController : ZilchComponent
             }
             
         }
+        if(!this.Space.GlobalVariables.WallDampening && this.Owner.RigidBody.Velocity.Y < 0)
+            this.CanPlay = true;
         
+    }
+    
+    function CanJump(event : CollisionEvent)
+    {
+        if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground)
+        {
+            this.Space.GlobalVariables.CanJump = true;
+        }
+           /*if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground && 
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1)
+            {
+                this.CanPlay = true;
+            }*/
+
+    }
+    function WallJump(event : CollisionEvent)
+    {
+
+        if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground && 
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X < 0)
+            {
+                this.CanPlay = false;
+                this.Space.GlobalVariables.WallDampening = true;
+                if(Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A))
+                {
+                    var move = Real3(1,1,0) * this.JumpSpeed;
+                    this.Owner.RigidBody.Velocity += move;
+                }
+                
+            }
+            
+        else if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground && 
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X > 0)
+            {
+                this.CanPlay = false;
+                this.Space.GlobalVariables.WallDampening = true;
+                if(Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A))
+                {
+                    
+                    var move = Real3(-1,1,0) * this.JumpSpeed;
+                    this.Owner.RigidBody.Velocity += move;
+                }
+            }
+        else
+        {
+            this.CanPlay = true;
+            this.Space.GlobalVariables.WallDampening = false;
+        }
+
+            
+       if(event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y == -1)
+                this.CanPlay = true;
+
+    }
+    function WallJumpEnded(event : CollisionEvent)
+    {
+        /*if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground)
+            this.CanPlay = false;*/
+        
+        this.Space.GlobalVariables.WallDampening = false;
+
     }
 }

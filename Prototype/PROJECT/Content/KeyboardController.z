@@ -35,44 +35,47 @@ class KeyboardController : ZilchComponent
         
         var ev  = ZilchEvent();
         
-        if(Zero.Keyboard.KeyIsDown(Keys.A) && Zero.Keyboard.KeyIsPressed(Keys.Z))
+        if((Zero.Keyboard.KeyIsDown(Keys.A) || this.Controller.IsButtonHeld(Buttons.StickLeft)) && 
+        ((Zero.Keyboard.KeyIsPressed(Keys.Z)) || this.Controller.IsButtonPressed(Buttons.B)))
         {
             // move left    
             ev.EventId = this.DashLeft;
             this.Owner.DispatchEvent(this.DashLeft, ev);
         }
-        else if(Zero.Keyboard.KeyIsDown(Keys.A))
+        else if(Zero.Keyboard.KeyIsDown(Keys.A) || this.Controller.IsButtonHeld(Buttons.StickLeft))
         {
             // move left    
             ev.EventId = this.MoveLeft;
             this.Owner.DispatchEvent(this.MoveLeft, ev);
         }
-        if(Zero.Keyboard.KeyIsDown(Keys.D) && Zero.Keyboard.KeyIsPressed(Keys.Z))
+        if((Zero.Keyboard.KeyIsDown(Keys.D) || this.Controller.IsButtonHeld(Buttons.StickRight)) && 
+        ((Zero.Keyboard.KeyIsPressed(Keys.Z)) || this.Controller.IsButtonPressed(Buttons.B)))
         {
             // move right
             ev.EventId = this.DashRight;
             this.Owner.DispatchEvent(this.DashRight, ev);
         }
-        else if(Zero.Keyboard.KeyIsDown(Keys.D))
+        else if(Zero.Keyboard.KeyIsDown(Keys.D) || this.Controller.IsButtonHeld(Buttons.StickRight))
         {
             // move right
             ev.EventId = this.MoveRight;
             this.Owner.DispatchEvent(this.MoveRight, ev);
         }
-        if(Zero.Keyboard.KeyIsPressed(Keys.W))
+        if((Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A)) && this.Space.GlobalVariables.CanJump)
         {
+            this.Space.GlobalVariables.CanJump = false;
             // move top
             ev.EventId = this.Jump;
             this.Owner.DispatchEvent(this.Jump, ev);
         }
-        if(Zero.Keyboard.KeyIsDown(Keys.S))
+        /*if(Zero.Keyboard.KeyIsDown(Keys.S))
         {
             // move down
             ev.EventId = this.MoveDown;
             this.Owner.DispatchEvent(this.MoveDown, ev);
-        }
+        }*/
         
-        if(Zero.Keyboard.KeyIsPressed(Keys.Space) && !this.Space.GlobalVariables.NoEnemies && 
+        if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && !this.Space.GlobalVariables.NoEnemies && 
            this.Spell1Cooldown <= 0 && !this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
         {
             // move down
@@ -80,7 +83,7 @@ class KeyboardController : ZilchComponent
             this.Owner.DispatchEvent(this.Spell1, ev);
             this.Spell1Cooldown = this.Temp1;
         }
-        else if(Zero.Keyboard.KeyIsPressed(Keys.Space) && !this.Space.GlobalVariables.NoEnemies && 
+        else if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && !this.Space.GlobalVariables.NoEnemies && 
                 this.Spell1Cooldown <= 0 && this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
         {
             // move down
@@ -94,12 +97,11 @@ class KeyboardController : ZilchComponent
             this.Spell1Cooldown = Math.Round(this.Spell1Cooldown, -2);
         }
         
-        
         //-----------------------------------SLOW MOTION-------------------------------------------------
-         
-        if (Zero.Keyboard.KeyIsDown(Keys.J) && this.TimeSlowMo >= 0.0 ) /*Slowing the Time*/
+
+        if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0 ) /*Slowing the Time*/
         {
-            Console.WriteLine(this.Space.TimeSpace.TimeScale);
+
             this.TimeSlowMo -= event.Dt / this.Space.TimeSpace.TimeScale;
             
             if (this.TimeSlowMo >= 1.0)

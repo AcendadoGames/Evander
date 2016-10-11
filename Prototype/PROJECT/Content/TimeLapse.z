@@ -4,14 +4,19 @@ class TimeLapse : ZilchComponent
     var MaxFrames : Integer = 120;
     var Frames : Array[Frame] = new Array[Frame]();
     var  TimeLim: Real = 120;
+    
+    var Controller:Gamepad = null;
+    
+    
     function Initialize(init : CogInitializer)
     {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
 
     function OnLogicUpdate(event : UpdateEvent)  
     {
-        if(Zero.Keyboard.KeyIsDown(Keys.T))
+        if(Zero.Keyboard.KeyIsDown(Keys.T) || (this.Controller.IsButtonHeld(Buttons.LeftThumb) && this.Controller.IsButtonHeld(Buttons.RightThumb)))
         {
             if(this.Frames.All.IsNotEmpty && this.TimeLim != 0)
             {
