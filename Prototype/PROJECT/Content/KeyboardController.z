@@ -1,9 +1,10 @@
 class KeyboardController : ZilchComponent
 {
     [Property]
-    var TimeSlowMo : Real = 0.5;
+    var TimeSlowMo : Real = 5.0;
     [Property]
     var MaxTimeSlowed : Real = 5.0;
+    var TimeIsSlowed : Boolean = false;
     
     
     var MoveLeft : String = "MoveLeft";
@@ -101,7 +102,8 @@ class KeyboardController : ZilchComponent
 
         if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0 ) /*Slowing the Time*/
         {
-
+            
+            this.TimeIsSlowed = true;
             this.TimeSlowMo -= event.Dt / this.Space.TimeSpace.TimeScale;
             
             if (this.TimeSlowMo >= 1.0)
@@ -115,10 +117,11 @@ class KeyboardController : ZilchComponent
         }
         else /*This is putting the time as it was*/
             this.Space.TimeSpace.TimeScale = 1;
-
+            
             
         if ((this.Space.TimeSpace.TimeScale) == 1 && (this.TimeSlowMo <= this.MaxTimeSlowed)) /* Reloading the SlowMo Aiming Power*/
         {
+            this.TimeIsSlowed = false;
             this.TimeSlowMo += event.Dt;
         }
     }

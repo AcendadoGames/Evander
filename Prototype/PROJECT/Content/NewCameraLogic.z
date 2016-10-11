@@ -18,7 +18,7 @@ class NewCameraLogic : ZilchComponent
         var newCameraPos = this.TargetObject.Transform.LocalTranslation;
         
         newCameraPos = Math.Lerp(this.Owner.Transform.Translation, playerPosition, 0.05);
-        newCameraPos.Z = 20;
-        this.Owner.Transform.LocalTranslation = newCameraPos;
+        var camZ = this.Owner.Transform.LocalTranslation.Z;
+        this.Owner.Transform.LocalTranslation = Real3(newCameraPos.X, newCameraPos.Y, camZ);
     }
 }

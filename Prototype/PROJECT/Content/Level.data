@@ -104,7 +104,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [4.63983965, 2.78491402, 50],
+			Vec3 Translation = [-19.3718624, 13.0608883, 49.9989967],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -116,7 +116,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 54.8811989,
+			float Size = 33.287178,
 		},
 		EditorCameraController = 
 		{
@@ -124,7 +124,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [4.63983965, 2.78491402, -7.936722e-07],
+			Vec3 LookTarget = [-19.3718624, 13.0608883, -0.00100184418],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -160,7 +160,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 200,
-			float Size = 40,
+			float Size = 30,
 		},
 		SoundListener = 
 		{
@@ -185,12 +185,85 @@ Level =
 				CogPathPreference PathPreference2 = Absolute,
 			},
 		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 5,
+				},
+				Named = 
+				{
+					string Name = "DefaultBar",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-19.5, 12.5, -3],
+					Vec3 Scale = [0.689999998, 0.689999998, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 1, 1, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "57729f1982b10a82:definitivebar6",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 6,
+				},
+				Named = 
+				{
+					string Name = "BarBackground",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-23.8532372, 12.2062435, -3],
+					Vec3 Scale = [0.689999998, 0.689999998, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.814999998, 0, 0, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "57700f8341c27024:definitivebar4",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
+		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 5,
+			uint Id = 7,
 		},
 		Named = 
 		{
@@ -247,7 +320,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 6,
+			uint Id = 8,
 		},
 		Named = 
 		{
@@ -304,7 +377,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 7,
+			uint Id = 9,
 		},
 		Named = 
 		{
@@ -369,7 +442,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-14.7413006, 23.0892315, 0],
+			Vec3 Translation = [-10.3447399, 1.86445808, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -460,7 +533,7 @@ Level =
 				string Name = "57deb71aa0082a0f:Combo",
 				LinkId = 
 				{
-					uint Id = 8,
+					uint Id = 10,
 				},
 				Transform = 
 				{
@@ -479,7 +552,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 9,
+			uint Id = 11,
 		},
 		Named = 
 		{
@@ -555,7 +628,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 10,
+			uint Id = 12,
 		},
 		Named = 
 		{
@@ -631,7 +704,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 11,
+			uint Id = 13,
 		},
 		Named = 
 		{
@@ -707,7 +780,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 12,
+			uint Id = 14,
 		},
 		Named = 
 		{
@@ -777,6 +850,143 @@ Level =
 			bool LocalSpaceDirection = false,
 			float Strength = 10,
 			Vec3 Direction = [0, 1, 0],
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 15,
+		},
+		Named = 
+		{
+			string Name = "TimeBar",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-19.2820797, 12.2293396, 38],
+			Vec3 Scale = [0.689999998, 0.689999998, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "577c0298316d7ff6:definitivebar2",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		TimeBar = 
+		{
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 16,
+		},
+		Named = 
+		{
+			string Name = "LifeBar",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-18.597559, 13.0136089, 38],
+			Vec3 Scale = [0.689999998, 0.689999998, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "577c02902e2dbe60:definitivebar1",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		LifeBar = 
+		{
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 17,
+		},
+		Named = 
+		{
+			string Name = "Transform",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-23.6164169, 12.5882359, 37],
+			Vec3 Scale = [1, 1, 0.99999994],
+			Quat Rotation = [0, 0, -0.0092052212, 0.999957621],
+		},
+		SlowMoBar = 
+		{
+		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 18,
+				},
+				Named = 
+				{
+					string Name = "SlowMoBar",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-0.234867096, -0.361333847, 0],
+					Vec3 Scale = [0.689999998, 0.689999998, 1.00000012],
+					Quat Rotation = [0, 0, -4.72410022e-09, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 1, 1, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "57700f8341c27024:definitivebar4",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				Hierarchy = 
+				{
+				},
+			},
 		},
 	},
 },

@@ -11,22 +11,18 @@ class TimeBar : ZilchComponent
         var scale: Real = (timeLim/ 120);
         var counter: Real = 120;
         var timePos : Real = ((4.93 * (0.69 - (0.69 * scale))) );
-        var timeBar = this.Space.FindObjectByName("Camera").Transform.Translation.X -20.1927;
+        var timeBar = this.Space.FindObjectByName("Camera").Transform.Translation.X - 19.2821;
         
-        this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Space.FindObjectByName("Camera").Transform.Translation.Y + 12.4833, 1);
+        this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Space.FindObjectByName("Camera").Transform.Translation.Y + 12.2293,
+                                                this.Owner.Transform.Translation.Z);
         
         if (timeLim < counter || timeLim > 0)
         {
             
             // 0.69 is the value of the Scale.X
-            this.Owner.Transform.Scale = Real3(0.69 * scale, this.Owner.Transform.Scale.Y, 1); 
-            this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Owner.Transform.Translation.Y, 1);
+            this.Owner.Transform.Scale = Real3(0.69 * scale, this.Owner.Transform.Scale.Y, this.Owner.Transform.Translation.Z ); 
+            this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Owner.Transform.Translation.Y, this.Owner.Transform.Translation.Z );
             counter -= 1;
         }
-        /*if (timeLim == 0)
-            
-            this.Owner.Transform.Scale = Real3(0.69 * scale, this.Owner.Transform.Scale.Y, 1); 
-            this.Owner.Transform.Translation = Real3((timeBar + timePos), this.Owner.Transform.Translation.Y, 1);
-            Console.WriteLine("`timeLim`");*/
     }
 }
