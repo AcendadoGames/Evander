@@ -1,0 +1,82 @@
+class ComboTree : ZilchComponent
+{
+    var Combos : Cog = null;
+    var CurrentState : Cog = null;
+    var TimeToCancelCombo : Real = 0.7;
+    var Temp1 : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.CurrentState = this.Owner.FindChildByName("Combo");
+        this.Temp1 = this.TimeToCancelCombo;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Space, "L", this.ReceiveLevent);
+        Zero.Connect(this.Space, "R", this.ReceiveRevent);
+    }
+
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.TimeToCancelCombo > 0)
+        {
+            this.TimeToCancelCombo -= event.Dt;
+            this.TimeToCancelCombo = Math.Round(this.TimeToCancelCombo, -2);
+        }
+        else
+            this.ResetCombo();
+        
+        if(this.CurrentState != null && this.CurrentState.Parent != null)
+        {
+            this.CurrentState.ComboState.ExecuteCombo();
+        }
+        
+    }
+    
+    function ReceiveLevent(event : ZilchEvent)
+    {
+        if(this.CurrentState == null)
+        {
+            return;
+        }
+        
+        var temp = this.CurrentState.Children;
+        
+        while (temp.IsNotEmpty)
+        {
+            if(temp.Current.Name == "L" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
+            {
+                this.CurrentState = temp.Current;
+                this.TimeToCancelCombo = this.Temp1;
+                return;
+            }
+            temp.MoveNext();
+        }
+    }
+    function ReceiveRevent(event : ZilchEvent)
+    {
+        if(this.CurrentState == null)
+        {
+            return;
+        }
+
+        var temp = this.CurrentState.Children;
+        
+        while (temp.IsNotEmpty)
+        {
+            if(temp.Current.Name == "R" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
+            {
+                this.CurrentState = temp.Current;
+                this.TimeToCancelCombo = this.Temp1;
+                return;
+            }
+            
+            temp.MoveNext();
+        }
+
+    }
+    
+    function ResetCombo()
+    {
+        this.CurrentState = this.Owner.FindChildByName("Combo");
+    }
+}

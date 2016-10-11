@@ -1,0 +1,24 @@
+class NewCameraLogic : ZilchComponent
+{
+    [Property]
+    var TargetObjectCogPath : CogPath = null;
+    
+    var TargetObject : Cog = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.TargetObject = this.TargetObjectCogPath.Cog;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var ownerPosition = this.Owner.Transform.Translation;
+        var playerPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+        
+        var newCameraPos = this.TargetObject.Transform.LocalTranslation;
+        
+        newCameraPos = Math.Lerp(this.Owner.Transform.Translation, playerPosition, 0.05);
+        newCameraPos.Z = 20;
+        this.Owner.Transform.LocalTranslation = newCameraPos;
+    }
+}

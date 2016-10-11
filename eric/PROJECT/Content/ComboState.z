@@ -1,0 +1,46 @@
+class ComboState : ZilchComponent
+{
+    [Property]
+    var PreAttackTime : Real = 0.2;
+    [Property]
+    var PreAttackAnim : SpriteSource;
+    [Property]
+    var OnAttackTime : Real = 0.2;
+    [Property]
+    var OnAttackAnim : SpriteSource;
+    [Property]
+    var PostAttackTime : Real = 0.2;
+    [Property]
+    var PostAttackAnim : SpriteSource;
+    [Property]
+    var InputTiming : Real = 0.2;
+    [Property]
+    var Text : String = null;
+
+    var Time : Real = 0.0;
+    
+    var Temp1 : Real;
+
+    function Initialize(init : CogInitializer)
+    {
+        this.Temp1 = this.PreAttackTime + this.OnAttackTime + this.PostAttackTime;
+    }
+
+    function ExecuteCombo()
+    {
+        //Console.WriteLine("Executing", this.Text);
+        if(this.Time < this.PreAttackTime)
+        {
+            //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PreAttackAnim;
+        }
+        if(this.Time < this.OnAttackTime + this.PreAttackTime)
+        {
+            //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.OnAttackAnim;
+        }
+        if(this.Time < this.Temp1)
+        {
+            //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PostAttackAnim;
+        }
+            
+    }
+}
