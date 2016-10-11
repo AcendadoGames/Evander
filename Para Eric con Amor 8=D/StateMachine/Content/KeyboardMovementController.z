@@ -1,0 +1,35 @@
+class KeyboardMovementController : ZilchComponent
+{
+    [Dependency] var StateMachine : StateMachine;
+    [Dependency] var MoveSM_Idle : MoveSM_Idle;
+    [Dependency] var MoveSM_Walk : MoveSM_Walk;
+    [Dependency] var MoveSM_Jump : MoveSM_Jump;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(Zero.Keyboard.KeyIsPressed(Keys.Space))
+        {
+            this.Owner.StateMachine.ChangeState(this.Owner.MoveSM_Jump);
+        }
+        else if(Zero.Keyboard.KeyIsDown(Keys.A))
+        {
+            this.Owner.MoveSM_Walk.Direction = -1.0;
+            this.Owner.StateMachine.ChangeState(this.Owner.MoveSM_Walk);
+        }
+        else if(Zero.Keyboard.KeyIsDown(Keys.D))
+        {
+            this.Owner.MoveSM_Walk.Direction = 1.0;
+            this.Owner.StateMachine.ChangeState(this.Owner.MoveSM_Walk);
+        }
+        else if(this.Owner.StateMachine.CurrentState != this.Owner.MoveSM_Jump)
+        {
+            if(this.Owner.StateMachine.CurrentState != this.Owner.MoveSM_Idle)
+                this.Owner.StateMachine.ChangeState(this.Owner.MoveSM_Idle);
+        }
+    }
+}

@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "SMState",
+		uint64 ResourceId = 56ff1edf9f59a68c,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"StateMachineAPI",
+		],
+	},
+},

@@ -1,0 +1,31 @@
+class Test : State
+{
+
+    function Initialize(init : CogInitializer)
+    {
+        // YOU MUST CALL THIS FUNCTION NO MATTER WHAT BEFORE 
+        // WRITING ANY OTHER CODE
+        this.StateInitialize(init);
+        
+        // 
+        // WRITE YOUR INITIALIZATION CODE HERE.
+        //
+    }
+    
+    //
+    // OVERRIDDEN STATE FUNCTIONS
+    //
+    
+    [Override]function Enter()
+    {
+        // WRITE YOUR CODE HERE
+    }
+    [Override]function Exit()
+    {
+        // WRITE YOUR CODE HERE
+    }
+    [Override]function Update(event : UpdateEvent)
+    {
+        // WRITE YOUR CODE HERE
+    }
+}

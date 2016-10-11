@@ -1,0 +1,115 @@
+class GuardSM_SeekTarget : SuperState
+{
+    var TargetCog : Cog;
+    // Path to the sensor object
+    [Property] var SensorCopPath : CogPath = null;
+    var SensorCog : Cog = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+        // get the sensor
+        if(this.SensorCopPath != null)
+            this.SensorCog = this.SensorCopPath.Cog;
+    }
+    [Override]function Enter()
+    {
+        this.TargetCog = this.Owner.GuardSM_Patrol.TargetCog;
+    }
+    [Override]function Update(event:UpdateEvent)
+    {
+        this.SensorCog.SphereCollider.DebugDraw();
+    }
+}
+
+class GuardSM_SeekTarget_Chase : State
+{
+    [Property]
+    var Duration : Real = 3.5; // chase duration
+    
+    // Movement state Machine
+    var MovementStateMachine : StateMachine = null;
+    
+    
+    // Initialize
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+        
+        // Get the movement state machine
+        this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement");
+    }
+    
+    [Override] function Enter()
+    {
+        Zero.Connect(this.Owner.Parent.GuardSM_SeekTarget.SensorCog, Events.CollisionEnded, this.OnSensorExit);
+    }
+    [Override] function Exit()
+    {
+        Zero.Disconnect(this.Owner.Parent.GuardSM_SeekTarget.SensorCog, Events.CollisionEnded, this);
+    }
+    function OnSensorExit(event: CollisionEvent)
+    {
+        this.Owner.StateMachine.ChangeState(this.Owner.GuardSM_SeekTarget_Lost);
+    }
+    [Override] function Update(event : UpdateEvent)
+    {
+        if(this.TimeInState > this.Duration)
+        this.Owner.StateMachine.FindStateMachineFromRoot("GuardAI").ChangeState("GuardSM_Fire");
+        
+        // Chase the target
+        var target = this.Owner.Parent.GuardSM_SeekTarget.TargetCog;
+        var dir = target.Transform.Translation - this.Actor.Transform.Translation;
+        
+        // set movement state machine
+        this.MovementStateMachine.Owner.MoveSM_Walk.Direction = Math.Sign(dir.X);
+        this.MovementStateMachine.ChangeState("MoveSM_Walk");
+    }
+}
+
+class GuardSM_SeekTarget_Lost : State
+{
+    [Property] var Duration : Real = 5.0; // lost duration 
+    var FlipTimer : Real = 0.0;
+    
+    // Movement state Machine
+    var MovementStateMachine : StateMachine = null;
+    
+    
+    // Initialize
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+        
+        // Get the movement state machine
+        this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement");
+    }
+    
+    [Override] function Enter()
+    {
+        this.MovementStateMachine.ChangeState("MoveSM_Idle");
+        Zero.Connect(this.Owner.Parent.GuardSM_SeekTarget.SensorCog, Events.CollisionStarted, this.OnSensorEnter);
+    }
+    [Override] function Exit()
+    {
+        Zero.Disconnect(this.Owner.Parent.GuardSM_SeekTarget.SensorCog, Events.CollisionStarted, this);
+    }
+    function OnSensorEnter(event : CollisionEvent)
+    {
+        this.Owner.StateMachine.ChangeState(this.Owner.GuardSM_SeekTarget_Chase);
+    }
+    [Override] function Update(event : UpdateEvent)
+    {
+        
+        if(this.TimeInState > this.Duration)
+            this.Owner.StateMachine.FindStateMachineFromRoot("GuardAI").ChangeState("GuardSM_Patrol");
+            
+        this.FlipTimer += event.Dt;
+        if(this.FlipTimer > this.Duration * 0.25) 
+        {
+            this.Actor.Sprite.FlipX = !this.Actor.Sprite.FlipX;
+            this.FlipTimer = 0.0;
+        }        
+    }
+    
+}

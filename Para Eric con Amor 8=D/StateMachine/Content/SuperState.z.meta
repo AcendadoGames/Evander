@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "SuperState",
+		uint64 ResourceId = 56fe1c1f25cde421,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"StateMachineAPI",
+		],
+	},
+},

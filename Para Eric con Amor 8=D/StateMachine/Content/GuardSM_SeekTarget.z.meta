@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "GuardSM_SeekTarget",
+		uint64 ResourceId = 5671feda10a7c5d3,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"GuardSM",
+		],
+	},
+},

@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "GuardSM_Patrol",
+		uint64 ResourceId = 56fe10de037d14e5,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"GuardSM",
+		],
+	},
+},

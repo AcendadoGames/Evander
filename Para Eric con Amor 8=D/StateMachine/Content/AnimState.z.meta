@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "AnimState",
+		uint64 ResourceId = 5671cd165df97004,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"StateMachineAPI",
+		],
+	},
+},

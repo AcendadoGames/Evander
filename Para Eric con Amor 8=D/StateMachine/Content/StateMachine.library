@@ -1,0 +1,7 @@
+ContentLibrary = 
+{
+	string Name = "StateMachine",
+	uint64 LibraryId = 56773401519e4ac1,
+	string SourceControlType = "",
+	bool ReadOnly = false,
+},
