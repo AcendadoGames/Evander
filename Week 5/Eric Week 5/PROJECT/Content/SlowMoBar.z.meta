@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "SlowMoBar",
+		uint64 ResourceId = 5772aee533e08d1c,
+	},
+},
