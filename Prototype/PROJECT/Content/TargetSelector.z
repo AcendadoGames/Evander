@@ -1,81 +1,98 @@
 class TargetSelector : ZilchComponent
 {
-    var TargetPosition : Real3 = Real3(0,0,0);
-    var Closestenemy : Cog = null;
+    var TargetPosition : Real3 = Real3(-99999999,-9999999,-999999);
+    var Controller:Gamepad = null;
+    var EnemyIndex : Integer = 0;
+    var RightStickRightPressed : Boolean = false;
+    var RightStickLeftPressed : Boolean = false;
+    var Temp1 : Boolean = false;
+    var Temp2 : Boolean = false;
     
     function Initialize(init : CogInitializer)
     {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
 
     function OnLogicUpdate(event : UpdateEvent)
     {
         var enemyarray = this.Space.FindAllObjectsByName("PrototypeEnemy");
-        var enemyarray2 = this.Space.FindAllObjectsByName("PrototypeEnemy");
-        
-        if(!enemyarray.IsNotEmpty)
+        var mouseScreenPosition = Zero.Mouse.ScreenPosition;
+        var mouseWorldPosition = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(mouseScreenPosition, 0);
+
+        var a : Array[Real3] = new Array[Real3]();
+        while (enemyarray.IsNotEmpty)
+        {
+            a.Push(enemyarray.Current.Transform.Translation);
+            enemyarray.MoveNext();
+        }
+        this.Space.GeneralAlgorithms.ArraySorting(a, 0, a.LastIndex);
+                
+
+        if(a == null)
             this.Space.GlobalVariables.NoEnemies = true;
         else
             this.Space.GlobalVariables.NoEnemies = false;
-        
-        var enemiesInFront : Array[Cog] = this.GetEnemiesInFrontPlayer(enemyarray);
-        var enemiesInBack : Array[Cog] = this.GetEnemiesInBackPlayer(enemyarray2);
-        
-        if(!this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
+            
+        if(a != null)
         {
-            if(enemiesInFront.Count > 0)
+            if(this.Controller.IsActive)
             {
-                this.Closestenemy = enemiesInFront[0];
-                for(var i = 0; i < enemiesInFront.Count; i += 1)
+                this.RightStickInput();
+                
+                if(this.RightStickRightPressed && this.EnemyIndex < a.LastIndex)
                 {
-                    if(Math.Distance(this.Owner.Transform.Translation, this.Closestenemy.Transform.Translation) >
-                    Math.Distance(this.Owner.Transform.Translation, enemiesInFront[i].Transform.Translation))
-                    {
-                        this.Closestenemy = enemiesInFront[i];
-                    }
+                    this.EnemyIndex += 1;
+                }
+                if(this.RightStickLeftPressed && this.EnemyIndex > 0)
+                {
+                    this.EnemyIndex -= 1;
+                }
+                if(!this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
+                    this.TargetPosition = a[this.EnemyIndex];
+            }
+            else
+            {
+                for(var i = 0; i < a.Count; i += 1)
+                {
+                    if(Math.Distance(a[i], mouseWorldPosition) < 
+                       Math.Distance(this.TargetPosition, mouseWorldPosition))
+                        {
+                            if(!this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
+                                this.TargetPosition = a[i]; 
+                        }   
                 }
             }
-            else if(enemiesInBack.Count > 0)
-            {
-                this.Closestenemy = enemiesInBack[0];
-                for(var i = 0; i < enemiesInBack.Count; i += 1)
-                {
-                    if(Math.Distance(this.Owner.Transform.Translation, this.Closestenemy.Transform.Translation) >
-                    Math.Distance(this.Owner.Transform.Translation, enemiesInBack[i].Transform.Translation))
-                    {
-                        this.Closestenemy = enemiesInBack[i];
-                    }
-                }
-            }
+            
+            
         }
+    }
+    
+    function RightStickInput()
+    {
+        //Left Input
+        if(this.Controller.RightStick.X < -0.2 && !this.Temp1)
+        {
+            this.RightStickLeftPressed = true;
+            this.Temp1 = true;
+        }
+        else
+            this.RightStickLeftPressed = false;  
         
-        if(this.Closestenemy != null)
-            this.TargetPosition = this.Closestenemy.Transform.Translation;
-
-    }
-    
-    
-    function GetEnemiesInFrontPlayer (enemies : CogNameRange) : Array[Cog]
-    {
-        var enemiesInFront : Array[Cog] = new Array[Cog]();
-        while (enemies.IsNotEmpty)
+        if(this.Controller.RightStick.X > -0.2)
+            this.Temp1 = false;
+        
+        //Right Input    
+        if(this.Controller.RightStick.X > 0.2 && !this.Temp2)
         {
-            if(enemies.Current.Transform.Translation.X > this.Owner.Transform.Translation.X)
-                enemiesInFront.Push(enemies.Current);
-            enemies.MoveNext();   
+            this.RightStickRightPressed = true;
+            this.Temp2 = true;
         }
-        return enemiesInFront;
-    }
-    function GetEnemiesInBackPlayer (enemies : CogNameRange) : Array[Cog]
-    {
-        var enemiesInBack : Array[Cog] = new Array[Cog]();
-        while (enemies.IsNotEmpty)
-        {
-            if(enemies.Current.Transform.Translation.X < this.Owner.Transform.Translation.X)
-                enemiesInBack.Push(enemies.Current);
-            enemies.MoveNext();   
-        }
-        return enemiesInBack;
+        else
+            this.RightStickRightPressed = false;
+            
+        if(this.Controller.RightStick.X < 0.2)
+            this.Temp2 = false;
     }
 }
 

@@ -17,14 +17,12 @@ class SlowMoBar : ZilchComponent
         {
             this.Owner.Transform.EulerAngles -= Real3(0, 0, 2 * Math.Pi / 130);
             this.Counter -= 0.1;
-            Console.WriteLine("`this.Counter`");
         }
         if (timeLim > this.Counter  && this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed == false)
         {
             this.Owner.Transform.EulerAngles += Real3(0, 0, 2 * Math.Pi / 130);
             this.Counter += 0.1;
-            Console.WriteLine("`this.Counter`");
         }
-        Console.WriteLine("`this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed`");
+        //Console.WriteLine("`this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed`");
     }
 }

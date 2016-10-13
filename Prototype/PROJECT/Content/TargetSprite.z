@@ -1,0 +1,19 @@
+class TargetSprite : ZilchComponent
+{
+    [Property]
+    var AngVel : Real = 1;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(!this.Space.GlobalVariables.NoEnemies)
+        {
+            this.Owner.Transform.Translation = this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition;
+            this.Owner.RigidBody.AngularVelocity = Real3(0,0,this.AngVel);
+        }
+    }
+}
