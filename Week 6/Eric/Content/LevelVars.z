@@ -1,0 +1,14 @@
+class LevelVars : ZilchComponent
+{
+    [Property]
+        var PlayerPosition : Real3 = Real3(0,1, 0);
+
+    function Initialize(init : CogInitializer)
+    {
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+    }
+}

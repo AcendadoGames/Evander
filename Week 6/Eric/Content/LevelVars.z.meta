@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "LevelVars",
+		uint64 ResourceId = 57749ab00c3f7545,
+	},
+},
