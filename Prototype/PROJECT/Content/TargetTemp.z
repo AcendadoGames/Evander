@@ -21,7 +21,7 @@ class TargetTemp : ZilchComponent
         var enemiesInFront : Array[Cog] = this.GetEnemiesInFrontPlayer(enemyarray);
         var enemiesInBack : Array[Cog] = this.GetEnemiesInBackPlayer(enemyarray2);
         
-        if(!this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
+        if(!this.Space.GlobalVariables.CanDash)
         {
             if(enemiesInFront.Count > 0)
             {

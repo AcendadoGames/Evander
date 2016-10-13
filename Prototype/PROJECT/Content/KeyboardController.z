@@ -6,6 +6,12 @@ class KeyboardController : ZilchComponent
     var MaxTimeSlowed : Real = 5.0;
     var TimeIsSlowed : Boolean = false;
     
+    [Property]
+    var TargetSprite1 : Archetype;
+        
+    [Property]
+    var TargetSprite2 : Archetype;
+    
     
     var MoveLeft : String = "MoveLeft";
     var MoveRight : String = "MoveRight";
@@ -20,6 +26,9 @@ class KeyboardController : ZilchComponent
     var Spell1Cooldown : Real = 0.0;
     
     var Temp1 : Real;
+    
+    var LeftTriggerPressed : Boolean = false;
+    var Temp2 : Boolean = false;
     
     var Controller:Gamepad = null;
     
@@ -77,19 +86,12 @@ class KeyboardController : ZilchComponent
         }*/
         
         if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && !this.Space.GlobalVariables.NoEnemies && 
-           this.Spell1Cooldown <= 0 && !this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
-        {
-            // move down
-            ev.EventId = this.Spell1;
-            this.Owner.DispatchEvent(this.Spell1, ev);
-            this.Spell1Cooldown = this.Temp1;
-        }
-        else if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && !this.Space.GlobalVariables.NoEnemies && 
-                this.Spell1Cooldown <= 0 && this.Space.GlobalVariables.CanDash && this.Space.GlobalVariables.CanSpell1)
+                this.Spell1Cooldown <= 0 && this.Space.GlobalVariables.CanDash)
         {
             // move down
             ev.EventId = this.Spell1Dash;
             this.Space.DispatchEvent(this.Spell1Dash, ev);
+            this.Spell1Cooldown = this.Temp1;
         }
         
         if(this.Spell1Cooldown > 0)
@@ -99,16 +101,25 @@ class KeyboardController : ZilchComponent
         }
         
         //-----------------------------------SLOW MOTION-------------------------------------------------
-
+        this.LeftTriggerInput();
+        if ((Zero.Keyboard.KeyIsPressed(Keys.J) || this.LeftTriggerPressed) && this.TimeSlowMo >= 0.0 ) /*Slowing the Time*/
+        {
+            var position = this.Owner.TargetSelector.TargetPosition;
+            if(!this.Space.GlobalVariables.NoEnemies)
+            {
+                this.Space.CreateAtPosition(this.TargetSprite1, position);
+                this.Space.CreateAtPosition(this.TargetSprite2, position);
+            }
+        }
         if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0 ) /*Slowing the Time*/
         {
-            
+            this.Space.GlobalVariables.CanDash = true;
             this.TimeIsSlowed = true;
             this.TimeSlowMo -= event.Dt / this.Space.TimeSpace.TimeScale;
             
             if (this.TimeSlowMo >= 1.0)
             {
-                this.Space.TimeSpace.TimeScale = 0.2;
+                this.Space.TimeSpace.TimeScale = 0.1;
             }
             else if(this.TimeSlowMo <= 1.0) /* Lerping At the end of the time if the player stays in SlowMo*/
             {
@@ -116,7 +127,10 @@ class KeyboardController : ZilchComponent
             }
         }
         else /*This is putting the time as it was*/
+        {
             this.Space.TimeSpace.TimeScale = 1;
+            this.Space.GlobalVariables.CanDash = false;
+        }
             
             
         if ((this.Space.TimeSpace.TimeScale) == 1 && (this.TimeSlowMo <= this.MaxTimeSlowed)) /* Reloading the SlowMo Aiming Power*/
@@ -124,5 +138,19 @@ class KeyboardController : ZilchComponent
             this.TimeIsSlowed = false;
             this.TimeSlowMo += event.Dt;
         }
+    }
+    function LeftTriggerInput()
+    {
+        if(this.Controller.LeftTrigger > 0.2 && !this.Temp2)
+        {
+            this.LeftTriggerPressed = true;
+            this.Temp2 = true;
+        }
+        else
+            this.LeftTriggerPressed = false;  
+        
+        if(this.Controller.LeftTrigger < 0.2)
+            this.Temp2 = false;
+        
     }
 }

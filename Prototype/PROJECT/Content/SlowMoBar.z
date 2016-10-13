@@ -1,5 +1,6 @@
 class SlowMoBar : ZilchComponent
 {
+    [Property]
     var Counter: Real = 5.0;
     
     

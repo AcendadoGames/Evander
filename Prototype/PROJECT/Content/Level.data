@@ -15,7 +15,7 @@ Level =
 			bool Active = true,
 			bool WakeUpOnChange = false,
 			bool LocalSpaceDirection = true,
-			float Strength = 10,
+			float Strength = 50,
 			Vec3 Direction = [0, -1, 0],
 		},
 		DragEffect = 
@@ -104,7 +104,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0.796548367, 9.44372559, 49.9990005],
+			Vec3 Translation = [0.122921698, 6.06698608, 49.9990005],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -116,7 +116,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 27.2532482,
+			float Size = 33.2871437,
 		},
 		EditorCameraController = 
 		{
@@ -124,7 +124,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0.796548367, 9.44372559, -0.00100096269],
+			Vec3 LookTarget = [0.122921698, 6.06698608, -0.00100099191],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -271,7 +271,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 0, 0],
+			Vec3 Translation = [-2.57012057, 0, 0],
 			Vec3 Scale = [39.3748131, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -324,7 +324,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "PrototypeGround",
+			string Name = "PrototypeWall",
 		},
 		Transform = 
 		{
@@ -368,7 +368,7 @@ Level =
 			bool SendsMessages = true,
 			bool Seamless = true,
 			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
-			string SerializedGroupName = "57e4cc038d9cf0e7:Ground",
+			string SerializedGroupName = "57d5c7a0ce43a9cb:Wall",
 			Vec3 Offset = [0, 0, 0],
 			Vec3 Size = [0.5, 0.5, 50],
 		},
@@ -381,7 +381,7 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "PrototypeGround",
+			string Name = "PrototypeWall",
 		},
 		Transform = 
 		{
@@ -425,7 +425,64 @@ Level =
 			bool SendsMessages = true,
 			bool Seamless = true,
 			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
-			string SerializedGroupName = "57e4cc038d9cf0e7:Ground",
+			string SerializedGroupName = "57d5c7a0ce43a9cb:Wall",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [0.5, 0.5, 50],
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 10,
+		},
+		Named = 
+		{
+			string Name = "PrototypeWall",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-21.5640907, 0, 0],
+			Vec3 Scale = [39.3748131, 1, 1],
+			Quat Rotation = [0, 0, 0.707106829, 0.707106829],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		RigidBody = 
+		{
+			bool Static = true,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = false,
+			bool Mode2D = true,
+			bool AllowSleep = true,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		BoxCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
+			string SerializedGroupName = "57d5c7a0ce43a9cb:Wall",
 			Vec3 Offset = [0, 0, 0],
 			Vec3 Size = [0.5, 0.5, 50],
 		},
@@ -442,7 +499,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-10.3447399, 1.86445808, 0],
+			Vec3 Translation = [-18.2566738, 1.86445808, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -490,6 +547,8 @@ Level =
 		{
 			float TimeSlowMo = 5,
 			float MaxTimeSlowed = 5,
+			string TargetSprite1 = "57d593dd5d06bfa7:targetpart1",
+			string TargetSprite2 = "57d593a55f9d7f95:targetpart2",
 			float Spell1Cooldown = 0,
 		},
 		MovementController = 
@@ -498,10 +557,6 @@ Level =
 			float DashSpeed = 50,
 			float JumpSpeed = 50,
 			float RotationSpeed = 2,
-		},
-		SpellCast = 
-		{
-			string Projectile = "57c6b0895d5b522e:PrototypeSpell1",
 		},
 		VelRotDampening = 
 		{
@@ -512,6 +567,8 @@ Level =
 		},
 		TargetSelector = 
 		{
+			string TargetSprite1 = "57d593dd5d06bfa7:targetpart1",
+			string TargetSprite2 = "57d593a55f9d7f95:targetpart2",
 		},
 		TimeLapse = 
 		{
@@ -530,7 +587,7 @@ Level =
 				string Name = "57deb71aa0082a0f:Combo",
 				LinkId = 
 				{
-					uint Id = 10,
+					uint Id = 11,
 				},
 				Transform = 
 				{
@@ -549,7 +606,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 11,
+			uint Id = 12,
 		},
 		Named = 
 		{
@@ -612,20 +669,28 @@ Level =
 			float NegativeJumpDampening = 1,
 			float RotationDampening = 0.899999976,
 		},
-		GravityEffect = 
+		IgnoreSpaceEffects = 
 		{
-			bool Active = true,
-			bool WakeUpOnChange = true,
-			bool LocalSpaceDirection = false,
-			float Strength = 10,
-			Vec3 Direction = [0, 1, 0],
+			bool Drag = false,
+			bool Flow = false,
+			bool Force = false,
+			bool Gravity = true,
+			bool Thrust = false,
+			bool Vortex = false,
+			bool Wind = false,
+			bool Invalid = false,
+			bool Torque = false,
+			bool PointGravity = false,
+			bool PointForce = false,
+			bool Buoyancy = false,
+			bool Custom = false,
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 12,
+			uint Id = 13,
 		},
 		Named = 
 		{
@@ -688,20 +753,28 @@ Level =
 			float NegativeJumpDampening = 1,
 			float RotationDampening = 0.899999976,
 		},
-		GravityEffect = 
+		IgnoreSpaceEffects = 
 		{
-			bool Active = true,
-			bool WakeUpOnChange = true,
-			bool LocalSpaceDirection = false,
-			float Strength = 10,
-			Vec3 Direction = [0, 1, 0],
+			bool Drag = false,
+			bool Flow = false,
+			bool Force = false,
+			bool Gravity = true,
+			bool Thrust = false,
+			bool Vortex = false,
+			bool Wind = false,
+			bool Invalid = false,
+			bool Torque = false,
+			bool PointGravity = false,
+			bool PointForce = false,
+			bool Buoyancy = false,
+			bool Custom = false,
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 13,
+			uint Id = 14,
 		},
 		Named = 
 		{
@@ -764,28 +837,29 @@ Level =
 			float NegativeJumpDampening = 1,
 			float RotationDampening = 0.899999976,
 		},
-		GravityEffect = 
+		IgnoreSpaceEffects = 
 		{
-			bool Active = true,
-			bool WakeUpOnChange = true,
-			bool LocalSpaceDirection = false,
-			float Strength = 10,
-			Vec3 Direction = [0, 1, 0],
+			bool Drag = false,
+			bool Flow = false,
+			bool Force = false,
+			bool Gravity = true,
+			bool Thrust = false,
+			bool Vortex = false,
+			bool Wind = false,
+			bool Invalid = false,
+			bool Torque = false,
+			bool PointGravity = false,
+			bool PointForce = false,
+			bool Buoyancy = false,
+			bool Custom = false,
 		},
 	},
-	Cog = 
+	ArchetypeInstance = 
 	{
+		string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		LinkId = 
 		{
-			uint Id = 14,
-		},
-		Named = 
-		{
-			string Name = "PrototypeEnemy",
-		},
-		Archetyped = 
-		{
-			string Name = "57c6f3818ec7874f:PrototypeEnemy",
+			uint Id = 15,
 		},
 		Transform = 
 		{
@@ -793,67 +867,16 @@ Level =
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
-		Sprite = 
+		Named = 
 		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 0, 0, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		RigidBody = 
-		{
-			bool Static = false,
-			bool Asleep = false,
-			bool Kinematic = false,
-			bool RotationLocked = true,
-			bool Mode2D = true,
-			bool AllowSleep = true,
-			bool Inherit2DMode = true,
-			Vec3 Velocity = [0, 0, 0],
-			Vec3 AngularVelocity = [0, 0, 0],
-		},
-		BoxCollider = 
-		{
-			bool Ghost = false,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
-			string SerializedGroupName = "57c6b63fee8fbbb0:Enemy",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 0.5],
-		},
-		VelRotDampening = 
-		{
-			float VelocityDampening = 0.899999976,
-			float JumpDampening = 0.899999976,
-			float NegativeJumpDampening = 1,
-			float RotationDampening = 0.899999976,
-		},
-		GravityEffect = 
-		{
-			bool Active = true,
-			bool WakeUpOnChange = true,
-			bool LocalSpaceDirection = false,
-			float Strength = 10,
-			Vec3 Direction = [0, 1, 0],
+			string Name = "PrototypeEnemy",
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 15,
+			uint Id = 16,
 		},
 		Named = 
 		{
@@ -891,7 +914,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 16,
+			uint Id = 17,
 		},
 		Named = 
 		{
@@ -929,7 +952,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 17,
+			uint Id = 18,
 		},
 		Named = 
 		{
@@ -943,6 +966,7 @@ Level =
 		},
 		SlowMoBar = 
 		{
+			float Counter = 5,
 		},
 		Hierarchy = 
 		{
@@ -950,7 +974,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 18,
+					uint Id = 19,
 				},
 				Named = 
 				{
@@ -990,141 +1014,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 19,
-		},
-		Named = 
-		{
-			string Name = "target part1",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [0, 10, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5793924a695d5c43:target part1",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		TargetSprite = 
-		{
-			float AngVel = -1,
-		},
-		RigidBody = 
-		{
-			bool Static = false,
-			bool Asleep = false,
-			bool Kinematic = false,
-			bool RotationLocked = false,
-			bool Mode2D = true,
-			bool AllowSleep = true,
-			bool Inherit2DMode = true,
-			Vec3 Velocity = [0, 0, 0],
-			Vec3 AngularVelocity = [0, 0, 0],
-		},
-		IgnoreSpaceEffects = 
-		{
-			bool Drag = false,
-			bool Flow = false,
-			bool Force = false,
-			bool Gravity = true,
-			bool Thrust = false,
-			bool Vortex = false,
-			bool Wind = false,
-			bool Invalid = false,
-			bool Torque = false,
-			bool PointGravity = false,
-			bool PointForce = false,
-			bool Buoyancy = false,
-			bool Custom = false,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
 			uint Id = 20,
-		},
-		Named = 
-		{
-			string Name = "target part2",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [0, 10, 0],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5793924a695d6d09:target part2",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		TargetSprite = 
-		{
-			float AngVel = 1,
-		},
-		RigidBody = 
-		{
-			bool Static = false,
-			bool Asleep = false,
-			bool Kinematic = false,
-			bool RotationLocked = false,
-			bool Mode2D = true,
-			bool AllowSleep = true,
-			bool Inherit2DMode = true,
-			Vec3 Velocity = [0, 0, 0],
-			Vec3 AngularVelocity = [0, 0, 0],
-		},
-		IgnoreSpaceEffects = 
-		{
-			bool Drag = false,
-			bool Flow = false,
-			bool Force = false,
-			bool Gravity = true,
-			bool Thrust = false,
-			bool Vortex = false,
-			bool Wind = false,
-			bool Invalid = false,
-			bool Torque = false,
-			bool PointGravity = false,
-			bool PointForce = false,
-			bool Buoyancy = false,
-			bool Custom = false,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 21,
 		},
 		Named = 
 		{
