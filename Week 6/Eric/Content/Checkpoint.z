@@ -1,0 +1,17 @@
+class Checkpoint : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        //when hitting a checkpoint, save this position in the level
+        if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Player)
+        {
+            if(this.Owner.Transform.Translation.X > this.Space.GlobalVariables.StartPosition.X)
+                this.Space.GlobalVariables.StartPosition = this.Owner.Transform.Translation;
+        }
+    }
+}

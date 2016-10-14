@@ -10,6 +10,7 @@ class GlobalVariables : ZilchComponent
     var Aiming : Boolean = false;
     var Controller:Gamepad = null;
     var Temp1 : Real;
+    var StartPosition : Real3 = Real3(-10, 1, 0);
     
     function Initialize(init : CogInitializer)
     {

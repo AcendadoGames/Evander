@@ -32,7 +32,6 @@ class MovementController : ZilchComponent
         Zero.Connect(this.Owner, Events.CollisionStarted, this.CanJump);
         Zero.Connect(this.Owner, Events.CollisionPersisted, this.WallJump);
         Zero.Connect(this.Owner, Events.CollisionEnded, this.WallJumpEnded);
-        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
     }
     function AllowPlay(event : ZilchEvent)
     {
@@ -197,13 +196,5 @@ class MovementController : ZilchComponent
         
         this.Space.GlobalVariables.WallDampening = false;
 
-    }
-    function OnCollisionStarted(event : CollisionEvent)
-    {
-        //when hitting a checkpoint, save this position in the level
-        if(event.OtherObject.Name == "Checkpoint")
-        {
-            this.Space.GlobalVariables.StartPosition = event.OtherObject.Transform.Translation;
-        }
     }
 }
