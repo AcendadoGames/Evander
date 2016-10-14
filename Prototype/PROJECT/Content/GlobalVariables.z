@@ -7,11 +7,13 @@ class GlobalVariables : ZilchComponent
     var Spell1TimeToJump : Real = 3.0;
     var Temp : Real;
     var WallDampening : Boolean = false;
-    
+    var Aiming : Boolean = false;
+    var Controller:Gamepad = null;
     var Temp1 : Real;
     
     function Initialize(init : CogInitializer)
     {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
         this.Temp = this.Spell1TimeToJump;
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
         Zero.Connect(this.Owner, "Spell1Dash", this.Spell1Dash);
@@ -19,7 +21,11 @@ class GlobalVariables : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-
+        if(this.Controller.LeftTrigger > 0.2 && this.Space.TimeSpace.TimeScale < 0.4)
+            this.Aiming = true;
+        else
+            this.Aiming = false;
+            
     }
     
     function Spell1Dash(event : ZilchEvent)
