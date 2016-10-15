@@ -1,0 +1,28 @@
+class LifeBar : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var lifeLim : Real = this.Space.FindObjectByName("PrototypePlayer").PlayerCollisionHandler.Hp;
+        var scale: Real = (lifeLim/100);
+        var counter: Real = 100;
+        var lifePos : Real = ((4.93 * (0.69 - (0.69 * scale))) );
+        var lifeBar = this.Space.FindObjectByName("Camera").Transform.Translation.X - 18.5976;
+        
+        this.Owner.Transform.Translation = Real3((lifeBar - lifePos), this.Space.FindObjectByName("Camera").Transform.Translation.Y + 13.0136,
+                                                this.Owner.Transform.Translation.Z );
+        
+        if (lifeLim != counter)
+        {
+            
+            // 0.69 is the value of the Scale.X
+            this.Owner.Transform.Scale = Real3(0.69 * scale, this.Owner.Transform.Scale.Y, this.Owner.Transform.Translation.Z ); 
+            this.Owner.Transform.Translation = Real3((lifeBar - lifePos), this.Owner.Transform.Translation.Y, this.Owner.Transform.Translation.Z );
+            counter -= 1;
+        }
+    }
+}
