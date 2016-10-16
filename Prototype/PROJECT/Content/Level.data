@@ -324,63 +324,6 @@ Level =
 		},
 		Named = 
 		{
-			string Name = "PrototypeGround",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-2.57012057, 5.15135956, 0],
-			Vec3 Scale = [39.3748131, 1, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		RigidBody = 
-		{
-			bool Static = true,
-			bool Asleep = false,
-			bool Kinematic = false,
-			bool RotationLocked = false,
-			bool Mode2D = true,
-			bool AllowSleep = true,
-			bool Inherit2DMode = true,
-			Vec3 Velocity = [0, 0, 0],
-			Vec3 AngularVelocity = [0, 0, 0],
-		},
-		BoxCollider = 
-		{
-			bool Ghost = false,
-			bool SendsMessages = true,
-			bool Seamless = true,
-			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
-			string SerializedGroupName = "57e4cc038d9cf0e7:Ground",
-			Vec3 Offset = [0, 0, 0],
-			Vec3 Size = [0.5, 0.5, 50],
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 9,
-		},
-		Named = 
-		{
 			string Name = "PrototypeWall",
 		},
 		Transform = 
@@ -434,7 +377,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 10,
+			uint Id = 9,
 		},
 		Named = 
 		{
@@ -491,7 +434,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 11,
+			uint Id = 10,
 		},
 		Named = 
 		{
@@ -642,7 +585,7 @@ Level =
 				string Name = "57deb71aa0082a0f:Combo",
 				LinkId = 
 				{
-					uint Id = 12,
+					uint Id = 11,
 				},
 				Transform = 
 				{
@@ -661,7 +604,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 13,
+			uint Id = 12,
 		},
 		Named = 
 		{
@@ -745,7 +688,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 14,
+			uint Id = 13,
 		},
 		Named = 
 		{
@@ -829,7 +772,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 15,
+			uint Id = 14,
 		},
 		Named = 
 		{
@@ -914,7 +857,7 @@ Level =
 		string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		LinkId = 
 		{
-			uint Id = 16,
+			uint Id = 15,
 		},
 		Transform = 
 		{
@@ -931,7 +874,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 17,
+			uint Id = 16,
 		},
 		Named = 
 		{
@@ -969,7 +912,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 18,
+			uint Id = 17,
 		},
 		Named = 
 		{
@@ -1007,7 +950,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 19,
+			uint Id = 18,
 		},
 		Named = 
 		{
@@ -1029,7 +972,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 20,
+					uint Id = 19,
 				},
 				Named = 
 				{
@@ -1069,7 +1012,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 21,
+			uint Id = 20,
 		},
 		Named = 
 		{
