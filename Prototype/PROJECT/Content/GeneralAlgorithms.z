@@ -62,3 +62,4 @@ class GeneralAlgorithms : ZilchComponent
         return j;           // returns middle subscript  
     }
 }
+    
