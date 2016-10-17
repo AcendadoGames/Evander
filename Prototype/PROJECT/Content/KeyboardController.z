@@ -1,9 +1,9 @@
 class KeyboardController : ZilchComponent
 {
     [Property]
-    var TimeSlowMo : Real = 5.0;
+    var TimeSlowMo : Real = 2.0;
     [Property]
-    var MaxTimeSlowed : Real = 5.0;
+    var MaxTimeSlowed : Real = 2.0;
     var TimeIsSlowed : Boolean = false;
     
     [Property]
@@ -117,11 +117,11 @@ class KeyboardController : ZilchComponent
             this.TimeIsSlowed = true;
             this.TimeSlowMo -= event.Dt / this.Space.TimeSpace.TimeScale;
             
-            if (this.TimeSlowMo >= 1.0)
+            if (this.TimeSlowMo >= 0.5)
             {
                 this.Space.TimeSpace.TimeScale = 0.1;
             }
-            else if(this.TimeSlowMo <= 1.0) /* Lerping At the end of the time if the player stays in SlowMo*/
+            else if(this.TimeSlowMo <= 0.5) /* Lerping At the end of the time if the player stays in SlowMo*/
             {
                 this.Space.TimeSpace.TimeScale = Math.Lerp(this.Space.TimeSpace.TimeScale, 1, 0.07);
             }

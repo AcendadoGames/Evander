@@ -3,6 +3,6 @@ TextContent =
 	ZilchScriptBuilder = 
 	{
 		string Name = "RKeyReset",
-		uint64 ResourceId = 582b1c0cb832a07e,
+		uint64 ResourceId = 577494ae58c92889,
 	},
 },
