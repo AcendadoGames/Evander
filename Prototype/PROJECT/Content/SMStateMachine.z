@@ -1,0 +1,207 @@
+class StateMachine : ZilchComponent
+{
+    // The name of the initial state of the state machine. 
+    // if specified, this will be the first state that the state machine
+    // changes to when running for the first time and/or when reset. 
+    [Property]  var InitStateName : String = null;
+    [Property] var PrintDebug : Boolean = true;
+    
+    // Container for all the states. 
+    var StateMap : HashMap[String, State] = new HashMap[String, State]();
+    
+    // Variable to keep track of the current, previous and next states 
+    var CurrentState : State = null;
+    var NextState : State = null;
+    var PreviousState : State = null;
+    
+    // Game object to act on - found automatically on initialize
+    var Actor : Cog = null;
+    
+    // ChangeState. Does exactly what it's name suggest. Note that the state change
+    // will only take effect once the state machine is updated. Therefore, only the last
+    // call to ChangeState before the state machine is updated will determine the new state. 
+    function ChangeState(nextState : State)
+    {
+        if(nextState == this.CurrentState)
+        {
+            return;
+        }
+        
+        if(nextState != null)
+        {
+            this.NextState = nextState;
+        }
+        else
+        {
+            //Console.WriteLine("ERROR:  `this.Actor.Name`::ChangeState: NULL argument passed!");
+        }
+    }
+    // This is a helper function that searches for the state by name and changes to it. 
+    // this can be useful when you don't have access to the state component directly. 
+    function ChangeState(nextStateName : String)
+    {
+        if(this.StateMap.Contains(nextStateName))
+            this.ChangeState(this.StateMap.Get(nextStateName));
+        //else
+            //Console.WriteLine("ERROR:  `this.Actor.Name`::ChangeState: `nextStateName` not FOUND!");
+    }
+    
+    // This will reset the state machine. Similarly 
+    function ResetStatMachine()
+    {
+        this.CurrentState = null;
+        this.NextState = null;
+        this.PreviousState = null;
+    }
+    // -----------------------------------------------------------------
+    // -----------------------------------------------------------------
+    // NESTED STATE MACHINE HELPERS
+    
+    // Follows the hierarchy from the bottom up (child->parent->grandparent,etc...)
+    // until it finds the first object that has a state machine component. The root.
+    function GetRootOwner() : Cog
+    {
+        var rootOwner = this.Owner;
+        
+        while(rootOwner.Parent != null && rootOwner.Parent.StateMachine != null)
+        {
+            rootOwner = rootOwner.Parent;
+        }
+        return rootOwner;
+    }
+    
+    // Returns the root object's state machine component. 
+    function GetRootStateMachine() : StateMachine
+    {
+        var rootOwner = this.GetRootOwner();
+        return rootOwner.StateMachine;
+    }
+    // Searches for and return the state machine component of the object
+    // whose name matches the specified one. The search starts at the current 
+    // object and follows the top-down ordering (parent->child->grandchildren etc...)
+    function FindStateMachineFromObj(smName : String) : StateMachine
+    {
+        
+        // start from the root object
+        var obj = this.Owner;
+        
+        // if this object is the one we are looking for
+        // return;
+        if(obj.Name == smName)
+        {
+            return obj.StateMachine;
+        }
+        
+        // Otherwise, ask each child object to do the same
+        else
+        {
+            // loop over each child
+            foreach(var child in obj.Children)
+            {
+                // if the child has a state machine
+                if(child.StateMachine != null)
+                {
+                    // ask the child to check as well if it is the 
+                    // oject we are looking for. If not, check its children.
+                    var res = child.StateMachine.FindStateMachineFromObj(smName);
+                    
+                    // there is a valid result, return this. 
+                    if(res != null)
+                        return res;
+                }
+            }
+            
+        }
+        
+        // not found
+        return null;
+    }
+    
+    // This will navigate the whole object hierarchy (i.e. starting from the actor object)
+    // to try and find the state machine of the object of the given name.
+    function FindStateMachineFromRoot(smName : String) : StateMachine
+    {
+        // start from the root object and find the state machine 
+        // using the default find function
+        var rootOwner = this.GetRootStateMachine();
+        
+        // return the state machine
+        return rootOwner.FindStateMachineFromObj(smName);
+    }
+    
+    
+    // -----------------------------------------------------------------
+    // -----------------------------------------------------------------
+    // INTERNAL USE - DO NOT MODIFY THIS CODE
+    
+    // Initialization function. Connects to update event and find actor COG.
+    function Initialize(init : CogInitializer)
+    {
+        // Connect to update. 
+        Zero.Connect(this.Space, Events.LogicUpdate, this.UpdateStates);
+         
+         // Get the actor. This will be the first object in the hierarchy with a state machine 
+         // component attached to it. 
+        this.Actor = this.GetRootOwner();
+    }
+    
+    // Adds a state to the state machine. This function is called 
+    // by the states themselves in the StateInitialize function.
+    // should not be called directly  and is for internal use only. 
+    function AddState(stateName : String, newState : State)
+    {
+        if(this.StateMap.Contains(stateName) != false)
+        {
+            Console.WriteLine("ERROR:  `this.Actor.Name`::AddState: `stateName` already exists!");
+        }
+        else
+        {
+            this.StateMap[stateName] = newState;
+        }
+    }
+    
+    // Delayed Initialize. In the current way the state machine API is designed, state machines are initialized
+    // before the states. (this is because of the explicit dependency in the State class definition). This function will
+    // perform delayed intialization and is called from the update function below. It will change the state to the state
+    // specified in the [Property] InitStateName. If none is provided, then the initstate is chosen at random in the 
+    // state map. 
+    function DelayedInitialize()
+    {
+        if(this.CurrentState == null && this.NextState == null)
+        {
+            // first state provided
+            if( this.InitStateName != null && this.InitStateName.Count != 0)
+                this.ChangeState(this.InitStateName);
+            else if(this.StateMap.Count != 0) // initial state not set, pick first
+            {
+                Console.WriteLine("`this.Owner.Name`::StateMachine Init: No Initial State Specified, defaulting to state 0 (`this.StateMap.All.Current.Value`)");
+                this.ChangeState(this.StateMap.All.Current.Value);
+            }
+        }
+    }
+    function UpdateStates(event : UpdateEvent)
+    {
+        // First update initialize
+        this.DelayedInitialize();
+        
+        // StateMachine
+        if(this.CurrentState != null)
+            this.CurrentState.InternalUpdate(event);
+            
+        // Change State Machine
+        if(this.CurrentState != this.NextState)
+        {
+            if(this.PrintDebug)
+                Console.WriteLine("`this.Actor.Name`::ChangeState: CURRENT: `typeid(this.CurrentState).Name` NEXT: `typeid(this.NextState).Name`");
+                
+            if(this.CurrentState != null)
+                this.CurrentState.InternalExit();
+            
+            this.PreviousState = this.CurrentState;
+            this.CurrentState = this.NextState;
+            
+            if(this.CurrentState != null)
+                this.CurrentState.InternalEnter();
+        }
+    }
+}

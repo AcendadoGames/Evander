@@ -12,6 +12,6 @@ class HUDInteraction : ZilchComponent
         slowMo.SlowMoBar.TimeLim = this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo;
         slowMo.SlowMoBar.TimeIsSlowed = this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed;
         timeBar.TimeBar.TimeLim = this.Space.FindObjectByName("PrototypePlayer").TimeLapse.TimeLim;
-        
+        Console.WriteLine(this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo);
     }
 }

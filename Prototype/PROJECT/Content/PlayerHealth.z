@@ -1,0 +1,22 @@
+class PlayerHealth : ZilchComponent
+{
+    var Health : Integer = 10;
+    var CurrentHealth : Integer;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+       this.CurrentHealth = this.Health;
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        
+        if (this.CurrentHealth != this.Health)
+        {
+            Console.WriteLine("YOUR HEALTH IS `this.Health`");
+            this.CurrentHealth = this.Health;
+        }
+        
+    }
+}
