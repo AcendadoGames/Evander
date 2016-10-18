@@ -1,18 +1,16 @@
-class Archer_SeekTarget :SuperState
+class Melee_SeekTarget : SuperState
 {
-    //PROPERTIES
     [Property]
-    var MaxDistance : Real = 40.0;
+    var MaxDistance : Real = 40; 
     [Property]
-    var ShootingMaxDistance : Real = 25;
+    var MeleeDistance : Real = 4.0;
     [Property] 
     var SensorCogPath : CogPath = null;
     
-    //OTHERVARIABLES
+    
     var SensorCog : Cog = null;
     var TargetCog : Cog = null;
     
-    /*------------------------------------------------------------------------------------------*/
     function Initialize(init : CogInitializer)
     {
         this.StateInitialize(init);
@@ -20,6 +18,7 @@ class Archer_SeekTarget :SuperState
         if (this.SensorCogPath != null)
             this.SensorCog = this.SensorCogPath.Cog;
     }
+    
     [Override]function Enter()
         {
             //Setting some variables to compute the distance form the owner to the player
@@ -27,73 +26,66 @@ class Archer_SeekTarget :SuperState
             var ownerPos : Real3 = this.Actor.Transform.Translation;
             var distanceToPlayer : Real = Math.Distance( ownerPos, playerPos );
             
-            //if you enter the Archer_SeekTarget this will decide where you go
-            if(distanceToPlayer >= this.ShootingMaxDistance && distanceToPlayer <= this.MaxDistance)    /*Chasing the Player in the distance*/
-                this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Chase);
+            //if you enter the Melee_SeekTarget this will decide where you go
+            if(distanceToPlayer <= this.MaxDistance && distanceToPlayer >= this.MeleeDistance)          /*Chasing the Player in the distance*/
+                this.Owner.StateMachine.ChangeState(this.Owner.Melee_SeekTarget_Chase);
             
             if (distanceToPlayer >= this.MaxDistance)                                                   /*Losing the Player bcs the distance not respected*/
-                this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Lost);
+                this.Owner.StateMachine.ChangeState(this.Owner.Melee_SeekTarget_Lost);
                 
-            this.TargetCog = this.Owner.Archer_Patrol.TargetCog;
+            if(distanceToPlayer <= this.MeleeDistance)
+            {
+                this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_Attack");
+            }
+            this.TargetCog = this.Owner.Melee_Patrol.TargetCog;
         }
     [Override]function Update(event:UpdateEvent)
         {
             this.SensorCog.BoxCollider.DebugDraw();
-            
         }
 }
-class Archer_SeekTarget_Chase : State
+class Melee_SeekTarget_Chase : State
 {
-    //PROPERTIES
     [Property]
-    var Duration : Real = 10.0;
+    var MaxDistance : Real = 40; 
     [Property]
-    var MaxDistance : Real = 30.0;
-    [Property]
-    var MeleeDistance : Real = 5;
-    [Property]
-    var ShootingMaxDistance : Real = 25;
+    var MeleeDistance : Real = 4.0;
     
-    //OTHERVARIABLES
-    var ShootingMinDistance : Real;
     var MovementStateMachine : StateMachine = null;
     
     function Initialize(init : CogInitializer)
     {
         this.StateInitialize(init);
         this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement");
-        this.ShootingMinDistance = this.MeleeDistance;
     }
-    
     [Override] function Update(event : UpdateEvent)
         {
             //setting some variables to compute the distance
             var playerPos : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
             var ownerPos : Real3 = this.Actor.Transform.Translation;
             var distanceToPlayer : Real = Math.Distance( ownerPos, playerPos );
-            var target = this.Owner.Parent.Archer_SeekTarget.TargetCog;
+            var target = this.Owner.Parent.Melee_SeekTarget.TargetCog;
             var direc = target.Transform.Translation - this.Actor.Transform.Translation;
             
             this.MovementStateMachine.Owner.Move_Walk.Direction = Math.Sign(direc.X);
             this.MovementStateMachine.ChangeState("Move_Walk");
             
-            if (distanceToPlayer <= this.ShootingMaxDistance)
+            if (distanceToPlayer <= this.MaxDistance && distanceToPlayer >= this.MeleeDistance)
+                {
+                    this.MovementStateMachine.ChangeState("Move_Walk");
+                }
+            else if (distanceToPlayer <= this.MeleeDistance)
                 {
                     this.MovementStateMachine.ChangeState("Move_Idle");
-                    this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Attack");
+                    this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_Attack");
                 }
-                else if (distanceToPlayer <= this.MeleeDistance)
+            else if (distanceToPlayer >= this.MaxDistance)
                 {
-                    this.MovementStateMachine.ChangeState("Move_Idle");
-                    this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Attack");
-                }
-                else if (distanceToPlayer >= this.MaxDistance)
-                {
-                    this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Lost);
+                    this.Owner.StateMachine.ChangeState(this.Owner.Melee_SeekTarget_Lost);
                 }
         }
 }
-class Archer_SeekTarget_Lost : State
+class Melee_SeekTarget_Lost : State
 {
     [Property] 
     var Duration : Real = 5.0;
@@ -111,21 +103,21 @@ class Archer_SeekTarget_Lost : State
     [Override] function Enter()
     {
         this.MovementStateMachine.ChangeState("Move_Idle");
-        Zero.Connect(this.Owner.Parent.Archer_SeekTarget.SensorCog, Events.CollisionStarted, this.OnSensorEnter);
+        Zero.Connect(this.Owner.Parent.Melee_SeekTarget.SensorCog, Events.CollisionStarted, this.OnSensorEnter);
     }
     [Override] function Exit()
     {
-        Zero.Disconnect(this.Owner.Parent.Archer_SeekTarget.SensorCog, Events.CollisionStarted, this);
+        Zero.Disconnect(this.Owner.Parent.Melee_SeekTarget.SensorCog, Events.CollisionStarted, this);
     }
     function OnSensorEnter(event : CollisionEvent)
     {
-        this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Chase);
+        this.Owner.StateMachine.ChangeState(this.Owner.Melee_SeekTarget_Chase);
     }
     [Override] function Update(event : UpdateEvent)
     {
         
         if(this.TimeInState > this.Duration)
-            this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Patrol");
+            this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_Patrol");
             
         this.FlipTimer += event.Dt;
         if(this.FlipTimer > this.Duration * 0.25) 

@@ -6,16 +6,16 @@ Cog =
 	},
 	Named = 
 	{
-		string Name = "Guard",
+		string Name = "Melee",
 	},
 	Archetyped = 
 	{
-		string Name = "56fe1b739c9942a3:Guard",
+		string Name = "582f805310deafbd:Melee",
 	},
 	Transform = 
 	{
-		Vec3 Translation = [5.09589052, 0, 0],
-		Vec3 Scale = [2.5, 2.5, 2.5],
+		Vec3 Translation = [44.3776283, 3.47089005, -0.00100027618],
+		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
 	Sprite = 
@@ -24,17 +24,27 @@ Cog =
 		bool VisibilityCulling = true,
 		bool VisibilityEvents = true,
 		bool CastShadows = false,
-		Vec4 Color = [1, 0.570000172, 0, 1],
+		Vec4 Color = [1, 1, 1, 1],
 		BlendMode BlendMode = Alpha,
 		SpriteGeometryMode GeometryMode = ZPlane,
 		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-		string SpriteSource = "55fd3678c71357c9:MonkeyStand",
+		string SpriteSource = "5275aa4d802dd6dc:Square",
 		bool RenderMask = false,
 		bool FlipX = false,
 		bool FlipY = false,
 		bool AnimationActive = true,
 		float AnimationSpeed = 1,
 		uint StartFrame = 0,
+	},
+	BoxCollider = 
+	{
+		bool Ghost = false,
+		bool SendsMessages = true,
+		bool Seamless = true,
+		string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+		string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+		Vec3 Offset = [0, 0, 0],
+		Vec3 Size = [0.5, 0.5, 0.5],
 	},
 	RigidBody = 
 	{
@@ -48,19 +58,17 @@ Cog =
 		Vec3 Velocity = [0, 0, 0],
 		Vec3 AngularVelocity = [0, 0, 0],
 	},
-	BoxCollider = 
-	{
-		bool Ghost = false,
-		bool SendsMessages = true,
-		bool Seamless = true,
-		string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-		string SerializedGroupName = "4e740859314e5515:DefaultGroup",
-		Vec3 Offset = [0, -0.0500000007, 0],
-		Vec3 Size = [0.349999994, 0.449999988, 0.5],
-	},
 	StateMachine = 
 	{
 		string InitStateName = "",
+		bool PrintDebug = true,
+	},
+	DragEffect = 
+	{
+		bool Active = true,
+		bool WakeUpOnChange = true,
+		float Drag = 0,
+		float AngularDrag = 0,
 	},
 	Hierarchy = 
 	{
@@ -76,13 +84,14 @@ Cog =
 			},
 			Transform = 
 			{
-				Vec3 Translation = [0, 0, 0],
+				Vec3 Translation = [-0.0889358521, 0.0291893482, 0],
 				Vec3 Scale = [1, 1, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},
 			StateMachine = 
 			{
 				string InitStateName = "",
+				bool PrintDebug = true,
 			},
 			Hierarchy = 
 			{
@@ -98,49 +107,26 @@ Cog =
 					},
 					Transform = 
 					{
-						Vec3 Translation = [0, 0, 0],
+						Vec3 Translation = [0.123104095, -0.123103857, 0],
 						Vec3 Scale = [1, 1, 1],
 						Quat Rotation = [0, 0, 0, 1],
 					},
 					StateMachine = 
 					{
-						string InitStateName = "MoveSM_Idle",
+						string InitStateName = "Move_Idle",
+						bool PrintDebug = true,
 					},
-					MoveSM_Idle = 
+					Move_Idle = 
 					{
-						bool StateAnimEnabled = true,
-						bool StateAnimForceReset = false,
-						string StateAnim = "55fd3678c71357c9:MonkeyStand",
-						int StateAnimStartFrame = 0,
-						float StateAnimSpeed = 1,
-						bool StateAnimFlipX = false,
-						bool StateAnimFlipY = false,
-						bool StateAnimLoop = false,
 					},
-					MoveSM_Walk = 
+					Move_Jump = 
 					{
-						float Speed = 3,
+						float Impulse = 5,
+					},
+					Move_Walk = 
+					{
+						float Speed = 0.200000003,
 						float Direction = 1,
-						bool StateAnimEnabled = true,
-						bool StateAnimForceReset = false,
-						string StateAnim = "55fd3678c713370e:MonkeyWalk",
-						int StateAnimStartFrame = 0,
-						float StateAnimSpeed = 1,
-						bool StateAnimFlipX = false,
-						bool StateAnimFlipY = false,
-						bool StateAnimLoop = true,
-					},
-					MoveSM_Jump = 
-					{
-						float Impulse = 10,
-						bool StateAnimEnabled = true,
-						bool StateAnimForceReset = false,
-						string StateAnim = "55fd3678c713771d:MonkeyJump",
-						int StateAnimStartFrame = 0,
-						float StateAnimSpeed = 1,
-						bool StateAnimFlipX = false,
-						bool StateAnimFlipY = false,
-						bool StateAnimLoop = false,
 					},
 				},
 				Cog = 
@@ -151,23 +137,24 @@ Cog =
 					},
 					Named = 
 					{
-						string Name = "GuardAI",
+						string Name = "MeleeAI",
 					},
 					Transform = 
 					{
-						Vec3 Translation = [0, 0, 0],
+						Vec3 Translation = [0.184653282, -0.0615520477, 0],
 						Vec3 Scale = [1, 1, 1],
 						Quat Rotation = [0, 0, 0, 1],
 					},
 					StateMachine = 
 					{
-						string InitStateName = "GuardSM_Patrol",
+						string InitStateName = "",
+						bool PrintDebug = true,
 					},
-					GuardSM_Patrol = 
+					Melee_Patrol = 
 					{
-						CogPath SensorCopPath = 
+						CogPath SensorCogPath = 
 						{
-							string Path = "GuardSM_Patrol/Sensor",
+							string Path = "../../Sensor",
 							bool ErrorOnResolveToNull = false,
 							bool ErrorOnPathCantCompute = false,
 							bool ErrorOnDirectLinkFail = false,
@@ -181,14 +168,13 @@ Cog =
 							CogPathPreference PathPreference2 = Absolute,
 						},
 					},
-					GuardSM_Fire = 
+					Melee_SeekTarget = 
 					{
-					},
-					GuardSM_SeekTarget = 
-					{
-						CogPath SensorCopPath = 
+						float MaxDistance = 40,
+						float MeleeDistance = 4,
+						CogPath SensorCogPath = 
 						{
-							string Path = "GuardSM_Patrol/Sensor",
+							string Path = "../../Sensor",
 							bool ErrorOnResolveToNull = false,
 							bool ErrorOnPathCantCompute = false,
 							bool ErrorOnDirectLinkFail = false,
@@ -201,6 +187,10 @@ Cog =
 							CogPathPreference PathPreference1 = SpaceRelative,
 							CogPathPreference PathPreference2 = Absolute,
 						},
+					},
+					Melee_Attack = 
+					{
+						float MeleeDistance = 4,
 					},
 					Hierarchy = 
 					{
@@ -212,28 +202,27 @@ Cog =
 							},
 							Named = 
 							{
-								string Name = "GuardSM_Patrol",
+								string Name = "Melee_Patrol",
 							},
 							Transform = 
 							{
-								Vec3 Translation = [0, 0, 0],
+								Vec3 Translation = [-0.0828704834, 0.0366067886, -1.87661499e-07],
 								Vec3 Scale = [1, 1, 1],
 								Quat Rotation = [0, 0, 0, 1],
 							},
 							StateMachine = 
 							{
-								string InitStateName = "GuardSM_Patrol_Wait",
+								string InitStateName = "Melee_Patrol_Wait",
+								bool PrintDebug = true,
 							},
-							GuardSM_Patrol_Wait = 
+							Melee_Patrol_Walking = 
 							{
-								float Duration = 1,
+								float Direction = 1,
+								float Duration = 5,
 							},
-							GuardSM_Patrol_Walk = 
+							Melee_Patrol_Wait = 
 							{
-								float Duration = 1.5,
-							},
-							Hierarchy = 
-							{
+								float Duration = 3,
 							},
 						},
 						Cog = 
@@ -244,23 +233,25 @@ Cog =
 							},
 							Named = 
 							{
-								string Name = "GuardSM_SeekTarget",
+								string Name = "Melee_SeekTarget",
 							},
 							Transform = 
 							{
-								Vec3 Translation = [0, 0, 0],
+								Vec3 Translation = [-0.0828742981, 0.082205534, -1.87661499e-07],
 								Vec3 Scale = [1, 1, 1],
 								Quat Rotation = [0, 0, 0, 1],
 							},
 							StateMachine = 
 							{
-								string InitStateName = "GuardSM_SeekTarget_Chase",
+								string InitStateName = "Melee_SeekTarget_Chase",
+								bool PrintDebug = true,
 							},
-							GuardSM_SeekTarget_Chase = 
+							Melee_SeekTarget_Chase = 
 							{
-								float Duration = 3.5,
+								float MaxDistance = 40,
+								float MeleeDistance = 4,
 							},
-							GuardSM_SeekTarget_Lost = 
+							Melee_SeekTarget_Lost = 
 							{
 								float Duration = 5,
 							},
@@ -273,17 +264,74 @@ Cog =
 							},
 							Named = 
 							{
-								string Name = "GuardSM_Fire",
+								string Name = "Melee_Attack",
 							},
 							Transform = 
 							{
-								Vec3 Translation = [0, 0, 0],
+								Vec3 Translation = [-0.0745849609, -0.0123188496, 4.23751771e-07],
 								Vec3 Scale = [1, 1, 1],
 								Quat Rotation = [0, 0, 0, 1],
 							},
 							StateMachine = 
 							{
-								string InitStateName = "",
+								string InitStateName = "Melee_Attack_MeleeA",
+								bool PrintDebug = true,
+							},
+							Melee_Attack_MeleeA = 
+							{
+								float MeleeDistance = 4,
+								float MeleeAttackRate = 1,
+							},
+							Hierarchy = 
+							{
+								Cog = 
+								{
+									LinkId = 
+									{
+										uint Id = 9,
+									},
+									Named = 
+									{
+										string Name = "DamageBox",
+									},
+									Transform = 
+									{
+										Vec3 Translation = [-0.00672531128, -0.0163636208, 0.999998033],
+										Vec3 Scale = [5, 5, 1],
+										Quat Rotation = [0, 0, 0, 1],
+									},
+									Sprite = 
+									{
+										bool Visible = true,
+										bool VisibilityCulling = true,
+										bool VisibilityEvents = true,
+										bool CastShadows = false,
+										Vec4 Color = [1, 0, 0, 0.5],
+										BlendMode BlendMode = Alpha,
+										SpriteGeometryMode GeometryMode = ZPlane,
+										string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+										string SpriteSource = "5275aa4d802dd6dc:Square",
+										bool RenderMask = false,
+										bool FlipX = false,
+										bool FlipY = false,
+										bool AnimationActive = true,
+										float AnimationSpeed = 1,
+										uint StartFrame = 0,
+									},
+									BoxCollider = 
+									{
+										bool Ghost = true,
+										bool SendsMessages = false,
+										bool Seamless = true,
+										string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+										string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+										Vec3 Offset = [0, 0, 0],
+										Vec3 Size = [0.5, 0.5, 0.5],
+									},
+									MeleeEnemiesDamage = 
+									{
+									},
+								},
 							},
 						},
 					},
@@ -302,11 +350,11 @@ Cog =
 			},
 			Transform = 
 			{
-				Vec3 Translation = [0, 0, 0],
+				Vec3 Translation = [1.90734863e-06, -2.38418579e-07, 0],
 				Vec3 Scale = [1, 1, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},
-			SphereCollider = 
+			BoxCollider = 
 			{
 				bool Ghost = true,
 				bool SendsMessages = true,
@@ -314,7 +362,7 @@ Cog =
 				string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
 				string SerializedGroupName = "4e740859314e5515:DefaultGroup",
 				Vec3 Offset = [0, 0, 0],
-				float Radius = 2.5,
+				Vec3 Size = [7.5, 5, 0.5],
 			},
 		},
 	},

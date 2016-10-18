@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "MeleeEnemiesDamage",
+		uint64 ResourceId = 582ac4972dc02d3e,
+	},
+},

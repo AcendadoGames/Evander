@@ -1,8 +1,0 @@
-
-class GuardSM_Fire : SuperState
-{
-    function Initialize(init : CogInitializer)
-    {
-        this.StateInitialize(init);
-    }
-}

@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "Melee_SeekTarget",
+		uint64 ResourceId = 582adf1349ff2af7,
+	},
+},
