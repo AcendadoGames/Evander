@@ -6,15 +6,15 @@ Cog =
 	},
 	Named = 
 	{
-		string Name = "PrototypeEnemy",
+		string Name = "target part2",
 	},
 	Archetyped = 
 	{
-		string Name = "57c6f3818ec7874f:PrototypeEnemy",
+		string Name = "57d593a55f9d7f95:targetpart2",
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-6.56538677, 4.30336332, 0],
+		Vec3 Translation = [0, 0, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -24,11 +24,11 @@ Cog =
 		bool VisibilityCulling = true,
 		bool VisibilityEvents = true,
 		bool CastShadows = false,
-		Vec4 Color = [1, 0, 0, 1],
+		Vec4 Color = [1, 1, 1, 1],
 		BlendMode BlendMode = Alpha,
 		SpriteGeometryMode GeometryMode = ZPlane,
 		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-		string SpriteSource = "5275aa4d802dd6dc:Square",
+		string SpriteSource = "5793924a695d6d09:target part2",
 		bool RenderMask = false,
 		bool FlipX = false,
 		bool FlipY = false,
@@ -36,34 +36,21 @@ Cog =
 		float AnimationSpeed = 1,
 		uint StartFrame = 0,
 	},
+	TargetSprite = 
+	{
+		float AngVel = 5,
+	},
 	RigidBody = 
 	{
 		bool Static = false,
 		bool Asleep = false,
 		bool Kinematic = false,
-		bool RotationLocked = true,
-		bool Mode2D = true,
+		bool RotationLocked = false,
+		bool Mode2D = false,
 		bool AllowSleep = true,
 		bool Inherit2DMode = true,
 		Vec3 Velocity = [0, 0, 0],
 		Vec3 AngularVelocity = [0, 0, 0],
-	},
-	BoxCollider = 
-	{
-		bool Ghost = false,
-		bool SendsMessages = true,
-		bool Seamless = true,
-		string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
-		string SerializedGroupName = "57c6b63fee8fbbb0:Enemy",
-		Vec3 Offset = [0, 0, 0],
-		Vec3 Size = [0.5, 0.5, 0.5],
-	},
-	VelRotDampening = 
-	{
-		float VelocityDampening = 0.899999976,
-		float JumpDampening = 0.899999976,
-		float NegativeJumpDampening = 1,
-		float RotationDampening = 0.899999976,
 	},
 	IgnoreSpaceEffects = 
 	{

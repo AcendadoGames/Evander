@@ -46,6 +46,10 @@ class ComboTree : ZilchComponent
             if(temp.Current.Name == "L" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
             {
                 this.CurrentState = temp.Current;
+                if(!this.Space.GlobalVariables.CanJump)
+                this.Space.FindObjectByName("PrototypePlayer").RigidBody.Velocity = Real3(this.Space.FindObjectByName("PrototypePlayer").RigidBody.Velocity.X,
+                                                                                          this.Space.FindObjectByName("PrototypePlayer").RigidBody.Velocity.Y + 30,
+                                                                                          this.Space.FindObjectByName("PrototypePlayer").RigidBody.Velocity.Z);
                 this.TimeToCancelCombo = this.Temp1;
                 return;
             }
@@ -66,6 +70,10 @@ class ComboTree : ZilchComponent
             if(temp.Current.Name == "R" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
             {
                 this.CurrentState = temp.Current;
+                if(!this.Space.GlobalVariables.CanJump)
+                this.Space.FindObjectByName("PrototypePlayer").RigidBody.Velocity = Real3(this.Space.FindObjectByName("PrototypePlayer").RigidBody.Velocity.X,
+                                                                                          this.Space.FindObjectByName("PrototypePlayer").RigidBody.Velocity.Y + 30,
+                                                                                          this.Space.FindObjectByName("PrototypePlayer").RigidBody.Velocity.Z);
                 this.TimeToCancelCombo = this.Temp1;
                 return;
             }

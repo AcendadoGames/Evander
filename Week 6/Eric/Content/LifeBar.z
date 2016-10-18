@@ -1,4 +1,4 @@
-class LifeBar : ZilchComponent
+/*class LifeBar : ZilchComponent
 {
     function Initialize(init : CogInitializer)
     {
@@ -7,7 +7,7 @@ class LifeBar : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        var lifeLim : Real = this.Space.FindObjectByName("PrototypePlayer").PlayerHp.Hp;
+       
         var scale: Real = (lifeLim/100);
         var counter: Real = 100;
         var lifePos : Real = ((4.93 * (0.69 - (0.69 * scale))) );
@@ -26,3 +26,4 @@ class LifeBar : ZilchComponent
         }
     }
 }
+*/

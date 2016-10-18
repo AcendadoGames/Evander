@@ -1,5 +1,7 @@
 class TimeBar : ZilchComponent
 {
+    var TimeLim : Real;
+        
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
@@ -7,21 +9,19 @@ class TimeBar : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        var timeLim : Real = this.Space.FindObjectByName("PrototypePlayer").TimeLapse.TimeLim;
-        var scale: Real = (timeLim/ 120);
+        var scale: Real = (this.TimeLim/ 120);
         var counter: Real = 120;
-        var timePos : Real = ((4.93 * (0.69 - (0.69 * scale))) );
-        var timeBar = this.Space.FindObjectByName("Camera").Transform.Translation.X - 19.2821;
+        var timePos : Real = ((2.45 * (0.69 - (0.69 * scale))) );
         
-        this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Space.FindObjectByName("Camera").Transform.Translation.Y + 12.2293,
+        this.Owner.Transform.Translation = Real3((-20.5465 - timePos), this.Owner.Transform.Translation.Y,
                                                 this.Owner.Transform.Translation.Z);
         
-        if (timeLim < counter || timeLim > 0)
+        if (this.TimeLim < counter || this.TimeLim > 0)
         {
             
             // 0.69 is the value of the Scale.X
             this.Owner.Transform.Scale = Real3(0.69 * scale, this.Owner.Transform.Scale.Y, this.Owner.Transform.Translation.Z ); 
-            this.Owner.Transform.Translation = Real3((timeBar - timePos), this.Owner.Transform.Translation.Y, this.Owner.Transform.Translation.Z );
+            this.Owner.Transform.Translation = Real3((this.Owner.Transform.Translation.X - timePos), this.Owner.Transform.Translation.Y, this.Owner.Transform.Translation.Z );
             counter -= 1;
         }
     }

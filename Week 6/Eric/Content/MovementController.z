@@ -81,12 +81,7 @@ class MovementController : ZilchComponent
             if(event.EventId == "Jump")
             {
                 //movement
-                if(this.Owner.RigidBody.Velocity.X > 0)
-                    move = Real3(0.5,1,0) * this.JumpSpeed;
-                else if(this.Owner.RigidBody.Velocity.X < 0)
-                    move = Real3(-0.5,1,0) * this.JumpSpeed;
-                else
-                    move = Real3(0,1,0) * this.JumpSpeed;
+                move = Real3(0,1,0) * this.JumpSpeed;
                 //rotation
                 rotation = Real3(-1,0,0) * this.RotationSpeed;      
                 this.Owner.RigidBody.AngularVelocity += rotation;
@@ -120,7 +115,7 @@ class MovementController : ZilchComponent
             else
             {
                 this.Space.GlobalVariables.Dashing = false;
-                this.Space.GlobalVariables.CanDash = false;
+                this.Space.GlobalVariables.CanDash = true;
                 this.Space.GlobalVariables.Spell1TimeToJump = this.Space.GlobalVariables.Temp;
             }
             
@@ -132,7 +127,7 @@ class MovementController : ZilchComponent
     
     function CanJump(event : CollisionEvent)
     {
-        if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground)
+        if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground || event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Wall)
         {
             this.Space.GlobalVariables.CanJump = true;
         }
@@ -146,12 +141,11 @@ class MovementController : ZilchComponent
     }
     function WallJump(event : CollisionEvent)
     {
-
-        if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground && 
+        if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Wall && 
            event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
            event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
-           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X < 0 && 
-           event.OtherObject.Name == "Wall")
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X < 0 &&
+           event.Object.BoxCollider.ContactCount == 1)
             {
                 this.CanPlay = false;
                 this.Space.GlobalVariables.WallDampening = true;
@@ -163,11 +157,11 @@ class MovementController : ZilchComponent
                 
             }
             
-        else if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground && 
+        else if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Wall && 
            event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
            event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
-           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X > 0 && 
-           event.OtherObject.Name == "Wall")
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X > 0 &&
+           event.Object.BoxCollider.ContactCount == 1)
             {
                 this.CanPlay = false;
                 this.Space.GlobalVariables.WallDampening = true;

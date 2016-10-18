@@ -1,7 +1,9 @@
 class SlowMoBar : ZilchComponent
 {
+    [Property]
     var Counter: Real = 2.0;
-    
+    var TimeLim : Real;
+    var TimeIsSlowed : Boolean;
     
     function Initialize(init : CogInitializer)
     {
@@ -10,17 +12,14 @@ class SlowMoBar : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        var timeLim : Real = this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo;
-        this.Owner.Transform.Translation = Real3(this.Space.FindObjectByName("Camera").Transform.Translation.X -23.6164, this.Space.FindObjectByName("Camera").Transform.Translation.Y + 12.5882, this.Owner.Transform.Translation.Z);
-        
-        if (timeLim < this.Counter  && this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed == true)
+        if (this.TimeLim <= this.Counter  && this.TimeIsSlowed == true)
         {
-            this.Owner.Transform.EulerAngles -= Real3(0, 0, 2 * Math.Pi / 70);
+            this.Owner.Transform.EulerAngles -= Real3(0, 0, 2 * Math.Pi / 100);
             this.Counter -= 0.05;
         }
-        if (timeLim > this.Counter  && this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed == false)
+        if (this.TimeLim >= this.Counter  && this.TimeIsSlowed == false)
         {
-            this.Owner.Transform.EulerAngles += Real3(0, 0, 2 * Math.Pi / 70);
+            this.Owner.Transform.EulerAngles += Real3(0, 0, 2 * Math.Pi / 100);
             this.Counter += 0.05;
         }
     }

@@ -2,13 +2,12 @@ class GlobalVariables : ZilchComponent
 {
     var CanDash : Boolean = false;
     var Dashing : Boolean = false;
-    var CanSpell1 : Boolean = true;
     var CanJump : Boolean = false;
     var NoEnemies : Boolean = true;
     var Spell1TimeToJump : Real = 3.0;
     var Temp : Real;
     var WallDampening : Boolean = false;
-    var StartPosition : Real3 = Real3(-10, 1, 0);
+    
     var Temp1 : Real;
     
     function Initialize(init : CogInitializer)
@@ -20,20 +19,6 @@ class GlobalVariables : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        
-        if(this.CanDash)
-        {
-            if(this.Spell1TimeToJump > 0)
-            {
-                this.Spell1TimeToJump -= event.Dt;
-                this.Spell1TimeToJump = Math.Round(this.Spell1TimeToJump, -2);
-            }
-            else
-            {
-                this.Spell1TimeToJump = this.Temp;
-                this.CanDash = false;
-            }
-        }
 
     }
     
