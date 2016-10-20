@@ -58,8 +58,8 @@ class SuperState : State
                 this.SubStates.CurrentState.InternalEnter();
             else
             {
-                Console.WriteLine("sopmethine is terribly wrong");
-                Console.WriteLine("`this.SubStates.StateMap.Count` : `this.SubStates.InitStateName`");
+                //Console.WriteLine("sopmethine is terribly wrong");
+                //Console.WriteLine("`this.SubStates.StateMap.Count` : `this.SubStates.InitStateName`");
             }
         }
     }

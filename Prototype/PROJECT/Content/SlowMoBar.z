@@ -22,7 +22,7 @@ class SlowMoBar : ZilchComponent
             this.Owner.Transform.EulerAngles += Real3(0, 0, 2 * Math.Pi / 100);
             this.Counter += 0.05;
         }
-        Console.WriteLine(this.TimeLim);
+        //Console.WriteLine(this.TimeLim);
     }
     
 }

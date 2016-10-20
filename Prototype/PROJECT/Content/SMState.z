@@ -23,7 +23,7 @@ class State : ZilchComponent
     [Virtual]function StateInitialize(init : CogInitializer)
     {
         // Debug
-        Console.WriteLine("State `typeid(this).Name`::Initialize");
+        //Console.WriteLine("State `typeid(this).Name`::Initialize");
         
         // add the state to the owner state machine. 
         this.Owner.StateMachine.AddState(typeid(this).Name, this);

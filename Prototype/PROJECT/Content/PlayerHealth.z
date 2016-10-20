@@ -14,7 +14,7 @@ class PlayerHealth : ZilchComponent
         
         if (this.CurrentHealth != this.Health)
         {
-            Console.WriteLine("YOUR HEALTH IS `this.Health`");
+            //Console.WriteLine("YOUR HEALTH IS `this.Health`");
             this.CurrentHealth = this.Health;
         }
         

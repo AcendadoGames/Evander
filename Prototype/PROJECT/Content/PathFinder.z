@@ -6,14 +6,17 @@ class Node
     // The node's location in the grid
     var Location : Integer2;
     
+    //the node's location in theworld
+    var WorldPos : Real3;
+    
     // True when the node may be traversed, otherwise false
     var IsWalkable : Boolean;
     
     // Cost from start to here
-    var G : Real;
+    var G : Real = 0;
     
     // Estimated cost from here to end
-    var H : Real;
+    var H : Real = 0;
     
     // Flags whether the node is open, closed or untested by the PathFinder
     var State : NodeState;
@@ -27,25 +30,39 @@ class Node
         get { return this.ParentNode; }
         set
         {
-            // When setting the parent, also calculate the traversal cost from the start node to here (the 'G' value)
-            this.ParentNode = value;
-            this.G = this.ParentNode.G + this.GetTraversalCost(this.Location, this.ParentNode.Location);
+            if(value != null)
+            {
+                // When setting the parent, also calculate the traversal cost from the start node to here (the 'G' value)
+                this.ParentNode = value;
+                this.G = this.ParentNode.G + this.GetTraversalCost(this.Location, this.ParentNode.Location);
+            }
         }
     }
     
     
     // Creates a new instance of Node.
-    // <param name="x">The node's location along the X axis</param>
-    // <param name="y">The node's location along the Y axis</param>
-    // <param name="isWalkable">True if the node can be traversed, false if the node is a wall</param>
-    // <param name="endLocation">The location of the destination node</param>
-    constructor(x : Integer, y : Integer, isWalkable : Boolean, endLocation : Integer2)
+    // <"x">The node's location along the X axis
+    // <"y">The node's location along the Y axis
+    // <"isWalkable">True if the node can be traversed, false if the node is a wall
+    // <"endLocation">The location of the destination node
+    constructor(x : Integer, y : Integer, isWalkable : Boolean, endLocation : Integer2, worldPos : Real3)
     {
         this.Location = Integer2(x, y);
+        this.WorldPos = worldPos;
         this.State = NodeState.Untested;
         this.IsWalkable = isWalkable;
         this.H = this.GetTraversalCost(this.Location, endLocation);
         this.G = 0;
+    }
+    constructor(node : Node)
+    {
+        this.Location = node.Location;
+        this.WorldPos = node.WorldPos;
+        this.State = node.State;
+        this.IsWalkable = node.IsWalkable;
+        this.H = node.H;
+        this.G = node.G;
+        this.PNode = node.PNode;
     }
     
     // Gets the distance between two points
@@ -74,6 +91,7 @@ class PathFinder
     var StartNode : Node;
     var EndNode : Node;
     var Searchparameters : SearchParameters;
+    var NodePath : Array[Node] = new Array[Node]();
     
     // Create a new instance of PathFinder
     constructor(searchParameters : SearchParameters)
@@ -86,9 +104,9 @@ class PathFinder
         
     }
     
-    function ReverseArray(arr : Array[Integer2]) : Array[Integer2]
+    function ReverseArray(arr : Array[Real3]) : Array[Real3]
     {
-        var temp : Integer2 = Integer2(0,0);
+        var temp : Real3 = Real3(0,0,0);
         for (var i = 0; i < arr.Count/2; i += 1) 
         {
             temp = arr[arr.Count-i-1];
@@ -100,7 +118,7 @@ class PathFinder
     
     
     // Attempts to find a path from the start location to the end location based on the supplied SearchParameters
-    // <returns>A List of Points representing the path. If no path was found, the returned list is empty.</returns>
+    // returns A List of Points representing the path. If no path was found, the returned list is empty.
     function FindPath() : Array[Integer2]
     {
         // The start node is the first entry in the 'open' list
@@ -108,21 +126,26 @@ class PathFinder
         var success : Boolean = this.Search(this.StartNode);
         if(success)
         {
-            // If a path was found, follow the parents from the end node to build a list of locations
-            var node : Node = this.EndNode;
+            /*// If a path was found, follow the parents from the end node to build a list of locations
+            var node : Node = new Node(this.EndNode);
+            //var node : Node = this.EndNode;
             while (node.PNode != null)
             {
-                path.Push(node.Location);
+                path.Push(node.WorldPos);
                 node = node.PNode;
             }
             // Reverse the list so it's in the correct order when returned
-            path = this.ReverseArray(path);
+            path = this.ReverseArray(path);*/
+            foreach (var node in this.NodePath)
+            {
+                path.Push(node.Location);
+            }
         }
         return path;
     }
     
     // Builds the node grid from a simple grid of booleans indicating areas which are and aren't walkable
-    // <param name="map">A boolean representation of a grid in which true = walkable and false = not walkable</param>
+    // <"map">A boolean representation of a grid in which true = walkable and false = not walkable
     function InitializeNodes(map : TwoDBooleanArray)
     {
         this.Width = map.Size.X;
@@ -134,11 +157,10 @@ class PathFinder
         {
             for (var x = 0; x < this.Width; x += 1)
             {
-                var tempNode : Node = new Node(x, y, map.Get(Integer2(x, y)), this.Searchparameters.EndLocation);
+                var tempNode : Node = new Node(x, y, map.Get(Integer2(x, y)), this.Searchparameters.EndLocation, Real3(x*2, y*2, 0));
                 this.Nodes.Set(Integer2(x, y), tempNode);
             }
         }
-        
     }
     
     
@@ -162,7 +184,7 @@ class PathFinder
         var x = array[top];
         var i = top - 1;
         var j = bottom + 1;
-        var temp = new Node(0,0, false, Integer2(0,0));
+        var temp = new Node(0,0, false, Integer2(0,0), Real3(0,0,0));
         do
         {
             do      
@@ -185,13 +207,15 @@ class PathFinder
         return j;           // returns middle subscript  
     }
 
-    // Attempts to find a path to the destination node using <paramref name="currentNode"/> as the starting location
-    // <param name="currentNode">The node from which to find a path</param>
-    // <returns>True if a path to the destination has been found, otherwise false</returns>
+    // Attempts to find a path to the destination node using <"currentNode"/> as the starting location
+    // <"currentNode">The node from which to find a path
+    // returns True if a path to the destination has been found, otherwise false
     function Search(currentNode : Node) : Boolean
     {
+
         // Set the current node to Closed since it cannot be traversed more than once
         currentNode.State = NodeState.Closed;
+        
         var nextNodes : Array[Node] = this.GetAdjacentWalkableNodes(currentNode);
         
         // Sort by F-value so that the shortest possible routes are considered first
@@ -199,6 +223,8 @@ class PathFinder
         
         foreach (var nextNode in nextNodes)
         {
+            this.NodePath.Push(nextNode);
+            //Console.WriteLine("NodePath are `this.NodePath`");
             // Check whether the end node has been reached
             if (nextNode.Location == this.EndNode.Location)
             {
@@ -215,9 +241,9 @@ class PathFinder
         return false;
     }
     
-    // Returns any nodes that are adjacent to <paramref name="fromNode"/> and may be considered to form the next step in the path
-    // <param name="fromNode">The node from which to return the next possible nodes in the path</param>
-    // <returns>A list of next possible nodes in the path</returns>
+    // Returns any nodes that are adjacent to <"fromNode"> and may be considered to form the next step in the path
+    // <"fromNode">The node from which to return the next possible nodes in the path
+    // returns A list of next possible nodes in the path
     function GetAdjacentWalkableNodes(fromNode : Node) : Array[Node]
     {
         var walkableNodes : Array[Node] = new Array[Node]();
@@ -232,7 +258,9 @@ class PathFinder
             if (x < 0 || x >= this.Width || y < 0 || y >= this.Height)
                 continue;
             
-            var node : Node = this.Nodes.Get(Integer2(x, y));
+            //var node : Node = this.Nodes.Get(Integer2(x, y));
+            var node = new Node(this.Nodes.Get(Integer2(x, y)));
+            
             // Ignore non-walkable nodes
             if (!node.IsWalkable)
                 continue;
@@ -265,9 +293,9 @@ class PathFinder
         return walkableNodes;
     }
     
-    // Returns the eight locations immediately adjacent (orthogonally and diagonally) to <paramref name="fromLocation"/>
-    // <param name="fromLocation">The location from which to return all adjacent points</param>
-    // <returns>The locations as an IEnumerable of Points</returns>
+    // Returns the eight locations immediately adjacent (orthogonally and diagonally) to <"fromLocation"/>
+    // <"fromLocation">The location from which to return all adjacent points
+    // returns The locations as an IEnumerable of Points
     function GetAdjacentLocations(fromLocation : Integer2) : Array[Integer2]
     {
         var adjacentLocations : Array[Integer2] = new Array[Integer2]();
@@ -297,19 +325,36 @@ class SearchParameters
     }
 }
 
-// A simple console routine to show examples of the A* implementation in use
+// Main Program
 class Program : ZilchComponent
 {
     var Map : TwoDBooleanArray;
     var Searchparameters : SearchParameters;
+    var Pathfinder : PathFinder;
+    var Path : Array[Integer2];
     
     function Initialize(init : CogInitializer)
     {
-        this.Run();
+        //this.Run();
+        
+        this.InitializeMap();
+        this.Pathfinder = new PathFinder(this.Searchparameters);
+        this.Path = this.Pathfinder.FindPath();
+        Console.WriteLine(this.Path);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Searchparameters.EndLocation != this.Path[this.Path.LastIndex])
+            this.Path = this.Pathfinder.FindPath();
+        //var path : Array[Integer2] = this.Pathfinder.FindPath();
+        Console.WriteLine(this.Path);
+        
     }
     // Outputs three examples of path finding to the Console.
     // <remarks>The examples have copied from the unit tests!</remarks>
-    function Run()
+    /*function Run()
     {
         Console.WriteLine("/ = wall\n. = walkable points\n* = finded path\nP/Q = Start/EndPoint\n ");
         // Start with a clear map (don't add any obstacles)
@@ -335,11 +380,11 @@ class Program : ZilchComponent
         this.ShowRoute("The wall is same size the grid, so we can't get any path from P to Q:", path);
         Console.WriteLine();
         
-    }
+    }*/
     
     // Displays the map and path as a simple grid to the console
-    // <param name="title">A descriptive title</param>
-    // <param name="path">The points that comprise the path</param>
+    // <"title">A descriptive title
+    // <"path">The points that comprise the path
     function ShowRoute(title : String, path : Array[Integer2])
     {
         Console.WriteLine(title);
@@ -380,12 +425,12 @@ class Program : ZilchComponent
     function InitializeMap()
     {
         this.Map = new TwoDBooleanArray();
-        this.Map.Resize(Integer2(7,5));
-        for (var y = 0; y < 5; y += 1)
-            for (var x = 0; x < 7; x += 1)
+        this.Map.Resize(Integer2(100,100));
+        for (var y = 0; y < 100; y += 1)
+            for (var x = 0; x < 100; x += 1)
                 this.Map.Set(Integer2(x, y), true);
         
-        var startLocation = Integer2(1, 2);
+        var startLocation = Integer2(0, 0);
         var endLocation = Integer2(5, 2);
         this.Searchparameters = new SearchParameters(startLocation, endLocation, this.Map);
     }

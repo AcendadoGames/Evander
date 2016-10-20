@@ -29,7 +29,7 @@ class MovementController : ZilchComponent
         Zero.Connect(this.Owner, "Jump", this.OnKeyboardEvent);
         Zero.Connect(this.Owner, "MoveDown", this.OnKeyboardEvent);
         Zero.Connect(this.Owner, "PlayerDead", this.AllowPlay);
-        Zero.Connect(this.Owner, Events.CollisionStarted, this.CanJump);
+        Zero.Connect(this.Owner, Events.CollisionPersisted, this.CanJump);
         Zero.Connect(this.Owner, Events.CollisionPersisted, this.WallJump);
         Zero.Connect(this.Owner, Events.CollisionEnded, this.WallJumpEnded);
     }

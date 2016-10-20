@@ -36,7 +36,7 @@ class Melee_Patrol : SuperState
         
     [Override] function OnSensorEnter(event : CollisionEvent) /*Collision event with the Sensor */
         {
-            Console.WriteLine("CollidedWithSensor");
+            //Console.WriteLine("CollidedWithSensor");
             if (event.OtherObject.Name == "PrototypePlayer")
             {
                 this.TargetCog = event.OtherObject;

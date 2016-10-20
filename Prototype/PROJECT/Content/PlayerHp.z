@@ -17,6 +17,6 @@ class PlayerHp : ZilchComponent
         if(otherObject.Name == "Arrow" )
             this.Hp -= 5;
             
-        Console.WriteLine("`this.Hp`");
+        //Console.WriteLine("`this.Hp`");
     }
 }

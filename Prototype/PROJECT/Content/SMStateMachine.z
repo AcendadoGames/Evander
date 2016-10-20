@@ -152,7 +152,7 @@ class StateMachine : ZilchComponent
     {
         if(this.StateMap.Contains(stateName) != false)
         {
-            Console.WriteLine("ERROR:  `this.Actor.Name`::AddState: `stateName` already exists!");
+            //Console.WriteLine("ERROR:  `this.Actor.Name`::AddState: `stateName` already exists!");
         }
         else
         {
@@ -174,7 +174,7 @@ class StateMachine : ZilchComponent
                 this.ChangeState(this.InitStateName);
             else if(this.StateMap.Count != 0) // initial state not set, pick first
             {
-                Console.WriteLine("`this.Owner.Name`::StateMachine Init: No Initial State Specified, defaulting to state 0 (`this.StateMap.All.Current.Value`)");
+                //Console.WriteLine("`this.Owner.Name`::StateMachine Init: No Initial State Specified, defaulting to state 0 (`this.StateMap.All.Current.Value`)");
                 this.ChangeState(this.StateMap.All.Current.Value);
             }
         }
@@ -192,7 +192,7 @@ class StateMachine : ZilchComponent
         if(this.CurrentState != this.NextState)
         {
             if(this.PrintDebug)
-                Console.WriteLine("`this.Actor.Name`::ChangeState: CURRENT: `typeid(this.CurrentState).Name` NEXT: `typeid(this.NextState).Name`");
+                //Console.WriteLine("`this.Actor.Name`::ChangeState: CURRENT: `typeid(this.CurrentState).Name` NEXT: `typeid(this.NextState).Name`");
                 
             if(this.CurrentState != null)
                 this.CurrentState.InternalExit();
