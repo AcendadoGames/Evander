@@ -61,7 +61,7 @@ Cog =
 	BulletDestructionLogic = 
 	{
 		float TimeToDestroy = 2,
-		int BulletDamage = 2,
+		int BulletDamage = 10,
 	},
 	IgnoreSpaceEffects = 
 	{
