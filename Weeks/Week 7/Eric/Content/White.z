@@ -1,0 +1,25 @@
+class White : ZilchComponent
+{
+    var Timer: Real = 0;
+    var Ended : Boolean = false;
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Timer += event.Dt;
+        if(this.Timer > 2 && this.Owner.Sprite.Color.W > 0.03)
+        {
+            if(this.Owner.Sprite.Color.Z < 0.99)
+            {
+            this.Owner.Sprite.Color += Real4(0.0001, 0.0001, 0.01, 0);
+            }
+            else
+            this.Owner.Sprite.Color -= Real4(0, 0, 0, 0.005);
+        }
+        if(this.Owner.Sprite.Color.W < 0.03)
+        this.Ended = true;
+    }
+}

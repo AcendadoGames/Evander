@@ -1,0 +1,91 @@
+class SuperState : State
+{
+    // The state machine that holds the sub states of the SuperState.
+    var SubStates : StateMachine = null;
+    
+    // StateInitialize. automatically tries to find the child object
+    // whose name matches the name of the class that derives from SuperState.
+    // For example, if you derive a SuperState and you call it "Attack", then
+    // the child object in the hierarchy must also be called "Attack"
+    [Override] function StateInitialize(init : CogInitializer)
+    {
+        // initializse normally
+        (this as State)~>StateInitialize(init);
+        
+        // get the sub state machine by  trying to find a child
+        // object that matches the superstate name
+        foreach(var child in this.Owner.Children)
+        {
+            // check name of the object equal to name of this class
+            if(child.Name == typeid(this).Name && child.StateMachine != null)
+            {
+                // get the substates
+                this.SubStates = child.StateMachine;
+                
+                // Connect to events when objects are all initialized to disconnect the 
+                // State machine. from updating. This cannot be done now as this script
+                // will be executed first.
+                Zero.Connect(init, Events.AllObjectsInitialized, this.OnAllObjectsInitialized);
+                return;
+            }
+        }
+    }
+
+    // disconnect the sub-statemachine from the logic update event. Also disconnects
+    // this from this event to stop responding to it.
+    function OnAllObjectsInitialized(event : CogInitializerEvent)
+    {
+        Zero.Disconnect(this.SubStates.Space, Events.LogicUpdate, this.SubStates);
+        Zero.Disconnect(event.CogInitializer, Events.AllObjectsInitialized, this);
+    }
+    
+    // Internal Enter: Resets the sub state machine (first call default internal enter to
+    // make sure that Enter is called).
+    [Override] function InternalEnter()
+    {
+        // Call internal enter
+        (this as State)~>InternalEnter();
+        
+        // reset the sub state machine and force Enter to be called on 
+        // the initial state.
+        if(this.SubStates != null)
+        {
+            this.SubStates.ResetStatMachine();
+            this.SubStates.DelayedInitialize(); 
+            // force new state to be set
+            // call enter on the current sub state
+            if(this.SubStates.CurrentState != null)
+                this.SubStates.CurrentState.InternalEnter();
+            else
+            {
+                //Console.WriteLine("sopmethine is terribly wrong");
+                //Console.WriteLine("`this.SubStates.StateMap.Count` : `this.SubStates.InitStateName`");
+            }
+        }
+    }
+    
+    // Internal update: Calls default update and then update the sub-state machine.
+    // This is useful to have global logic on top of the sub-states.
+    [Override] function InternalUpdate(event : UpdateEvent)
+    {
+        
+        // call internal update as base state
+        (this as State)~>InternalUpdate(event);
+        
+        // update the sub state machine
+        if(this.SubStates != null)
+            this.SubStates.UpdateStates(event);
+    }
+    
+    // Internal Exit: Calls default internal exit and insure that current state exit is called. 
+    // Notice that the order is the opposite of InternalEnter.
+    [Override] function InternalExit()
+    {
+        // call enter on the current sub state
+        if(this.SubStates != null && this.SubStates.CurrentState != null)
+           this.SubStates.CurrentState.InternalExit();
+           
+        // call internal exit  as base state
+        (this as State)~>InternalExit();
+    }
+}

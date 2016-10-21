@@ -1,0 +1,29 @@
+class GlobalVariables : ZilchComponent
+{
+    var CanDash : Boolean = false;
+    var Dashing : Boolean = false;
+    var CanJump : Boolean = false;
+    var NoEnemies : Boolean = true;
+    var Spell1TimeToJump : Real = 3.0;
+    var Temp : Real;
+    var WallDampening : Boolean = false;
+    var StartPosition : Real3;
+    var Temp1 : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Temp = this.Spell1TimeToJump;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, "Spell1Dash", this.Spell1Dash);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+
+    }
+    
+    function Spell1Dash(event : ZilchEvent)
+    {
+        this.Dashing = true;
+    }
+}

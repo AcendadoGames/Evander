@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ComboLogic",
+		uint64 ResourceId = 57dfb179b951ea05,
+	},
+},
