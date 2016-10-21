@@ -1,6 +1,7 @@
-class LifeBar : ZilchComponent
+class LifeBar2 : ZilchComponent
 {
     var CurrentLife : Real; 
+    var LerpLife : Real = 100;
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
@@ -9,11 +10,14 @@ class LifeBar : ZilchComponent
     function OnLogicUpdate(event : UpdateEvent)
     {
        
-        var scale : Real = (this.CurrentLife/100);
+        var scale : Real = (this.LerpLife/100);
         var counter: Real = 100;
         var lifePos : Real = ((5.93 * (0.69 - (0.69 * scale))) );
         
         this.Owner.Transform.Translation = Real3((this.Owner.Transform.Translation.X - lifePos), this.Owner.Transform.Translation.Y,this.Owner.Transform.Translation.Z );
+        
+        if(this.LerpLife > this.CurrentLife)
+            this.LerpLife -= 0.25;
         
         if ( this.CurrentLife != counter)
         {

@@ -9,6 +9,6 @@ class MeleeEnemiesDamage : ZilchComponent
         var otherObject = event.OtherObject;
         
         if (otherObject.Name == "PrototypePlayer")
-            otherObject.PlayerHealth.Health -= 2;
+            otherObject.PlayerHealth.CurrentHealth -= 20;
     }
 }

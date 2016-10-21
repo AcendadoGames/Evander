@@ -310,12 +310,53 @@ Level =
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
 		},
+		LifeBar = 
+		{
+		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
 			uint Id = 8,
+		},
+		Named = 
+		{
+			string Name = "LifeBar2",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-19.8619728, 13.1937523, 0.400000006],
+			Vec3 Scale = [0.689999998, 0.689999998, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.588863492, 0.610000014, 0.582549989, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "577c02902e2dbe60:definitivebar1",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		LifeBar2 = 
+		{
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 9,
 		},
 		Named = 
 		{
@@ -337,7 +378,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 9,
+					uint Id = 10,
 				},
 				Named = 
 				{
