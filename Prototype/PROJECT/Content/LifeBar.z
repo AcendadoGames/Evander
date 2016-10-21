@@ -23,7 +23,5 @@ class LifeBar : ZilchComponent
             this.Owner.Transform.Translation = Real3((-19.862 - lifePos), this.Owner.Transform.Translation.Y, this.Owner.Transform.Translation.Z );
             counter -= 1;
         }
-        Console.WriteLine(scale);
-        Console.WriteLine(this.CurrentLife);
     }
 }

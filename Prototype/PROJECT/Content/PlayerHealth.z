@@ -14,12 +14,15 @@ class PlayerHealth : ZilchComponent
         
         if (this.CurrentHealth != this.Health)
         {
-            Console.WriteLine("YOUR HEALTH IS `this.Health`");
             if(this.CurrentHealth > 0)
                 this.Health = this.CurrentHealth;
             else 
                 this.Health = 0;
         }
-        
+        if (this.Health == 0)
+        {
+            this.Space.ReloadLevel();
+            this.Space.FindObjectByName("PrototypePlayer").Transform.Translation = this.Space.GlobalVariables.StartPosition;
+        }
     }
 }

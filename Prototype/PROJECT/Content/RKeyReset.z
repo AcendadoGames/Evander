@@ -3,16 +3,14 @@ class RKeyReset : ZilchComponent
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.Space.FindObjectByName("PrototypePlayer").Transform.Translation = this.Space.GlobalVariables.StartPosition;
     }
 
     function OnLogicUpdate(event : UpdateEvent)
     {
         if(Zero.Keyboard.KeyIsPressed(Keys.R))
         {
-            var player = this.Space.FindObjectByName("PrototypePlayer");
-
-            if(player != null)
-                this.Space.ReloadLevel();
+            this.Space.ReloadLevel();
         }
     }
 }
