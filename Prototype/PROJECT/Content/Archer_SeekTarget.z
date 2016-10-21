@@ -38,15 +38,13 @@ class Archer_SeekTarget :SuperState
         }
     [Override]function Update(event:UpdateEvent)
         {
-            this.SensorCog.BoxCollider.DebugDraw();
+            //this.SensorCog.BoxCollider.DebugDraw();
             
         }
 }
 class Archer_SeekTarget_Chase : State
 {
     //PROPERTIES
-    [Property]
-    var Duration : Real = 10.0;
     [Property]
     var MaxDistance : Real = 30.0;
     [Property]

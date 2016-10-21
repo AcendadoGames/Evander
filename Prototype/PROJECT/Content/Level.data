@@ -1144,7 +1144,7 @@ Level =
 								{
 									float Duration = 5,
 									float MaxDistance = 40,
-									float MeleeDistance = 3,
+									float MeleeDistance = 4,
 									float ShootingMaxDistance = 25,
 								},
 								Archer_SeekTarget_Lost = 
@@ -1178,15 +1178,15 @@ Level =
 									float FireRate = 1,
 									string BulletArchetype = "57d8856f24342cc4:Arrow",
 									float BulletSpeed = 100,
-									float MeleeDistance = 5,
-									float ShootingMinDistance = 5,
+									float MeleeDistance = 4,
+									float ShootingMinDistance = 4,
 									float LosingDistance = 25,
 								},
 								Archer_Attack_MeleeA = 
 								{
-									float MeleeDistance = 5,
-									float Range = 3,
-									float MeleeAttackRate = 1,
+									float MeleeDistance = 4,
+									float Range = 4,
+									float MeleeAttackRate = 0.5,
 								},
 								Hierarchy = 
 								{
