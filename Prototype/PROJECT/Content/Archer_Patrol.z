@@ -46,7 +46,7 @@ class Archer_Patrol : SuperState
         
     [Override] function Update(event: UpdateEvent)
         {
-            this.SensorCog.BoxCollider.DebugDraw();
+            //this.SensorCog.BoxCollider.DebugDraw();
         }
 }
 /*------------------------------------------------------------------------------------------*/

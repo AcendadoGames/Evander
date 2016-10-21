@@ -41,7 +41,7 @@ class Melee_SeekTarget : SuperState
         }
     [Override]function Update(event:UpdateEvent)
         {
-            this.SensorCog.BoxCollider.DebugDraw();
+            //this.SensorCog.BoxCollider.DebugDraw();
         }
 }
 class Melee_SeekTarget_Chase : State

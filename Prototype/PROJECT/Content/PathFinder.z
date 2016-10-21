@@ -340,7 +340,7 @@ class Program : ZilchComponent
         this.InitializeMap();
         this.Pathfinder = new PathFinder(this.Searchparameters);
         this.Path = this.Pathfinder.FindPath();
-        Console.WriteLine(this.Path);
+        //Console.WriteLine(this.Path);
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
     
@@ -349,7 +349,7 @@ class Program : ZilchComponent
         if(this.Searchparameters.EndLocation != this.Path[this.Path.LastIndex])
             this.Path = this.Pathfinder.FindPath();
         //var path : Array[Integer2] = this.Pathfinder.FindPath();
-        Console.WriteLine(this.Path);
+        //Console.WriteLine(this.Path);
         
     }
     // Outputs three examples of path finding to the Console.
