@@ -1,0 +1,137 @@
+class Archer_SeekTarget :SuperState
+{
+    //PROPERTIES
+    [Property]
+    var MaxDistance : Real = 40.0;
+    [Property]
+    var ShootingMaxDistance : Real = 25;
+    [Property] 
+    var SensorCogPath : CogPath = null;
+    
+    //OTHERVARIABLES
+    var SensorCog : Cog = null;
+    var TargetCog : Cog = null;
+    
+    /*------------------------------------------------------------------------------------------*/
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+            
+        if (this.SensorCogPath != null)
+            this.SensorCog = this.SensorCogPath.Cog;
+    }
+    [Override]function Enter()
+        {
+            //Setting some variables to compute the distance form the owner to the player
+            var playerPos : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+            var ownerPos : Real3 = this.Actor.Transform.Translation;
+            var distanceToPlayer : Real = Math.Distance( ownerPos, playerPos );
+            
+            //if you enter the Archer_SeekTarget this will decide where you go
+            if(distanceToPlayer >= this.ShootingMaxDistance && distanceToPlayer <= this.MaxDistance)    /*Chasing the Player in the distance*/
+                this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Chase);
+            
+            if (distanceToPlayer >= this.MaxDistance)                                                   /*Losing the Player bcs the distance not respected*/
+                this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Lost);
+                
+            this.TargetCog = this.Owner.Archer_Patrol.TargetCog;
+        }
+    [Override]function Update(event:UpdateEvent)
+        {
+            //this.SensorCog.BoxCollider.DebugDraw();
+            
+        }
+}
+class Archer_SeekTarget_Chase : State
+{
+    //PROPERTIES
+    [Property]
+    var Duration : Real = 10.0;
+    [Property]
+    var MaxDistance : Real = 30.0;
+    [Property]
+    var MeleeDistance : Real = 3;
+    [Property]
+    var ShootingMaxDistance : Real = 25;
+    
+    //OTHERVARIABLES
+    var ShootingMinDistance : Real;
+    var MovementStateMachine : StateMachine = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+        this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement");
+        this.ShootingMinDistance = this.MeleeDistance;
+    }
+    
+    [Override] function Update(event : UpdateEvent)
+        {
+            //setting some variables to compute the distance
+            var playerPos : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+            var ownerPos : Real3 = this.Actor.Transform.Translation;
+            var distanceToPlayer : Real = Math.Distance( ownerPos, playerPos );
+            var target = this.Owner.Parent.Archer_SeekTarget.TargetCog;
+            var direc = target.Transform.Translation - this.Actor.Transform.Translation;
+            
+            this.MovementStateMachine.Owner.Move_Walk.Direction = Math.Sign(direc.X);
+            this.MovementStateMachine.ChangeState("Move_Walk");
+            
+            if (distanceToPlayer <= this.ShootingMaxDistance)
+                {
+                    this.MovementStateMachine.ChangeState("Move_Idle");
+                    this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Attack");
+                }
+                else if (distanceToPlayer <= this.MeleeDistance)
+                {
+                    this.MovementStateMachine.ChangeState("Move_Idle");
+                    this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Attack");
+                }
+                else if (distanceToPlayer >= this.MaxDistance)
+                {
+                    this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Lost);
+                }
+        }
+}
+class Archer_SeekTarget_Lost : State
+{
+    [Property] 
+    var Duration : Real = 5.0;
+    
+    var FlipTimer : Real = 1.0;
+    
+    var MovementStateMachine : StateMachine = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+        this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement");
+    }
+    
+    [Override] function Enter()
+    {
+        this.MovementStateMachine.ChangeState("Move_Idle");
+        Zero.Connect(this.Owner.Parent.Archer_SeekTarget.SensorCog, Events.CollisionStarted, this.OnSensorEnter);
+    }
+    [Override] function Exit()
+    {
+        Zero.Disconnect(this.Owner.Parent.Archer_SeekTarget.SensorCog, Events.CollisionStarted, this);
+    }
+    function OnSensorEnter(event : CollisionEvent)
+    {
+        this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Chase);
+    }
+    [Override] function Update(event : UpdateEvent)
+    {
+        
+        if(this.TimeInState > this.Duration)
+            this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Patrol");
+            
+        this.FlipTimer += event.Dt;
+        if(this.FlipTimer > this.Duration * 0.25) 
+        {
+            this.Actor.Sprite.FlipX = !this.Actor.Sprite.FlipX;
+            this.FlipTimer = 0.0;   
+        }
+    }
+}

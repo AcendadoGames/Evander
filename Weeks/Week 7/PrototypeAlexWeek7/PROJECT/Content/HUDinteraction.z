@@ -1,0 +1,17 @@
+class HUDInteraction : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var slowMo = this.Owner.HUDCreator.HudSpace.FindObjectByName("Transform");
+        var timeBar = this.Owner.HUDCreator.HudSpace.FindObjectByName("TimeBar");
+        slowMo.SlowMoBar.TimeLim = this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo;
+        slowMo.SlowMoBar.TimeIsSlowed = this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed;
+        timeBar.TimeBar.TimeLim = this.Space.FindObjectByName("PrototypePlayer").TimeLapse.TimeLim;
+        //Console.WriteLine(this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo);
+    }
+}

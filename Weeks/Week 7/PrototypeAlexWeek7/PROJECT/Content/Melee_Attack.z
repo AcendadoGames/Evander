@@ -1,0 +1,76 @@
+class Melee_Attack : SuperState
+{
+    //PROPERTIES
+    [Property]
+    var MeleeDistance : Real = 4;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    [Override] function Update(event : UpdateEvent)
+        {
+            
+            //Setting some variables to define the distance to the player
+            var playerPos : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+            var ownerPos : Real3 = this.Actor.Transform.Translation;
+            var distanceToPlayer : Real = Math.Distance( ownerPos, playerPos );
+            
+            if (distanceToPlayer <= this.MeleeDistance)         /*Going to attack from distance*/
+            {
+                this.Owner.StateMachine.ChangeState(this.Owner.Melee_Attack_MeleeA);
+            }
+            else if (distanceToPlayer >= this.MeleeDistance)    /*Going to Patrol*/
+            {
+                this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_SeekTarget");
+            }
+        }
+}
+class Melee_Attack_MeleeA : State
+{
+    //PROPERTIES
+    [Property]
+    var MeleeDistance : Real = 5.0;
+    [Property]
+    var MeleeAttackRate : Real = 1.0;
+    
+    //OTHERVARIABLES
+    var AttackTime : Real = 0.0;
+    var MovementStateMachine : StateMachine = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+        this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement"); 
+    }
+    [Override] function Update (event : UpdateEvent)
+        {
+            /*The attack is set to have a cooldown, and it works with a BoxCollider that starts a CollisionPersisted 
+            event only when the player is in range, this event will send a message to the player's health him 
+            that he has been hit*/
+            
+            this.Owner.FindChildByName("DamageBox").BoxCollider.SendsEvents = false;/*In order to only have one Frame sent*/
+            this.AttackTime += event.Dt;
+            
+            //Setting some variables for the Player distance
+            var playerPosition : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+            var ownerPosition : Real3 = this.Actor.Transform.Translation;
+            var distanceToPlayer = Math.Distance(playerPosition, ownerPosition);
+            
+            if (distanceToPlayer <= this.MeleeDistance && this.AttackTime >= this.MeleeAttackRate)      /*Attack the player*/
+            {
+                this.MovementStateMachine.ChangeState("Move_Idle");
+                this.Owner.FindChildByName("DamageBox").BoxCollider.SendsEvents = true;
+                this.AttackTime = 0;
+            }
+            else if (distanceToPlayer >= this.MeleeDistance)                                    /*Going back to distance attacks */
+            {
+                this.MovementStateMachine.ChangeState("Move_Idle");
+                this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_SeekTarget");
+            }
+        }
+    [Override]function Exit ()
+        {
+            this.AttackTime = 0;
+        }
+}
