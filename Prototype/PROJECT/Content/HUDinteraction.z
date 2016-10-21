@@ -9,12 +9,9 @@ class HUDInteraction : ZilchComponent
     {
         var slowMo = this.Owner.HUDCreator.HudSpace.FindObjectByName("Transform");
         var timeBar = this.Owner.HUDCreator.HudSpace.FindObjectByName("TimeBar");
-        var lifeBar = this.Owner.HUDCreator.HudSpace.FindObjectByName("LifeBar");
-        var lifeBar2 = this.Owner.HUDCreator.HudSpace.FindObjectByName("LifeBar2");
         slowMo.SlowMoBar.TimeLim = this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo;
         slowMo.SlowMoBar.TimeIsSlowed = this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed;
         timeBar.TimeBar.TimeLim = this.Space.FindObjectByName("PrototypePlayer").TimeLapse.TimeLim;
-        lifeBar.LifeBar.CurrentLife = this.Space.FindObjectByName("PrototypePlayer").PlayerHealth.Health;
-        lifeBar2.LifeBar2.CurrentLife = this.Space.FindObjectByName("PrototypePlayer").PlayerHealth.Health;
+        //Console.WriteLine(this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo);
     }
 }

@@ -111,7 +111,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 0, 50],
+			Vec3 Translation = [6.17453909, -1.91300976, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -123,7 +123,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 81.8730545,
+			float Size = 60.6531296,
 		},
 		EditorCameraController = 
 		{
@@ -131,7 +131,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0, 0, 0],
+			Vec3 LookTarget = [6.17453909, -1.91300976, 2.69897441e-07],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -496,7 +496,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-17.7087288, -26.0540352, 0],
+			Vec3 Translation = [-17.7925091, -25.1501961, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -902,7 +902,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-7.12452745, -17.9673233, -0.00100185024],
+			Vec3 Translation = [-6.86759329, -25.221468, -0.00100185024],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -942,7 +942,7 @@ Level =
 			bool SendsMessages = true,
 			bool Seamless = true,
 			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			string SerializedGroupName = "57c6b63fee8fbbb0:Enemy",
 			Vec3 Offset = [0, 0, 0],
 			Vec3 Size = [0.5, 0.5, 0.5],
 		},
@@ -1009,7 +1009,7 @@ Level =
 						},
 						Move_Walk = 
 						{
-							float Speed = 0.5,
+							float Speed = 0.300000012,
 							float Direction = 1,
 						},
 						Move_Jump = 
@@ -1141,7 +1141,7 @@ Level =
 								{
 									float Duration = 5,
 									float MaxDistance = 40,
-									float MeleeDistance = 5,
+									float MeleeDistance = 3,
 									float ShootingMaxDistance = 25,
 								},
 								Archer_SeekTarget_Lost = 
@@ -1205,7 +1205,7 @@ Level =
 										},
 										Sprite = 
 										{
-											bool Visible = true,
+											bool Visible = false,
 											bool VisibilityCulling = true,
 											bool VisibilityEvents = true,
 											bool CastShadows = false,
@@ -1233,6 +1233,41 @@ Level =
 										},
 										ArchersMeleeDamage = 
 										{
+										},
+									},
+									Cog = 
+									{
+										LinkId = 
+										{
+											uint Id = 25,
+										},
+										Named = 
+										{
+											string Name = "Muzzle",
+										},
+										Transform = 
+										{
+											Vec3 Translation = [0.00485038757, -0.173469543, 0.0010015422],
+											Vec3 Scale = [0.327540517, 0.655080974, 0.327540517],
+											Quat Rotation = [0, 0, 0, 1],
+										},
+										Sprite = 
+										{
+											bool Visible = true,
+											bool VisibilityCulling = true,
+											bool VisibilityEvents = true,
+											bool CastShadows = false,
+											Vec4 Color = [0.31764707, 0.31764707, 0.31764707, 1],
+											BlendMode BlendMode = Alpha,
+											SpriteGeometryMode GeometryMode = ZPlane,
+											string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+											string SpriteSource = "5275aa4d802dd6dc:Square",
+											bool RenderMask = false,
+											bool FlipX = false,
+											bool FlipY = false,
+											bool AnimationActive = true,
+											float AnimationSpeed = 1,
+											uint StartFrame = 0,
 										},
 									},
 								},
@@ -1274,7 +1309,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 25,
+			uint Id = 26,
 		},
 		Named = 
 		{
@@ -1282,7 +1317,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [13.8126917, -24.2433949, -0.00100027618],
+			Vec3 Translation = [9.86423016, 6.51785278, -0.00100027618],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -1310,7 +1345,7 @@ Level =
 			bool SendsMessages = true,
 			bool Seamless = true,
 			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			string SerializedGroupName = "57c6b63fee8fbbb0:Enemy",
 			Vec3 Offset = [0, 0, 0],
 			Vec3 Size = [0.5, 0.5, 0.5],
 		},
@@ -1344,7 +1379,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 26,
+					uint Id = 27,
 				},
 				Named = 
 				{
@@ -1367,7 +1402,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 27,
+							uint Id = 28,
 						},
 						Named = 
 						{
@@ -1401,7 +1436,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 28,
+							uint Id = 29,
 						},
 						Named = 
 						{
@@ -1415,7 +1450,7 @@ Level =
 						},
 						StateMachine = 
 						{
-							string InitStateName = "",
+							string InitStateName = "Melee_Patrol",
 							bool PrintDebug = true,
 						},
 						Melee_Patrol = 
@@ -1430,7 +1465,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 29,
+								uint ResolvedCog = 30,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -1450,7 +1485,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 29,
+								uint ResolvedCog = 30,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -1460,13 +1495,16 @@ Level =
 						{
 							float MeleeDistance = 4,
 						},
+						Melee_Stuned = 
+						{
+						},
 						Hierarchy = 
 						{
 							Cog = 
 							{
 								LinkId = 
 								{
-									uint Id = 30,
+									uint Id = 31,
 								},
 								Named = 
 								{
@@ -1497,7 +1535,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 31,
+									uint Id = 32,
 								},
 								Named = 
 								{
@@ -1528,7 +1566,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 32,
+									uint Id = 33,
 								},
 								Named = 
 								{
@@ -1556,7 +1594,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 33,
+											uint Id = 34,
 										},
 										Named = 
 										{
@@ -1570,7 +1608,7 @@ Level =
 										},
 										Sprite = 
 										{
-											bool Visible = true,
+											bool Visible = false,
 											bool VisibilityCulling = true,
 											bool VisibilityEvents = true,
 											bool CastShadows = false,
@@ -1602,6 +1640,32 @@ Level =
 									},
 								},
 							},
+							Cog = 
+							{
+								LinkId = 
+								{
+									uint Id = 35,
+								},
+								Named = 
+								{
+									string Name = "Melee_Stuned",
+								},
+								Transform = 
+								{
+									Vec3 Translation = [-0.104863167, 0.0107212067, 0.00200055237],
+									Vec3 Scale = [1, 1, 1],
+									Quat Rotation = [0, 0, 0, 1],
+								},
+								StateMachine = 
+								{
+									string InitStateName = "Melee_Stuned_True",
+									bool PrintDebug = true,
+								},
+								Melee_Stuned_True = 
+								{
+									float StunTime = 0.5,
+								},
+							},
 						},
 					},
 				},
@@ -1610,7 +1674,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 29,
+					uint Id = 30,
 				},
 				Named = 
 				{
