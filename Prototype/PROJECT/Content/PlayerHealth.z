@@ -1,6 +1,6 @@
 class PlayerHealth : ZilchComponent
 {
-    var Health : Integer = 10;
+    var Health : Integer = 100;
     var CurrentHealth : Integer;
     
     function Initialize(init : CogInitializer)
@@ -14,8 +14,11 @@ class PlayerHealth : ZilchComponent
         
         if (this.CurrentHealth != this.Health)
         {
-            //Console.WriteLine("YOUR HEALTH IS `this.Health`");
-            this.CurrentHealth = this.Health;
+            Console.WriteLine("YOUR HEALTH IS `this.Health`");
+            if(this.CurrentHealth > 0)
+                this.Health = this.CurrentHealth;
+            else 
+                this.Health = 0;
         }
         
     }
