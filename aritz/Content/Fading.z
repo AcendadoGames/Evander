@@ -1,0 +1,15 @@
+class Fading : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        
+        var fading : Real4 = Real4(0, 0, 0, 0.001);
+        if(this.Owner.Sprite.Color.W < 1 && this.Space.FindObjectByName("Board").White.Ended == true)
+        this.Owner.Sprite.Color += fading;
+    }
+}

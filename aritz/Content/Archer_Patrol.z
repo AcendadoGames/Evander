@@ -1,0 +1,119 @@
+class Archer_Patrol : SuperState
+{
+    //PROPERTIES
+    [Property] var SensorCogPath : CogPath = null;
+    
+    //OTHERVARIABLES
+    var SensorCog : Cog = null;
+    var TargetCog : Cog = null;
+    
+/*------------------------------------------------------------------------------------------*/
+    function Initialize(init : CogInitializer) /*We are setting the sensor up*/
+    {
+        this.StateInitialize(init);
+        
+        if (this.SensorCogPath != null)
+            this.SensorCog = this.SensorCogPath.Cog;
+    }
+    
+    [Override] function Enter()
+        {
+            (this as SuperState)~>Enter();
+            
+            this.TargetCog = null;
+        
+            if(this.SensorCog != null)
+                Zero.Connect(this.SensorCog, Events.CollisionStarted, this.OnSensorEnter);
+        }
+        
+    [Override] function Exit()
+        {
+            if(this.SensorCog != null)
+                Zero.Disconnect(this.SensorCog, Events.CollisionStarted, this);
+            
+            (this as SuperState)~>Exit();
+        }
+        
+    [Override] function OnSensorEnter(event : CollisionEvent) /*Collision event with the Sensor */
+        {
+            //Console.WriteLine("CollidedWithSensor");
+            if (event.OtherObject.Name == "PrototypePlayer")
+            {
+                this.TargetCog = event.OtherObject;
+                this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget);
+            }
+        }
+        
+    [Override] function Update(event: UpdateEvent)
+        {
+            this.SensorCog.BoxCollider.DebugDraw();
+        }
+}
+/*------------------------------------------------------------------------------------------*/
+class Archer_Patrol_Walking : State
+{
+    //PROPERTIES
+    [Property]
+    var Direction : Real = 1.0;
+    [Property]
+    var Duration : Real = 5.0;
+    
+    //OTHERVARIABLES
+    var MovementStateMachine : StateMachine = null;
+    
+    function Initialize(init :  CogInitializer)
+    {
+        this.StateInitialize(init);
+        this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement");
+    }
+    /*Entering the walking from the Patrol since we start in this state*/
+    [Override] function Enter()
+        {
+            this.Direction *= -1;
+            
+            if (this.MovementStateMachine != null)
+            {
+                this.MovementStateMachine.Owner.Move_Walk.Direction = this.Direction;
+                this.MovementStateMachine.ChangeState("Move_Walk");
+            }
+        }
+    
+    [Override] function Update(event : UpdateEvent)
+    {
+        /*Making him wait after walking, and changing his State*/
+        if(this.TimeInState >= this.Duration)
+            this.Owner.StateMachine.ChangeState(this.Owner.Archer_Patrol_Wait);
+    }
+}
+/*------------------------------------------------------------------------------------------*/
+class Archer_Patrol_Wait : State
+{
+    //PROPERTIES
+    [Property]
+    var Duration : Real = 3.0;
+    
+    //OTHERVARIABLES
+    var MovementStateMachine : StateMachine = null;
+    
+    function Initialize(init :  CogInitializer)
+    {
+        this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement");
+        this.StateInitialize(init);
+    }
+    
+    [Override] function Enter()
+        {
+            /*Setting the waiting movement*/
+            if(this.MovementStateMachine != null)
+            {
+                this.MovementStateMachine.ChangeState("Move_Idle");
+            }
+        }
+        
+    [Override] function Update(event : UpdateEvent)
+        {
+            /*This is the waiting time*/
+            if (this.TimeInState >= this.Duration)
+                this.Owner.StateMachine.ChangeState(this.Owner.Archer_Patrol_Walking);
+        }
+}
