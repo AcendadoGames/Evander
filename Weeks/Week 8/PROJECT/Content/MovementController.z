@@ -129,8 +129,8 @@ class MovementController : ZilchComponent
         if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Wall && 
            event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
            event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
-           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X < 0 /*&&
-           event.Object.BoxCollider.ContactCount == 1*/)
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X < 0 &&
+           event.Object.BoxCollider.ContactCount == 1)
             {
                 this.CanPlay = false;
                 this.Space.GlobalVariables.WallDampening = true;
@@ -145,8 +145,8 @@ class MovementController : ZilchComponent
         else if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Wall && 
            event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
            event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
-           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X > 0 /*&&
-           event.Object.BoxCollider.ContactCount == 1*/)
+           event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X > 0 &&
+           event.Object.BoxCollider.ContactCount == 1)
             {
                 this.CanPlay = false;
                 this.Space.GlobalVariables.WallDampening = true;
@@ -166,37 +166,6 @@ class MovementController : ZilchComponent
             
        if(event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y == -1)
                 this.CanPlay = true;
-                
-
-        if(event.Object.BoxCollider.ContactCount > 1)
-        {
-            var contactArray = event.Object.BoxCollider.Contacts;
-            var wallCollided = false;
-            var groundCollided = false;
-            while(contactArray.IsNotEmpty)
-            {
-                if(contactArray.Current.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Wall)
-                {
-                    wallCollided = true;
-                }
-                if(contactArray.Current.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground)
-                {
-                    groundCollided = true;
-                }
-                if (wallCollided && groundCollided)
-                {
-                    this.Space.GlobalVariables.CanJump = true;
-                    break;
-                }
-                else 
-                {
-                    this.Space.GlobalVariables.CanJump = false;
-                }    
-                contactArray.MoveNext();
-                Console.WriteLine(wallCollided, groundCollided);
-            }
-
-        }
 
     }
     function WallJumpEnded(event : CollisionEvent)

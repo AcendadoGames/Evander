@@ -18,23 +18,22 @@ class TargetSelector : ZilchComponent
     function OnLogicUpdate(event : UpdateEvent)
     {
         var enemyarray = this.Space.FindAllObjectsByName("PrototypeEnemy");
-        var enemyarray2 = this.Space.FindAllObjectsByName("Archer");
-        var enemyarray3 = this.Space.FindAllObjectsByName("Melee");
         var mouseScreenPosition = Zero.Mouse.ScreenPosition;
         var mouseWorldPosition = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(mouseScreenPosition, 0);
         this.A.Clear();
         while (enemyarray.IsNotEmpty)
         {
             this.A.Push(enemyarray.Current.Transform.Translation);
-            this.A.Push(enemyarray2.Current.Transform.Translation);
-            this.A.Push(enemyarray3.Current.Transform.Translation);
             enemyarray.MoveNext();
-            enemyarray2.MoveNext();
-            enemyarray3.MoveNext();
         }
         this.Space.GeneralAlgorithms.ArraySorting(this.A, 0, this.A.LastIndex);
                 
-
+        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 16 
+            || this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo <= 0)
+            this.Space.GlobalVariables.CanDash = false;
+        else 
+            this.Space.GlobalVariables.CanDash = true;
+            
         if(this.A == null)
             this.Space.GlobalVariables.NoEnemies = true;
         else
@@ -110,7 +109,7 @@ class TargetSelector : ZilchComponent
         for(var i = 0; i < this.A.Count; i += 1)
         {
             if(Math.Distance(this.A[i], this.Owner.Transform.Translation) < 
-            Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) && Math.Distance(this.A[i], this.Owner.Transform.Translation) < 16)
+            Math.Distance(this.TargetPosition, this.Owner.Transform.Translation))
             {
                 this.TargetPosition = this.A[i];
                 this.EnemyIndex = i;

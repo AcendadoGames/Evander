@@ -8,9 +8,13 @@ Cog =
 	{
 		string Name = "Melee",
 	},
+	Archetyped = 
+	{
+		string Name = "58877e4e46a8a555:Melee",
+	},
 	Transform = 
 	{
-		Vec3 Translation = [-40.4802513, 7.62282372, -0.00100027618],
+		Vec3 Translation = [-55.0048828, 8.31423759, -0.00100027618],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -65,6 +69,9 @@ Cog =
 		bool WakeUpOnChange = true,
 		float Drag = 0,
 		float AngularDrag = 0,
+	},
+	EnemyHealth = 
+	{
 	},
 	Hierarchy = 
 	{
