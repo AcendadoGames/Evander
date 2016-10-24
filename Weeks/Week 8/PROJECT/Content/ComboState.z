@@ -16,11 +16,20 @@ class ComboState : ZilchComponent
     var InputTiming : Real = 0.2;
     [Property]
     var Text : String = null;
+    [Property]
+    var DamageArchetype : Archetype = Archetype.Find("damage");
+    [Property]
+    var Damage : Real = 0;
+    [Property]
+    var Color : Real4 = Real4(0,0,0,0);
+    [Property]
+    var LifeTime : Real = 0.0;
 
     var Time : Real = 0.0;
     
     var Temp1 : Real;
 
+    
     function Initialize(init : CogInitializer)
     {
         this.Temp1 = this.PreAttackTime + this.OnAttackTime + this.PostAttackTime;
@@ -28,6 +37,14 @@ class ComboState : ZilchComponent
 
     function ExecuteCombo()
     {
+        if(this.Time == 0/*el momento que queramos que se spawnee el damage, solo hay que hacerlo un frame*/)
+        {
+            var position = this.Owner.Transform.Translation; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
+            var damage = this.Space.CreateAtPosition(this.DamageArchetype, position);
+            damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime);
+         
+        }
+        
         //Console.WriteLine("Executing", this.Text);
         if(this.Time < this.PreAttackTime)
         {
