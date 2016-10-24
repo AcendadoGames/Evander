@@ -1,0 +1,17 @@
+class Title : ZilchComponent
+{
+    var Timer: Real = 0;
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Timer += event.Dt/2;
+        if(this.Timer > 2 && this.Owner.SpriteText.Color.W > 0.001)
+            this.Owner.SpriteText.Color -= Real4(0, 0, 0, 0.005);
+        if(this.Owner.SpriteText.Color.W < 0.01)
+        this.Owner.Destroy;
+    }
+}

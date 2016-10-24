@@ -1,0 +1,121 @@
+class TargetSelector : ZilchComponent
+{
+    var TargetPosition : Real3 = Real3(-99999999,-9999999,-999999);
+    var Controller:Gamepad = null;
+    var EnemyIndex : Integer = 0;
+    var RightStickRightPressed : Boolean = false;
+    var RightStickLeftPressed : Boolean = false;
+    var Temp1 : Boolean = false;
+    var Temp2 : Boolean = false;
+    var A : Array[Real3] = new Array[Real3]();
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var enemyarray = this.Space.FindAllObjectsByName("PrototypeEnemy");
+        var enemyarray2 = this.Space.FindAllObjectsByName("Archer");
+        var enemyarray3 = this.Space.FindAllObjectsByName("Melee");
+        var mouseScreenPosition = Zero.Mouse.ScreenPosition;
+        var mouseWorldPosition = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(mouseScreenPosition, 0);
+        this.A.Clear();
+        while (enemyarray.IsNotEmpty)
+        {
+            this.A.Push(enemyarray.Current.Transform.Translation);
+            this.A.Push(enemyarray2.Current.Transform.Translation);
+            this.A.Push(enemyarray3.Current.Transform.Translation);
+            enemyarray.MoveNext();
+            enemyarray2.MoveNext();
+            enemyarray3.MoveNext();
+        }
+        this.Space.GeneralAlgorithms.ArraySorting(this.A, 0, this.A.LastIndex);
+                
+
+        if(this.A == null)
+            this.Space.GlobalVariables.NoEnemies = true;
+        else
+            this.Space.GlobalVariables.NoEnemies = false;
+            
+        if(this.A != null)
+        {
+            if(this.Controller.IsActive)
+            {
+                this.RightStickInput();
+                if(this.Owner.KeyboardController.LeftTriggerPressed)
+                {
+                    this.GetNearestTarget();
+                }
+                else if(this.RightStickRightPressed && this.EnemyIndex < this.A.LastIndex && (this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing))
+                {
+                    this.EnemyIndex += 1;
+                    this.TargetPosition = this.A[this.EnemyIndex];
+                }
+                else if(this.RightStickLeftPressed && this.EnemyIndex > 0 && (this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing))
+                {
+                    this.EnemyIndex -= 1;
+                    this.TargetPosition = this.A[this.EnemyIndex];
+                }
+        
+            }
+            else
+            {
+                for(var i = 0; i < this.A.Count; i += 1)
+                {
+                    if(Math.Distance(this.A[i], mouseWorldPosition) < 
+                       Math.Distance(this.TargetPosition, mouseWorldPosition))
+                        {
+                            if(this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing)
+                                this.TargetPosition = this.A[i]; 
+                        }   
+                }
+            }
+            
+            
+        }
+    }
+    
+    function RightStickInput()
+    {
+        //Left Input
+        if(this.Controller.RightStick.X < -0.2 && !this.Temp1)
+        {
+            this.RightStickLeftPressed = true;
+            this.Temp1 = true;
+        }
+        else
+            this.RightStickLeftPressed = false;  
+        
+        if(this.Controller.RightStick.X > -0.2)
+            this.Temp1 = false;
+        
+        //Right Input    
+        if(this.Controller.RightStick.X > 0.2 && !this.Temp2)
+        {
+            this.RightStickRightPressed = true;
+            this.Temp2 = true;
+        }
+        else
+            this.RightStickRightPressed = false;
+            
+        if(this.Controller.RightStick.X < 0.2)
+            this.Temp2 = false;
+            
+    }
+    function GetNearestTarget()
+    {
+        for(var i = 0; i < this.A.Count; i += 1)
+        {
+            if(Math.Distance(this.A[i], this.Owner.Transform.Translation) < 
+            Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) && Math.Distance(this.A[i], this.Owner.Transform.Translation) < 16)
+            {
+                this.TargetPosition = this.A[i];
+                this.EnemyIndex = i;
+            }   
+        }    
+    }
+}
+
