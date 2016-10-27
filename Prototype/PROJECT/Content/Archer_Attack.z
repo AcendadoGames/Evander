@@ -11,12 +11,19 @@ class Archer_Attack : SuperState
     var ShootingMaxDistance : Real = 25;
     
     //OTHERVARIABLES
-    var ShootingMinDistance : Real = 5;
+    var ShootingMinDistance : Real;
     
     function Initialize(init : CogInitializer)
     {
         this.StateInitialize(init);
     }
+    
+    //This is just to set the minimum of confusion when it comes to this code.
+    [Override] function Enter()
+        {
+            this.ShootingMinDistance = this.MeleeDistance;
+        }
+        
     [Override] function Update(event : UpdateEvent)
         {
             //Setting some variables to define the distance to the player
@@ -57,13 +64,12 @@ class Archer_Attack_DistanceA : State /* The Enemy stops and starts shooting arr
     [Property] 
     var BulletSpeed : Real = 20.0;
     [Property]
-    var MeleeDistance : Real = 3.0;
-    [Property]
-    var ShootingMinDistance : Real = 3.0;
+    var MeleeDistance : Real = 5.0;
     [Property]
     var LosingDistance : Real = 25;
     
     //OTHERVARIABLES
+    var ShootingMinDistance : Real;
     var Timer : Real = 0.0;
     var ShootingAngle : Real;
     var MuzzleObject : Cog = null;
@@ -73,6 +79,12 @@ class Archer_Attack_DistanceA : State /* The Enemy stops and starts shooting arr
         this.StateInitialize(init);
         this.MuzzleObject = this.Owner.FindChildByName("Muzzle");
     }
+    
+    [Override] function Enter()
+        {
+            this.ShootingMinDistance = this.MeleeDistance;
+        }
+        
     [Override] function Update(event: UpdateEvent)
         {
             this.Timer += event.Dt;
@@ -82,6 +94,7 @@ class Archer_Attack_DistanceA : State /* The Enemy stops and starts shooting arr
             var ownerPosition : Real3 = this.Actor.Transform.Translation;
             var vectorToPlayer = playerPosition - ownerPosition;
             var distanceToPlayer = Math.Distance(playerPosition, ownerPosition);
+            
             
             this.ShootingAngle = Math.ATan2(vectorToPlayer.Y, vectorToPlayer.X);
             
@@ -171,11 +184,13 @@ class Archer_Attack_MeleeA : State
     //OTHERVARIABLES
     var AttackTime : Real = 0.0;
     var MovementStateMachine : StateMachine = null;
+    var Direction : Real;
     
     function Initialize(init : CogInitializer)
     {
         this.StateInitialize(init);
         this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement"); 
+        
         /* I needed to get access to the Player movement because the player could be out of range but still be in
         melee attack range, and I didn't want those to be the same*/
     }
@@ -184,33 +199,44 @@ class Archer_Attack_MeleeA : State
             /*The attack is set to have a cooldown, and it works with a BoxCollider that starts a CollisionPersisted 
             event only when the player is in range, this event will send a message to the player's health him 
             that he has been hit*/
+            this.Owner.FindChildByName("DamageBox").BoxCollider.SendsEvents = false; /*In order to only have one Frame sent*/
             
-            this.Owner.FindChildByName("DamageBox").BoxCollider.SendsEvents = false;/*In order to only have one Frame sent*/
             this.AttackTime += event.Dt;
             
             //Setting some variables for the Player distance
             var playerPosition : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
             var ownerPosition : Real3 = this.Actor.Transform.Translation;
             var distanceToPlayer = Math.Distance(playerPosition, ownerPosition);
+            var target = this.Space.FindObjectByName("PrototypePlayer");
             
-            if (distanceToPlayer <= this.Range && this.AttackTime >= this.MeleeAttackRate)      /*Attack the player*/
-            {
-                this.MovementStateMachine.ChangeState("Move_Idle");
-                this.Owner.FindChildByName("DamageBox").BoxCollider.SendsEvents = true;
-                this.AttackTime = 0;
-            }
-            else if (distanceToPlayer >= this.MeleeDistance)                                    /*Going back to distance attacks */
-            {
-                this.MovementStateMachine.ChangeState("Move_Idle");
-                this.Owner.StateMachine.ChangeState("Archer_Attack_DistanceA");
-            }
-            else if (distanceToPlayer >= this.Range && distanceToPlayer <= this.MeleeDistance)  /*Getting closer to the player JIC*/
-            {
-                this.MovementStateMachine.ChangeState("Move_Walk");
-            }
+            var direc = target.Transform.Translation - this.Actor.Transform.Translation;
+            
+            
+            
+            //Just incase the player jump over the Archer
+            this.MovementStateMachine.Owner.Move_Walk.Direction = Math.Sign(direc.X);
+            
+                                //The actual Attacking    
+                if (distanceToPlayer <= this.Range && this.AttackTime >= this.MeleeAttackRate)      /*Attack the player*/
+                {
+                    this.MovementStateMachine.ChangeState("Move_Idle");
+                    this.Owner.FindChildByName("DamageBox").BoxCollider.SendsEvents = true;
+                    this.AttackTime = 0;
+                }
+                else if (distanceToPlayer >= this.MeleeDistance)                                    /*Going back to distance attacks */
+                {
+                    this.MovementStateMachine.ChangeState("Move_Idle");
+                    this.Owner.StateMachine.ChangeState("Archer_Attack_DistanceA");
+                }
+                else if (distanceToPlayer >= this.Range && distanceToPlayer <= this.MeleeDistance)  /*Getting closer to the player JIC*/
+                {
+                    this.MovementStateMachine.ChangeState("Move_Walk");
+                }
         }
+        
     [Override] function Exit()
         {
+            //we are setting it to 0 again if not, it will restart at the last AttackTime if it leaves
             this.AttackTime = 0;
         }
 }

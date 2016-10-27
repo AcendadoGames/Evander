@@ -5,13 +5,12 @@ class KeyboardController : ZilchComponent
     [Property]
     var MaxTimeSlowed : Real = 2.0;
     var TimeIsSlowed : Boolean = false;
-    
     [Property]
     var TargetSprite1 : Archetype;
-        
     [Property]
     var TargetSprite2 : Archetype;
-    
+    [Property]
+    var Spell1Cooldown : Real = 0.0;
     
     var MoveLeft : String = "MoveLeft";
     var MoveRight : String = "MoveRight";
@@ -21,9 +20,6 @@ class KeyboardController : ZilchComponent
     var MoveDown : String = "MoveDown";
     var Spell1 : String = "Spell1";
     var Spell1Dash : String = "Spell1Dash";
-    
-    [Property]
-    var Spell1Cooldown : Real = 0.0;
     
     var Temp1 : Real;
     
@@ -71,19 +67,12 @@ class KeyboardController : ZilchComponent
             ev.EventId = this.MoveRight;
             this.Owner.DispatchEvent(this.MoveRight, ev);
         }
-        if((Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A)) && this.Space.GlobalVariables.CanJump)
+        if((Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A)) && this.Space.GlobalVariables.CanJump == true)
         {
-            this.Space.GlobalVariables.CanJump = false;
             // move top
             ev.EventId = this.Jump;
             this.Owner.DispatchEvent(this.Jump, ev);
         }
-        /*if(Zero.Keyboard.KeyIsDown(Keys.S))
-        {
-            // move down
-            ev.EventId = this.MoveDown;
-            this.Owner.DispatchEvent(this.MoveDown, ev);
-        }*/
         
         if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && !this.Space.GlobalVariables.NoEnemies && 
                 this.Spell1Cooldown <= 0 && this.Space.GlobalVariables.CanDash)

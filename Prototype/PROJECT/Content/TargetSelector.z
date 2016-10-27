@@ -28,7 +28,12 @@ class TargetSelector : ZilchComponent
         }
         this.Space.GeneralAlgorithms.ArraySorting(this.A, 0, this.A.LastIndex);
                 
-
+        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 16 
+            || this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo <= 0)
+            this.Space.GlobalVariables.CanDash = false;
+        else 
+            this.Space.GlobalVariables.CanDash = true;
+            
         if(this.A == null)
             this.Space.GlobalVariables.NoEnemies = true;
         else

@@ -1,7 +1,7 @@
 class BulletDestructionLogic : ZilchComponent
 {
-    [Property] 
-    var TimeToDestroy : Real = 2.0;
+    //[Property] 
+    //var TimeToDestroy : Real = 2.0;
     [Property]
     var BulletDamage : Integer = 2;
     
@@ -9,18 +9,18 @@ class BulletDestructionLogic : ZilchComponent
     
     function Initialize(init : CogInitializer)
     {
-        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        //Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
         Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
     }
 
-    function OnLogicUpdate(event : UpdateEvent)
+    /*function OnLogicUpdate(event : UpdateEvent)
     {
         this.Timer += event.Dt;
         
         if (this.Timer >= this.TimeToDestroy)
             this.Owner.Destroy();
         
-    }
+    }*/
     function OnCollisionStarted(event : CollisionEvent)
     {
         var otherObject = event.OtherObject;
@@ -30,5 +30,7 @@ class BulletDestructionLogic : ZilchComponent
             otherObject.PlayerHealth.CurrentHealth -= this.BulletDamage;
             this.Owner.Destroy();
         }
+        else
+        this.Owner.Destroy();
     }
 }

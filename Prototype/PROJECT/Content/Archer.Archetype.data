@@ -10,11 +10,11 @@ Cog =
 	},
 	Archetyped = 
 	{
-		string Name = "582e5899b7601db9:Archer",
+		string Name = "58877e5a4860e8db:Archer",
 	},
 	Transform = 
 	{
-		Vec3 Translation = [0, 0, 0],
+		Vec3 Translation = [-0.776452541, -15.6871719, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -42,7 +42,7 @@ Cog =
 		bool Asleep = false,
 		bool Kinematic = false,
 		bool RotationLocked = true,
-		bool Mode2D = false,
+		bool Mode2D = true,
 		bool AllowSleep = true,
 		bool Inherit2DMode = true,
 		Vec3 Velocity = [0, 0, 0],
@@ -69,6 +69,15 @@ Cog =
 		bool WakeUpOnChange = true,
 		float Drag = 0,
 		float AngularDrag = 0,
+	},
+	MassOverride = 
+	{
+		bool Active = true,
+		float invMass = 0.00999999978,
+		Vec3 invInertiaX = [0, 0, 0],
+		Vec3 invInertiaY = [0, 0, 0],
+		Vec3 invInertiaZ = [0, 0, 0],
+		Vec3 LocalCenterOfMass = [0, 0, 0],
 	},
 	Hierarchy = 
 	{
@@ -121,7 +130,8 @@ Cog =
 					},
 					Move_Walk = 
 					{
-						float Speed = 0.5,
+						float SpeedArcher = 0.5,
+						float SpeedMelee = 1,
 						float Direction = 1,
 					},
 					Move_Jump = 
@@ -253,7 +263,7 @@ Cog =
 							{
 								float Duration = 5,
 								float MaxDistance = 40,
-								float MeleeDistance = 5,
+								float MeleeDistance = 3,
 								float ShootingMaxDistance = 25,
 							},
 							Archer_SeekTarget_Lost = 
@@ -288,7 +298,6 @@ Cog =
 								string BulletArchetype = "57d8856f24342cc4:Arrow",
 								float BulletSpeed = 100,
 								float MeleeDistance = 5,
-								float ShootingMinDistance = 5,
 								float LosingDistance = 25,
 							},
 							Archer_Attack_MeleeA = 
@@ -317,7 +326,7 @@ Cog =
 									},
 									Sprite = 
 									{
-										bool Visible = true,
+										bool Visible = false,
 										bool VisibilityCulling = true,
 										bool VisibilityEvents = true,
 										bool CastShadows = false,
@@ -345,6 +354,41 @@ Cog =
 									},
 									ArchersMeleeDamage = 
 									{
+									},
+								},
+								Cog = 
+								{
+									LinkId = 
+									{
+										uint Id = 10,
+									},
+									Named = 
+									{
+										string Name = "Muzzle",
+									},
+									Transform = 
+									{
+										Vec3 Translation = [0.00485038757, -0.173469543, 0.0010015422],
+										Vec3 Scale = [0.327540517, 0.655080974, 0.327540517],
+										Quat Rotation = [0, 0, 0, 1],
+									},
+									Sprite = 
+									{
+										bool Visible = true,
+										bool VisibilityCulling = true,
+										bool VisibilityEvents = true,
+										bool CastShadows = false,
+										Vec4 Color = [0.31764707, 0.31764707, 0.31764707, 1],
+										BlendMode BlendMode = Alpha,
+										SpriteGeometryMode GeometryMode = ZPlane,
+										string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+										string SpriteSource = "5275aa4d802dd6dc:Square",
+										bool RenderMask = false,
+										bool FlipX = false,
+										bool FlipY = false,
+										bool AnimationActive = true,
+										float AnimationSpeed = 1,
+										uint StartFrame = 0,
 									},
 								},
 							},

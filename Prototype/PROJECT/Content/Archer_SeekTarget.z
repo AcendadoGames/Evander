@@ -46,6 +46,8 @@ class Archer_SeekTarget_Chase : State
 {
     //PROPERTIES
     [Property]
+    var Duration : Real = 10.0;
+    [Property]
     var MaxDistance : Real = 30.0;
     [Property]
     var MeleeDistance : Real = 5;
@@ -72,20 +74,23 @@ class Archer_SeekTarget_Chase : State
             var target = this.Owner.Parent.Archer_SeekTarget.TargetCog;
             var direc = target.Transform.Translation - this.Actor.Transform.Translation;
             
+            //Changing the direction of the enemy walking depending on where the player is
             this.MovementStateMachine.Owner.Move_Walk.Direction = Math.Sign(direc.X);
             this.MovementStateMachine.ChangeState("Move_Walk");
             
-            if (distanceToPlayer <= this.ShootingMaxDistance)
+            
+                        //Moving through the States.
+            if (distanceToPlayer <= this.ShootingMaxDistance)                    /* Going to Distance_Attack_Distance */
                 {
                     this.MovementStateMachine.ChangeState("Move_Idle");
                     this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Attack");
                 }
-                else if (distanceToPlayer <= this.MeleeDistance)
+                else if (distanceToPlayer <= this.MeleeDistance)                 /* Going to Distance_Attack_Melee */
                 {
                     this.MovementStateMachine.ChangeState("Move_Idle");
                     this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Attack");
                 }
-                else if (distanceToPlayer >= this.MaxDistance)
+                else if (distanceToPlayer >= this.MaxDistance)                   /*Going to Target_Lost since player is too far away*/
                 {
                     this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Lost);
                 }
@@ -93,11 +98,12 @@ class Archer_SeekTarget_Chase : State
 }
 class Archer_SeekTarget_Lost : State
 {
+    //PROPERTIES
     [Property] 
     var Duration : Real = 5.0;
     
+    //OTHERVARIABLES
     var FlipTimer : Real = 1.0;
-    
     var MovementStateMachine : StateMachine = null;
     
     function Initialize(init : CogInitializer)
@@ -106,30 +112,30 @@ class Archer_SeekTarget_Lost : State
         this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement");
     }
     
-    [Override] function Enter()
-    {
-        this.MovementStateMachine.ChangeState("Move_Idle");
-        Zero.Connect(this.Owner.Parent.Archer_SeekTarget.SensorCog, Events.CollisionStarted, this.OnSensorEnter);
-    }
-    [Override] function Exit()
-    {
-        Zero.Disconnect(this.Owner.Parent.Archer_SeekTarget.SensorCog, Events.CollisionStarted, this);
-    }
-    function OnSensorEnter(event : CollisionEvent)
-    {
-        this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Chase);
-    }
-    [Override] function Update(event : UpdateEvent)
-    {
-        
-        if(this.TimeInState > this.Duration)
-            this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Patrol");
-            
-        this.FlipTimer += event.Dt;
-        if(this.FlipTimer > this.Duration * 0.25) 
+    [Override] function Enter() /*The Enemy is not moving, he stays in Idle*/ 
         {
-            this.Actor.Sprite.FlipX = !this.Actor.Sprite.FlipX;
-            this.FlipTimer = 0.0;   
+            this.MovementStateMachine.ChangeState("Move_Idle");
+            Zero.Connect(this.Owner.Parent.Archer_SeekTarget.SensorCog, Events.CollisionStarted, this.OnSensorEnter);
         }
-    }
+        function OnSensorEnter(event : CollisionEvent)/*Reactivating the sensor so that the player can be detected*/
+        {
+            this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget_Chase);
+        }
+    [Override] function Update(event : UpdateEvent)/*This State is not an infinite state since Archer can't stay lost*/
+        {
+            this.FlipTimer += event.Dt;
+            
+            if(this.TimeInState > this.Duration)
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Patrol");
+        
+            if(this.FlipTimer > this.Duration * 0.25) 
+            {
+                this.Actor.Sprite.FlipX = !this.Actor.Sprite.FlipX;
+                this.FlipTimer = 0.0;   
+            }
+        }
+    [Override] function Exit()
+        {
+            Zero.Disconnect(this.Owner.Parent.Archer_SeekTarget.SensorCog, Events.CollisionStarted, this);
+        }
 }

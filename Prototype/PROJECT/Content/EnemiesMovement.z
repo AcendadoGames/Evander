@@ -15,8 +15,14 @@ class Move_Idle : State
 
 class Move_Walk : State
 {
+    /*It depends on who you are putting this, you have to change it to every enemy*/
+    
+    //For Archers
     [Property]
-    var Speed : Real = 1.0;
+    var SpeedArcher : Real = 0.5;
+    //For Melees
+    [Property]
+    var SpeedMelee : Real = 0.5;
     [Property]
     var Direction : Real = 1.0;
     /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
@@ -29,8 +35,15 @@ class Move_Walk : State
     {
         var body = this.Actor.RigidBody;
         
-        if (body != null)
-            body.Velocity += Real3(this.Speed * this.Direction, 0, 0);
+        if (this.Actor.Name == "Archer")
+        {
+            body.Velocity += Real3(this.SpeedArcher * this.Direction, 0, 0);
+        }
+        
+        if (this.Actor.Name == "Melee")
+        {
+            body.Velocity += Real3(this.SpeedMelee * this.Direction, 0, 0);
+        }
     }
     
 }

@@ -1,12 +1,16 @@
 class TimeLapse : ZilchComponent
 {
     [Property]
+    var TimeLapseSprite : SpriteSource;
+    [Property]
+    var NormalSprite : SpriteSource;
+    
+    [Property]
     var MaxFrames : Integer = 120;
     var Frames : Array[Frame] = new Array[Frame]();
     var  TimeLim: Real = 120;
     
     var Controller:Gamepad = null;
-    
     
     function Initialize(init : CogInitializer)
     {
@@ -18,6 +22,9 @@ class TimeLapse : ZilchComponent
     {
         if(Zero.Keyboard.KeyIsDown(Keys.T) || (this.Controller.IsButtonHeld(Buttons.LeftThumb) && this.Controller.IsButtonHeld(Buttons.RightThumb)))
         {
+            
+            this.Owner.Sprite.SpriteSource = this.TimeLapseSprite;
+            
             if(this.Frames.All.IsNotEmpty && this.TimeLim != 0)
             {
                 this.Owner.Transform.Translation = this.Frames[this.Frames.Count - 1].Position;
@@ -28,7 +35,10 @@ class TimeLapse : ZilchComponent
             
         }
         else if(this.Frames.Count <= this.MaxFrames)
+        {
+            this.Owner.Sprite.SpriteSource = this.NormalSprite;
             this.Frames.Push(Frame(this.Owner.Transform.Translation, this.Owner.Transform.EulerAngles, 100));
+        }
         else
             {
             this.Frames.RemoveAt(0);

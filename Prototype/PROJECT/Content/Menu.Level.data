@@ -116,7 +116,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 16.9861755,
+			float Size = 31.002512,
 		},
 		EditorCameraController = 
 		{
@@ -268,7 +268,7 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [0.840000033, 0.81971395, 0.550199986, 1],
+			Vec4 Color = [0.699999988, 0.666749954, 0.367500007, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -282,6 +282,85 @@ Level =
 		},
 		White = 
 		{
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 7,
+		},
+		Named = 
+		{
+			string Name = "AGpresents",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-12.9960155, 6.93806124, 1.40830252e-07],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0, 0, 0, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "5880890e7c40be6a:CANDY___",
+			uint FontSize = 150,
+			string Text = "Acendado Games presents",
+			TextAlign Align = Left,
+			float PixelsPerUnit = 28.3501129,
+			bool Smoothing = true,
+		},
+		Title = 
+		{
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 8,
+		},
+		Named = 
+		{
+			string Name = "Start Demo",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-10.3818016, -0.902467251, 1.40830252e-07],
+			Vec3 Scale = [1.5, 1.5, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 0],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "588082b53e768487:startdemo_0",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		Fading = 
+		{
+		},
+		ClickSelect = 
+		{
+			string Level = "554cea0f94af672f:Level",
 		},
 	},
 },

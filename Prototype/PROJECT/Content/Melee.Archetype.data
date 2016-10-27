@@ -10,11 +10,11 @@ Cog =
 	},
 	Archetyped = 
 	{
-		string Name = "582e5892b4afee18:Melee",
+		string Name = "58877e4e46a8a555:Melee",
 	},
 	Transform = 
 	{
-		Vec3 Translation = [0, 0, 0],
+		Vec3 Translation = [-6.78271437, -14.2973881, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -52,7 +52,7 @@ Cog =
 		bool Asleep = false,
 		bool Kinematic = false,
 		bool RotationLocked = true,
-		bool Mode2D = false,
+		bool Mode2D = true,
 		bool AllowSleep = true,
 		bool Inherit2DMode = true,
 		Vec3 Velocity = [0, 0, 0],
@@ -69,6 +69,18 @@ Cog =
 		bool WakeUpOnChange = true,
 		float Drag = 0,
 		float AngularDrag = 0,
+	},
+	EnemyHealth = 
+	{
+	},
+	MassOverride = 
+	{
+		bool Active = true,
+		float invMass = 0.00999999978,
+		Vec3 invInertiaX = [0, 0, 0],
+		Vec3 invInertiaY = [0, 0, 0],
+		Vec3 invInertiaZ = [0, 0, 0],
+		Vec3 LocalCenterOfMass = [0, 0, 0],
 	},
 	Hierarchy = 
 	{
@@ -125,7 +137,8 @@ Cog =
 					},
 					Move_Walk = 
 					{
-						float Speed = 0.200000003,
+						float SpeedArcher = 1,
+						float SpeedMelee = 0.5,
 						float Direction = 1,
 					},
 				},
@@ -147,7 +160,7 @@ Cog =
 					},
 					StateMachine = 
 					{
-						string InitStateName = "",
+						string InitStateName = "Melee_Patrol",
 						bool PrintDebug = true,
 					},
 					Melee_Patrol = 
@@ -191,6 +204,9 @@ Cog =
 					Melee_Attack = 
 					{
 						float MeleeDistance = 4,
+					},
+					Melee_Stuned = 
+					{
 					},
 					Hierarchy = 
 					{
@@ -302,7 +318,7 @@ Cog =
 									},
 									Sprite = 
 									{
-										bool Visible = true,
+										bool Visible = false,
 										bool VisibilityCulling = true,
 										bool VisibilityEvents = true,
 										bool CastShadows = false,
@@ -332,6 +348,32 @@ Cog =
 									{
 									},
 								},
+							},
+						},
+						Cog = 
+						{
+							LinkId = 
+							{
+								uint Id = 10,
+							},
+							Named = 
+							{
+								string Name = "Melee_Stuned",
+							},
+							Transform = 
+							{
+								Vec3 Translation = [-0.104863167, 0.0107212067, 0.00200055237],
+								Vec3 Scale = [1, 1, 1],
+								Quat Rotation = [0, 0, 0, 1],
+							},
+							StateMachine = 
+							{
+								string InitStateName = "Melee_Stuned_True",
+								bool PrintDebug = true,
+							},
+							Melee_Stuned_True = 
+							{
+								float StunTime = 0.5,
 							},
 						},
 					},

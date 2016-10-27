@@ -9,7 +9,7 @@ class White : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        this.Timer += event.Dt;
+        this.Timer += event.Dt/2;
         if(this.Timer > 2 && this.Owner.Sprite.Color.W > 0.03)
         {
             if(this.Owner.Sprite.Color.Z < 0.99)
