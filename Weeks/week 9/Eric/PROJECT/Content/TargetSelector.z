@@ -28,7 +28,7 @@ class TargetSelector : ZilchComponent
         }
         this.Space.GeneralAlgorithms.ArraySorting(this.A, 0, this.A.LastIndex);
                 
-        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 20
+        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 30
             || this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo <= 0)
             this.Space.GlobalVariables.CanDash = false;
         else 

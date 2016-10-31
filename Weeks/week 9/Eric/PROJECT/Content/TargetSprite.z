@@ -20,6 +20,11 @@ class TargetSprite : ZilchComponent
         }
         if((Zero.Keyboard.KeyIsUp(Keys.J) && this.Controller.LeftTrigger < 0.2) || this.Space.TimeSpace.TimeScale > 0.4)
             this.Owner.Destroy();
+        Console.WriteLine(this.Space.GlobalVariables.OnGroundCanDash == false && (this.Owner.Name == "target part1" || this.Owner.Name == "target part2"));
+        if(this.Space.GlobalVariables.OnGroundCanDash == false && (this.Owner.Name == "target part1" || this.Owner.Name == "target part2"))
+        {
+            this.Owner.Destroy();
+        }
     }
     function DestroySprite(event : ZilchEvent)
     {

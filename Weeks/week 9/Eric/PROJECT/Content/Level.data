@@ -114,7 +114,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-16.7078037, 0.198446095, 50.4990311],
+			Vec3 Translation = [-67.0621719, 14.3487864, 50.4990273],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -126,7 +126,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 29.8197918,
+			float Size = 44.4858856,
 		},
 		EditorCameraController = 
 		{
@@ -134,7 +134,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-16.7078037, 0.198446095, 0.499029636],
+			Vec3 LookTarget = [-67.0621719, 14.3487864, 0.499027401],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -1803,6 +1803,8 @@ Level =
 			float MaxTimeSlowed = 2,
 			string TargetSprite1 = "57d593dd5d06bfa7:targetpart1",
 			string TargetSprite2 = "57d593a55f9d7f95:targetpart2",
+			string TargetSprite3 = "589c802d94a4b08c:targetpart3",
+			string TargetSprite4 = "589c803497de7ee5:targetpart4",
 		},
 		MovementController = 
 		{

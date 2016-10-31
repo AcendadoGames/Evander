@@ -9,6 +9,10 @@ class KeyboardController : ZilchComponent
     var TargetSprite1 : Archetype;
     [Property]
     var TargetSprite2 : Archetype;
+    [Property]
+    var TargetSprite3 : Archetype;
+    [Property]
+    var TargetSprite4 : Archetype;
     var Particle : Archetype = Archetype.SpecialDash;
     
     var MoveLeft : String = "MoveLeft";
@@ -78,7 +82,14 @@ class KeyboardController : ZilchComponent
             && this.Space.GlobalVariables.Dashing == false) /*Targetting while not in dash*/
         {
             var position = this.Owner.TargetSelector.TargetPosition;
-            if(!this.Space.GlobalVariables.NoEnemies && this.Space.GlobalVariables.CanDash == true)
+            
+            if( this.Space.GlobalVariables.OnGroundCanDash == false || this.Space.GlobalVariables.OnGroundCanDash == false || distance > 30 )
+            {
+                this.Space.CreateAtPosition(this.TargetSprite3, position);
+                this.Space.CreateAtPosition(this.TargetSprite4, position);
+            }
+            
+            if(!this.Space.GlobalVariables.NoEnemies && this.Space.GlobalVariables.OnGroundCanDash == true)
             {
                 this.Space.CreateAtPosition(this.TargetSprite1, position);
                 this.Space.CreateAtPosition(this.TargetSprite2, position);
@@ -112,9 +123,6 @@ class KeyboardController : ZilchComponent
             this.TimeIsSlowed = false;
             this.TimeSlowMo += event.Dt;
         }
-        Console.WriteLine(this.Space.GlobalVariables.CanDash);
-        Console.WriteLine(this.Space.GlobalVariables.Dashing);
-        Console.WriteLine(this.TimeSlowMo);
         //-----------------------------------SPECIAL DASH-------------------------------------------------
         if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && 
           (Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && 
