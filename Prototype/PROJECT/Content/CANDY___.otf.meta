@@ -1,0 +1,8 @@
+FontContent = 
+{
+	FontBuilder = 
+	{
+		string Name = "CANDY___",
+		uint64 ResourceId = 5880890e7c40be6a,
+	},
+},

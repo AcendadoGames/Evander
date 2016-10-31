@@ -1,0 +1,33 @@
+class PlayerHealth : ZilchComponent
+{
+    var Health : Integer = 100;
+    var CurrentHealth : Integer;
+    var Timer : Real = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.CurrentHealth = this.Health;
+        this.Owner.Transform.Translation = this.Space.GlobalVariables.StartPosition;
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (this.CurrentHealth != this.Health)
+        {
+            if(this.CurrentHealth > 0)
+                this.Health = this.CurrentHealth;
+            else 
+            {
+                this.Health = 0;
+                this.Timer += 1;
+                this.Owner.Sprite.Color = Real4(0,0,0,1);
+                this.Owner.MovementController.MoveSpeed = 0;
+                this.Owner.MovementController.DashSpeed = 0;
+                this.Owner.MovementController.JumpSpeed = 0;
+                if(this.Timer > 3)
+                    this.Space.ReloadLevel();
+            }
+        }
+    }
+}
