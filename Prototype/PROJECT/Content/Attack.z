@@ -2,8 +2,6 @@ class Attack : ZilchComponent
 {
     var Damage : Real;
     
-    var Color : Real4 = Real4(0,0,0,0);
-    
     var LifeTime : Real;
     
     var ValuesSet : Boolean = false;
@@ -25,11 +23,15 @@ class Attack : ZilchComponent
             else
                 this.Owner.Destroy();
         }
+        if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
+            this.Owner.Transform.Translation = Real3(this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.X - 1, this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.Y, this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.Z); // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
+        else
+            this.Owner.Transform.Translation = Real3(this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.X + 1, this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.Y, this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.Z);
     }
     function SetValues(damage : Real, color : Real4, lifeTime : Real)
     {
         this.Damage = damage;
-        this.Color = color;
+        this.Owner.Sprite.Color = color;
         this.LifeTime = lifeTime;
         this.ValuesSet = true;
     }
