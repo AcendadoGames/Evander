@@ -1,0 +1,159 @@
+class KeyboardController : ZilchComponent
+{
+    [Property]
+    var TimeSlowMo : Real = 2.0;
+    [Property]
+    var MaxTimeSlowed : Real = 2.0;
+    var TimeIsSlowed : Boolean = false;
+    [Property]
+    var TargetSprite1 : Archetype;
+    [Property]
+    var TargetSprite2 : Archetype;
+    var Particle : Archetype = Archetype.SpecialDash;
+    
+    var MoveLeft : String = "MoveLeft";
+    var MoveRight : String = "MoveRight";
+    var DashLeft : String = "DashLeft";
+    var DashRight : String = "DashRight";
+    var Jump : String = "Jump";
+    var MoveDown : String = "MoveDown";
+    var Spell1 : String = "Spell1";
+    var Spell1Dash : String = "Spell1Dash";
+    
+    var Temp1 : Real;
+    
+    var LeftTriggerPressed : Boolean = false;
+    var Temp2 : Boolean = false;
+    
+    var Controller:Gamepad = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionPersisted, this.OnCollisionPersisted);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var player : Real3 = this.Owner.Transform.Translation;
+        var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
+        var ev  = ZilchEvent();
+        
+        if((Zero.Keyboard.KeyIsDown(Keys.A) || this.Controller.IsButtonHeld(Buttons.StickLeft)) && 
+        ((Zero.Keyboard.KeyIsPressed(Keys.Z)) || this.Controller.IsButtonPressed(Buttons.B)))
+        {
+            // move left    
+            ev.EventId = this.DashLeft;
+            this.Owner.DispatchEvent(this.DashLeft, ev);
+        }
+        else if(Zero.Keyboard.KeyIsDown(Keys.A) || this.Controller.IsButtonHeld(Buttons.StickLeft))
+        {
+            // move left    
+            ev.EventId = this.MoveLeft;
+            this.Owner.DispatchEvent(this.MoveLeft, ev);
+        }
+        if((Zero.Keyboard.KeyIsDown(Keys.D) || this.Controller.IsButtonHeld(Buttons.StickRight)) && 
+        ((Zero.Keyboard.KeyIsPressed(Keys.Z)) || this.Controller.IsButtonPressed(Buttons.B)))
+        {
+            // move right
+            ev.EventId = this.DashRight;
+            this.Owner.DispatchEvent(this.DashRight, ev);
+        }
+        else if(Zero.Keyboard.KeyIsDown(Keys.D) || this.Controller.IsButtonHeld(Buttons.StickRight))
+        {
+            // move right
+            ev.EventId = this.MoveRight;
+            this.Owner.DispatchEvent(this.MoveRight, ev);
+        }
+        if((Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A)) && this.Space.GlobalVariables.CanJump == true)
+        {
+            // move top
+            ev.EventId = this.Jump;
+            this.Owner.DispatchEvent(this.Jump, ev);
+        }
+        //-----------------------------------SLOW MOTION-------------------------------------------------
+        this.LeftTriggerInput();
+        if ((Zero.Keyboard.KeyIsPressed(Keys.J) || this.LeftTriggerPressed) && this.TimeSlowMo >= 0.0 
+            && this.Space.GlobalVariables.Dashing == false) /*Targetting while not in dash*/
+        {
+            var position = this.Owner.TargetSelector.TargetPosition;
+            if(!this.Space.GlobalVariables.NoEnemies && this.Space.GlobalVariables.CanDash == true)
+            {
+                this.Space.CreateAtPosition(this.TargetSprite1, position);
+                this.Space.CreateAtPosition(this.TargetSprite2, position);
+            }
+        }
+        if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0) /*Slowing the Time*/
+        {
+            if(this.Space.GlobalVariables.Dashing != true)
+            {
+                this.TimeIsSlowed = true;
+                this.TimeSlowMo -= event.Dt / this.Space.TimeSpace.TimeScale;
+                this.Space.TimeSpace.TimeScale = 0.1;
+                
+                if(this.TimeSlowMo <= 0.5) /* Lerping At the end of the time if the player stays in SlowMo*/
+                    this.Space.TimeSpace.TimeScale = Math.Lerp(this.Space.TimeSpace.TimeScale, 1, 0.01);
+                if(this.TimeSlowMo == 0 || this.TimeSlowMo < 0)
+                    this.Space.GlobalVariables.CanDash = false;
+            }
+             if(distance < 16 && distance > 3 && this.TimeSlowMo > 0)
+                this.Space.GlobalVariables.CanDash = true;
+        }
+        else /*This is putting the time as it was*/
+        {
+            this.Space.TimeSpace.TimeScale = 1;
+            this.Space.GlobalVariables.CanDash = false;
+        }
+        
+            
+        if ((this.Space.TimeSpace.TimeScale) == 1 && (this.TimeSlowMo <= this.MaxTimeSlowed)) /* Reloading the SlowMo Aiming Power*/
+        {
+            this.TimeIsSlowed = false;
+            this.TimeSlowMo += event.Dt;
+        }
+        Console.WriteLine(this.Space.GlobalVariables.CanDash);
+        Console.WriteLine(this.Space.GlobalVariables.Dashing);
+        Console.WriteLine(this.TimeSlowMo);
+        //-----------------------------------SPECIAL DASH-------------------------------------------------
+        if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && 
+          (Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && 
+          !this.Space.GlobalVariables.NoEnemies && this.Space.GlobalVariables.CanDash == true && this.Space.GlobalVariables.OnGroundCanDash == true)
+        {
+            if(this.Owner.Sprite.Visible == true)
+                this.Space.CreateAtPosition(this.Particle, player);
+            
+            ev.EventId = this.Spell1Dash;
+            this.Space.DispatchEvent(this.Spell1Dash, ev);
+            
+            if(distance < 0.5)
+            {
+                this.Space.GlobalVariables.Dashing = false;
+                this.Space.GlobalVariables.OnGroundCanDash = false;
+            }
+        }
+        else
+            this.Space.GlobalVariables.Dashing = false;
+    }
+    function LeftTriggerInput()
+    {
+        if(this.Controller.LeftTrigger > 0.2 && !this.Temp2)
+        {
+            this.LeftTriggerPressed = true;
+            this.Temp2 = true;
+        }
+        else
+            this.LeftTriggerPressed = false;  
+        
+        if(this.Controller.LeftTrigger < 0.2)
+            this.Temp2 = false;
+        
+    }
+    function OnCollisionPersisted(event : CollisionEvent)
+    {
+        if(this.Space.GlobalVariables.CanDash == true && (event.OtherObject.Name == "Ground" || event.OtherObject.Name == "Wall"))
+        {
+            this.Space.GlobalVariables.OnGroundCanDash = true;
+        }
+    }
+}
