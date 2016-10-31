@@ -1,0 +1,44 @@
+class Janus_Phase_1 : SuperState
+{
+    [Property]
+    var JanusTotalHealth : Real = 1000;
+    [Property]
+    var Phase1MinHealth : Real = 666;
+    
+    var CurrentHealth : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    
+}
+class Janus_Phase_1_Attack : State
+{
+    [Property]
+    var JanusTotalHealth : Real = 1000;
+    [Property]
+    var Phase1MinHealth : Real = 666;
+    
+    var CurrentHealth : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    
+}
+class Janus_Phase_1_Recover : State
+{
+    [Property]
+    var JanusTotalHealth : Real = 1000;
+    [Property]
+    var Phase1MinHealth : Real = 666;
+    
+    var CurrentHealth : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+}

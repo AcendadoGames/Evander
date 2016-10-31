@@ -1,0 +1,20 @@
+ImageContent = 
+{
+	SpriteSourceBuilder = 
+	{
+		string Name = "Player_Jump_Test",
+		uint64 ResourceId = 583f69a1c94cce7f,
+		uint64 AtlasId = 5274cf95e4a661fd,
+		uint FrameSizeX = 256,
+		uint FrameSizeY = 256,
+		uint FrameCount = 3,
+		float FrameDelay = 0.0833333358,
+		float OriginX = 128,
+		float OriginY = 128,
+		float PixelsPerUnit = 64,
+		bool Smoothing = false,
+		bool Looping = true,
+		Vec4 Slices = [0, 0, 0, 0],
+		SpriteFill Fill = Stretch,
+	},
+},
