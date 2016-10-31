@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "Spell1Logic",
-		uint64 ResourceId = 57c6a2c63f864d93,
-	},
-},
