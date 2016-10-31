@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "TargetSprite",
-		uint64 ResourceId = 579393ffad0d05ce,
-	},
-},

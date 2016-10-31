@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "SpellCasting",
-		uint64 ResourceId = 57c6bb07f2f3b9e0,
-	},
-},

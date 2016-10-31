@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "Melee_Patrol",
-		uint64 ResourceId = 582e58e68f682e88,
-	},
-},
