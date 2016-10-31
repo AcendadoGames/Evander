@@ -1,21 +1,27 @@
 class EnemyHealth : ZilchComponent
 {
-    var EnemyLife : Real = 20;
+    [Property]
+    var EnemyLife : Real = 100;
+    
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.DamageReceived);
     }
 
+    function DamageReceived(event : CollisionEvent)
+    {
+        if(event.OtherObject.Name == "damage")
+        {
+            Console.WriteLine(event.OtherObject.Attack.Damage);
+            this.EnemyLife -= event.OtherObject.Attack.Damage;
+        }
+    }
+    
+    
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if(this.Space.FindObjectByName("Damage") != null)
-        {
-            Console.WriteLine(this.EnemyLife);
-            if(this.Space.FindObjectByName("Damage").Attack.Damage > 0)
-                this.EnemyLife -= this.Space.FindObjectByName("Damage").Attack.Damage;
-            if(this.EnemyLife == 0 || this.EnemyLife < 0)
-                this.Owner.Destroy();
-        }
-        
+        if(this.EnemyLife <= 0)
+            this.Owner.Destroy();
     }
 }
