@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "SMState",
-		uint64 ResourceId = 582e58e68f6b6cbb,
-	},
-},

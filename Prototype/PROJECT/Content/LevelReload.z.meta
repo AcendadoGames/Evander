@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "LevelReload",
-		uint64 ResourceId = 582b1c6889ab8631,
-	},
-},

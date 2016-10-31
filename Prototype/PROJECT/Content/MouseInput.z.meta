@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "MouseInput",
-		uint64 ResourceId = 57df7dc91214e958,
-	},
-},
