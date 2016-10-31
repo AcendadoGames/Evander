@@ -1,0 +1,21 @@
+class EnemyHealth : ZilchComponent
+{
+    var EnemyLife : Real = 20;
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Space.FindObjectByName("Damage") != null)
+        {
+            Console.WriteLine(this.EnemyLife);
+            if(this.Space.FindObjectByName("Damage").Attack.Damage > 0)
+                this.EnemyLife -= this.Space.FindObjectByName("Damage").Attack.Damage;
+            if(this.EnemyLife == 0 || this.EnemyLife < 0)
+                this.Owner.Destroy();
+        }
+        
+    }
+}

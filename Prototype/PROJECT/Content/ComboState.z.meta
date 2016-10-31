@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ComboState",
+		uint64 ResourceId = 57de4ab9b462f0b1,
+	},
+},
