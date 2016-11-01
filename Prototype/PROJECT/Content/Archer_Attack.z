@@ -137,37 +137,39 @@ class Archer_Attack_DistanceA : State /* The Enemy stops and starts shooting arr
             //Getting the games gravity
             var gravity = this.Space.LevelSettings.GravityEffect.Strength;
             
-            //Computing distance to player
-            distanceToTarget = Math.Distance(ownerPosition, target.Transform.Translation);
+
+                //Computing distance to player
+                distanceToTarget = Math.Distance(ownerPosition, target.Transform.Translation);
+                
+                //Modifing the time in the aire depending on the distanceToTraget
+                t *= distanceToTarget / 30;
+                
+                //Getting the angle with the parabolic equations
+                alpha = Math.ATan((target.Transform.Translation.Y - ownerPosition.Y - 
+                                    (-gravity * t * t) / 2) / (target.Transform.Translation.X  
+                                    - (target.RigidBody.Velocity.X * t) - ownerPosition.X));
+                
+                //Finding the velocity with the angle
+                velocity = ((target.Transform.Translation.X - ownerPosition.X) / (t * Math.Cos(alpha)));
+                
+                
+                //INFORMATION WRITELINES
+                /*
+                Console.WriteLine("PlayerDistance `distanceToTarget`");
+                Console.WriteLine(t);
+                Console.WriteLine("The angle is `Math.ToDegrees(radians :alpha)`");
+                Console.WriteLine("The velocity is `velocity`");
+                Console.WriteLine("The distance to target`distanceToTarget`");
+                Console.WriteLine("--------------------------------");
+                */
+                
+                //Modifing the inicial velocity
+                iniVelocity.X = Math.Cos(alpha) * velocity;
+                iniVelocity.Y = Math.Sin(alpha) * velocity;
+                
+                //Creating the Bullet
+                bullet.RigidBody.Velocity = iniVelocity;
             
-            //Modifing the time in the aire depending on the distanceToTraget
-            t *= distanceToTarget / 30;
-            
-            //Getting the angle with the parabolic equations
-            alpha = Math.ATan((target.Transform.Translation.Y - ownerPosition.Y - 
-                                (-gravity * t * t) / 2) / (target.Transform.Translation.X  
-                                - (target.RigidBody.Velocity.X * t) - ownerPosition.X));
-            
-            //Finding the velocity with the angle
-            velocity = ((target.Transform.Translation.X - ownerPosition.X) / (t * Math.Cos(alpha)));
-            
-            
-            //INFORMATION WRITELINES
-            /*
-            Console.WriteLine("PlayerDistance `distanceToTarget`");
-            Console.WriteLine(t);
-            Console.WriteLine("The angle is `Math.ToDegrees(radians :alpha)`");
-            Console.WriteLine("The velocity is `velocity`");
-            Console.WriteLine("The distance to target`distanceToTarget`");
-            Console.WriteLine("--------------------------------");
-            */
-            
-            //Modifing the inicial velocity
-            iniVelocity.X = Math.Cos(alpha) * velocity;
-            iniVelocity.Y = Math.Sin(alpha) * velocity;
-            
-            //Creating the Bullet
-            bullet.RigidBody.Velocity = iniVelocity;
         }
 }
 /*-------------------------------------------------------------------------------------------------------------------------------------------------*/

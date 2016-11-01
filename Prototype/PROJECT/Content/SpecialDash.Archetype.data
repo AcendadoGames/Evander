@@ -1,0 +1,174 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "SpecialDash",
+	},
+	Archetyped = 
+	{
+		string Name = "5898a5920ff9b87c:SpecialDash",
+	},
+	Transform = 
+	{
+		Vec3 Translation = [-207.139099, 43.9457626, 0.499023438],
+		Vec3 Scale = [0.5, 0.100000001, 1],
+		Quat Rotation = [0, 0, 0, 1],
+	},
+	DashParticle = 
+	{
+	},
+	Hierarchy = 
+	{
+		Cog = 
+		{
+			LinkId = 
+			{
+				uint Id = 2,
+			},
+			Named = 
+			{
+				string Name = "Smoke",
+			},
+			Transform = 
+			{
+				Vec3 Translation = [-0.303749084, -3.14063501, -0.000243604183],
+				Vec3 Scale = [0.00999999978, 0.0299999993, 1],
+				Quat Rotation = [0, 0, 0, 1],
+			},
+			SpriteParticleSystem = 
+			{
+				bool Visible = true,
+				bool VisibilityCulling = true,
+				bool VisibilityEvents = true,
+				bool CastShadows = false,
+				SystemChildMode ChildMode = Independent,
+				SystemSpace SystemSpace = WorldSpace,
+				uint DrawOrder = 0,
+				Vec4 Tint = [0.5, 0.5, 0.5, 0.25],
+				float WarmUpTime = 0,
+				ParticleGeometry GeometryMode = Billboarded,
+				ParticleRenderMode RenderMode = Additive,
+				ParticleSortMode SortMode = Youngest,
+				ParticleAnimation ParticleAnimation = Single,
+				string Texture = "58989b0a421f8776:Smoke2",
+				float VelocityScale = 1,
+				float LengthScale = 0,
+				float MaxParticleSize = 100,
+				Vec3 SystemSize = [5, 5, 5],
+			},
+			SphericalParticleEmitter = 
+			{
+				bool Active = true,
+				uint EmitCount = 0,
+				float EmitRate = 800,
+				float EmitVariance = 0,
+				float Size = 2,
+				float SizeVariance = 0,
+				float Lifetime = 0.0250000004,
+				float LifetimeVariance = 0,
+				float Spin = 0,
+				float SpinVariance = 0,
+				bool RandomSpin = true,
+				float Fill = 0,
+				float EmitterVelocityPercent = 0,
+				Vec3 StartVelocity = [-1, 0, 0],
+				Vec3 RandomVelocity = [0, 2, 0],
+				Vec3 TangentVelocity = [0, 0, 0],
+				Vec3 EmitterSize = [0, 0, 0],
+				bool FastMovingEmitter = false,
+			},
+			LinearParticleAnimator = 
+			{
+				Vec3 Force = [-7, 0, 0],
+				Vec3 RandomForce = [0, 0, 0],
+				float Torque = 0,
+				float Growth = 0,
+				float Dampening = 0,
+				Vec3 Twist = [0, 0, 0],
+			},
+		},
+		Cog = 
+		{
+			LinkId = 
+			{
+				uint Id = 3,
+			},
+			Named = 
+			{
+				string Name = "BlueParticle",
+			},
+			Transform = 
+			{
+				Vec3 Translation = [-0.303848267, -3.1391573, -0.000243604183],
+				Vec3 Scale = [0.00999999978, 0.0299999993, 1],
+				Quat Rotation = [0, 0, 0, 1],
+			},
+			SpriteParticleSystem = 
+			{
+				bool Visible = true,
+				bool VisibilityCulling = true,
+				bool VisibilityEvents = true,
+				bool CastShadows = false,
+				SystemChildMode ChildMode = Independent,
+				SystemSpace SystemSpace = WorldSpace,
+				uint DrawOrder = 0,
+				Vec4 Tint = [0, 0.519999743, 1, 1],
+				float WarmUpTime = 0,
+				ParticleGeometry GeometryMode = Billboarded,
+				ParticleRenderMode RenderMode = Additive,
+				ParticleSortMode SortMode = Youngest,
+				ParticleAnimation ParticleAnimation = Single,
+				string Texture = "58989b0a421fac2f:FireCloud",
+				float VelocityScale = 1,
+				float LengthScale = 0,
+				float MaxParticleSize = 100,
+				Vec3 SystemSize = [5, 5, 5],
+			},
+			SphericalParticleEmitter = 
+			{
+				bool Active = true,
+				uint EmitCount = 0,
+				float EmitRate = 800,
+				float EmitVariance = 0,
+				float Size = 3,
+				float SizeVariance = 0,
+				float Lifetime = 0.0250000004,
+				float LifetimeVariance = 0,
+				float Spin = 300,
+				float SpinVariance = 0,
+				bool RandomSpin = true,
+				float Fill = 0,
+				float EmitterVelocityPercent = 0,
+				Vec3 StartVelocity = [-5, 0, 0],
+				Vec3 RandomVelocity = [1.5, 1.5, 1.5],
+				Vec3 TangentVelocity = [0, 0, 0],
+				Vec3 EmitterSize = [0.300000012, 0.300000012, 0],
+				bool FastMovingEmitter = false,
+			},
+			LinearParticleAnimator = 
+			{
+				Vec3 Force = [-10, 0, 0],
+				Vec3 RandomForce = [6, 0, 0],
+				float Torque = 5,
+				float Growth = 0,
+				float Dampening = 0,
+				Vec3 Twist = [0, 0, 0],
+			},
+			ParticleColorAnimator = 
+			{
+				Vec4 Color0 = [1, 1, 1, 0],
+				Vec4 Color1 = [0.796124995, 0.954867482, 0.964999974, 1],
+				Vec4 Color2 = [0.640500009, 0.898530006, 0.915000021, 1],
+				Vec4 Color3 = [0.429250002, 0.850000024, 0.749019921, 1],
+				Vec4 Color4 = [1, 1, 1, 1],
+			},
+			Hierarchy = 
+			{
+			},
+		},
+	},
+},

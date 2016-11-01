@@ -28,7 +28,7 @@ class TargetSelector : ZilchComponent
         }
         this.Space.GeneralAlgorithms.ArraySorting(this.A, 0, this.A.LastIndex);
                 
-        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 16 
+        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 30
             || this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo <= 0)
             this.Space.GlobalVariables.CanDash = false;
         else 
@@ -48,12 +48,12 @@ class TargetSelector : ZilchComponent
                 {
                     this.GetNearestTarget();
                 }
-                else if(this.RightStickRightPressed && this.EnemyIndex < this.A.LastIndex && (this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing))
+                else if(this.RightStickRightPressed && this.EnemyIndex < this.A.LastIndex && (this.Space.GlobalVariables.CanDash))
                 {
                     this.EnemyIndex += 1;
                     this.TargetPosition = this.A[this.EnemyIndex];
                 }
-                else if(this.RightStickLeftPressed && this.EnemyIndex > 0 && (this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing))
+                else if(this.RightStickLeftPressed && this.EnemyIndex > 0 && (this.Space.GlobalVariables.CanDash ))
                 {
                     this.EnemyIndex -= 1;
                     this.TargetPosition = this.A[this.EnemyIndex];
@@ -67,7 +67,7 @@ class TargetSelector : ZilchComponent
                     if(Math.Distance(this.A[i], mouseWorldPosition) < 
                        Math.Distance(this.TargetPosition, mouseWorldPosition))
                         {
-                            if(this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing)
+                            if(this.Space.GlobalVariables.CanDash )
                                 this.TargetPosition = this.A[i]; 
                         }   
                 }

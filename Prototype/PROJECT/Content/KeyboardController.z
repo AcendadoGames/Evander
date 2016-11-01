@@ -10,7 +10,10 @@ class KeyboardController : ZilchComponent
     [Property]
     var TargetSprite2 : Archetype;
     [Property]
-    var Spell1Cooldown : Real = 0.0;
+    var TargetSprite3 : Archetype;
+    [Property]
+    var TargetSprite4 : Archetype;
+    var Particle : Archetype = Archetype.SpecialDash;
     
     var MoveLeft : String = "MoveLeft";
     var MoveRight : String = "MoveRight";
@@ -32,13 +35,13 @@ class KeyboardController : ZilchComponent
     {
         this.Controller = Zero.Gamepads.GetGamePad(0);
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
-        this.Temp1 = this.Spell1Cooldown;
-        this.Spell1Cooldown = 0;
+        Zero.Connect(this.Owner, Events.CollisionPersisted, this.OnCollisionPersisted);
     }
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        
+        var player : Real3 = this.Owner.Transform.Translation;
+        var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
         var ev  = ZilchEvent();
         
         if((Zero.Keyboard.KeyIsDown(Keys.A) || this.Controller.IsButtonHeld(Buttons.StickLeft)) && 
@@ -73,60 +76,72 @@ class KeyboardController : ZilchComponent
             ev.EventId = this.Jump;
             this.Owner.DispatchEvent(this.Jump, ev);
         }
-        
-        if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && !this.Space.GlobalVariables.NoEnemies && 
-                this.Spell1Cooldown <= 0 && this.Space.GlobalVariables.CanDash)
-        {
-            // move down
-            ev.EventId = this.Spell1Dash;
-            this.Space.DispatchEvent(this.Spell1Dash, ev);
-            this.Spell1Cooldown = this.Temp1;
-        }
-        
-        if(this.Spell1Cooldown > 0)
-        {
-            this.Spell1Cooldown -= event.Dt;
-            this.Spell1Cooldown = Math.Round(this.Spell1Cooldown, -2);
-        }
-        
         //-----------------------------------SLOW MOTION-------------------------------------------------
         this.LeftTriggerInput();
-        if ((Zero.Keyboard.KeyIsPressed(Keys.J) || this.LeftTriggerPressed) && this.TimeSlowMo >= 0.0 ) /*Slowing the Time*/
+        if ((Zero.Keyboard.KeyIsPressed(Keys.J) || this.LeftTriggerPressed) && this.TimeSlowMo >= 0.0 
+            && this.Space.GlobalVariables.Dashing == false) /*Targetting while not in dash*/
         {
             var position = this.Owner.TargetSelector.TargetPosition;
-            if(!this.Space.GlobalVariables.NoEnemies)
+            
+            if( this.Space.GlobalVariables.OnGroundCanDash == false || this.Space.GlobalVariables.OnGroundCanDash == false || distance > 30 )
+            {
+                this.Space.CreateAtPosition(this.TargetSprite3, position);
+                this.Space.CreateAtPosition(this.TargetSprite4, position);
+            }
+            
+            if(!this.Space.GlobalVariables.NoEnemies && this.Space.GlobalVariables.OnGroundCanDash == true)
             {
                 this.Space.CreateAtPosition(this.TargetSprite1, position);
                 this.Space.CreateAtPosition(this.TargetSprite2, position);
             }
         }
-        if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0 ) /*Slowing the Time*/
+        if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0) /*Slowing the Time*/
         {
-            this.Space.GlobalVariables.CanDash = true;
-            this.TimeIsSlowed = true;
-            this.TimeSlowMo -= event.Dt / this.Space.TimeSpace.TimeScale;
-            
-            if (this.TimeSlowMo >= 0.5)
+            if(this.Space.GlobalVariables.Dashing != true)
             {
+                this.TimeIsSlowed = true;
+                this.TimeSlowMo -= event.Dt / this.Space.TimeSpace.TimeScale;
                 this.Space.TimeSpace.TimeScale = 0.1;
+                
+                if(this.TimeSlowMo <= 0.5) /* Lerping At the end of the time if the player stays in SlowMo*/
+                    this.Space.TimeSpace.TimeScale = Math.Lerp(this.Space.TimeSpace.TimeScale, 1, 0.01);
+                if(this.TimeSlowMo == 0 || this.TimeSlowMo < 0)
+                    this.Space.GlobalVariables.CanDash = false;
             }
-            else if(this.TimeSlowMo <= 0.5) /* Lerping At the end of the time if the player stays in SlowMo*/
-            {
-                this.Space.TimeSpace.TimeScale = Math.Lerp(this.Space.TimeSpace.TimeScale, 1, 0.07);
-            }
+             if(distance < 16 && distance > 3 && this.TimeSlowMo > 0)
+                this.Space.GlobalVariables.CanDash = true;
         }
         else /*This is putting the time as it was*/
         {
             this.Space.TimeSpace.TimeScale = 1;
             this.Space.GlobalVariables.CanDash = false;
         }
-            
+        
             
         if ((this.Space.TimeSpace.TimeScale) == 1 && (this.TimeSlowMo <= this.MaxTimeSlowed)) /* Reloading the SlowMo Aiming Power*/
         {
             this.TimeIsSlowed = false;
             this.TimeSlowMo += event.Dt;
         }
+        //-----------------------------------SPECIAL DASH-------------------------------------------------
+        if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && 
+          (Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && 
+          !this.Space.GlobalVariables.NoEnemies && this.Space.GlobalVariables.CanDash == true && this.Space.GlobalVariables.OnGroundCanDash == true)
+        {
+            if(this.Owner.Sprite.Visible == true)
+                this.Space.CreateAtPosition(this.Particle, player);
+            
+            ev.EventId = this.Spell1Dash;
+            this.Space.DispatchEvent(this.Spell1Dash, ev);
+            
+            if(distance < 0.5)
+            {
+                this.Space.GlobalVariables.Dashing = false;
+                this.Space.GlobalVariables.OnGroundCanDash = false;
+            }
+        }
+        else
+            this.Space.GlobalVariables.Dashing = false;
     }
     function LeftTriggerInput()
     {
@@ -141,5 +156,12 @@ class KeyboardController : ZilchComponent
         if(this.Controller.LeftTrigger < 0.2)
             this.Temp2 = false;
         
+    }
+    function OnCollisionPersisted(event : CollisionEvent)
+    {
+        if(this.Space.GlobalVariables.CanDash == true && (event.OtherObject.Name == "Ground" || event.OtherObject.Name == "Wall"))
+        {
+            this.Space.GlobalVariables.OnGroundCanDash = true;
+        }
     }
 }

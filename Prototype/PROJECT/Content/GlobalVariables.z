@@ -4,6 +4,7 @@ class GlobalVariables : ZilchComponent
     var Dashing : Boolean = false;
     var CanJump : Boolean = false;
     var CanWallJump : Boolean = false;
+    var OnGroundCanDash : Boolean = true;
     var NoEnemies : Boolean = true;
     var Spell1TimeToJump : Real = 3.0;
     var Temp : Real;
@@ -12,7 +13,7 @@ class GlobalVariables : ZilchComponent
     var Controller:Gamepad = null;
     var Temp1 : Real;
     [Property]
-    var StartPosition : Real3 = Real3(-126, 1, -1);
+    var StartPosition : Real3 = Real3(-126, 1, 0);
     
     function Initialize(init : CogInitializer)
     {

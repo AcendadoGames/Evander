@@ -6,16 +6,12 @@ Cog =
 	},
 	Named = 
 	{
-		string Name = "Arrow",
-	},
-	Archetyped = 
-	{
-		string Name = "57d8856f24342cc4:Arrow",
+		string Name = "target part4",
 	},
 	Transform = 
 	{
-		Vec3 Translation = [0, 0, 0],
-		Vec3 Scale = [0.200000003, 0.200000003, 1],
+		Vec3 Translation = [-56.3093719, 20.1860237, 0.499027252],
+		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
 	Sprite = 
@@ -24,11 +20,11 @@ Cog =
 		bool VisibilityCulling = true,
 		bool VisibilityEvents = true,
 		bool CastShadows = false,
-		Vec4 Color = [1, 1, 1, 1],
+		Vec4 Color = [1, 0, 0.000599861145, 0.999899983],
 		BlendMode BlendMode = Alpha,
 		SpriteGeometryMode GeometryMode = ZPlane,
 		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-		string SpriteSource = "589a2047d515eea1:aarrow",
+		string SpriteSource = "5793924a695d6d09:target part2",
 		bool RenderMask = false,
 		bool FlipX = false,
 		bool FlipY = false,
@@ -36,38 +32,28 @@ Cog =
 		float AnimationSpeed = 1,
 		uint StartFrame = 0,
 	},
+	TargetSprite = 
+	{
+		float AngVel = 5,
+	},
 	RigidBody = 
 	{
 		bool Static = false,
 		bool Asleep = false,
 		bool Kinematic = false,
-		bool RotationLocked = true,
-		bool Mode2D = false,
+		bool RotationLocked = false,
+		bool Mode2D = true,
 		bool AllowSleep = true,
 		bool Inherit2DMode = true,
 		Vec3 Velocity = [0, 0, 0],
 		Vec3 AngularVelocity = [0, 0, 0],
 	},
-	BoxCollider = 
-	{
-		bool Ghost = false,
-		bool SendsMessages = true,
-		bool Seamless = true,
-		string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-		string SerializedGroupName = "58211e347a89085f:Arrow",
-		Vec3 Offset = [0, 0, 0],
-		Vec3 Size = [0.5, 0.5, 0.5],
-	},
-	BulletDestructionLogic = 
-	{
-		int BulletDamage = 10,
-	},
 	IgnoreSpaceEffects = 
 	{
-		bool Drag = true,
+		bool Drag = false,
 		bool Flow = false,
 		bool Force = false,
-		bool Gravity = false,
+		bool Gravity = true,
 		bool Thrust = false,
 		bool Vortex = false,
 		bool Wind = false,
@@ -77,11 +63,5 @@ Cog =
 		bool PointForce = false,
 		bool Buoyancy = false,
 		bool Custom = false,
-	},
-	ArrowLogic = 
-	{
-	},
-	Hierarchy = 
-	{
 	},
 },
