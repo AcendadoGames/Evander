@@ -22,7 +22,7 @@ class MovementController : ZilchComponent
     
     var CanPlay : Boolean =  true;
     
-    var Epsilon : Real = Real(0.5);
+    var Epsilon : Real = Real(1.5);
     
     var Controller:Gamepad = null;
     
@@ -96,7 +96,7 @@ class MovementController : ZilchComponent
             }
             if(event.EventId == "Jump")
             {
-                this.InGround = false; 
+                
                 //movement
                 move = Real3(0,1,0) * this.JumpSpeed;
                 //rotation
@@ -128,19 +128,19 @@ class MovementController : ZilchComponent
         if(this.Space.GlobalVariables.Dashing)
         {
             var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
-            
-            this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
-                                                         this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition, 
-                                                               0.075);
-            if(distance < this.Epsilon)
+            if(distance > this.Epsilon)
+            {
+                this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
+                                                             this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition, 
+                                                             0.075);
+            }
+            else
             {
                 this.Space.GlobalVariables.Dashing = false;
+                this.Space.GlobalVariables.CanDash = true;
+                this.Space.GlobalVariables.Spell1TimeToJump = this.Space.GlobalVariables.Temp;
             }
             
-        }
-        else
-        {
-                this.Space.GlobalVariables.Spell1TimeToJump = this.Space.GlobalVariables.Temp;
         }
         if(!this.Space.GlobalVariables.WallDampening && this.Owner.RigidBody.Velocity.Y < 0)
             this.CanPlay = true;
