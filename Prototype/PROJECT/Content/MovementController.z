@@ -1,14 +1,6 @@
 class MovementController : ZilchComponent
 {
     [Property]
-    var JumpingAnim : SpriteSource;
-    [Property]
-    var RunningAnim : SpriteSource;
-    [Property]
-    var FallingAnim : SpriteSource;
-    
-    
-    [Property]
     var MoveSpeed : Real = 10.0;
     
     [Property]
@@ -96,17 +88,12 @@ class MovementController : ZilchComponent
             }
             if(event.EventId == "Jump")
             {
-                this.InGround = false; 
                 //movement
                 move = Real3(0,1,0) * this.JumpSpeed;
                 //rotation
                 rotation = Real3(-1,0,0) * this.RotationSpeed;      
                 this.Owner.RigidBody.AngularVelocity += rotation;
-                this.InGround = false;
-                if (this.InGround == false && this.Owner.Sprite.SpriteSource.Name != "Player_Jump_Test")
-                {
-                    this.Owner.Sprite.SpriteSource = this.JumpingAnim;
-                }
+                this.InGround = false; 
             }
             //movement
             this.Owner.RigidBody.Velocity += move;
@@ -115,32 +102,29 @@ class MovementController : ZilchComponent
     
     function OnLogicUpdate(event : UpdateEvent)
     {
-        /*ANIMATIONS*//*Esto no es serio, es solo porque los animadores me han pedido que haga pruebas*/
-        /*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
-        if (this.InGround == true && this.Owner.Sprite.SpriteSource.Name != "Running Animation")
-            this.Owner.Sprite.SpriteSource = this.RunningAnim;
-        else if (this.InGround == false && this.Owner.Sprite.SpriteSource.Name !="Player_Jump_Test" && this.Owner.Sprite.SpriteSource.Name != "Player_Landing")
-            this.Owner.Sprite.SpriteSource = this.JumpingAnim;
-        else if (this.Owner.Sprite.SpriteSource.Name == "Player_Jump_Test" && this.Owner.Sprite.CurrentFrame == 2)
-            this.Owner.Sprite.SpriteSource = this.FallingAnim;
-        /*-----------------------------------------------------------------------------------------------------------------------------------------------------*/
-        
         if(this.Space.GlobalVariables.Dashing)
         {
             var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
             
-            this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
-                                                         this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition, 
+            if(this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition.X < this.Owner.Transform.Translation.X)
+                this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
+                                                            this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition + Real3(1,1,0), 
                                                                0.075);
+            
+            if(this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition.X > this.Owner.Transform.Translation.X)
+                this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
+                                                            this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition + Real3(-1,1,0), 
+                                                               0.075);
+            this.CanPlay = false;
             if(distance < this.Epsilon)
             {
                 this.Space.GlobalVariables.Dashing = false;
             }
-            
         }
         else
         {
                 this.Space.GlobalVariables.Spell1TimeToJump = this.Space.GlobalVariables.Temp;
+                this.CanPlay = true;
         }
         if(!this.Space.GlobalVariables.WallDampening && this.Owner.RigidBody.Velocity.Y < 0)
             this.CanPlay = true;
@@ -176,6 +160,7 @@ class MovementController : ZilchComponent
                         
                         if(Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A))
                         {
+                            Console.WriteLine("que colo");
                             var move = Real3(1,1,0) * this.JumpSpeed;
                             this.Owner.RigidBody.Velocity += move;
                         }

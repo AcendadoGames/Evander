@@ -31,6 +31,9 @@ class KeyboardController : ZilchComponent
     
     var Controller:Gamepad = null;
     
+    var A: Cog = null;
+    var B: Cog = null;
+    
     function Initialize(init : CogInitializer)
     {
         this.Controller = Zero.Gamepads.GetGamePad(0);
@@ -43,6 +46,7 @@ class KeyboardController : ZilchComponent
         var player : Real3 = this.Owner.Transform.Translation;
         var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
         var ev  = ZilchEvent();
+        var position = this.Owner.TargetSelector.TargetPosition;
         
         if((Zero.Keyboard.KeyIsDown(Keys.A) || this.Controller.IsButtonHeld(Buttons.StickLeft)) && 
         ((Zero.Keyboard.KeyIsPressed(Keys.Z)) || this.Controller.IsButtonPressed(Buttons.B)))
@@ -78,24 +82,20 @@ class KeyboardController : ZilchComponent
         }
         //-----------------------------------SLOW MOTION-------------------------------------------------
         this.LeftTriggerInput();
+
         if ((Zero.Keyboard.KeyIsPressed(Keys.J) || this.LeftTriggerPressed) && this.TimeSlowMo >= 0.0 
             && this.Space.GlobalVariables.Dashing == false) /*Targetting while not in dash*/
-        {
-            var position = this.Owner.TargetSelector.TargetPosition;
-            
-            if( this.Space.GlobalVariables.OnGroundCanDash == false || this.Space.GlobalVariables.OnGroundCanDash == false || distance > 30 )
-            {
-                Console.WriteLine("hello");
-                this.Space.CreateAtPosition(this.TargetSprite3, position);
-                this.Space.CreateAtPosition(this.TargetSprite4, position);
-            }
-            
-            if(!this.Space.GlobalVariables.NoEnemies && this.Space.GlobalVariables.OnGroundCanDash == true)
-            {
-                this.Space.CreateAtPosition(this.TargetSprite1, position);
-                this.Space.CreateAtPosition(this.TargetSprite2, position);
-            }
+        { 
+            this.A = this.Space.CreateAtPosition(this.TargetSprite1, position);
+            this.B = this.Space.CreateAtPosition(this.TargetSprite2, position);
+
         }
+
+        if( (this.Space.GlobalVariables.OnGroundCanDash == false || distance > 30) && this.A != null && position != Real3(0, 0, 0))
+            {
+                this.A.Sprite.Color = Real4(1, 100/255 , 100/255, 1);
+                this.B.Sprite.Color = Real4(1, 100/255 , 100/255, 1);
+            }
         if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0) /*Slowing the Time*/
         {
             if(this.Space.GlobalVariables.Dashing != true)

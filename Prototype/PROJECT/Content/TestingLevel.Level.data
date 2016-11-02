@@ -114,7 +114,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-118.010071, 0.774003029, 50.7499962],
+			Vec3 Translation = [-111.279007, 8.26319027, 50.7499962],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -126,7 +126,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 44.9329338,
+			float Size = 36.3482666,
 		},
 		EditorCameraController = 
 		{
@@ -134,7 +134,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-118.010071, 0.774003029, 0.749994814],
+			Vec3 LookTarget = [-111.279007, 8.26319027, 0.749994338],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -512,9 +512,6 @@ Level =
 		},
 		MovementController = 
 		{
-			string JumpingAnim = "",
-			string RunningAnim = "",
-			string FallingAnim = "",
 			float MoveSpeed = 3,
 			float DashSpeed = 50,
 			float JumpSpeed = 50,
@@ -550,12 +547,19 @@ Level =
 		},
 		Hierarchy = 
 		{
-			ArchetypeInstance = 
+			Cog = 
 			{
-				string Name = "57deb71aa0082a0f:Combo",
 				LinkId = 
 				{
 					uint Id = 9,
+				},
+				Named = 
+				{
+					string Name = "Combo",
+				},
+				Archetyped = 
+				{
+					string Name = "57deb71aa0082a0f:Combo",
 				},
 				Transform = 
 				{
@@ -563,9 +567,438 @@ Level =
 					Vec3 Scale = [1, 1, 1],
 					Quat Rotation = [0, 0, 0, 1],
 				},
-				Named = 
+				ComboState = 
 				{
-					string Name = "Combo",
+					string NoneAttack = "",
+					float PreAttackTime = 0,
+					string PreAttackAnim = "",
+					float OnAttackTime = 0,
+					string OnAttackAnim = "",
+					float PostAttackTime = 0,
+					string PostAttackAnim = "",
+					float InputTiming = 0.200000003,
+					string Text = "Root",
+					string DamageArchetype = "58632e238f16a281:damage",
+					float Damage = 0,
+					Vec4 Color = [1, 0.0400000215, 0.183999658, 0],
+					float LifeTime = 0,
+				},
+				Hierarchy = 
+				{
+					Cog = 
+					{
+						LinkId = 
+						{
+							uint Id = 10,
+						},
+						Named = 
+						{
+							string Name = "L",
+						},
+						Transform = 
+						{
+							Vec3 Translation = [0, 0, 0],
+							Vec3 Scale = [1, 1, 1],
+							Quat Rotation = [0, 0, 0, 1],
+						},
+						ComboState = 
+						{
+							string NoneAttack = "5275aa4d802dd6dc:Square",
+							float PreAttackTime = 0.200000003,
+							string PreAttackAnim = "",
+							float OnAttackTime = 0.200000003,
+							string OnAttackAnim = "5274db4c2e7c11f9:Circle",
+							float PostAttackTime = 0.200000003,
+							string PostAttackAnim = "",
+							float InputTiming = 0.200000003,
+							string Text = "L",
+							string DamageArchetype = "58632e238f16a281:damage",
+							float Damage = 15,
+							Vec4 Color = [0, 0.760000229, 1, 1],
+							float LifeTime = 0.100000001,
+						},
+						Hierarchy = 
+						{
+							Cog = 
+							{
+								LinkId = 
+								{
+									uint Id = 11,
+								},
+								Named = 
+								{
+									string Name = "R",
+								},
+								Transform = 
+								{
+									Vec3 Translation = [0, 0, 0],
+									Vec3 Scale = [1, 1, 1],
+									Quat Rotation = [0, 0, 0, 1],
+								},
+								ComboState = 
+								{
+									string NoneAttack = "5275aa4d802dd6dc:Square",
+									float PreAttackTime = 0.200000003,
+									string PreAttackAnim = "",
+									float OnAttackTime = 0.200000003,
+									string OnAttackAnim = "",
+									float PostAttackTime = 0.200000003,
+									string PostAttackAnim = "",
+									float InputTiming = 0.200000003,
+									string Text = "LR",
+									string DamageArchetype = "58632e238f16a281:damage",
+									float Damage = 30,
+									Vec4 Color = [1, 0, 0, 1],
+									float LifeTime = 0.100000001,
+								},
+								Hierarchy = 
+								{
+									Cog = 
+									{
+										LinkId = 
+										{
+											uint Id = 12,
+										},
+										Named = 
+										{
+											string Name = "R",
+										},
+										Transform = 
+										{
+											Vec3 Translation = [0, 0, 0],
+											Vec3 Scale = [1, 1, 1],
+											Quat Rotation = [0, 0, 0, 1],
+										},
+										ComboState = 
+										{
+											string NoneAttack = "5275aa4d802dd6dc:Square",
+											float PreAttackTime = 0.200000003,
+											string PreAttackAnim = "",
+											float OnAttackTime = 0.200000003,
+											string OnAttackAnim = "5274db4c2e7c11f9:Circle",
+											float PostAttackTime = 0.200000003,
+											string PostAttackAnim = "",
+											float InputTiming = 0.200000003,
+											string Text = "LRR",
+											string DamageArchetype = "58632e238f16a281:damage",
+											float Damage = 35,
+											Vec4 Color = [1, 0, 0, 1],
+											float LifeTime = 0.100000001,
+										},
+									},
+									Cog = 
+									{
+										LinkId = 
+										{
+											uint Id = 13,
+										},
+										Named = 
+										{
+											string Name = "L",
+										},
+										Transform = 
+										{
+											Vec3 Translation = [0, 0, 0],
+											Vec3 Scale = [1, 1, 1],
+											Quat Rotation = [0, 0, 0, 1],
+										},
+										ComboState = 
+										{
+											string NoneAttack = "5275aa4d802dd6dc:Square",
+											float PreAttackTime = 0.200000003,
+											string PreAttackAnim = "",
+											float OnAttackTime = 0.200000003,
+											string OnAttackAnim = "57700f8341c27024:definitivebar4",
+											float PostAttackTime = 0.200000003,
+											string PostAttackAnim = "",
+											float InputTiming = 0.200000003,
+											string Text = "LRL",
+											string DamageArchetype = "58632e238f16a281:damage",
+											float Damage = 25,
+											Vec4 Color = [0, 0.610000134, 1, 1],
+											float LifeTime = 0.100000001,
+										},
+									},
+								},
+							},
+							Cog = 
+							{
+								LinkId = 
+								{
+									uint Id = 14,
+								},
+								Named = 
+								{
+									string Name = "L",
+								},
+								Transform = 
+								{
+									Vec3 Translation = [0, 0, 0],
+									Vec3 Scale = [1, 1, 1],
+									Quat Rotation = [0, 0, 0, 1],
+								},
+								ComboState = 
+								{
+									string NoneAttack = "5275aa4d802dd6dc:Square",
+									float PreAttackTime = 0.200000003,
+									string PreAttackAnim = "",
+									float OnAttackTime = 0.200000003,
+									string OnAttackAnim = "",
+									float PostAttackTime = 0.200000003,
+									string PostAttackAnim = "",
+									float InputTiming = 0.200000003,
+									string Text = "LL",
+									string DamageArchetype = "58632e238f16a281:damage",
+									float Damage = 20,
+									Vec4 Color = [0, 0.7900002, 1, 1],
+									float LifeTime = 0.100000001,
+								},
+								Hierarchy = 
+								{
+									Cog = 
+									{
+										LinkId = 
+										{
+											uint Id = 15,
+										},
+										Named = 
+										{
+											string Name = "R",
+										},
+										Transform = 
+										{
+											Vec3 Translation = [0, 0, 0],
+											Vec3 Scale = [1, 1, 1],
+											Quat Rotation = [0, 0, 0, 1],
+										},
+										ComboState = 
+										{
+											string NoneAttack = "5275aa4d802dd6dc:Square",
+											float PreAttackTime = 0.200000003,
+											string PreAttackAnim = "",
+											float OnAttackTime = 0.200000003,
+											string OnAttackAnim = "",
+											float PostAttackTime = 0.200000003,
+											string PostAttackAnim = "",
+											float InputTiming = 0.200000003,
+											string Text = "LLR",
+											string DamageArchetype = "58632e238f16a281:damage",
+											float Damage = 0,
+											Vec4 Color = [0, 0, 0, 0],
+											float LifeTime = 0,
+										},
+									},
+								},
+							},
+						},
+					},
+					Cog = 
+					{
+						LinkId = 
+						{
+							uint Id = 16,
+						},
+						Named = 
+						{
+							string Name = "R",
+						},
+						Transform = 
+						{
+							Vec3 Translation = [0, 0, 0],
+							Vec3 Scale = [1, 1, 1],
+							Quat Rotation = [0, 0, 0, 1],
+						},
+						ComboState = 
+						{
+							string NoneAttack = "5275aa4d802dd6dc:Square",
+							float PreAttackTime = 0.200000003,
+							string PreAttackAnim = "",
+							float OnAttackTime = 0.200000003,
+							string OnAttackAnim = "",
+							float PostAttackTime = 0.200000003,
+							string PostAttackAnim = "",
+							float InputTiming = 0.200000003,
+							string Text = "R",
+							string DamageArchetype = "58632e238f16a281:damage",
+							float Damage = 25,
+							Vec4 Color = [1, 0, 0, 1],
+							float LifeTime = 0.100000001,
+						},
+						Hierarchy = 
+						{
+							Cog = 
+							{
+								LinkId = 
+								{
+									uint Id = 17,
+								},
+								Named = 
+								{
+									string Name = "L",
+								},
+								Transform = 
+								{
+									Vec3 Translation = [0, 0, 0],
+									Vec3 Scale = [1, 1, 1],
+									Quat Rotation = [0, 0, 0, 1],
+								},
+								ComboState = 
+								{
+									string NoneAttack = "5275aa4d802dd6dc:Square",
+									float PreAttackTime = 0.200000003,
+									string PreAttackAnim = "",
+									float OnAttackTime = 0.200000003,
+									string OnAttackAnim = "",
+									float PostAttackTime = 0.200000003,
+									string PostAttackAnim = "",
+									float InputTiming = 0.200000003,
+									string Text = "RL",
+									string DamageArchetype = "58632e238f16a281:damage",
+									float Damage = 20,
+									Vec4 Color = [0, 0.610000134, 1, 1],
+									float LifeTime = 0.100000001,
+								},
+								Hierarchy = 
+								{
+									Cog = 
+									{
+										LinkId = 
+										{
+											uint Id = 18,
+										},
+										Named = 
+										{
+											string Name = "L",
+										},
+										Transform = 
+										{
+											Vec3 Translation = [0, 0, 0],
+											Vec3 Scale = [1, 1, 1],
+											Quat Rotation = [0, 0, 0, 1],
+										},
+										ComboState = 
+										{
+											string NoneAttack = "5275aa4d802dd6dc:Square",
+											float PreAttackTime = 0.200000003,
+											string PreAttackAnim = "",
+											float OnAttackTime = 0.200000003,
+											string OnAttackAnim = "",
+											float PostAttackTime = 0.200000003,
+											string PostAttackAnim = "",
+											float InputTiming = 0.200000003,
+											string Text = "RLL",
+											string DamageArchetype = "58632e238f16a281:damage",
+											float Damage = 25,
+											Vec4 Color = [0, 0.579999924, 1, 1],
+											float LifeTime = 0.100000001,
+										},
+									},
+									Cog = 
+									{
+										LinkId = 
+										{
+											uint Id = 19,
+										},
+										Named = 
+										{
+											string Name = "R",
+										},
+										Transform = 
+										{
+											Vec3 Translation = [0, 0, 0],
+											Vec3 Scale = [1, 1, 1],
+											Quat Rotation = [0, 0, 0, 1],
+										},
+										ComboState = 
+										{
+											string NoneAttack = "5275aa4d802dd6dc:Square",
+											float PreAttackTime = 0.200000003,
+											string PreAttackAnim = "",
+											float OnAttackTime = 0.200000003,
+											string OnAttackAnim = "",
+											float PostAttackTime = 0.200000003,
+											string PostAttackAnim = "",
+											float InputTiming = 0.200000003,
+											string Text = "RLR",
+											string DamageArchetype = "58632e238f16a281:damage",
+											float Damage = 35,
+											Vec4 Color = [1, 0, 0, 1],
+											float LifeTime = 0.100000001,
+										},
+									},
+								},
+							},
+							Cog = 
+							{
+								LinkId = 
+								{
+									uint Id = 20,
+								},
+								Named = 
+								{
+									string Name = "R",
+								},
+								Transform = 
+								{
+									Vec3 Translation = [0, 0, 0],
+									Vec3 Scale = [1, 1, 1],
+									Quat Rotation = [0, 0, 0, 1],
+								},
+								ComboState = 
+								{
+									string NoneAttack = "5275aa4d802dd6dc:Square",
+									float PreAttackTime = 0.200000003,
+									string PreAttackAnim = "",
+									float OnAttackTime = 0.200000003,
+									string OnAttackAnim = "",
+									float PostAttackTime = 0.200000003,
+									string PostAttackAnim = "",
+									float InputTiming = 0.200000003,
+									string Text = "RR",
+									string DamageArchetype = "58632e238f16a281:damage",
+									float Damage = 30,
+									Vec4 Color = [1, 0, 0, 1],
+									float LifeTime = 0.100000001,
+								},
+								Hierarchy = 
+								{
+									Cog = 
+									{
+										LinkId = 
+										{
+											uint Id = 21,
+										},
+										Named = 
+										{
+											string Name = "L",
+										},
+										Transform = 
+										{
+											Vec3 Translation = [0, 0, 0],
+											Vec3 Scale = [1, 1, 1],
+											Quat Rotation = [0, 0, 0, 1],
+										},
+										ComboState = 
+										{
+											string NoneAttack = "5275aa4d802dd6dc:Square",
+											float PreAttackTime = 0.200000003,
+											string PreAttackAnim = "",
+											float OnAttackTime = 0.200000003,
+											string OnAttackAnim = "",
+											float PostAttackTime = 0.200000003,
+											string PostAttackAnim = "",
+											float InputTiming = 0.200000003,
+											string Text = "RRL",
+											string DamageArchetype = "58632e238f16a281:damage",
+											float Damage = 25,
+											Vec4 Color = [0, 0.670000076, 1, 1],
+											float LifeTime = 0.100000001,
+										},
+									},
+								},
+							},
+						},
+					},
 				},
 			},
 		},
@@ -574,7 +1007,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 10,
+			uint Id = 22,
 		},
 		Named = 
 		{
@@ -627,11 +1060,29 @@ Level =
 			Vec3 AngularVelocity = [0, 0, 0],
 		},
 	},
+	ArchetypeInstance = 
+	{
+		string Name = "58877e5a4860e8db:Archer",
+		LinkId = 
+		{
+			uint Id = 23,
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-78.2438736, -3.56174183, 0],
+			Vec3 Scale = [0.140000001, 0.140000001, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Named = 
+		{
+			string Name = "Archer",
+		},
+	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 11,
+			uint Id = 24,
 		},
 		Named = 
 		{
@@ -684,29 +1135,11 @@ Level =
 			Vec3 AngularVelocity = [0, 0, 0],
 		},
 	},
-	ArchetypeInstance = 
-	{
-		string Name = "58877e5a4860e8db:Archer",
-		LinkId = 
-		{
-			uint Id = 12,
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-78.2438736, -3.56174183, 0],
-			Vec3 Scale = [0.140000001, 0.140000001, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Named = 
-		{
-			string Name = "Archer",
-		},
-	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 13,
+			uint Id = 25,
 		},
 		Named = 
 		{
@@ -731,7 +1164,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 14,
+					uint Id = 26,
 				},
 				Named = 
 				{
@@ -799,7 +1232,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 15,
+					uint Id = 27,
 				},
 				Named = 
 				{
@@ -881,7 +1314,7 @@ Level =
 		string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		LinkId = 
 		{
-			uint Id = 16,
+			uint Id = 28,
 		},
 		Transform = 
 		{
