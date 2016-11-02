@@ -38,13 +38,16 @@ class ComboState : ZilchComponent
     {
         if(time == this.PreAttackTime/*el momento que queramos que se spawnee el damage, solo hay que hacerlo un frame*/)
         {
-            var position = this.Owner.Transform.WorldTranslation;
-            if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
-                position.X -= 1; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
-            else
-                position.X += 1;
-            var damage = this.Space.CreateAtPosition(this.DamageArchetype, position);
-            damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime);
+            if(this.LifeTime > 0)
+            {
+                var position = this.Owner.Transform.WorldTranslation;
+                if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
+                    position.X -= 1; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
+                else
+                    position.X += 1;
+                var damage = this.Space.CreateAtPosition(this.DamageArchetype, position);
+                damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime);
+            }
          
         }
         

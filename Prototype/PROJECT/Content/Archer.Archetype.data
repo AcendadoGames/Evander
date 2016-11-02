@@ -14,8 +14,8 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-13.6700201, -2.53856778, -0.00100185024],
-		Vec3 Scale = [1, 1, 1],
+		Vec3 Translation = [-78.2438736, -3.56174183, 0],
+		Vec3 Scale = [0.140000001, 0.140000001, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
 	Sprite = 
@@ -28,7 +28,7 @@ Cog =
 		BlendMode BlendMode = Alpha,
 		SpriteGeometryMode GeometryMode = ZPlane,
 		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-		string SpriteSource = "5275aa4d802dd6dc:Square",
+		string SpriteSource = "589a22171b12fc48:Archer",
 		bool RenderMask = false,
 		bool FlipX = false,
 		bool FlipY = false,
@@ -56,7 +56,7 @@ Cog =
 		string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
 		string SerializedGroupName = "57c6b63fee8fbbb0:Enemy",
 		Vec3 Offset = [0, 0, 0],
-		Vec3 Size = [0.5, 0.5, 0.5],
+		Vec3 Size = [8.5, 11, 0.5],
 	},
 	StateMachine = 
 	{
@@ -70,9 +70,18 @@ Cog =
 		float Drag = 0,
 		float AngularDrag = 0,
 	},
+	MassOverride = 
+	{
+		bool Active = true,
+		float invMass = 0.00999999978,
+		Vec3 invInertiaX = [0, 0, 0],
+		Vec3 invInertiaY = [0, 0, 0],
+		Vec3 invInertiaZ = [0, 0, 0],
+		Vec3 LocalCenterOfMass = [0, 0, 0],
+	},
 	EnemyHealth = 
 	{
-		float EnemyLife = 100,
+		float EnemyLife = 80,
 	},
 	Hierarchy = 
 	{
@@ -126,7 +135,7 @@ Cog =
 					Move_Walk = 
 					{
 						float SpeedArcher = 0.5,
-						float SpeedMelee = 0.5,
+						float SpeedMelee = 1,
 						float Direction = 1,
 					},
 					Move_Jump = 
@@ -226,7 +235,7 @@ Cog =
 							Archer_Patrol_Walking = 
 							{
 								float Direction = 1,
-								float Duration = 0.800000012,
+								float Duration = 1,
 							},
 							Archer_Patrol_Wait = 
 							{
@@ -315,7 +324,7 @@ Cog =
 									},
 									Transform = 
 									{
-										Vec3 Translation = [-0.027009964, -0.0791869164, 0.999999285],
+										Vec3 Translation = [0.459527373, -1.53891146, 0.999999285],
 										Vec3 Scale = [5, 10, 1],
 										Quat Rotation = [0, 0, 0, 1],
 									},
@@ -345,7 +354,7 @@ Cog =
 										string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
 										string SerializedGroupName = "4e740859314e5515:DefaultGroup",
 										Vec3 Offset = [0, 0, 0],
-										Vec3 Size = [0.5, 0.5, 0.5],
+										Vec3 Size = [3.5, 3.5, 0.5],
 									},
 									ArchersMeleeDamage = 
 									{
@@ -404,8 +413,8 @@ Cog =
 			},
 			Transform = 
 			{
-				Vec3 Translation = [0.0659928322, -0.0430414677, 1.37230381e-06],
-				Vec3 Scale = [0.522414625, 2.50357509, 1],
+				Vec3 Translation = [0.027009964, 0.0395934582, 1.37230381e-06],
+				Vec3 Scale = [1, 0.5, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},
 			BoxCollider = 
@@ -416,7 +425,7 @@ Cog =
 				string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
 				string SerializedGroupName = "4e740859314e5515:DefaultGroup",
 				Vec3 Offset = [0, 0, 0],
-				Vec3 Size = [25, 1.5, 0.5],
+				Vec3 Size = [60, 25, 0.5],
 			},
 		},
 	},

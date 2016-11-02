@@ -2,9 +2,9 @@ class GlobalVariables : ZilchComponent
 {
     var CanDash : Boolean = false;
     var Dashing : Boolean = false;
+    var OnGroundCanDash : Boolean = true;
     var CanJump : Boolean = false;
     var CanWallJump : Boolean = false;
-    var OnGroundCanDash : Boolean = true;
     var NoEnemies : Boolean = true;
     var Spell1TimeToJump : Real = 3.0;
     var Temp : Real;

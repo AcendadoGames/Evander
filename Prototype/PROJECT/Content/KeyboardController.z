@@ -85,6 +85,7 @@ class KeyboardController : ZilchComponent
             
             if( this.Space.GlobalVariables.OnGroundCanDash == false || this.Space.GlobalVariables.OnGroundCanDash == false || distance > 30 )
             {
+                Console.WriteLine("hello");
                 this.Space.CreateAtPosition(this.TargetSprite3, position);
                 this.Space.CreateAtPosition(this.TargetSprite4, position);
             }
@@ -108,7 +109,7 @@ class KeyboardController : ZilchComponent
                 if(this.TimeSlowMo == 0 || this.TimeSlowMo < 0)
                     this.Space.GlobalVariables.CanDash = false;
             }
-             if(distance < 16 && distance > 3 && this.TimeSlowMo > 0)
+             if(distance < 25 && distance > 3 && this.TimeSlowMo > 0)
                 this.Space.GlobalVariables.CanDash = true;
         }
         else /*This is putting the time as it was*/

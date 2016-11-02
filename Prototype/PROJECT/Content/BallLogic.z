@@ -10,6 +10,5 @@ class BallLogic : ZilchComponent
     {
         if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Player)
             this.Space.FindObjectByName("Gate").BoxCollider.Ghost = true;
-        Console.WriteLine(this.Space.FindObjectByName("Ball").RigidBody.Velocity);
     }
 }
