@@ -114,7 +114,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-112.506737, -12.9612894, 49.9999962],
+			Vec3 Translation = [-111.279007, 8.26319027, 50.7499962],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -126,7 +126,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 54.8812256,
+			float Size = 36.3482666,
 		},
 		EditorCameraController = 
 		{
@@ -134,7 +134,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-112.506737, -12.9612894, -4.91168475e-06],
+			Vec3 LookTarget = [-111.279007, 8.26319027, 0.749994338],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -199,6 +199,22 @@ Level =
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
 			},
+			CogPath TargetBossCogPath = 
+			{
+				string Path = "",
+				bool ErrorOnResolveToNull = false,
+				bool ErrorOnPathCantCompute = false,
+				bool ErrorOnDirectLinkFail = false,
+				bool UpdateCogOnPathChange = true,
+				bool UpdatePathOnCogChange = true,
+				bool UpdateCogOnInitialize = true,
+				bool ResolvedNullErrorOccurred = false,
+				uint ResolvedCog = 4294967293,
+				CogPathPreference PathPreference0 = CogRelative,
+				CogPathPreference PathPreference1 = SpaceRelative,
+				CogPathPreference PathPreference2 = Absolute,
+			},
+			bool IsThereBoss = false,
 		},
 	},
 	Cog = 
@@ -214,7 +230,7 @@ Level =
 		Transform = 
 		{
 			Vec3 Translation = [-96.4893494, -6.2549305, 0],
-			Vec3 Scale = [25, 1, 1],
+			Vec3 Scale = [134.500397, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -240,7 +256,7 @@ Level =
 			bool Ghost = false,
 			bool SendsMessages = true,
 			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
 			string SerializedGroupName = "57e4cc038d9cf0e7:Ground",
 			Vec3 Offset = [0, 0, 0],
 			Vec3 Size = [0.5, 0.5, 0.5],
@@ -297,7 +313,7 @@ Level =
 			bool Ghost = false,
 			bool SendsMessages = true,
 			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
 			string SerializedGroupName = "57e4cc038d9cf0e7:Ground",
 			Vec3 Offset = [0, 0, 0],
 			Vec3 Size = [0.5, 0.5, 0.5],
@@ -480,7 +496,7 @@ Level =
 			bool Ghost = false,
 			bool SendsMessages = true,
 			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
 			string SerializedGroupName = "57c6b62bed7ced8a:Player",
 			Vec3 Offset = [-0.800000012, 0, 0],
 			Vec3 Size = [1, 1.54999995, 0.5],
@@ -491,7 +507,8 @@ Level =
 			float MaxTimeSlowed = 2,
 			string TargetSprite1 = "57d593dd5d06bfa7:targetpart1",
 			string TargetSprite2 = "57d593a55f9d7f95:targetpart2",
-			float Spell1Cooldown = 0,
+			string TargetSprite3 = "",
+			string TargetSprite4 = "",
 		},
 		MovementController = 
 		{
@@ -546,7 +563,7 @@ Level =
 				},
 				Transform = 
 				{
-					Vec3 Translation = [7.78126621, 2.85296631, 0],
+					Vec3 Translation = [0, 0, 0],
 					Vec3 Scale = [1, 1, 1],
 					Quat Rotation = [0, 0, 0, 1],
 				},
@@ -562,9 +579,9 @@ Level =
 					float InputTiming = 0.200000003,
 					string Text = "Root",
 					string DamageArchetype = "58632e238f16a281:damage",
-					float Damage = 10,
-					Vec4 Color = [1, 0.0400000215, 0.183999658, 0.944999993],
-					float LifeTime = 0.5,
+					float Damage = 0,
+					Vec4 Color = [1, 0.0400000215, 0.183999658, 0],
+					float LifeTime = 0,
 				},
 				Hierarchy = 
 				{
@@ -580,7 +597,7 @@ Level =
 						},
 						Transform = 
 						{
-							Vec3 Translation = [-8.28728485, -2.9005475, 0],
+							Vec3 Translation = [0, 0, 0],
 							Vec3 Scale = [1, 1, 1],
 							Quat Rotation = [0, 0, 0, 1],
 						},
@@ -596,9 +613,9 @@ Level =
 							float InputTiming = 0.200000003,
 							string Text = "L",
 							string DamageArchetype = "58632e238f16a281:damage",
-							float Damage = 0,
-							Vec4 Color = [0.372549027, 0.372549027, 0.862745166, 1],
-							float LifeTime = 0.5,
+							float Damage = 15,
+							Vec4 Color = [0, 0.760000229, 1, 1],
+							float LifeTime = 0.100000001,
 						},
 						Hierarchy = 
 						{
@@ -630,9 +647,9 @@ Level =
 									float InputTiming = 0.200000003,
 									string Text = "LR",
 									string DamageArchetype = "58632e238f16a281:damage",
-									float Damage = 0,
-									Vec4 Color = [0, 0, 0, 0],
-									float LifeTime = 0,
+									float Damage = 30,
+									Vec4 Color = [1, 0, 0, 1],
+									float LifeTime = 0.100000001,
 								},
 								Hierarchy = 
 								{
@@ -664,9 +681,9 @@ Level =
 											float InputTiming = 0.200000003,
 											string Text = "LRR",
 											string DamageArchetype = "58632e238f16a281:damage",
-											float Damage = 0,
-											Vec4 Color = [0, 0, 0, 0],
-											float LifeTime = 0,
+											float Damage = 35,
+											Vec4 Color = [1, 0, 0, 1],
+											float LifeTime = 0.100000001,
 										},
 									},
 									Cog = 
@@ -697,9 +714,9 @@ Level =
 											float InputTiming = 0.200000003,
 											string Text = "LRL",
 											string DamageArchetype = "58632e238f16a281:damage",
-											float Damage = 0,
-											Vec4 Color = [0, 0, 0, 0],
-											float LifeTime = 0,
+											float Damage = 25,
+											Vec4 Color = [0, 0.610000134, 1, 1],
+											float LifeTime = 0.100000001,
 										},
 									},
 								},
@@ -732,9 +749,9 @@ Level =
 									float InputTiming = 0.200000003,
 									string Text = "LL",
 									string DamageArchetype = "58632e238f16a281:damage",
-									float Damage = 0,
-									Vec4 Color = [0, 0, 0, 0],
-									float LifeTime = 0,
+									float Damage = 20,
+									Vec4 Color = [0, 0.7900002, 1, 1],
+									float LifeTime = 0.100000001,
 								},
 								Hierarchy = 
 								{
@@ -803,9 +820,9 @@ Level =
 							float InputTiming = 0.200000003,
 							string Text = "R",
 							string DamageArchetype = "58632e238f16a281:damage",
-							float Damage = 0,
-							Vec4 Color = [0, 0, 0, 0],
-							float LifeTime = 0,
+							float Damage = 25,
+							Vec4 Color = [1, 0, 0, 1],
+							float LifeTime = 0.100000001,
 						},
 						Hierarchy = 
 						{
@@ -837,9 +854,9 @@ Level =
 									float InputTiming = 0.200000003,
 									string Text = "RL",
 									string DamageArchetype = "58632e238f16a281:damage",
-									float Damage = 0,
-									Vec4 Color = [0, 0, 0, 0],
-									float LifeTime = 0,
+									float Damage = 20,
+									Vec4 Color = [0, 0.610000134, 1, 1],
+									float LifeTime = 0.100000001,
 								},
 								Hierarchy = 
 								{
@@ -871,9 +888,9 @@ Level =
 											float InputTiming = 0.200000003,
 											string Text = "RLL",
 											string DamageArchetype = "58632e238f16a281:damage",
-											float Damage = 0,
-											Vec4 Color = [0, 0, 0, 0],
-											float LifeTime = 0,
+											float Damage = 25,
+											Vec4 Color = [0, 0.579999924, 1, 1],
+											float LifeTime = 0.100000001,
 										},
 									},
 									Cog = 
@@ -904,9 +921,9 @@ Level =
 											float InputTiming = 0.200000003,
 											string Text = "RLR",
 											string DamageArchetype = "58632e238f16a281:damage",
-											float Damage = 0,
-											Vec4 Color = [0, 0, 0, 0],
-											float LifeTime = 0,
+											float Damage = 35,
+											Vec4 Color = [1, 0, 0, 1],
+											float LifeTime = 0.100000001,
 										},
 									},
 								},
@@ -939,9 +956,9 @@ Level =
 									float InputTiming = 0.200000003,
 									string Text = "RR",
 									string DamageArchetype = "58632e238f16a281:damage",
-									float Damage = 0,
-									Vec4 Color = [0, 0, 0, 0],
-									float LifeTime = 0,
+									float Damage = 30,
+									Vec4 Color = [1, 0, 0, 1],
+									float LifeTime = 0.100000001,
 								},
 								Hierarchy = 
 								{
@@ -973,9 +990,9 @@ Level =
 											float InputTiming = 0.200000003,
 											string Text = "RRL",
 											string DamageArchetype = "58632e238f16a281:damage",
-											float Damage = 0,
-											Vec4 Color = [0, 0, 0, 0],
-											float LifeTime = 0,
+											float Damage = 25,
+											Vec4 Color = [0, 0.670000076, 1, 1],
+											float LifeTime = 0.100000001,
 										},
 									},
 								},
@@ -984,43 +1001,13 @@ Level =
 					},
 				},
 			},
-			Cog = 
-			{
-				LinkId = 
-				{
-					uint Id = 22,
-				},
-				Named = 
-				{
-					string Name = "Damage zone",
-				},
-				Transform = 
-				{
-					Vec3 Translation = [0.0181808472, -0.0230035782, 0.499206811],
-					Vec3 Scale = [1, 1, 1],
-					Quat Rotation = [0, 0, 0, 1],
-				},
-				BoxCollider = 
-				{
-					bool Ghost = true,
-					bool SendsMessages = false,
-					bool Seamless = true,
-					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-					string SerializedGroupName = "57c6b63fee8fbbb0:Enemy",
-					Vec3 Offset = [2, 0, 0],
-					Vec3 Size = [1.5, 1, 0.5],
-				},
-				PlayerDamageTempo = 
-				{
-				},
-			},
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 23,
+			uint Id = 22,
 		},
 		Named = 
 		{
@@ -1055,8 +1042,8 @@ Level =
 			bool Ghost = false,
 			bool SendsMessages = true,
 			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
+			string SerializedGroupName = "57d5c7a0ce43a9cb:Wall",
 			Vec3 Offset = [0, 0, 0],
 			Vec3 Size = [0.5, 0.5, 0.5],
 		},
@@ -1071,6 +1058,24 @@ Level =
 			bool Inherit2DMode = true,
 			Vec3 Velocity = [0, 0, 0],
 			Vec3 AngularVelocity = [0, 0, 0],
+		},
+	},
+	ArchetypeInstance = 
+	{
+		string Name = "58877e5a4860e8db:Archer",
+		LinkId = 
+		{
+			uint Id = 23,
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-78.2438736, -3.56174183, 0],
+			Vec3 Scale = [0.140000001, 0.140000001, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Named = 
+		{
+			string Name = "Archer",
 		},
 	},
 	Cog = 
@@ -1112,8 +1117,8 @@ Level =
 			bool Ghost = false,
 			bool SendsMessages = true,
 			bool Seamless = true,
-			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-			string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+			string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
+			string SerializedGroupName = "57d5c7a0ce43a9cb:Wall",
 			Vec3 Offset = [0, 0, 0],
 			Vec3 Size = [0.5, 0.5, 0.5],
 		},
@@ -1128,6 +1133,198 @@ Level =
 			bool Inherit2DMode = true,
 			Vec3 Velocity = [0, 0, 0],
 			Vec3 AngularVelocity = [0, 0, 0],
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 25,
+		},
+		Named = 
+		{
+			string Name = "SpecialDash",
+		},
+		Archetyped = 
+		{
+			string Name = "5898a5920ff9b87c:SpecialDash",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-192.453873, 46.8725357, 0.750144422],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		DashParticle = 
+		{
+		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 26,
+				},
+				Named = 
+				{
+					string Name = "Smoke",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-0.303749084, 0.187812328, -0.000243604183],
+					Vec3 Scale = [0.00999999978, 0.0299999993, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				SpriteParticleSystem = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					SystemChildMode ChildMode = Independent,
+					SystemSpace SystemSpace = WorldSpace,
+					uint DrawOrder = 0,
+					Vec4 Tint = [0.5, 0.5, 0.5, 0.25],
+					float WarmUpTime = 0,
+					ParticleGeometry GeometryMode = Billboarded,
+					ParticleRenderMode RenderMode = Additive,
+					ParticleSortMode SortMode = Youngest,
+					ParticleAnimation ParticleAnimation = Single,
+					string Texture = "58989b0a421f8776:Smoke2",
+					float VelocityScale = 1,
+					float LengthScale = 0,
+					float MaxParticleSize = 100,
+					Vec3 SystemSize = [5, 5, 5],
+				},
+				SphericalParticleEmitter = 
+				{
+					bool Active = true,
+					uint EmitCount = 0,
+					float EmitRate = 700,
+					float EmitVariance = 0,
+					float Size = 2,
+					float SizeVariance = 0,
+					float Lifetime = 0.5,
+					float LifetimeVariance = 0,
+					float Spin = 0,
+					float SpinVariance = 0,
+					bool RandomSpin = true,
+					float Fill = 0,
+					float EmitterVelocityPercent = 0,
+					Vec3 StartVelocity = [-1, 0, 0],
+					Vec3 RandomVelocity = [0, 2, 0],
+					Vec3 TangentVelocity = [0, 0, 0],
+					Vec3 EmitterSize = [0, 0, 0],
+					bool FastMovingEmitter = false,
+				},
+				LinearParticleAnimator = 
+				{
+					Vec3 Force = [-7, 0, 0],
+					Vec3 RandomForce = [0, 0, 0],
+					float Torque = 0,
+					float Growth = 0,
+					float Dampening = 0,
+					Vec3 Twist = [0, 0, 0],
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 27,
+				},
+				Named = 
+				{
+					string Name = "BlueParticle",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-0.303848267, 0.189290047, -0.000243604183],
+					Vec3 Scale = [0.00999999978, 0.0299999993, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				SpriteParticleSystem = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					SystemChildMode ChildMode = Independent,
+					SystemSpace SystemSpace = WorldSpace,
+					uint DrawOrder = 0,
+					Vec4 Tint = [0, 0.519999743, 1, 1],
+					float WarmUpTime = 0,
+					ParticleGeometry GeometryMode = Billboarded,
+					ParticleRenderMode RenderMode = Additive,
+					ParticleSortMode SortMode = Youngest,
+					ParticleAnimation ParticleAnimation = Single,
+					string Texture = "58989b0a421fac2f:FireCloud",
+					float VelocityScale = 1,
+					float LengthScale = 0,
+					float MaxParticleSize = 100,
+					Vec3 SystemSize = [5, 5, 5],
+				},
+				SphericalParticleEmitter = 
+				{
+					bool Active = true,
+					uint EmitCount = 0,
+					float EmitRate = 700,
+					float EmitVariance = 0,
+					float Size = 3,
+					float SizeVariance = 0,
+					float Lifetime = 0.5,
+					float LifetimeVariance = 0.200000003,
+					float Spin = 300,
+					float SpinVariance = 0,
+					bool RandomSpin = true,
+					float Fill = 0,
+					float EmitterVelocityPercent = 0,
+					Vec3 StartVelocity = [-5, 0, 0],
+					Vec3 RandomVelocity = [1.5, 1.5, 1.5],
+					Vec3 TangentVelocity = [0, 0, 0],
+					Vec3 EmitterSize = [0.300000012, 0.300000012, 0],
+					bool FastMovingEmitter = false,
+				},
+				LinearParticleAnimator = 
+				{
+					Vec3 Force = [-10, 0, 0],
+					Vec3 RandomForce = [6, 0, 0],
+					float Torque = 5,
+					float Growth = 0,
+					float Dampening = 0,
+					Vec3 Twist = [0, 0, 0],
+				},
+				ParticleColorAnimator = 
+				{
+					Vec4 Color0 = [1, 1, 1, 0],
+					Vec4 Color1 = [0.796124995, 0.954867482, 0.964999974, 1],
+					Vec4 Color2 = [0.640500009, 0.898530006, 0.915000021, 1],
+					Vec4 Color3 = [0.429250002, 0.850000024, 0.749019921, 1],
+					Vec4 Color4 = [1, 1, 1, 1],
+				},
+				Hierarchy = 
+				{
+				},
+			},
+		},
+	},
+	ArchetypeInstance = 
+	{
+		string Name = "57c6f3818ec7874f:PrototypeEnemy",
+		LinkId = 
+		{
+			uint Id = 28,
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-105.517281, 3.56887245, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Named = 
+		{
+			string Name = "PrototypeEnemy",
 		},
 	},
 },

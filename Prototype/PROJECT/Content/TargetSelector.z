@@ -1,6 +1,6 @@
 class TargetSelector : ZilchComponent
 {
-    var TargetPosition : Real3 = Real3(-99999999,-9999999,-999999);
+    var TargetPosition : Real3;
     var Controller:Gamepad = null;
     var EnemyIndex : Integer = 0;
     var RightStickRightPressed : Boolean = false;
@@ -18,6 +18,8 @@ class TargetSelector : ZilchComponent
     function OnLogicUpdate(event : UpdateEvent)
     {
         var enemyarray = this.Space.FindAllObjectsByName("PrototypeEnemy");
+        var enemyarray2 = this.Space.FindAllObjectsByName("Melee");
+        var enemyarray3 = this.Space.FindAllObjectsByName("Archer");
         var mouseScreenPosition = Zero.Mouse.ScreenPosition;
         var mouseWorldPosition = this.LevelSettings.CameraViewport.ScreenToWorldZPlane(mouseScreenPosition, 0);
         this.A.Clear();
@@ -26,11 +28,24 @@ class TargetSelector : ZilchComponent
             this.A.Push(enemyarray.Current.Transform.Translation);
             enemyarray.MoveNext();
         }
+        while(enemyarray2.IsNotEmpty)
+        {
+            this.A.Push(enemyarray2.Current.Transform.Translation);
+            enemyarray2.MoveNext();
+        }
+        while(enemyarray3.IsNotEmpty)
+        {
+            this.A.Push(enemyarray3.Current.Transform.Translation);
+            enemyarray3.MoveNext();
+        }
+        
         this.Space.GeneralAlgorithms.ArraySorting(this.A, 0, this.A.LastIndex);
                 
-        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 16 
+        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 30
             || this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo <= 0)
-            this.Space.GlobalVariables.CanDash = false;
+            {
+                this.Space.GlobalVariables.CanDash = false;
+            }
         else 
             this.Space.GlobalVariables.CanDash = true;
             
@@ -41,6 +56,8 @@ class TargetSelector : ZilchComponent
             
         if(this.A != null)
         {
+            /*if(this.A.All.IsEmpty)*/
+                this.TargetPosition = this.A[this.EnemyIndex];
             if(this.Controller.IsActive)
             {
                 this.RightStickInput();
@@ -48,12 +65,14 @@ class TargetSelector : ZilchComponent
                 {
                     this.GetNearestTarget();
                 }
-                else if(this.RightStickRightPressed && this.EnemyIndex < this.A.LastIndex && (this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing))
+                else if(this.RightStickRightPressed && this.EnemyIndex < this.A.LastIndex && (this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing)
+                        && Math.Distance(this.A[this.EnemyIndex + 1], this.Owner.Transform.Translation) < 30)
                 {
                     this.EnemyIndex += 1;
                     this.TargetPosition = this.A[this.EnemyIndex];
                 }
-                else if(this.RightStickLeftPressed && this.EnemyIndex > 0 && (this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing))
+                else if(this.RightStickLeftPressed && this.EnemyIndex > 0 && (this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing)
+                        && Math.Distance(this.A[this.EnemyIndex - 1], this.Owner.Transform.Translation) < 30)
                 {
                     this.EnemyIndex -= 1;
                     this.TargetPosition = this.A[this.EnemyIndex];
@@ -106,6 +125,7 @@ class TargetSelector : ZilchComponent
     }
     function GetNearestTarget()
     {
+
         for(var i = 0; i < this.A.Count; i += 1)
         {
             if(Math.Distance(this.A[i], this.Owner.Transform.Translation) < 

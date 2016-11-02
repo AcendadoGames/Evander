@@ -1,0 +1,32 @@
+class DashParticle : ZilchComponent
+{
+    var DashOn : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var player : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+        
+        if(this.Space.GlobalVariables.Dashing == true) //Check if we are dashing
+            this.Space.FindObjectByName("SpecialDash").DashParticle.DashOn = true;
+        else
+            this.Space.FindObjectByName("SpecialDash").DashParticle.DashOn = false;
+        
+        if (this.DashOn == true)
+        {
+            this.Owner.Transform.Translation = player;
+            this.Owner.FindChildByName("Smoke").SpriteParticleSystem.Visible = true;
+            this.Owner.FindChildByName("BlueParticle").SpriteParticleSystem.Visible = true;
+            this.Space.FindObjectByName("PrototypePlayer").Sprite.Visible = false;
+        }
+        else
+        {
+            this.Owner.Destroy();
+            this.Space.FindObjectByName("PrototypePlayer").Sprite.Visible = true;
+        }
+    }
+}
