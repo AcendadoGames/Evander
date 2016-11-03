@@ -35,7 +35,7 @@ Cog =
 			},
 			Transform = 
 			{
-				Vec3 Translation = [-0.303749084, -3.14063501, -0.000243604183],
+				Vec3 Translation = [-0.303749084, 0.187812328, -0.000243604183],
 				Vec3 Scale = [0.00999999978, 0.0299999993, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},
@@ -64,11 +64,11 @@ Cog =
 			{
 				bool Active = true,
 				uint EmitCount = 0,
-				float EmitRate = 800,
+				float EmitRate = 250,
 				float EmitVariance = 0,
 				float Size = 2,
 				float SizeVariance = 0,
-				float Lifetime = 0.0250000004,
+				float Lifetime = 0.150000006,
 				float LifetimeVariance = 0,
 				float Spin = 0,
 				float SpinVariance = 0,
@@ -103,7 +103,7 @@ Cog =
 			},
 			Transform = 
 			{
-				Vec3 Translation = [-0.303848267, -3.1391573, -0.000243604183],
+				Vec3 Translation = [-0.303848267, 0.189290047, -0.000243604183],
 				Vec3 Scale = [0.00999999978, 0.0299999993, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},
@@ -132,11 +132,11 @@ Cog =
 			{
 				bool Active = true,
 				uint EmitCount = 0,
-				float EmitRate = 800,
+				float EmitRate = 250,
 				float EmitVariance = 0,
 				float Size = 3,
 				float SizeVariance = 0,
-				float Lifetime = 0.0250000004,
+				float Lifetime = 0.150000006,
 				float LifetimeVariance = 0,
 				float Spin = 300,
 				float SpinVariance = 0,

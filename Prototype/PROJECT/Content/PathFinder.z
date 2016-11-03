@@ -339,15 +339,13 @@ class Program : ZilchComponent
         
         this.InitializeMap();
         this.Pathfinder = new PathFinder(this.Searchparameters);
-        this.Path = this.Pathfinder.FindPath();
+        //this.Path = this.Pathfinder.FindPath();
         //Console.WriteLine(this.Path);
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
     
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if(this.Searchparameters.EndLocation != this.Path[this.Path.LastIndex])
-            this.Path = this.Pathfinder.FindPath();
         //var path : Array[Integer2] = this.Pathfinder.FindPath();
         //Console.WriteLine(this.Path);
         

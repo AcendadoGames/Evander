@@ -2,31 +2,31 @@ class DashParticle : ZilchComponent
 {
     var DashOn : Boolean = false;
     
+    var BlueParticle : Cog = null;
+    var Smoke : Cog = null;
+    
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.Smoke = this.Owner.FindChildByName("Smoke");
+        this.BlueParticle = this.Owner.FindChildByName("BlueParticle");
     }
 
     function OnLogicUpdate(event : UpdateEvent)
     {
         var player : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+        this.Owner.Transform.Translation = player;
         
-        if(this.Space.GlobalVariables.Dashing == true) //Check if we are dashing
-            this.Space.FindObjectByName("SpecialDash").DashParticle.DashOn = true;
-        else
-            this.Space.FindObjectByName("SpecialDash").DashParticle.DashOn = false;
+        this.DashOn = this.Space.GlobalVariables.Dashing;
+        this.Smoke.SpriteParticleSystem.Visible = this.DashOn;
+        this.BlueParticle.SpriteParticleSystem.Visible = this.DashOn;
+        this.Space.FindObjectByName("PrototypePlayer").Sprite.Visible = !this.DashOn;
         
-        if (this.DashOn == true)
+        if(this.DashOn == false)
         {
-            this.Owner.Transform.Translation = player;
-            this.Owner.FindChildByName("Smoke").SpriteParticleSystem.Visible = true;
-            this.Owner.FindChildByName("BlueParticle").SpriteParticleSystem.Visible = true;
-            this.Space.FindObjectByName("PrototypePlayer").Sprite.Visible = false;
-        }
-        else
-        {
-            this.Owner.Destroy();
-            this.Space.FindObjectByName("PrototypePlayer").Sprite.Visible = true;
-        }
+            this.BlueParticle.SpriteParticleSystem.Clear();
+            this.Smoke.SpriteParticleSystem.Clear();
+        }   
+        
     }
 }

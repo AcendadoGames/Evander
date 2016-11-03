@@ -43,9 +43,9 @@ class TargetSelector : ZilchComponent
                 
         if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 30
             || this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo <= 0)
-            {
-                this.Space.GlobalVariables.CanDash = false;
-            }
+        {
+            this.Space.GlobalVariables.CanDash = false;
+        }
         else 
             this.Space.GlobalVariables.CanDash = true;
             
@@ -56,8 +56,7 @@ class TargetSelector : ZilchComponent
             
         if(this.A != null)
         {
-            /*if(this.A.All.IsEmpty)*/
-                this.TargetPosition = this.A[this.EnemyIndex];
+            //this.TargetPosition = this.A[0];
             if(this.Controller.IsActive)
             {
                 this.RightStickInput();
@@ -77,7 +76,12 @@ class TargetSelector : ZilchComponent
                     this.EnemyIndex -= 1;
                     this.TargetPosition = this.A[this.EnemyIndex];
                 }
-        
+                else if(this.Controller.LeftTrigger > 0.2)
+                {
+                    if(Math.Distance(this.A[this.EnemyIndex], this.Owner.Transform.Translation) < 30)
+                        this.TargetPosition = this.A[this.EnemyIndex];
+                }
+                    
             }
             else
             {
@@ -99,42 +103,57 @@ class TargetSelector : ZilchComponent
     function RightStickInput()
     {
         //Left Input
-        if(this.Controller.RightStick.X < -0.2 && !this.Temp1)
+        if(this.Controller.RightStick.X < -0.7 && !this.Temp1)
         {
             this.RightStickLeftPressed = true;
+            Console.WriteLine("RightStickLeftPressed: ", this.RightStickLeftPressed); 
             this.Temp1 = true;
         }
         else
+        {
+            if(this.RightStickLeftPressed)
+                Console.WriteLine("RightStickLeftPressed: ", this.RightStickLeftPressed); 
             this.RightStickLeftPressed = false;  
+        }
         
-        if(this.Controller.RightStick.X > -0.2)
+        if(this.Controller.RightStick.X > -0.7)
             this.Temp1 = false;
         
         //Right Input    
-        if(this.Controller.RightStick.X > 0.2 && !this.Temp2)
+        if(this.Controller.RightStick.X > 0.7 && !this.Temp2)
         {
             this.RightStickRightPressed = true;
+            Console.WriteLine("RightStickRightPressed: ", this.RightStickRightPressed); 
             this.Temp2 = true;
         }
         else
+        {
+            if(this.RightStickRightPressed)
+                Console.WriteLine("RightStickRightPressed: ", this.RightStickRightPressed); 
             this.RightStickRightPressed = false;
+        }
             
-        if(this.Controller.RightStick.X < 0.2)
+        if(this.Controller.RightStick.X < 0.7)
             this.Temp2 = false;
+            
+
             
     }
     function GetNearestTarget()
     {
-
+        this.EnemyIndex = 0;
         for(var i = 0; i < this.A.Count; i += 1)
         {
-            if(Math.Distance(this.A[i], this.Owner.Transform.Translation) < 
-            Math.Distance(this.TargetPosition, this.Owner.Transform.Translation))
+            this.TargetPosition = this.A[0];
+            
+            var distToA = Math.Distance(this.A[i], this.Owner.Transform.WorldTranslation);
+            var distToMin = Math.Distance(this.A[this.EnemyIndex], this.Owner.Transform.WorldTranslation);
+            if(distToA < distToMin)
             {
-                this.TargetPosition = this.A[i];
                 this.EnemyIndex = i;
             }   
         }    
+        this.TargetPosition = this.A[this.EnemyIndex];
     }
 }
 

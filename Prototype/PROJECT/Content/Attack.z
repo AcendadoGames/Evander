@@ -28,11 +28,14 @@ class Attack : ZilchComponent
         else
             this.Owner.Transform.Translation = Real3(this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.X + 1, this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.Y, this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.Z);
     }
-    function SetValues(damage : Real, color : Real4, lifeTime : Real)
+    function SetValues(damage : Real, color : Real4, lifeTime : Real, impulse : Real3, onlyPushEnemy : Boolean)
     {
         this.Damage = damage;
         this.Owner.Sprite.Color = color;
         this.LifeTime = lifeTime;
+        this.Owner.WindEffect.WindDirection = impulse;
+        if(onlyPushEnemy)
+            this.Owner.BoxCollider.CollisionGroup = CollisionGroup.Player;
         this.ValuesSet = true;
     }
 }

@@ -45,6 +45,7 @@ Space =
 	},
 	GlobalVariables = 
 	{
+		Vec3 StartPosition = [-126, 1, 0],
 	},
 	MouseInput = 
 	{
@@ -53,6 +54,9 @@ Space =
 	{
 	},
 	GeneralAlgorithms = 
+	{
+	},
+	Program = 
 	{
 	},
 },

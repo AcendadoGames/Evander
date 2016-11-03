@@ -52,8 +52,9 @@ class ComboTree : ZilchComponent
                 if(!this.Space.GlobalVariables.Aiming)
                 {
                     this.Owner.TargetSelector.GetNearestTarget();
-                    if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 5)
-                        this.Space.GlobalVariables.Dashing = true;
+                    if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                        this.Space.GlobalVariables.AutoDashEnemy = true;
+
                 }
                 this.TimeToCancelCombo = this.Temp1;
                 this.TimeInCombo = 0;
@@ -79,8 +80,8 @@ class ComboTree : ZilchComponent
                 if(!this.Space.GlobalVariables.Aiming)
                 {
                     this.Owner.TargetSelector.GetNearestTarget();
-                    if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 5)
-                        this.Space.GlobalVariables.Dashing = true;
+                    if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                        this.Space.GlobalVariables.AutoDashEnemy = true;
                 }
                 this.TimeToCancelCombo = this.Temp1;
                 this.TimeInCombo = 0;

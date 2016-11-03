@@ -90,6 +90,8 @@ class KeyboardController : ZilchComponent
             this.B = this.Space.CreateAtPosition(this.TargetSprite2, position);
 
         }
+        else
+        this.Space.GlobalVariables.Dashing = false;
 
         if( (this.Space.GlobalVariables.OnGroundCanDash == false || distance > 30) && this.A != null && position != Real3(0, 0, 0))
             {
@@ -141,8 +143,8 @@ class KeyboardController : ZilchComponent
                 this.Space.GlobalVariables.OnGroundCanDash = false;
             }
         }
-        else
-            this.Space.GlobalVariables.Dashing = false;
+        /*else
+            this.Space.GlobalVariables.Dashing = false;*/
     }
     function LeftTriggerInput()
     {

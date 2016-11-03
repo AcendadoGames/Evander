@@ -22,6 +22,9 @@ class EnemyHealth : ZilchComponent
     function OnLogicUpdate(event : UpdateEvent)
     {
         if(this.EnemyLife <= 0)
+        {
+            this.Space.FindFirstObjectByName("PrototypePlayer").TargetSelector.EnemyIndex -= 1;
             this.Owner.Destroy();
+        }
     }
 }

@@ -26,6 +26,16 @@ class ComboState : ZilchComponent
     var Color : Real4 = Real4(0,0,0,1);
     [Property]
     var LifeTime : Real = 0.0;
+    [Property]
+    var ImpulsePre : Real3;
+    [Property]
+    var OnlyPushEnemyPre : Boolean = false;
+    [Property]
+    var ImpulsePost : Real3;
+    [Property]
+    var OnlyPushEnemyPost : Boolean = false;
+    [Property]
+    var GroundExplosion : Boolean = false;
     
     var Temp1 : Real;
 
@@ -36,6 +46,12 @@ class ComboState : ZilchComponent
     }
     function ExecuteCombo(time : Real)
     {
+        if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
+        {
+            this.ImpulsePre = Real3(-this.ImpulsePre.X, this.ImpulsePre.Y, this.ImpulsePre.Z);
+            this.ImpulsePost = Real3(-this.ImpulsePost.X, this.ImpulsePost.Y, this.ImpulsePost.Z);
+            
+        }
         if(time == this.PreAttackTime/*el momento que queramos que se spawnee el damage, solo hay que hacerlo un frame*/)
         {
             if(this.LifeTime > 0)
@@ -46,7 +62,7 @@ class ComboState : ZilchComponent
                 else
                     position.X += 1;
                 var damage = this.Space.CreateAtPosition(this.DamageArchetype, position);
-                damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime);
+                damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime, this.ImpulsePre, this.OnlyPushEnemyPre);
             }
          
         }
@@ -56,6 +72,19 @@ class ComboState : ZilchComponent
         {
             //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PreAttackAnim;
         }
+        /*if((time == 0.32) && this.GroundExplosion)
+        {
+             if(this.LifeTime > 0)
+            {
+                var position = this.Owner.Transform.WorldTranslation;
+                if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
+                    position.X -= 1; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
+                else
+                    position.X += 1;
+                var damage = this.Space.CreateAtPosition(this.DamageArchetype, position);
+                damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime, this.ImpulsePost, this.OnlyPushEnemyPost);
+            }
+        }*/
         if(time < this.OnAttackTime + this.PreAttackTime)
         {
             //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.OnAttackAnim;
@@ -63,6 +92,7 @@ class ComboState : ZilchComponent
         if(time < this.Temp1)
         {
             //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PostAttackAnim;
+           
         }
         
     }

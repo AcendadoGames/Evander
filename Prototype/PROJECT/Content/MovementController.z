@@ -16,6 +16,8 @@ class MovementController : ZilchComponent
     
     var Epsilon : Real = Real(0.5);
     
+    var EpsilonAutoDash : Real = Real(3);
+    
     var Controller:Gamepad = null;
     
     var InGround : Boolean = false;
@@ -102,23 +104,41 @@ class MovementController : ZilchComponent
     
     function OnLogicUpdate(event : UpdateEvent)
     {
+        Console.WriteLine(this.Space.GlobalVariables.AutoDashEnemy);
         if(this.Space.GlobalVariables.Dashing)
         {
             var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
-            
-            if(this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition.X < this.Owner.Transform.Translation.X)
-                this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
-                                                            this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition + Real3(1,1,0), 
-                                                               0.075);
-            
-            if(this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition.X > this.Owner.Transform.Translation.X)
-                this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
-                                                            this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition + Real3(-1,1,0), 
-                                                               0.075);
+            Console.WriteLine("here");
+            this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
+                                                        this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition, 
+                                                        0.075);
             this.CanPlay = false;
             if(distance < this.Epsilon)
             {
                 this.Space.GlobalVariables.Dashing = false;
+            }
+        }
+        if(this.Space.GlobalVariables.AutoDashEnemy)
+        {
+            this.Owner.IgnoreSpaceEffects.IgnoreGravity = true;
+            var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
+            var position = this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition;
+            var offset = -2;
+            if(this.Owner.Sprite.FlipX)
+                offset = -offset;
+            
+            position = Real3(position.X + offset, position.Y, position.Z);
+            
+            this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
+                                                        position, 
+                                                        0.15);
+            this.CanPlay = false;
+            var y = Math.Abs(position.Y - this.Owner.Transform.Translation.Y);
+            
+            if((distance < this.EpsilonAutoDash) && y < 0.5)
+            {
+                this.Space.GlobalVariables.AutoDashEnemy = false;
+                this.Owner.IgnoreSpaceEffects.IgnoreGravity = false;
             }
         }
         else
