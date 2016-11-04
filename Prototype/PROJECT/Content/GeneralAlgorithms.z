@@ -61,4 +61,14 @@ class GeneralAlgorithms : ZilchComponent
         } while (i < j)     
         return j;           // returns middle subscript  
     }
+    
+    function InpreciseLerp (v0 : Real3, v1 : Real3, t : Real) : Real3
+    {
+        return v0 + t*(v1-v0);
+    }
+    
+    function PreciseLerp (v0 : Real3, v1 : Real3, t : Real) : Real3
+    {
+        return (1-t)*v0 + t*v1;
+    }
 }

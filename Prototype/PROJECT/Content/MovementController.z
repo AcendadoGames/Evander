@@ -104,7 +104,7 @@ class MovementController : ZilchComponent
     
     function OnLogicUpdate(event : UpdateEvent)
     {
-        Console.WriteLine(this.Space.GlobalVariables.AutoDashEnemy);
+
         if(this.Space.GlobalVariables.Dashing)
         {
             var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
@@ -120,7 +120,8 @@ class MovementController : ZilchComponent
         }
         if(this.Space.GlobalVariables.AutoDashEnemy)
         {
-            this.Owner.IgnoreSpaceEffects.IgnoreGravity = true;
+            this.Owner.RigidBody.Velocity = Real3(0,0,0);
+            
             var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
             var position = this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition;
             var offset = -2;
@@ -129,16 +130,16 @@ class MovementController : ZilchComponent
             
             position = Real3(position.X + offset, position.Y, position.Z);
             
-            this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
+            this.Owner.Transform.Translation = this.Space.GeneralAlgorithms.PreciseLerp(this.Owner.Transform.Translation, 
                                                         position, 
                                                         0.15);
             this.CanPlay = false;
+            
             var y = Math.Abs(position.Y - this.Owner.Transform.Translation.Y);
             
-            if((distance < this.EpsilonAutoDash) && y < 0.5)
+            if((distance < this.EpsilonAutoDash) /*&& y < 0.1*/)
             {
                 this.Space.GlobalVariables.AutoDashEnemy = false;
-                this.Owner.IgnoreSpaceEffects.IgnoreGravity = false;
             }
         }
         else

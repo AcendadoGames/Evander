@@ -32,44 +32,48 @@ class VelRotDampening : ZilchComponent
     }
     function JumpDamp()
     {
-        if(this.Space.GlobalVariables.WallDampening)
+        if(!this.Space.GlobalVariables.AutoDashEnemy)
         {
-            if(this.Owner.RigidBody.Velocity.Y > 0)
+            if(this.Space.GlobalVariables.WallDampening)
             {
-                var vel = this.Owner.RigidBody.Velocity;
-                vel.Y *= this.JumpDampening;
-                this.Owner.RigidBody.Velocity = vel;
+                if(this.Owner.RigidBody.Velocity.Y > 0)
+                {
+                    var vel = this.Owner.RigidBody.Velocity;
+                    vel.Y *= this.JumpDampening;
+                    this.Owner.RigidBody.Velocity = vel;
+                }
+                else if(this.Owner.RigidBody.Velocity.Y < 0 && this.Owner.RigidBody.Velocity.Y > -10)
+                {
+                    var vel = this.Owner.RigidBody.Velocity;
+                    //vel.Y *= this.NegativeJumpDampening;
+                    this.Owner.RigidBody.Velocity = vel;
+                }
+                else if(this.Owner.RigidBody.Velocity.Y < -10)
+                {
+                    var vel = this.Owner.RigidBody.Velocity;
+                    vel.Y *= this.JumpDampening;
+                    this.Owner.RigidBody.Velocity = vel;
+                }
             }
-            else if(this.Owner.RigidBody.Velocity.Y < 0 && this.Owner.RigidBody.Velocity.Y > -10)
+            else
             {
-                var vel = this.Owner.RigidBody.Velocity;
-                //vel.Y *= this.NegativeJumpDampening;
-                this.Owner.RigidBody.Velocity = vel;
+                if(this.Owner.RigidBody.Velocity.Y > 0)
+                {
+                    var vel = this.Owner.RigidBody.Velocity;
+                    vel.Y *= this.JumpDampening;
+                    this.Owner.RigidBody.Velocity = vel;
+                }
+                else if(this.Owner.RigidBody.Velocity.Y > -40)
+                {
+                    var vel = this.Owner.RigidBody.Velocity;
+                    vel.Y *= this.NegativeJumpDampening;
+                    this.Owner.RigidBody.Velocity = vel;
+                } 
             }
-            else if(this.Owner.RigidBody.Velocity.Y < -10)
-            {
-                var vel = this.Owner.RigidBody.Velocity;
-                vel.Y *= this.JumpDampening;
-                this.Owner.RigidBody.Velocity = vel;
-            }
+            if(this.Space.GlobalVariables.Dashing)
+                this.Owner.RigidBody.Velocity = Real3(0,0,0);
         }
-        else
-        {
-            if(this.Owner.RigidBody.Velocity.Y > 0)
-            {
-                var vel = this.Owner.RigidBody.Velocity;
-                vel.Y *= this.JumpDampening;
-                this.Owner.RigidBody.Velocity = vel;
-            }
-            else if(this.Owner.RigidBody.Velocity.Y > -40)
-            {
-                var vel = this.Owner.RigidBody.Velocity;
-                vel.Y *= this.NegativeJumpDampening;
-                this.Owner.RigidBody.Velocity = vel;
-            } 
-        }
-        if(this.Space.GlobalVariables.Dashing)
-            this.Owner.RigidBody.Velocity = Real3(0,0,0);
+        
     }
     function RotDampening()
     {

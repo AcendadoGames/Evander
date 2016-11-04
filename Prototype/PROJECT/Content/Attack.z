@@ -35,7 +35,7 @@ class Attack : ZilchComponent
         this.LifeTime = lifeTime;
         this.Owner.WindEffect.WindDirection = impulse;
         if(onlyPushEnemy)
-            this.Owner.BoxCollider.CollisionGroup = CollisionGroup.Player;
+            this.Owner.BoxCollider.CollisionGroup = CollisionGroup.OnlyKnockUpEnemy;
         this.ValuesSet = true;
     }
 }
