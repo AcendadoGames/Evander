@@ -8,9 +8,13 @@ Cog =
 	{
 		string Name = "PrototypePlayer",
 	},
+	Archetyped = 
+	{
+		string Name = "5891c8b6ae0a8106:Player",
+	},
 	Transform = 
 	{
-		Vec3 Translation = [-126.889511, -3.67976952, 0],
+		Vec3 Translation = [-121.809311, 3.35020733, 0.499023438],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -98,6 +102,9 @@ Cog =
 	PlayerHealth = 
 	{
 	},
+	HUDBlood = 
+	{
+	},
 	Hierarchy = 
 	{
 		Cog = 
@@ -135,6 +142,11 @@ Cog =
 				float Damage = 0,
 				Vec4 Color = [1, 0.0400000215, 0.183999658, 0],
 				float LifeTime = 0,
+				Vec3 ImpulsePre = [0, 0, 0],
+				bool OnlyPushEnemyPre = false,
+				Vec3 ImpulsePost = [0, 0, 0],
+				bool OnlyPushEnemyPost = false,
+				bool GroundExplosion = false,
 			},
 			Hierarchy = 
 			{
@@ -169,6 +181,11 @@ Cog =
 						float Damage = 15,
 						Vec4 Color = [0, 0.760000229, 1, 1],
 						float LifeTime = 0.100000001,
+						Vec3 ImpulsePre = [0, 0, 0],
+						bool OnlyPushEnemyPre = false,
+						Vec3 ImpulsePost = [0, 0, 0],
+						bool OnlyPushEnemyPost = false,
+						bool GroundExplosion = false,
 					},
 					Hierarchy = 
 					{
@@ -203,6 +220,11 @@ Cog =
 								float Damage = 30,
 								Vec4 Color = [1, 0, 0, 1],
 								float LifeTime = 0.100000001,
+								Vec3 ImpulsePre = [0, 0, 0],
+								bool OnlyPushEnemyPre = false,
+								Vec3 ImpulsePost = [0, 0, 0],
+								bool OnlyPushEnemyPost = false,
+								bool GroundExplosion = false,
 							},
 							Hierarchy = 
 							{
@@ -237,6 +259,11 @@ Cog =
 										float Damage = 35,
 										Vec4 Color = [1, 0, 0, 1],
 										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [0, 0, 0],
+										bool OnlyPushEnemyPre = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
 									},
 								},
 								Cog = 
@@ -270,6 +297,11 @@ Cog =
 										float Damage = 25,
 										Vec4 Color = [0, 0.610000134, 1, 1],
 										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [0, 0, 0],
+										bool OnlyPushEnemyPre = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
 									},
 								},
 							},
@@ -305,6 +337,11 @@ Cog =
 								float Damage = 20,
 								Vec4 Color = [0, 0.7900002, 1, 1],
 								float LifeTime = 0.100000001,
+								Vec3 ImpulsePre = [0, 0, 0],
+								bool OnlyPushEnemyPre = false,
+								Vec3 ImpulsePost = [0, 0, 0],
+								bool OnlyPushEnemyPost = false,
+								bool GroundExplosion = false,
 							},
 							Hierarchy = 
 							{
@@ -339,6 +376,11 @@ Cog =
 										float Damage = 0,
 										Vec4 Color = [0, 0, 0, 0],
 										float LifeTime = 0,
+										Vec3 ImpulsePre = [0, 0, 0],
+										bool OnlyPushEnemyPre = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
 									},
 								},
 							},
@@ -376,6 +418,11 @@ Cog =
 						float Damage = 25,
 						Vec4 Color = [1, 0, 0, 1],
 						float LifeTime = 0.100000001,
+						Vec3 ImpulsePre = [0, 0, 0],
+						bool OnlyPushEnemyPre = false,
+						Vec3 ImpulsePost = [0, 0, 0],
+						bool OnlyPushEnemyPost = false,
+						bool GroundExplosion = false,
 					},
 					Hierarchy = 
 					{
@@ -410,6 +457,11 @@ Cog =
 								float Damage = 20,
 								Vec4 Color = [0, 0.610000134, 1, 1],
 								float LifeTime = 0.100000001,
+								Vec3 ImpulsePre = [0, 0, 0],
+								bool OnlyPushEnemyPre = false,
+								Vec3 ImpulsePost = [0, 0, 0],
+								bool OnlyPushEnemyPost = false,
+								bool GroundExplosion = false,
 							},
 							Hierarchy = 
 							{
@@ -444,6 +496,11 @@ Cog =
 										float Damage = 25,
 										Vec4 Color = [0, 0.579999924, 1, 1],
 										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [0, 0, 0],
+										bool OnlyPushEnemyPre = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
 									},
 								},
 								Cog = 
@@ -477,6 +534,11 @@ Cog =
 										float Damage = 35,
 										Vec4 Color = [1, 0, 0, 1],
 										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [0, 0, 0],
+										bool OnlyPushEnemyPre = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
 									},
 								},
 							},
@@ -512,6 +574,11 @@ Cog =
 								float Damage = 30,
 								Vec4 Color = [1, 0, 0, 1],
 								float LifeTime = 0.100000001,
+								Vec3 ImpulsePre = [0, 0, 0],
+								bool OnlyPushEnemyPre = false,
+								Vec3 ImpulsePost = [0, 0, 0],
+								bool OnlyPushEnemyPost = false,
+								bool GroundExplosion = false,
 							},
 							Hierarchy = 
 							{
@@ -546,6 +613,11 @@ Cog =
 										float Damage = 25,
 										Vec4 Color = [0, 0.670000076, 1, 1],
 										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [0, 0, 0],
+										bool OnlyPushEnemyPre = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
 									},
 								},
 							},
