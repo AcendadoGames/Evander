@@ -8,11 +8,11 @@ class PlayerCollisionHandler : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if(this.Space.GlobalVariables.Dashing && this.Owner.BoxCollider.Ghost != true)
+        if(this.Space.GlobalVariables.Dashing)
         {
             this.Owner.BoxCollider.CollisionGroup = CollisionGroup.Null;
         }
-        else if(!this.Space.GlobalVariables.Dashing && this.Owner.BoxCollider.Ghost != false)
+        else if(!this.Space.GlobalVariables.Dashing)
         {
             this.Owner.BoxCollider.CollisionGroup = CollisionGroup.Player;
         }
