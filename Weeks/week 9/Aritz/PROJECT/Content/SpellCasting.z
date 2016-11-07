@@ -1,0 +1,17 @@
+class SpellCast : ZilchComponent
+{
+    [Property]
+    var Projectile : Archetype;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, "Spell1", this.CastingSpell);
+    }
+
+    function CastingSpell(event : ZilchEvent)
+    {
+        var position = this.Owner.Transform.Translation;
+        if(!this.Space.GlobalVariables.NoEnemies)
+            this.Space.CreateAtPosition(this.Projectile, position);
+    }
+}
