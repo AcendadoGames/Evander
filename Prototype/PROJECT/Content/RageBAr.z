@@ -1,0 +1,102 @@
+class RageBar : ZilchComponent
+{
+    var FinalPosition : Real3 = Real3(-24.9859,11.406,1.1);
+    var FinalStartVelocity : Real3 = Real3(0, -8, 0);
+    var FinalRandomVelocity : Real3 = Real3(-0.2, -8, -0.8);
+    var FinalEmitRate : Real = 1500;
+    var BeginPosition : Real3 = Real3(-24.9859,6.76749,1.1);
+    var BeginStartVelocity : Real3 = Real3(0,0,0);
+    var BeginRandomVelocity : Real3 = Real3(-0.2, 0, -0.8);
+    var BeginEmitRate : Real = 500;
+    var CurrentPosition : Real3 = Real3(-24.9859,6.76749,1.1);
+    var CurrentStartVelocity : Real3 = Real3(0,0,0);
+    var CurrentRandomVelocity : Real3 = Real3(-0.2, 0, -0.8);
+    var CurrentEmitRate : Real = 500;
+    var DeltaPosition : Real;
+    var DeltaStartVelocity : Real;
+    var DeltaRandomVelocity : Real;
+    var DeltaEmitRate : Real;
+    [Property]
+    var PreRageColor : Real4;
+    [Property]
+    var PostRageColor : Real4;
+    var Color : Real4;
+    var ExecuteOnce : Boolean = false;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.DeltaPosition = this.FinalPosition.Y - this.BeginPosition.Y;
+        this.DeltaStartVelocity = this.FinalStartVelocity.Y - this.BeginStartVelocity.Y;
+        this.DeltaRandomVelocity = this.FinalRandomVelocity.Y - this.BeginRandomVelocity.Y;
+        this.DeltaEmitRate = this.FinalEmitRate - this.BeginEmitRate;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function Anim ()
+    {
+        Action.Property(this.Owner.Actions,
+                        @this.CurrentEmitRate,
+                        500,
+                        10,
+                        Ease.Linear);
+        Action.Property(this.Owner.Actions,
+                        @this.CurrentStartVelocity,
+                        this.BeginStartVelocity,
+                        10,
+                        Ease.Linear);
+        Action.Property(this.Owner.Actions,
+                        @this.CurrentRandomVelocity,
+                        this.BeginRandomVelocity,
+                        10,
+                        Ease.Linear);
+        Action.Property(this.Owner.Actions,
+                        @this.CurrentPosition,
+                        this.BeginPosition,
+                        10,
+                        Ease.Linear);
+    }
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Space.GlobalVariables.RageMode)
+        {
+            this.Color = this.PostRageColor;
+            if(!this.ExecuteOnce)
+            {
+                this.Anim();
+                this.ExecuteOnce = true;
+            }
+            
+        }
+        else
+        {
+            this.Color = this.PreRageColor;
+            this.ExecuteOnce = false;
+            
+            if(this.Space.ComboText.ComboText < 20)
+            {
+                this.CurrentPosition = Real3(this.BeginPosition.X, 
+                                             this.BeginPosition.Y + (this.DeltaPosition/20) * this.Space.ComboText.ComboText, 
+                                             this.BeginPosition.Z);
+                                             
+                                             
+                this.CurrentStartVelocity = Real3(this.BeginStartVelocity.X, 
+                                                  this.BeginStartVelocity.Y + (this.DeltaStartVelocity/20) * this.Space.ComboText.ComboText, 
+                                                  this.BeginStartVelocity.Z);
+                                                  
+                                                  
+                this.CurrentRandomVelocity = Real3(this.BeginRandomVelocity.X, 
+                                                   this.BeginRandomVelocity.Y + (this.DeltaRandomVelocity/20) * this.Space.ComboText.ComboText, 
+                                                   this.BeginRandomVelocity.Z);
+                this.CurrentEmitRate = this.BeginEmitRate + (this.DeltaEmitRate/20) * this.Space.ComboText.ComboText;
+            }
+            else if(this.Space.ComboText.ComboText > 20)
+            {
+                this.CurrentPosition = this.FinalPosition;
+                this.CurrentStartVelocity = this.FinalStartVelocity;
+                this.CurrentRandomVelocity = this.FinalRandomVelocity;
+                this.CurrentEmitRate = this.FinalEmitRate;
+            }
+        }
+    }
+}

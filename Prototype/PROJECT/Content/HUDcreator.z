@@ -3,7 +3,7 @@ class HUDCreator : ZilchComponent
     [Property]
     var HudLevel: Level = null; // Level that has our HUD in it
     var HudSpace: Space = null;
-
+    
     function Initialize(init : CogInitializer)
     {
         // Create a new Space to load our HUD level into

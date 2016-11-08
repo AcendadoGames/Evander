@@ -141,6 +141,7 @@ class PathFinder
                 path.Push(node.Location);
             }
         }
+        this.NodePath.Clear();
         return path;
     }
     

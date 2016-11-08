@@ -1,6 +1,6 @@
 class PlayerHealth : ZilchComponent
 {
-    var Health : Integer = 100;
+    var Health : Integer = 10000000;
     var CurrentHealth : Integer;
     var Timer : Real = 0;
     

@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-78.2438736, -3.56174183, 0],
+		Vec3 Translation = [-100.246971, 0.213966846, 0.75],
 		Vec3 Scale = [0.140000001, 0.140000001, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -77,6 +77,15 @@ Cog =
 	{
 		float EnemyLife = 100,
 	},
+	MassOverride = 
+	{
+		bool Active = true,
+		float invMass = 0.161290333,
+		Vec3 invInertiaX = [0, 0, 0],
+		Vec3 invInertiaY = [0, 0, 0],
+		Vec3 invInertiaZ = [0, 0, 0],
+		Vec3 LocalCenterOfMass = [0, 0, 0],
+	},
 	Hierarchy = 
 	{
 		Cog = 
@@ -128,7 +137,7 @@ Cog =
 					},
 					Move_Walk = 
 					{
-						float SpeedArcher = 0,
+						float SpeedArcher = 0.5,
 						float SpeedMelee = 1,
 						float Direction = 1,
 					},
@@ -328,7 +337,7 @@ Cog =
 										bool VisibilityCulling = true,
 										bool VisibilityEvents = true,
 										bool CastShadows = false,
-										Vec4 Color = [1, 0, 0, 0.5],
+										Vec4 Color = [1, 0, 0, 0],
 										BlendMode BlendMode = Alpha,
 										SpriteGeometryMode GeometryMode = ZPlane,
 										string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -432,6 +441,85 @@ Cog =
 				string SerializedGroupName = "5831f2a61e419268:Sensor",
 				Vec3 Offset = [0, 0, 0],
 				Vec3 Size = [60, 25, 0.5],
+			},
+		},
+		Cog = 
+		{
+			LinkId = 
+			{
+				uint Id = 11,
+			},
+			Named = 
+			{
+				string Name = "RageModeSmoke",
+			},
+			Transform = 
+			{
+				Vec3 Translation = [1.70010102, -4.72895622, 1.25],
+				Vec3 Scale = [7.14285707, 7.14285707, 1],
+				Quat Rotation = [0, 0, 0, 1],
+			},
+			SpriteParticleSystem = 
+			{
+				bool Visible = true,
+				bool VisibilityCulling = true,
+				bool VisibilityEvents = true,
+				bool CastShadows = false,
+				SystemChildMode ChildMode = Independent,
+				SystemSpace SystemSpace = WorldSpace,
+				uint DrawOrder = 0,
+				Vec4 Tint = [0.769999981, 0.138599992, 0.138599992, 0.100000001],
+				float WarmUpTime = 0,
+				ParticleGeometry GeometryMode = Billboarded,
+				ParticleRenderMode RenderMode = Blended,
+				ParticleSortMode SortMode = Sorted,
+				ParticleAnimation ParticleAnimation = Single,
+				string Texture = "559dbaeb34c81bf2:Cloud",
+				float VelocityScale = 1,
+				float LengthScale = 1,
+				float MaxParticleSize = 100,
+				Vec3 SystemSize = [50, 50, 4],
+			},
+			LinearParticleAnimator = 
+			{
+				Vec3 Force = [0, 0, 0],
+				Vec3 RandomForce = [0, 0, 0],
+				float Torque = 0,
+				float Growth = 0,
+				float Dampening = 0,
+				Vec3 Twist = [0, 0, 0],
+			},
+			ParticleColorAnimator = 
+			{
+				Vec4 Color0 = [1, 1, 1, 0],
+				Vec4 Color1 = [1, 1, 1, 1],
+				Vec4 Color2 = [1, 1, 1, 1],
+				Vec4 Color3 = [1, 1, 1, 1],
+				Vec4 Color4 = [1, 1, 1, 0],
+			},
+			BoxParticleEmitter = 
+			{
+				bool Active = false,
+				uint EmitCount = 0,
+				float EmitRate = 1000,
+				float EmitVariance = 0,
+				float Size = 3,
+				float SizeVariance = 2,
+				float Lifetime = 0.100000001,
+				float LifetimeVariance = 0.100000001,
+				float Spin = 0,
+				float SpinVariance = 50,
+				bool RandomSpin = true,
+				float Fill = 1,
+				float EmitterVelocityPercent = 0,
+				Vec3 StartVelocity = [0, 12, 0],
+				Vec3 RandomVelocity = [0.25, 0.0500000007, 0.25],
+				Vec3 TangentVelocity = [0, 0, 0],
+				Vec3 EmitterSize = [2, 2, 0],
+				bool FastMovingEmitter = false,
+			},
+			RageActive = 
+			{
 			},
 		},
 	},

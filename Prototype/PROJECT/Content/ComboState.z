@@ -31,6 +31,10 @@ class ComboState : ZilchComponent
     [Property]
     var OnlyPushEnemyPre : Boolean = false;
     [Property]
+    var Shake : Boolean = false;
+    [Property]
+    var GroundShake : Boolean = false;
+    [Property]
     var ImpulsePost : Real3;
     [Property]
     var OnlyPushEnemyPost : Boolean = false;
@@ -52,6 +56,8 @@ class ComboState : ZilchComponent
         {
             if(this.LifeTime > 0)
             {
+                if(this.Shake)
+                    this.Space.FindObjectByName("Camera").CameraShake.SingleShake();
                 var position = this.Owner.Transform.WorldTranslation;
                 if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
                     position.X -= 1; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
@@ -70,6 +76,8 @@ class ComboState : ZilchComponent
         }
         if (time == 0.48 && this.GroundExplosion) // this is a madarfakin magician numbuh
         {
+            if(this.GroundShake)
+                this.Space.FindObjectByName("Camera").CameraShake.SingleShake();
             var position = this.Owner.Transform.WorldTranslation;
             if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
                 position.X -= 1; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando

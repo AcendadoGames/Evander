@@ -108,7 +108,7 @@ class MovementController : ZilchComponent
         if(this.Space.GlobalVariables.Dashing)
         {
             var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
-            Console.WriteLine("here");
+            //Console.WriteLine("here");
             this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
                                                         this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition, 
                                                         0.075);
@@ -181,7 +181,7 @@ class MovementController : ZilchComponent
                         
                         if(Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A))
                         {
-                            Console.WriteLine("que colo");
+                            //Console.WriteLine("que colo");
                             var move = Real3(1,1,0) * this.JumpSpeed;
                             this.Owner.RigidBody.Velocity += move;
                         }

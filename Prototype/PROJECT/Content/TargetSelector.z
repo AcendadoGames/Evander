@@ -106,13 +106,13 @@ class TargetSelector : ZilchComponent
         if(this.Controller.RightStick.X < -0.7 && !this.Temp1)
         {
             this.RightStickLeftPressed = true;
-            Console.WriteLine("RightStickLeftPressed: ", this.RightStickLeftPressed); 
+            //Console.WriteLine("RightStickLeftPressed: ", this.RightStickLeftPressed); 
             this.Temp1 = true;
         }
         else
         {
             if(this.RightStickLeftPressed)
-                Console.WriteLine("RightStickLeftPressed: ", this.RightStickLeftPressed); 
+                //Console.WriteLine("RightStickLeftPressed: ", this.RightStickLeftPressed); 
             this.RightStickLeftPressed = false;  
         }
         
@@ -123,13 +123,13 @@ class TargetSelector : ZilchComponent
         if(this.Controller.RightStick.X > 0.7 && !this.Temp2)
         {
             this.RightStickRightPressed = true;
-            Console.WriteLine("RightStickRightPressed: ", this.RightStickRightPressed); 
+            //Console.WriteLine("RightStickRightPressed: ", this.RightStickRightPressed); 
             this.Temp2 = true;
         }
         else
         {
             if(this.RightStickRightPressed)
-                Console.WriteLine("RightStickRightPressed: ", this.RightStickRightPressed); 
+                //Console.WriteLine("RightStickRightPressed: ", this.RightStickRightPressed); 
             this.RightStickRightPressed = false;
         }
             

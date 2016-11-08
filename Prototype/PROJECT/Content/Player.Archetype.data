@@ -105,14 +105,24 @@ Cog =
 	HUDBlood = 
 	{
 	},
+	Rage = 
+	{
+	},
 	Hierarchy = 
 	{
-		ArchetypeInstance = 
+		Cog = 
 		{
-			string Name = "57deb71aa0082a0f:Combo",
 			LinkId = 
 			{
 				uint Id = 2,
+			},
+			Named = 
+			{
+				string Name = "Combo",
+			},
+			Archetyped = 
+			{
+				string Name = "57deb71aa0082a0f:Combo",
 			},
 			Transform = 
 			{
@@ -120,9 +130,706 @@ Cog =
 				Vec3 Scale = [1, 1, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},
+			ComboState = 
+			{
+				string NoneAttack = "",
+				float PreAttackTime = 0,
+				string PreAttackAnim = "",
+				float OnAttackTime = 0,
+				string OnAttackAnim = "",
+				float PostAttackTime = 0,
+				string PostAttackAnim = "",
+				float InputTiming = 0.200000003,
+				string Text = "Root",
+				string DamageArchetype = "58632e238f16a281:damage",
+				float Damage = 0,
+				Vec4 Color = [1, 0.0400000215, 0.183999658, 0],
+				float LifeTime = 0,
+				Vec3 ImpulsePre = [50, 0, 0],
+				bool OnlyPushEnemyPre = false,
+				bool Shake = false,
+				bool GroundShake = false,
+				Vec3 ImpulsePost = [0, 0, 0],
+				bool OnlyPushEnemyPost = false,
+				bool GroundExplosion = false,
+				Vec3 Scale = [2, 3, 1],
+			},
+			Hierarchy = 
+			{
+				Cog = 
+				{
+					LinkId = 
+					{
+						uint Id = 3,
+					},
+					Named = 
+					{
+						string Name = "L",
+					},
+					Transform = 
+					{
+						Vec3 Translation = [0, 0, 0],
+						Vec3 Scale = [1, 1, 1],
+						Quat Rotation = [0, 0, 0, 1],
+					},
+					ComboState = 
+					{
+						string NoneAttack = "5275aa4d802dd6dc:Square",
+						float PreAttackTime = 0.200000003,
+						string PreAttackAnim = "",
+						float OnAttackTime = 0.200000003,
+						string OnAttackAnim = "5274db4c2e7c11f9:Circle",
+						float PostAttackTime = 0.200000003,
+						string PostAttackAnim = "",
+						float InputTiming = 0.200000003,
+						string Text = "L",
+						string DamageArchetype = "58632e238f16a281:damage",
+						float Damage = 15,
+						Vec4 Color = [0, 0.760000229, 1, 1],
+						float LifeTime = 0.100000001,
+						Vec3 ImpulsePre = [0, 0, 0],
+						bool OnlyPushEnemyPre = false,
+						bool Shake = false,
+						bool GroundShake = false,
+						Vec3 ImpulsePost = [0, 0, 0],
+						bool OnlyPushEnemyPost = false,
+						bool GroundExplosion = false,
+						Vec3 Scale = [2, 3, 1],
+					},
+					Hierarchy = 
+					{
+						Cog = 
+						{
+							LinkId = 
+							{
+								uint Id = 4,
+							},
+							Named = 
+							{
+								string Name = "R",
+							},
+							Transform = 
+							{
+								Vec3 Translation = [0, 0, 0],
+								Vec3 Scale = [1, 1, 1],
+								Quat Rotation = [0, 0, 0, 1],
+							},
+							ComboState = 
+							{
+								string NoneAttack = "5275aa4d802dd6dc:Square",
+								float PreAttackTime = 0.200000003,
+								string PreAttackAnim = "",
+								float OnAttackTime = 0.200000003,
+								string OnAttackAnim = "",
+								float PostAttackTime = 0.200000003,
+								string PostAttackAnim = "",
+								float InputTiming = 0.200000003,
+								string Text = "LR",
+								string DamageArchetype = "58632e238f16a281:damage",
+								float Damage = 30,
+								Vec4 Color = [1, 0, 0, 1],
+								float LifeTime = 0.100000001,
+								Vec3 ImpulsePre = [40, 70, 0],
+								bool OnlyPushEnemyPre = false,
+								bool Shake = false,
+								bool GroundShake = false,
+								Vec3 ImpulsePost = [0, 0, 0],
+								bool OnlyPushEnemyPost = false,
+								bool GroundExplosion = false,
+								Vec3 Scale = [2, 3, 1],
+							},
+							Hierarchy = 
+							{
+								Cog = 
+								{
+									LinkId = 
+									{
+										uint Id = 5,
+									},
+									Named = 
+									{
+										string Name = "R",
+									},
+									Transform = 
+									{
+										Vec3 Translation = [0, 0, 0],
+										Vec3 Scale = [1, 1, 1],
+										Quat Rotation = [0, 0, 0, 1],
+									},
+									ComboState = 
+									{
+										string NoneAttack = "5275aa4d802dd6dc:Square",
+										float PreAttackTime = 0.200000003,
+										string PreAttackAnim = "",
+										float OnAttackTime = 0.200000003,
+										string OnAttackAnim = "5274db4c2e7c11f9:Circle",
+										float PostAttackTime = 0.200000003,
+										string PostAttackAnim = "",
+										float InputTiming = 0.400000006,
+										string Text = "LRR",
+										string DamageArchetype = "58632e238f16a281:damage",
+										float Damage = 35,
+										Vec4 Color = [1, 0, 0, 1],
+										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [0, -60, 0],
+										bool OnlyPushEnemyPre = false,
+										bool Shake = true,
+										bool GroundShake = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
+										Vec3 Scale = [2, 3, 1],
+									},
+								},
+								Cog = 
+								{
+									LinkId = 
+									{
+										uint Id = 6,
+									},
+									Named = 
+									{
+										string Name = "L",
+									},
+									Transform = 
+									{
+										Vec3 Translation = [0, 0, 0],
+										Vec3 Scale = [1, 1, 1],
+										Quat Rotation = [0, 0, 0, 1],
+									},
+									ComboState = 
+									{
+										string NoneAttack = "5275aa4d802dd6dc:Square",
+										float PreAttackTime = 0.200000003,
+										string PreAttackAnim = "",
+										float OnAttackTime = 0.200000003,
+										string OnAttackAnim = "57700f8341c27024:definitivebar4",
+										float PostAttackTime = 0.200000003,
+										string PostAttackAnim = "",
+										float InputTiming = 0.400000006,
+										string Text = "LRL",
+										string DamageArchetype = "58632e238f16a281:damage",
+										float Damage = 25,
+										Vec4 Color = [0, 0.610000134, 1, 1],
+										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [50, 0, 0],
+										bool OnlyPushEnemyPre = true,
+										bool Shake = false,
+										bool GroundShake = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
+										Vec3 Scale = [2, 3, 1],
+									},
+								},
+							},
+						},
+						Cog = 
+						{
+							LinkId = 
+							{
+								uint Id = 7,
+							},
+							Named = 
+							{
+								string Name = "L",
+							},
+							Transform = 
+							{
+								Vec3 Translation = [0, 0, 0],
+								Vec3 Scale = [1, 1, 1],
+								Quat Rotation = [0, 0, 0, 1],
+							},
+							ComboState = 
+							{
+								string NoneAttack = "5275aa4d802dd6dc:Square",
+								float PreAttackTime = 0.200000003,
+								string PreAttackAnim = "",
+								float OnAttackTime = 0.200000003,
+								string OnAttackAnim = "",
+								float PostAttackTime = 0.200000003,
+								string PostAttackAnim = "",
+								float InputTiming = 0.200000003,
+								string Text = "LL",
+								string DamageArchetype = "58632e238f16a281:damage",
+								float Damage = 20,
+								Vec4 Color = [0, 0.7900002, 1, 1],
+								float LifeTime = 0.100000001,
+								Vec3 ImpulsePre = [10, 0, 0],
+								bool OnlyPushEnemyPre = true,
+								bool Shake = false,
+								bool GroundShake = false,
+								Vec3 ImpulsePost = [0, 0, 0],
+								bool OnlyPushEnemyPost = false,
+								bool GroundExplosion = false,
+								Vec3 Scale = [2, 3, 1],
+							},
+							Hierarchy = 
+							{
+								Cog = 
+								{
+									LinkId = 
+									{
+										uint Id = 8,
+									},
+									Named = 
+									{
+										string Name = "R",
+									},
+									Transform = 
+									{
+										Vec3 Translation = [0, 0, 0],
+										Vec3 Scale = [1, 1, 1],
+										Quat Rotation = [0, 0, 0, 1],
+									},
+									ComboState = 
+									{
+										string NoneAttack = "5275aa4d802dd6dc:Square",
+										float PreAttackTime = 0.200000003,
+										string PreAttackAnim = "",
+										float OnAttackTime = 0.200000003,
+										string OnAttackAnim = "",
+										float PostAttackTime = 0.200000003,
+										string PostAttackAnim = "",
+										float InputTiming = 0.400000006,
+										string Text = "LLR",
+										string DamageArchetype = "58632e238f16a281:damage",
+										float Damage = 35,
+										Vec4 Color = [1, 0, 0, 1],
+										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [20, 60, 0],
+										bool OnlyPushEnemyPre = true,
+										bool Shake = true,
+										bool GroundShake = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
+										Vec3 Scale = [2, 3, 1],
+									},
+								},
+							},
+						},
+					},
+				},
+				Cog = 
+				{
+					LinkId = 
+					{
+						uint Id = 9,
+					},
+					Named = 
+					{
+						string Name = "R",
+					},
+					Transform = 
+					{
+						Vec3 Translation = [0, 0, 0],
+						Vec3 Scale = [1, 1, 1],
+						Quat Rotation = [0, 0, 0, 1],
+					},
+					ComboState = 
+					{
+						string NoneAttack = "5275aa4d802dd6dc:Square",
+						float PreAttackTime = 0.200000003,
+						string PreAttackAnim = "",
+						float OnAttackTime = 0.200000003,
+						string OnAttackAnim = "",
+						float PostAttackTime = 0.200000003,
+						string PostAttackAnim = "",
+						float InputTiming = 0,
+						string Text = "R",
+						string DamageArchetype = "58632e238f16a281:damage",
+						float Damage = 25,
+						Vec4 Color = [1, 0, 0, 1],
+						float LifeTime = 0.100000001,
+						Vec3 ImpulsePre = [0, 70, 0],
+						bool OnlyPushEnemyPre = false,
+						bool Shake = false,
+						bool GroundShake = false,
+						Vec3 ImpulsePost = [0, 0, 0],
+						bool OnlyPushEnemyPost = false,
+						bool GroundExplosion = false,
+						Vec3 Scale = [2, 3, 1],
+					},
+					Hierarchy = 
+					{
+						Cog = 
+						{
+							LinkId = 
+							{
+								uint Id = 10,
+							},
+							Named = 
+							{
+								string Name = "L",
+							},
+							Transform = 
+							{
+								Vec3 Translation = [0, 0, 0],
+								Vec3 Scale = [1, 1, 1],
+								Quat Rotation = [0, 0, 0, 1],
+							},
+							ComboState = 
+							{
+								string NoneAttack = "5275aa4d802dd6dc:Square",
+								float PreAttackTime = 0.200000003,
+								string PreAttackAnim = "",
+								float OnAttackTime = 0.200000003,
+								string OnAttackAnim = "",
+								float PostAttackTime = 0.200000003,
+								string PostAttackAnim = "",
+								float InputTiming = 0.400000006,
+								string Text = "RL",
+								string DamageArchetype = "58632e238f16a281:damage",
+								float Damage = 20,
+								Vec4 Color = [0, 0.610000134, 1, 1],
+								float LifeTime = 0.100000001,
+								Vec3 ImpulsePre = [0, 40, 0],
+								bool OnlyPushEnemyPre = false,
+								bool Shake = false,
+								bool GroundShake = false,
+								Vec3 ImpulsePost = [0, 0, 0],
+								bool OnlyPushEnemyPost = false,
+								bool GroundExplosion = false,
+								Vec3 Scale = [2, 3, 1],
+							},
+							Hierarchy = 
+							{
+								Cog = 
+								{
+									LinkId = 
+									{
+										uint Id = 11,
+									},
+									Named = 
+									{
+										string Name = "L",
+									},
+									Transform = 
+									{
+										Vec3 Translation = [0, 0, 0],
+										Vec3 Scale = [1, 1, 1],
+										Quat Rotation = [0, 0, 0, 1],
+									},
+									ComboState = 
+									{
+										string NoneAttack = "5275aa4d802dd6dc:Square",
+										float PreAttackTime = 0.200000003,
+										string PreAttackAnim = "",
+										float OnAttackTime = 0.200000003,
+										string OnAttackAnim = "",
+										float PostAttackTime = 0.200000003,
+										string PostAttackAnim = "",
+										float InputTiming = 0.400000006,
+										string Text = "RLL",
+										string DamageArchetype = "58632e238f16a281:damage",
+										float Damage = 25,
+										Vec4 Color = [0, 0.579999924, 1, 1],
+										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [50, 0, 0],
+										bool OnlyPushEnemyPre = true,
+										bool Shake = false,
+										bool GroundShake = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
+										Vec3 Scale = [2, 3, 1],
+									},
+								},
+								Cog = 
+								{
+									LinkId = 
+									{
+										uint Id = 12,
+									},
+									Named = 
+									{
+										string Name = "R",
+									},
+									Transform = 
+									{
+										Vec3 Translation = [0, 0, 0],
+										Vec3 Scale = [1, 1, 1],
+										Quat Rotation = [0, 0, 0, 1],
+									},
+									ComboState = 
+									{
+										string NoneAttack = "5275aa4d802dd6dc:Square",
+										float PreAttackTime = 0.200000003,
+										string PreAttackAnim = "",
+										float OnAttackTime = 0.200000003,
+										string OnAttackAnim = "",
+										float PostAttackTime = 0.200000003,
+										string PostAttackAnim = "",
+										float InputTiming = 0.400000006,
+										string Text = "RLR",
+										string DamageArchetype = "58632e238f16a281:damage",
+										float Damage = 17.5,
+										Vec4 Color = [1, 0, 0, 0.5],
+										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [0, -60, 0],
+										bool OnlyPushEnemyPre = false,
+										bool Shake = false,
+										bool GroundShake = true,
+										Vec3 ImpulsePost = [0, 60, 0],
+										bool OnlyPushEnemyPost = true,
+										bool GroundExplosion = true,
+										Vec3 Scale = [10, 3, 1],
+									},
+								},
+							},
+						},
+						Cog = 
+						{
+							LinkId = 
+							{
+								uint Id = 13,
+							},
+							Named = 
+							{
+								string Name = "R",
+							},
+							Transform = 
+							{
+								Vec3 Translation = [0, 0, 0],
+								Vec3 Scale = [1, 1, 1],
+								Quat Rotation = [0, 0, 0, 1],
+							},
+							ComboState = 
+							{
+								string NoneAttack = "5275aa4d802dd6dc:Square",
+								float PreAttackTime = 0.200000003,
+								string PreAttackAnim = "",
+								float OnAttackTime = 0.200000003,
+								string OnAttackAnim = "",
+								float PostAttackTime = 0.200000003,
+								string PostAttackAnim = "",
+								float InputTiming = 0.400000006,
+								string Text = "RR",
+								string DamageArchetype = "58632e238f16a281:damage",
+								float Damage = 30,
+								Vec4 Color = [1, 0, 0, 1],
+								float LifeTime = 0.100000001,
+								Vec3 ImpulsePre = [0, -60, 0],
+								bool OnlyPushEnemyPre = false,
+								bool Shake = false,
+								bool GroundShake = false,
+								Vec3 ImpulsePost = [0, 0, 0],
+								bool OnlyPushEnemyPost = false,
+								bool GroundExplosion = false,
+								Vec3 Scale = [2, 3, 1],
+							},
+							Hierarchy = 
+							{
+								Cog = 
+								{
+									LinkId = 
+									{
+										uint Id = 14,
+									},
+									Named = 
+									{
+										string Name = "L",
+									},
+									Transform = 
+									{
+										Vec3 Translation = [0, 0, 0],
+										Vec3 Scale = [1, 1, 1],
+										Quat Rotation = [0, 0, 0, 1],
+									},
+									ComboState = 
+									{
+										string NoneAttack = "5275aa4d802dd6dc:Square",
+										float PreAttackTime = 0.200000003,
+										string PreAttackAnim = "",
+										float OnAttackTime = 0.200000003,
+										string OnAttackAnim = "",
+										float PostAttackTime = 0.200000003,
+										string PostAttackAnim = "",
+										float InputTiming = 0.400000006,
+										string Text = "RRL",
+										string DamageArchetype = "58632e238f16a281:damage",
+										float Damage = 25,
+										Vec4 Color = [0, 0.670000076, 1, 1],
+										float LifeTime = 0.100000001,
+										Vec3 ImpulsePre = [50, 0, 0],
+										bool OnlyPushEnemyPre = true,
+										bool Shake = false,
+										bool GroundShake = false,
+										Vec3 ImpulsePost = [0, 0, 0],
+										bool OnlyPushEnemyPost = false,
+										bool GroundExplosion = false,
+										Vec3 Scale = [2, 3, 1],
+									},
+								},
+							},
+						},
+					},
+				},
+				Cog = 
+				{
+					LinkId = 
+					{
+						uint Id = 15,
+					},
+					Named = 
+					{
+						string Name = "X",
+					},
+					Transform = 
+					{
+						Vec3 Translation = [0, 0, 0],
+						Vec3 Scale = [1, 1, 1],
+						Quat Rotation = [0, 0, 0, 1],
+					},
+					ComboState = 
+					{
+						string NoneAttack = "5275aa4d802dd6dc:Square",
+						float PreAttackTime = 0.140000001,
+						string PreAttackAnim = "",
+						float OnAttackTime = 0.200000003,
+						string OnAttackAnim = "",
+						float PostAttackTime = 0.200000003,
+						string PostAttackAnim = "",
+						float InputTiming = 0.100000001,
+						string Text = "X1",
+						string DamageArchetype = "58632e238f16a281:damage",
+						float Damage = 50,
+						Vec4 Color = [0, 1, 0.00999975204, 1],
+						float LifeTime = 0.100000001,
+						Vec3 ImpulsePre = [0, 0, 0],
+						bool OnlyPushEnemyPre = true,
+						bool Shake = true,
+						bool GroundShake = false,
+						Vec3 ImpulsePost = [0, 0, 0],
+						bool OnlyPushEnemyPost = false,
+						bool GroundExplosion = false,
+						Vec3 Scale = [2, 3, 1],
+					},
+					Hierarchy = 
+					{
+						Cog = 
+						{
+							LinkId = 
+							{
+								uint Id = 16,
+							},
+							Named = 
+							{
+								string Name = "X",
+							},
+							Transform = 
+							{
+								Vec3 Translation = [0, 0, 0],
+								Vec3 Scale = [1, 1, 1],
+								Quat Rotation = [0, 0, 0, 1],
+							},
+							ComboState = 
+							{
+								string NoneAttack = "5275aa4d802dd6dc:Square",
+								float PreAttackTime = 0.140000001,
+								string PreAttackAnim = "",
+								float OnAttackTime = 0.200000003,
+								string OnAttackAnim = "",
+								float PostAttackTime = 0.200000003,
+								string PostAttackAnim = "",
+								float InputTiming = 0.100000001,
+								string Text = "X2",
+								string DamageArchetype = "58632e238f16a281:damage",
+								float Damage = 50,
+								Vec4 Color = [0, 1, 0.130000114, 1],
+								float LifeTime = 0.100000001,
+								Vec3 ImpulsePre = [0, 0, 0],
+								bool OnlyPushEnemyPre = true,
+								bool Shake = true,
+								bool GroundShake = false,
+								Vec3 ImpulsePost = [0, 0, 0],
+								bool OnlyPushEnemyPost = false,
+								bool GroundExplosion = false,
+								Vec3 Scale = [2, 3, 1],
+							},
+						},
+					},
+				},
+			},
+		},
+		Cog = 
+		{
+			LinkId = 
+			{
+				uint Id = 17,
+			},
 			Named = 
 			{
-				string Name = "Combo",
+				string Name = "RageModeSmoke",
+			},
+			Transform = 
+			{
+				Vec3 Translation = [-0.716064453, -0.957435608, 1.25],
+				Vec3 Scale = [1, 1, 1],
+				Quat Rotation = [0, 0, 0, 1],
+			},
+			SpriteParticleSystem = 
+			{
+				bool Visible = true,
+				bool VisibilityCulling = true,
+				bool VisibilityEvents = true,
+				bool CastShadows = false,
+				SystemChildMode ChildMode = Independent,
+				SystemSpace SystemSpace = WorldSpace,
+				uint DrawOrder = 0,
+				Vec4 Tint = [0.138599992, 0.466927826, 0.769999981, 0.100000001],
+				float WarmUpTime = 0,
+				ParticleGeometry GeometryMode = Billboarded,
+				ParticleRenderMode RenderMode = Blended,
+				ParticleSortMode SortMode = Sorted,
+				ParticleAnimation ParticleAnimation = Single,
+				string Texture = "559dbaeb34c81bf2:Cloud",
+				float VelocityScale = 1,
+				float LengthScale = 1,
+				float MaxParticleSize = 100,
+				Vec3 SystemSize = [50, 50, 4],
+			},
+			LinearParticleAnimator = 
+			{
+				Vec3 Force = [0, 0, 0],
+				Vec3 RandomForce = [0, 0, 0],
+				float Torque = 0,
+				float Growth = 0,
+				float Dampening = 0,
+				Vec3 Twist = [0, 0, 0],
+			},
+			ParticleColorAnimator = 
+			{
+				Vec4 Color0 = [1, 1, 1, 0],
+				Vec4 Color1 = [1, 1, 1, 1],
+				Vec4 Color2 = [1, 1, 1, 1],
+				Vec4 Color3 = [1, 1, 1, 1],
+				Vec4 Color4 = [1, 1, 1, 0],
+			},
+			BoxParticleEmitter = 
+			{
+				bool Active = false,
+				uint EmitCount = 0,
+				float EmitRate = 1000,
+				float EmitVariance = 0,
+				float Size = 3,
+				float SizeVariance = 2,
+				float Lifetime = 0.100000001,
+				float LifetimeVariance = 0.100000001,
+				float Spin = 0,
+				float SpinVariance = 50,
+				bool RandomSpin = true,
+				float Fill = 1,
+				float EmitterVelocityPercent = 0,
+				Vec3 StartVelocity = [0, 12, 0],
+				Vec3 RandomVelocity = [0.25, 0.0500000007, 0.25],
+				Vec3 TangentVelocity = [0, 0, 0],
+				Vec3 EmitterSize = [2, 2, 0],
+				bool FastMovingEmitter = false,
+			},
+			RageActive = 
+			{
 			},
 		},
 	},
