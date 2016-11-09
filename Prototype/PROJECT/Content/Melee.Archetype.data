@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-112.313591, -2.54830313, 0.75],
+		Vec3 Translation = [-112.649887, -1.19846153, -3.81469727e-06],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -62,6 +62,13 @@ Cog =
 	{
 		string InitStateName = "",
 		bool PrintDebug = true,
+	},
+	DragEffect = 
+	{
+		bool Active = true,
+		bool WakeUpOnChange = true,
+		float Drag = 0,
+		float AngularDrag = 0,
 	},
 	EnemyHealth = 
 	{
@@ -130,7 +137,7 @@ Cog =
 					Move_Walk = 
 					{
 						float SpeedArcher = 0.5,
-						float SpeedMelee = 0.5,
+						float SpeedMelee = 0.699999988,
 						float Direction = 1,
 					},
 				},
@@ -304,7 +311,7 @@ Cog =
 									},
 									Transform = 
 									{
-										Vec3 Translation = [-0.00672531128, -0.0163636208, 0.999998033],
+										Vec3 Translation = [0.158313751, 0.024895668, 0],
 										Vec3 Scale = [5, 5, 1],
 										Quat Rotation = [0, 0, 0, 1],
 									},
@@ -336,9 +343,6 @@ Cog =
 										Vec3 Offset = [0, 0, 0],
 										Vec3 Size = [0.5, 0.5, 0.5],
 									},
-									MeleeEnemiesDamage = 
-									{
-									},
 									RigidBody = 
 									{
 										bool Static = true,
@@ -350,6 +354,9 @@ Cog =
 										bool Inherit2DMode = true,
 										Vec3 Velocity = [0, 0, 0],
 										Vec3 AngularVelocity = [0, 0, 0],
+									},
+									MeleeEnemiesDamage = 
+									{
 									},
 								},
 							},
@@ -377,7 +384,7 @@ Cog =
 							},
 							Melee_Stuned_True = 
 							{
-								float StunTime = 0.5,
+								float StunTime = 1,
 							},
 						},
 					},
@@ -406,7 +413,7 @@ Cog =
 				bool SendsMessages = true,
 				bool Seamless = true,
 				string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-				string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+				string SerializedGroupName = "5831f2a61e419268:Sensor",
 				Vec3 Offset = [0, 0, 0],
 				Vec3 Size = [7.5, 5, 0.5],
 			},

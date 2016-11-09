@@ -4,7 +4,7 @@ class EnemyHealth : ZilchComponent
     var EnemyLife : Real = 100;
     
     var Rand : Random = Random();
-    
+    var BeenDamaged : Boolean = false;
     var Timer : Real = 3;
     
     var X1Vel : Real = -3;
@@ -28,8 +28,10 @@ class EnemyHealth : ZilchComponent
 
     function DamageReceived(event : CollisionEvent)
     {
+        this.BeenDamaged = false;
         if(event.OtherObject.Name == "damage")
         {
+            this.BeenDamaged = true;
             //Console.WriteLine(event.OtherObject.Attack.Damage);
             this.EnemyLife -= event.OtherObject.Attack.Damage;
             this.Space.ComboText.AddCombo();
@@ -41,7 +43,7 @@ class EnemyHealth : ZilchComponent
     {
         if(this.EnemyLife <= 0)
         {
-            this.Space.FindFirstObjectByName("PrototypePlayer").TargetSelector.EnemyIndex -= 1;
+            this.Owner.Name = "DeadEnemy";
             
             this.Owner.BoxCollider.Ghost = true;
             

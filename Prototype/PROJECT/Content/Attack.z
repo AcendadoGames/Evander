@@ -46,6 +46,7 @@ class Attack : ZilchComponent
     }
     function Push(event : CollisionEvent)
     {
+        Console.WriteLine(event.OtherObject.Name);
         event.OtherObject.RigidBody.Velocity = this.Impulse;
     }
 }

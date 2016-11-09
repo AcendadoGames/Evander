@@ -1,0 +1,34 @@
+class JanusArmDamage : ZilchComponent
+{
+    [Property]
+    var JanusArmDamage : Integer = 50;
+    
+    var AttackDone : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionPersisted,this.OnCollisionPersisted);
+    }
+    function OnCollisionPersisted(event : CollisionEvent)
+    {
+        var otherObject = event.OtherObject;
+        if (otherObject.Name == "PrototypePlayer")
+        {
+            event.OtherObject.PlayerHealth.CurrentHealth -= this.JanusArmDamage;
+        }
+        this.AttackDone = true;
+    }
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (this.AttackDone == true)
+        {
+            this.Owner.BoxCollider.SendsEvents = false;
+        }
+        
+        if (this.Owner.BoxCollider.SendsEvents == false)
+        {
+            this.AttackDone = false;
+        }
+    }
+} 

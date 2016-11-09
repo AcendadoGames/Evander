@@ -87,6 +87,9 @@ class Archer_Attack_DistanceA : State /* The Enemy stops and starts shooting arr
         
     [Override] function Update(event: UpdateEvent)
         {
+            if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Stuned");
+            
             this.Timer += event.Dt;
             
             //Setting variables that wiil be needed to compute the distance to player and the angle for the Fire() function
@@ -198,6 +201,8 @@ class Archer_Attack_MeleeA : State
     }
     [Override] function Update (event : UpdateEvent)
         {
+            if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Stuned");
             /*The attack is set to have a cooldown, and it works with a BoxCollider that starts a CollisionPersisted 
             event only when the player is in range, this event will send a message to the player's health him 
             that he has been hit*/

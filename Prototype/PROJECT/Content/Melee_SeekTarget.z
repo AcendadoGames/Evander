@@ -41,7 +41,6 @@ class Melee_SeekTarget : SuperState
         }
     [Override]function Update(event:UpdateEvent)
         {
-            //this.SensorCog.BoxCollider.DebugDraw();
         }
 }
 class Melee_SeekTarget_Chase : State
@@ -60,7 +59,8 @@ class Melee_SeekTarget_Chase : State
     }
     [Override] function Update(event : UpdateEvent)
         {
-            //Console.WriteLine(this.Actor.RigidBody.Velocity);
+            if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_Stuned");
             
             //setting some variables to compute the distance
             var playerPos : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
@@ -117,6 +117,9 @@ class Melee_SeekTarget_Lost : State
     }
     [Override] function Update(event : UpdateEvent)
     {
+        if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_Stuned");
+        
         
         if(this.TimeInState > this.Duration)
             this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_Patrol");

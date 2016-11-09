@@ -23,7 +23,7 @@ class KeyboardController : ZilchComponent
     var MoveDown : String = "MoveDown";
     var Spell1 : String = "Spell1";
     var Spell1Dash : String = "Spell1Dash";
-    
+    var NotMoving : String = "NotMoving";
     var Temp1 : Real;
     
     var LeftTriggerPressed : Boolean = false;
@@ -40,7 +40,43 @@ class KeyboardController : ZilchComponent
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
         Zero.Connect(this.Owner, Events.CollisionPersisted, this.OnCollisionPersisted);
     }
-
+    function IfAnyKey():Boolean
+    {
+        if(Zero.Keyboard.KeyIsDown(Keys.A))
+            return true;
+        if (Zero.Keyboard.KeyIsDown(Keys.D))
+            return true;
+        if (Zero.Keyboard.KeyIsDown(Keys.W))
+            return true;
+        if (Zero.Keyboard.KeyIsDown(Keys.Space))
+            return true;
+        if (Zero.Keyboard.KeyIsDown(Keys.T))
+            return true;
+        if (Zero.Keyboard.KeyIsDown(Keys.R))
+            return true;
+        if (Zero.Keyboard.KeyIsDown(Keys.Z))
+            return true;
+        if (Zero.Keyboard.KeyIsDown(Keys.W))
+            return true;
+        if (Zero.Mouse.IsButtonDown(MouseButtons.Left))
+            return true;
+        if (Zero.Mouse.IsButtonDown(MouseButtons.Right))
+            return true;
+        if (this.Controller.IsButtonHeld(Buttons.StickLeft))
+            return true;
+        if (this.Controller.IsButtonHeld(Buttons.StickRight))
+            return true;
+        if (this.Controller.IsButtonPressed(Buttons.B))
+            return true;
+        if (this.Controller.IsButtonPressed(Buttons.A))
+            return true;
+        if (this.Controller.IsButtonPressed(Buttons.X))
+            return true;
+        if (this.Controller.IsButtonPressed(Buttons.Y))
+            return true;
+            
+        return false;
+    }
     function OnLogicUpdate(event : UpdateEvent)
     {
         var player : Real3 = this.Owner.Transform.Translation;
@@ -80,11 +116,21 @@ class KeyboardController : ZilchComponent
             ev.EventId = this.Jump;
             this.Owner.DispatchEvent(this.Jump, ev);
         }
+        //Alex-------------------------------------------------------------Checking if the player is Idle
+        
+        this.IfAnyKey();
+        if (this.IfAnyKey() == false)
+        {
+            
+            ev.EventId = this.NotMoving;
+            this.Owner.DispatchEvent(this.NotMoving, ev);
+        }
+        
         //-----------------------------------SLOW MOTION-------------------------------------------------
         this.LeftTriggerInput();
 
         if ((Zero.Keyboard.KeyIsPressed(Keys.J) || this.LeftTriggerPressed) && this.TimeSlowMo >= 0.0 
-            && this.Space.GlobalVariables.Dashing == false) /*Targetting while not in dash*/
+            && this.Space.GlobalVariables.Dashing == false && !this.Space.GlobalVariables.NoEnemies) /*Targetting while not in dash*/
         { 
             this.A = this.Space.CreateAtPosition(this.TargetSprite1, position);
             this.B = this.Space.CreateAtPosition(this.TargetSprite2, position);

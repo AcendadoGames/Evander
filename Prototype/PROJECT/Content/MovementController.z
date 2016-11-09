@@ -21,6 +21,15 @@ class MovementController : ZilchComponent
     var Controller:Gamepad = null;
     
     var InGround : Boolean = false;
+    
+        /*Animation Variables*/
+    var NotMoving : Boolean = false;
+    var MovingRight : Boolean = false;
+    var MovingLeft : Boolean = false;
+    var WallStandingRight : Boolean = false;
+    var WallStandingLeft : Boolean = false;
+    var Jumping : Boolean = false;
+    var WallJumping : Boolean = false;
 
     function Initialize(init : CogInitializer)
     {
@@ -33,6 +42,7 @@ class MovementController : ZilchComponent
         Zero.Connect(this.Owner, "Jump", this.OnKeyboardEvent);
         Zero.Connect(this.Owner, "MoveDown", this.OnKeyboardEvent);
         Zero.Connect(this.Owner, "PlayerDead", this.AllowPlay);
+        Zero.Connect(this.Owner, "NotMoving", this.OnKeyboardEvent);
         Zero.Connect(this.Owner, Events.CollisionPersisted, this.CanJump);
         Zero.Connect(this.Owner, Events.CollisionPersisted, this.Jump);
         Zero.Connect(this.Owner, Events.CollisionEnded, this.WallJumpEnded);
@@ -42,7 +52,7 @@ class MovementController : ZilchComponent
         if(event.EventId == "PlayerDead")
             this.CanPlay = false;
     }
-    function OnKeyboardEvent(event : ZilchEvent)
+        function OnKeyboardEvent(event : ZilchEvent)
     {
         if(this.CanPlay && !this.Space.GlobalVariables.Dashing)
         {
@@ -50,8 +60,10 @@ class MovementController : ZilchComponent
         
             var rotation = Real3(0,0,0);
             
+            this.MovingLeft  = false;
             if(event.EventId == "MoveLeft")
             {
+                this.MovingLeft = true;
                 //movement
                 move = Real3(-1,0,0) * this.MoveSpeed;
                 //rotation
@@ -69,8 +81,10 @@ class MovementController : ZilchComponent
                 rotation = Real3(-1,0,0) * this.RotationSpeed;      
                 this.Owner.RigidBody.AngularVelocity += rotation;
             }
+            this.MovingRight = false;
             if(event.EventId == "MoveRight")
             {
+                this.MovingRight = true;
                 //movement
                 move = Real3(1,0,0) * this.MoveSpeed;
                 //rotation
@@ -85,11 +99,20 @@ class MovementController : ZilchComponent
                 //movement
                 move = Real3(1,0,0) * this.DashSpeed;
                 //rotation
-                rotation = Real3(-1,0,0) * this.RotationSpeed;      
+                rotation = Real3(-1,0,0) * this.RotationSpeed;
                 this.Owner.RigidBody.AngularVelocity += rotation;
             }
+            
+            this.NotMoving = false;
+            if(event.EventId == "NotMoving" && this.InGround == true)
+            {
+                this.NotMoving = true;
+            }
+            
+            this.Jumping = false;
             if(event.EventId == "Jump")
             {
+                this.Jumping = true;
                 //movement
                 move = Real3(0,1,0) * this.JumpSpeed;
                 //rotation

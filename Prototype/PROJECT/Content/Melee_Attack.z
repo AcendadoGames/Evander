@@ -16,6 +16,7 @@ class Melee_Attack : SuperState
             var ownerPos : Real3 = this.Actor.Transform.Translation;
             var distanceToPlayer : Real = Math.Distance( ownerPos, playerPos );
             
+            
             if (distanceToPlayer <= this.MeleeDistance)         /*Going to attack from distance*/
             {
                 this.Owner.StateMachine.ChangeState(this.Owner.Melee_Attack_MeleeA);
@@ -48,6 +49,8 @@ class Melee_Attack_MeleeA : State
             /*The attack is set to have a cooldown, and it works with a BoxCollider that starts a CollisionPersisted 
             event only when the player is in range, this event will send a message to the player's health him 
             that he has been hit*/
+            if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_Stuned");
             
             this.Owner.FindChildByName("DamageBox").BoxCollider.SendsEvents = false;/*In order to only have one Frame sent*/
             this.AttackTime += event.Dt;
@@ -59,6 +62,7 @@ class Melee_Attack_MeleeA : State
             
             if (distanceToPlayer <= this.MeleeDistance && this.AttackTime >= this.MeleeAttackRate)      /*Attack the player*/
             {
+                Console.WriteLine("DAMAGING");
                 this.MovementStateMachine.ChangeState("Move_Idle");
                 this.Owner.FindChildByName("DamageBox").BoxCollider.SendsEvents = true;
                 this.AttackTime = 0;

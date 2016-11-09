@@ -49,12 +49,12 @@ class TargetSelector : ZilchComponent
         else 
             this.Space.GlobalVariables.CanDash = true;
             
-        if(this.A == null)
+        if(this.A.All.IsEmpty)
             this.Space.GlobalVariables.NoEnemies = true;
         else
             this.Space.GlobalVariables.NoEnemies = false;
             
-        if(this.A != null)
+        if(this.A.All.IsNotEmpty)
         {
             //this.TargetPosition = this.A[0];
             if(this.Controller.IsActive)
@@ -152,7 +152,9 @@ class TargetSelector : ZilchComponent
             {
                 this.EnemyIndex = i;
             }   
-        }    
+        }
+        Console.WriteLine(this.A.Count);
+            
         this.TargetPosition = this.A[this.EnemyIndex];
     }
 }

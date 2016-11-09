@@ -67,6 +67,9 @@ class Archer_SeekTarget_Chase : State
     
     [Override] function Update(event : UpdateEvent)
         {
+            if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Stuned");
+                
             //setting some variables to compute the distance
             var playerPos : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
             var ownerPos : Real3 = this.Actor.Transform.Translation;
@@ -123,6 +126,9 @@ class Archer_SeekTarget_Lost : State
         }
     [Override] function Update(event : UpdateEvent)/*This State is not an infinite state since Archer can't stay lost*/
         {
+            if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Stuned");
+                
             this.FlipTimer += event.Dt;
             
             if(this.TimeInState > this.Duration)

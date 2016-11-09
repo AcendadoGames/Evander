@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-100.246971, 0.213966846, 0.75],
+		Vec3 Translation = [-97.5300369, -0.685024738, -3.81469727e-06],
 		Vec3 Scale = [0.140000001, 0.140000001, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -43,7 +43,7 @@ Cog =
 		bool Kinematic = false,
 		bool RotationLocked = true,
 		bool Mode2D = true,
-		bool AllowSleep = true,
+		bool AllowSleep = false,
 		bool Inherit2DMode = true,
 		Vec3 Velocity = [0, 0, 0],
 		Vec3 AngularVelocity = [0, 0, 0],
@@ -61,7 +61,7 @@ Cog =
 	StateMachine = 
 	{
 		string InitStateName = "Archer_Patrol",
-		bool PrintDebug = true,
+		bool PrintDebug = false,
 	},
 	FindPath = 
 	{
@@ -211,6 +211,9 @@ Cog =
 						float MaxDistance = 40,
 						float MeleeDistance = 5,
 						float ShootingMaxDistance = 25,
+					},
+					Archer_Stuned = 
+					{
 					},
 					Hierarchy = 
 					{
@@ -412,6 +415,32 @@ Cog =
 								},
 							},
 						},
+						Cog = 
+						{
+							LinkId = 
+							{
+								uint Id = 11,
+							},
+							Named = 
+							{
+								string Name = "Archer_Stuned",
+							},
+							Transform = 
+							{
+								Vec3 Translation = [1.36206055, 0.593837261, 0.000105556079],
+								Vec3 Scale = [7.14285707, 14.2857141, 1],
+								Quat Rotation = [0, 0, 0, 1],
+							},
+							StateMachine = 
+							{
+								string InitStateName = "Archer_Stuned_True",
+								bool PrintDebug = false,
+							},
+							Archer_Stuned_True = 
+							{
+								float StunTime = 0.5,
+							},
+						},
 					},
 				},
 			},
@@ -447,7 +476,7 @@ Cog =
 		{
 			LinkId = 
 			{
-				uint Id = 11,
+				uint Id = 12,
 			},
 			Named = 
 			{

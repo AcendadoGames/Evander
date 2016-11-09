@@ -80,6 +80,8 @@ class Archer_Patrol_Walking : State
     
     [Override] function Update(event : UpdateEvent)
     {
+        if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Stuned");
         /*Making him wait after walking, and changing his State*/
         if(this.TimeInState >= this.Duration)
             this.Owner.StateMachine.ChangeState(this.Owner.Archer_Patrol_Wait);
@@ -112,6 +114,8 @@ class Archer_Patrol_Wait : State
         
     [Override] function Update(event : UpdateEvent)
         {
+            if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Stuned");
             /*This is the waiting time*/
             if (this.TimeInState >= this.Duration)
                 this.Owner.StateMachine.ChangeState(this.Owner.Archer_Patrol_Walking);

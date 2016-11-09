@@ -1,4 +1,4 @@
-class Melee_Stuned :SuperState
+class Archer_Stuned :SuperState
 {
     function Initialize(init : CogInitializer)
     {
@@ -7,11 +7,11 @@ class Melee_Stuned :SuperState
     
     [Override]function Enter()
         {
-            this.Owner.StateMachine.ChangeState(this.Owner.Melee_Stuned_True);
+            this.Owner.StateMachine.ChangeState(this.Owner.Archer_Stuned_True);
         }
 }
 
-class Melee_Stuned_True : State
+class Archer_Stuned_True : State
 {
     //PROPERTIES
     [Property]
@@ -37,7 +37,7 @@ class Melee_Stuned_True : State
             {
                 //Console.WriteLine("OK");
                 this.StunTimer = 0.0;
-                this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_SeekTarget");
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_SeekTarget");
             }
         }
     
