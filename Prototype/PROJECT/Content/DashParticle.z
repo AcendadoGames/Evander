@@ -21,7 +21,6 @@ class DashParticle : ZilchComponent
         this.Smoke.SpriteParticleSystem.Visible = this.DashOn;
         this.BlueParticle.SpriteParticleSystem.Visible = this.DashOn;
         this.Space.FindObjectByName("PrototypePlayer").Sprite.Visible = !this.DashOn;
-        
         if(this.DashOn == false)
         {
             this.BlueParticle.SpriteParticleSystem.Clear();

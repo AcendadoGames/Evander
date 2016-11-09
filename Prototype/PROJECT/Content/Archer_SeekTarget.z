@@ -75,7 +75,10 @@ class Archer_SeekTarget_Chase : State
             var ownerPos : Real3 = this.Actor.Transform.Translation;
             var distanceToPlayer : Real = Math.Distance( ownerPos, playerPos );
             var target = this.Owner.Parent.Archer_SeekTarget.TargetCog;
-            var direc = target.Transform.Translation - this.Actor.Transform.Translation;
+             var direc = Real3(0,0,0);
+            
+            if(target != null)
+                direc = target.Transform.Translation - this.Actor.Transform.Translation;
             
             //Changing the direction of the enemy walking depending on where the player is
             this.MovementStateMachine.Owner.Move_Walk.Direction = Math.Sign(direc.X);

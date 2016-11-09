@@ -16,6 +16,8 @@ class Attack : ZilchComponent
     }
     function OnLogicUpdate(event : UpdateEvent)
     {
+        if (this.Space.GlobalVariables.Dashing)
+            this.Owner.Destroy();
         if(this.ValuesSet)
         {
             if(this.LifeTime > 0)
@@ -46,7 +48,7 @@ class Attack : ZilchComponent
     }
     function Push(event : CollisionEvent)
     {
-        Console.WriteLine(event.OtherObject.Name);
+        //Console.WriteLine(event.OtherObject.Name);
         event.OtherObject.RigidBody.Velocity = this.Impulse;
     }
 }

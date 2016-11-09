@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-125.621613, -3.59885263, 0.75],
+		Vec3 Translation = [-144.136993, 0.712329388, -3.81469727e-06],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -43,7 +43,7 @@ Cog =
 		bool Kinematic = false,
 		bool RotationLocked = true,
 		bool Mode2D = true,
-		bool AllowSleep = true,
+		bool AllowSleep = false,
 		bool Inherit2DMode = true,
 		Vec3 Velocity = [0, 0, 0],
 		Vec3 AngularVelocity = [0, 0, 0],
@@ -772,7 +772,7 @@ Cog =
 			},
 			Transform = 
 			{
-				Vec3 Translation = [0, 0, 0],
+				Vec3 Translation = [-0.691421509, -0.138285637, 0],
 				Vec3 Scale = [1, 1, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},

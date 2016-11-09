@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-6.56538677, 4.30336332, 0],
+		Vec3 Translation = [-26.6235657, 20.7346802, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -38,7 +38,7 @@ Cog =
 	},
 	RigidBody = 
 	{
-		bool Static = false,
+		bool Static = true,
 		bool Asleep = false,
 		bool Kinematic = false,
 		bool RotationLocked = true,
@@ -50,7 +50,7 @@ Cog =
 	},
 	BoxCollider = 
 	{
-		bool Ghost = false,
+		bool Ghost = true,
 		bool SendsMessages = true,
 		bool Seamless = true,
 		string MaterialName = "57c6bda3b6a5c44c:ProtypePhysicsMat",
