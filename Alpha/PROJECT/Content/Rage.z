@@ -1,7 +1,7 @@
 class Rage : ZilchComponent
 {
     var Controller:Gamepad = null;
-    var Duration : Real = 10;
+    var Duration : Real = 5;
     var Temp : Real;
     
     function Initialize(init : CogInitializer)
@@ -13,7 +13,7 @@ class Rage : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if(this.Space.ComboText.ComboText >= 20 && !this.Space.GlobalVariables.RageMode && 
+        if(this.Space.ComboText.ComboText >= 15 && !this.Space.GlobalVariables.RageMode && 
            this.Controller.IsButtonHeld(Buttons.LeftShoulder) && 
            this.Controller.IsButtonHeld(Buttons.RightShoulder))
         {

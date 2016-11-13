@@ -38,22 +38,22 @@ class RageBar : ZilchComponent
         Action.Property(this.Owner.Actions,
                         @this.CurrentEmitRate,
                         500,
-                        10,
+                        5,
                         Ease.Linear);
         Action.Property(this.Owner.Actions,
                         @this.CurrentStartVelocity,
                         this.BeginStartVelocity,
-                        10,
+                        5,
                         Ease.Linear);
         Action.Property(this.Owner.Actions,
                         @this.CurrentRandomVelocity,
                         this.BeginRandomVelocity,
-                        10,
+                        5,
                         Ease.Linear);
         Action.Property(this.Owner.Actions,
                         @this.CurrentPosition,
                         this.BeginPosition,
-                        10,
+                        5,
                         Ease.Linear);
     }
     function OnLogicUpdate(event : UpdateEvent)
@@ -73,24 +73,24 @@ class RageBar : ZilchComponent
             this.Color = this.PreRageColor;
             this.ExecuteOnce = false;
             
-            if(this.Space.ComboText.ComboText < 20)
+            if(this.Space.ComboText.ComboText < 15)
             {
                 this.CurrentPosition = Real3(this.BeginPosition.X, 
-                                             this.BeginPosition.Y + (this.DeltaPosition/20) * this.Space.ComboText.ComboText, 
+                                             this.BeginPosition.Y + (this.DeltaPosition/15) * this.Space.ComboText.ComboText, 
                                              this.BeginPosition.Z);
                                              
                                              
                 this.CurrentStartVelocity = Real3(this.BeginStartVelocity.X, 
-                                                  this.BeginStartVelocity.Y + (this.DeltaStartVelocity/20) * this.Space.ComboText.ComboText, 
+                                                  this.BeginStartVelocity.Y + (this.DeltaStartVelocity/15) * this.Space.ComboText.ComboText, 
                                                   this.BeginStartVelocity.Z);
                                                   
                                                   
                 this.CurrentRandomVelocity = Real3(this.BeginRandomVelocity.X, 
-                                                   this.BeginRandomVelocity.Y + (this.DeltaRandomVelocity/20) * this.Space.ComboText.ComboText, 
+                                                   this.BeginRandomVelocity.Y + (this.DeltaRandomVelocity/15) * this.Space.ComboText.ComboText, 
                                                    this.BeginRandomVelocity.Z);
-                this.CurrentEmitRate = this.BeginEmitRate + (this.DeltaEmitRate/20) * this.Space.ComboText.ComboText;
+                this.CurrentEmitRate = this.BeginEmitRate + (this.DeltaEmitRate/15) * this.Space.ComboText.ComboText;
             }
-            else if(this.Space.ComboText.ComboText > 20)
+            else if(this.Space.ComboText.ComboText > 15)
             {
                 this.CurrentPosition = this.FinalPosition;
                 this.CurrentStartVelocity = this.FinalStartVelocity;
