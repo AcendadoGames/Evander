@@ -1,0 +1,44 @@
+class Melee_Stuned :SuperState
+{
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    
+    [Override]function Enter()
+        {
+            this.Owner.StateMachine.ChangeState(this.Owner.Melee_Stuned_True);
+        }
+}
+
+class Melee_Stuned_True : State
+{
+    //PROPERTIES
+    [Property]
+    var StunTime : Real = 1.0;
+    
+    //OTHERVARIABLES
+    var StunTimer : Real = 0.0;
+    var MovementStateMachine : StateMachine = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+        this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement"); 
+    }
+    
+    [Override]function Update(event : UpdateEvent)
+        {
+            //Console.WriteLine("STUNED");
+            this.StunTimer += event.Dt;
+            this.MovementStateMachine.ChangeState("Move_Idle");
+            
+            if (this.StunTimer >= this.StunTime)
+            {
+                //Console.WriteLine("OK");
+                this.StunTimer = 0.0;
+                this.Owner.StateMachine.FindStateMachineFromRoot("MeleeAI").ChangeState("Melee_SeekTarget");
+            }
+        }
+    
+}
