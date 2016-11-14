@@ -42,6 +42,8 @@ class ComboState : ZilchComponent
     var GroundExplosion : Boolean = false;
     [Property]
     var Scale : Real3 = Real3(2,3,1);
+    [Property]
+    var Vibrate : Boolean = false;
     
     var Temp1 : Real;
 
@@ -52,12 +54,15 @@ class ComboState : ZilchComponent
     }
     function ExecuteCombo(time : Real)
     {
-        if(time == this.PreAttackTime) /*el momento que queramos que se spawnee el damage, solo hay que hacerlo un frame*/
+        if(time < this.PreAttackTime)
         {
-            if(this.LifeTime > 0)
+            //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PreAttackAnim;
+            if(this.LifeTime > 0 && !this.Space.GlobalVariables.DamageDealt)
             {
+                this.Space.GlobalVariables.DamageDealt = true;
+                this.Space.GlobalVariables.EnablePlay = false;
                 if(this.Shake)
-                    this.Space.FindObjectByName("Camera").CameraShake.SingleShake();
+                    this.Space.FindObjectByName("Camera").CameraShake.SingleShake(this.Vibrate);
                 var position = this.Owner.Transform.WorldTranslation;
                 if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
                     position.X -= 1; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
@@ -66,18 +71,11 @@ class ComboState : ZilchComponent
                 var damage = this.Space.CreateAtPosition(this.DamageArchetype, position);
                 damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime, this.ImpulsePre, this.OnlyPushEnemyPre, this.Scale);
             }
-         
-        }
-        
-        //Console.WriteLine("Executing", this.Text);
-        if(time < this.PreAttackTime)
-        {
-            //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PreAttackAnim;
         }
         if (time == 0.48 && this.GroundExplosion) // this is a madarfakin magician numbuh
         {
             if(this.GroundShake)
-                this.Space.FindObjectByName("Camera").CameraShake.SingleShake();
+                this.Space.FindObjectByName("Camera").CameraShake.SingleShake(this.Vibrate);
             var position = this.Owner.Transform.WorldTranslation;
             if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
                 position.X -= 1; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
@@ -87,11 +85,12 @@ class ComboState : ZilchComponent
             damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime, this.ImpulsePost, this.OnlyPushEnemyPost, this.Scale);
         }
             
-        if(time < this.OnAttackTime + this.PreAttackTime)
+        else if(time > this.OnAttackTime + this.PreAttackTime)
         {
+            this.Space.GlobalVariables.EnablePlay = true;
             //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.OnAttackAnim;
         }
-        if(time < this.Temp1)
+        else if(time > this.Temp1)
         {
             //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PostAttackAnim;
            

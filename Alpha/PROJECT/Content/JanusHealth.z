@@ -13,7 +13,7 @@ class JanusHealth : ZilchComponent
     {
         if(event.OtherObject.Name == "damage")
         {
-            Console.WriteLine(event.OtherObject.Attack.Damage);
+            //Console.WriteLine(event.OtherObject.Attack.Damage);
             this.JanusHealth -= event.OtherObject.Attack.Damage;
         }
     }

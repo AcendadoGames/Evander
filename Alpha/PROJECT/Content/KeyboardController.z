@@ -1,6 +1,8 @@
 class KeyboardController : ZilchComponent
 {
     [Property]
+    var DashTime : Real = 2.0;
+    [Property]
     var TimeSlowMo : Real = 2.0;
     [Property]
     var MaxTimeSlowed : Real = 2.0;
@@ -35,7 +37,7 @@ class KeyboardController : ZilchComponent
     var B: Cog = null;
     
     var Enablemovement : Boolean = true;
-    
+    var Timer : Real = 2.0;
     function Initialize(init : CogInitializer)
     {
         this.Controller = Zero.Gamepads.GetGamePad(0);
@@ -86,14 +88,20 @@ class KeyboardController : ZilchComponent
         var ev  = ZilchEvent();
         var position = Real3(this.Owner.TargetSelector.TargetPosition.X, this.Owner.TargetSelector.TargetPosition.Y, 6);
         
-        if(this.Enablemovement)
+        this.Timer += event.Dt;
+        
+        if(this.Enablemovement && this.Space.GlobalVariables.EnablePlay)
         {
             if((Zero.Keyboard.KeyIsDown(Keys.A) || this.Controller.IsButtonHeld(Buttons.StickLeft)) && 
             ((Zero.Keyboard.KeyIsPressed(Keys.Z)) || this.Controller.IsButtonPressed(Buttons.B)))
             {
                 // move left    
-                ev.EventId = this.DashLeft;
-                this.Owner.DispatchEvent(this.DashLeft, ev);
+                if(this.Timer >= this.DashTime)
+                {
+                    ev.EventId = this.DashLeft;
+                    this.Owner.DispatchEvent(this.DashLeft, ev);
+                    this.Timer = 0;
+                }
             }
             else if(Zero.Keyboard.KeyIsDown(Keys.A) || this.Controller.IsButtonHeld(Buttons.StickLeft))
             {
@@ -105,8 +113,12 @@ class KeyboardController : ZilchComponent
             ((Zero.Keyboard.KeyIsPressed(Keys.Z)) || this.Controller.IsButtonPressed(Buttons.B)))
             {
                 // move right
-                ev.EventId = this.DashRight;
-                this.Owner.DispatchEvent(this.DashRight, ev);
+                if(this.Timer >= this.DashTime)
+                {
+                    ev.EventId = this.DashRight;
+                    this.Owner.DispatchEvent(this.DashRight, ev);
+                    this.Timer = 0;
+                }
             }
             else if(Zero.Keyboard.KeyIsDown(Keys.D) || this.Controller.IsButtonHeld(Buttons.StickRight))
             {

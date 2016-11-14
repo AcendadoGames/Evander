@@ -8,7 +8,12 @@ class PlayerAnimation : ZilchComponent
     var JumpAnimation : SpriteSource = null;
     [Property]
     var WallJumpAnimation : SpriteSource = null;
+    [Property]
+    var FallingAnimation : SpriteSource = null;
     
+    var JumpingAnimDone : Boolean = false;
+    
+    var InCombo : Boolean = false;
     
     function Initialize(init : CogInitializer)
     {
@@ -17,39 +22,44 @@ class PlayerAnimation : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        
-        
-        //Idle Animation
-        if (this.Owner.MovementController.NotMoving == true )
+        if (this.InCombo == false)
         {
-            this.Owner.Sprite.SpriteSource = this.IdleAnimation;
-        }
-        
-        //Moving Left Animation (same as Right but had to seperate)
-        if (this.Owner.MovementController.MovingLeft == true && this.Owner.Sprite.SpriteSource.Name != "Evander_Run_Anim")
-        {
+            //Idle Animation
+            if (this.Owner.MovementController.NotMoving == true )
+            {
+                this.Owner.Sprite.SpriteSource = this.IdleAnimation;
+            }
             
-            this.Owner.Sprite.SpriteSource = this.RunAnimation;
-        }
-        
-        //Moving Right Animation
-        if (this.Owner.MovementController.MovingRight == true && this.Owner.Sprite.SpriteSource.Name != "Evander_Run_Anim")
-        {
+            //Moving Left Animation (same as Right but had to seperate)
+            if (this.Owner.MovementController.MovingLeft == true && this.Owner.Sprite.SpriteSource.Name != "Evander_Run_Anim" && this.Owner.MovementController.InGround == true)
+            {
+                this.Owner.Sprite.SpriteSource = this.RunAnimation;
+            }
             
-            this.Owner.Sprite.SpriteSource = this.RunAnimation;
-        }
-        
-        //Jumping Animation
-        //if (this.Owner.MovementController.Jumping == true)
-        //{
-        //    this.Owner.Sprite.SpriteSource = this.JumpAnimation;
-        //}
-        
-        //WallJumpingAnimation
-        //if (this.Owner.MovementController.WallJumping == true)
-        //{
+            //Moving Right Animation
+            if (this.Owner.MovementController.MovingRight == true && this.Owner.Sprite.SpriteSource.Name != "Evander_Run_Anim" && this.Owner.MovementController.InGround == true)
+            {
+                
+                this.Owner.Sprite.SpriteSource = this.RunAnimation;
+            }
             
-        //    this.Owner.Sprite.SpriteSource = this.WallJumpAnimation;
-        //}
+            //Jumping Animation
+            if (this.Owner.MovementController.Jumping == true && this.Owner.MovementController.InGround == false)
+            {
+                this.Owner.Sprite.SpriteSource = this.JumpAnimation;
+            }
+            //Falling Animation
+            if (this.Owner.MovementController.InGround == false && this.Owner.Sprite.SpriteSource.Name == "Evander_Jump_Anim" && this.Owner.Sprite.CurrentFrame == 2)
+                this.Owner.Sprite.SpriteSource = this.FallingAnimation;
+            
+            if (this.Owner.MovementController.InGround == false)
+                this.Owner.Sprite.SpriteSource = this.FallingAnimation;
+            
+            //WallJumpingAnimation
+            if (this.Owner.MovementController.WallJumping == true)
+            {
+                this.Owner.Sprite.SpriteSource = this.WallJumpAnimation;
+            }
+        }
     }
 }

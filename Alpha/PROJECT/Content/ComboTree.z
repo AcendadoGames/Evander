@@ -51,9 +51,10 @@ class ComboTree : ZilchComponent
             
                 while (temp.IsNotEmpty)
                 {
-                    if(temp.Current.Name == "L" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
+                    if(temp.Current.Name == "L" /*&& this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming)*/)
                     {
                         this.CurrentState = temp.Current;
+                        this.Space.GlobalVariables.DamageDealt = false;
                         if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
                         {
                             this.Owner.TargetSelector.GetNearestTarget();
@@ -77,6 +78,7 @@ class ComboTree : ZilchComponent
                     if(temp.Current.Name == "X")
                     {
                         this.CurrentState = temp.Current;
+                        this.Space.GlobalVariables.DamageDealt = false;
                         if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
                         {
                             this.Owner.TargetSelector.GetNearestTarget();
@@ -96,6 +98,7 @@ class ComboTree : ZilchComponent
                 if(temp2.Name == "X")
                 {
                     this.CurrentState = temp2;
+                    this.Space.GlobalVariables.DamageDealt = false;
                     if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
                     {
                         this.Owner.TargetSelector.GetNearestTarget();
@@ -125,9 +128,10 @@ class ComboTree : ZilchComponent
             
                 while (temp.IsNotEmpty)
                 {
-                    if(temp.Current.Name == "R" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
+                    if(temp.Current.Name == "R" /*&& this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming)*/)
                     {
                         this.CurrentState = temp.Current;
+                        this.Space.GlobalVariables.DamageDealt = false;
                         if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
                         {
                             this.Owner.TargetSelector.GetNearestTarget();
@@ -151,6 +155,7 @@ class ComboTree : ZilchComponent
                     if(temp.Current.Name == "X")
                     {
                         this.CurrentState = temp.Current;
+                        this.Space.GlobalVariables.DamageDealt = false;
                         if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
                         {
                             this.Owner.TargetSelector.GetNearestTarget();
@@ -170,6 +175,7 @@ class ComboTree : ZilchComponent
                 if(temp2.Name == "X")
                 {
                     this.CurrentState = temp2;
+                    this.Space.GlobalVariables.DamageDealt = false;
                     if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
                     {
                         this.Owner.TargetSelector.GetNearestTarget();

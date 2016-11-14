@@ -1,0 +1,42 @@
+class EnemiesCollision : ZilchComponent
+{
+    var Moving : Boolean = false;
+    
+    var TheOtherIsMoving : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.CollisionPersisted, this.OnCollisionPersisted);
+        Zero.Connect(this.Owner, Events.CollisionEnded, this.OnCollisionExit);
+    }
+    function OnCollisionPersisted(event : CollisionEvent)
+    {
+        var otherObject = event.OtherObject;
+        
+        if (otherObject.Name == "Archer"|| otherObject.Name == "Melee" )
+        {
+            if(otherObject.EnemiesCollision.TheOtherIsMoving == false)
+            {
+                this.TheOtherIsMoving = true;
+                
+                if(otherObject.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X == 1)
+                {
+                    this.Owner.Transform.Translation += Real3(0.1, 0.0, 0.0);
+                }
+                if(otherObject.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X == -1)
+                {
+                    this.Owner.Transform.Translation -= Real3(0.1, 0.0, 0.0);
+                }
+            }
+        }
+        
+        if (otherObject.Name == "PrototypePlayer" && otherObject.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y == 1 || otherObject.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y == -1)
+        {
+            this.Owner.Transform.Translation += Real3(0.2, 0.0, 0.0);
+        }
+    }
+    function OnCollisionExit(event : CollisionEvent)
+    {
+        this.TheOtherIsMoving = false;
+    }
+}

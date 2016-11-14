@@ -29,10 +29,10 @@ class CameraShake : ZilchComponent
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
             
-    function SingleShake()
+    function SingleShake(vibrate : Boolean)
     {
         this.Shake = true;
-        this.Vibrate = true;
+        this.Vibrate = vibrate;
         this.ResetValues();
     }
     function OnLogicUpdate(event : UpdateEvent)

@@ -38,9 +38,14 @@ class Attack : ZilchComponent
         this.Damage = damage;
         this.Owner.Sprite.Color = color;
         this.LifeTime = lifeTime;
-        this.Impulse = impulse;
-        if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
-            this.Impulse.X = -this.Impulse.X;
+        if(impulse == Real3(0,0,0))
+            this.Impulse = this.Space.FindObjectByName("PrototypePlayer").RigidBody.Velocity;
+        else
+        {
+            this.Impulse = impulse;    
+            if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
+                this.Impulse.X = -this.Impulse.X;
+        }
         if(onlyPushEnemy)
             this.Owner.BoxCollider.CollisionGroup = CollisionGroup.OnlyKnockUpEnemy;
         this.Owner.Transform.Scale = scale;
@@ -48,7 +53,7 @@ class Attack : ZilchComponent
     }
     function Push(event : CollisionEvent)
     {
-        //Console.WriteLine(event.OtherObject.Name);
+        Console.WriteLine(this.Impulse);
         event.OtherObject.RigidBody.Velocity = this.Impulse;
     }
 }

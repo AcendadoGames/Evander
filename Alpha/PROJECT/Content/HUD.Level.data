@@ -446,7 +446,7 @@ Level =
 		},
 		SlowMoBar = 
 		{
-			float Counter = 2,
+			float Counter = 4,
 		},
 		Hierarchy = 
 		{

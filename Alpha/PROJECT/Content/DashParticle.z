@@ -19,9 +19,9 @@ class DashParticle : ZilchComponent
         
         if(!this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed)
         {
-            this.Smoke.SphericalParticleEmitter.EmitRate = 30;
+            this.Smoke.SphericalParticleEmitter.EmitRate = 20;
             this.Smoke.SphericalParticleEmitter.Lifetime = 1.2;
-            this.BlueParticle.SphericalParticleEmitter.EmitRate = 30;
+            this.BlueParticle.SphericalParticleEmitter.EmitRate = 20;
             this.BlueParticle.SphericalParticleEmitter.Lifetime = 1.2;
         }
         else

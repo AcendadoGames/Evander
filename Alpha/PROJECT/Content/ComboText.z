@@ -36,15 +36,15 @@ class ComboText : ZilchComponent
             this.Color = this.Color1;
         else if(this.ComboText >= 5 && this.ComboText < 10)
             this.Color = this.Color2;
-        else if(this.ComboText >= 10 && this.ComboText < 20)
+        else if(this.ComboText >= 10 && this.ComboText < 15)
             this.Color = this.Color3;
-        else if(this.ComboText >= 20)
+        else if(this.ComboText >= 15)
             this.Color = this.Color4;
     }
     function AddCombo()
     {
         this.ComboText += 1;
-        this.ComboTime = 2;
+        this.ComboTime = 3;
         this.Scale = 0;
         this.ScaleAnim();
     }

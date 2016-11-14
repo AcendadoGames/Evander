@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-97.4121933, 6.89656258, -3.81469727e-06],
+		Vec3 Translation = [0, 0, 0],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -52,7 +52,7 @@ Cog =
 		bool Asleep = false,
 		bool Kinematic = false,
 		bool RotationLocked = true,
-		bool Mode2D = true,
+		bool Mode2D = false,
 		bool AllowSleep = false,
 		bool Inherit2DMode = true,
 		Vec3 Velocity = [0, 0, 0],
@@ -80,6 +80,9 @@ Cog =
 		float JumpDampening = 0.899999976,
 		float NegativeJumpDampening = 1.10000002,
 		float RotationDampening = 0.899999976,
+	},
+	EnemiesCollision = 
+	{
 	},
 	Hierarchy = 
 	{
@@ -349,7 +352,7 @@ Cog =
 										bool Asleep = false,
 										bool Kinematic = false,
 										bool RotationLocked = false,
-										bool Mode2D = true,
+										bool Mode2D = false,
 										bool AllowSleep = false,
 										bool Inherit2DMode = true,
 										Vec3 Velocity = [0, 0, 0],

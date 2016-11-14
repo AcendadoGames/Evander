@@ -63,7 +63,7 @@ class Janus_Phase_1_Attack : State
                 if (this.RandomNum == 1)
                 {
                     this.TimerForArmAttack += event.Dt;
-                    Console.WriteLine(this.TimerForArmAttack);
+                    //Console.WriteLine(this.TimerForArmAttack);
                     
                     if(this.TimerForArmAttack >= this.ArmAttackSpeed)
                     {
@@ -96,6 +96,6 @@ class Janus_Phase_1_Recover : State
     }
     [Override] function Enter()
     {
-        Console.WriteLine("Recovering");
+        //Console.WriteLine("Recovering");
     }
 }

@@ -16,7 +16,7 @@ class MovementController : ZilchComponent
     
     var Epsilon : Real = Real(0.5);
     
-    var EpsilonAutoDash : Real = Real(3);
+    var EpsilonAutoDash : Real = Real(2);
     
     var Controller:Gamepad = null;
     
@@ -143,7 +143,6 @@ class MovementController : ZilchComponent
         }
         if(this.Space.GlobalVariables.AutoDashEnemy)
         {
-            this.Owner.RigidBody.Velocity = Real3(0,0,0);
             
             var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
             var position = this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition;
@@ -153,22 +152,25 @@ class MovementController : ZilchComponent
             
             position = Real3(position.X + offset, position.Y, position.Z);
             
-            Console.WriteLine(this.Owner.Transform.Translation.X < position.X);
+            //Console.WriteLine(this.Owner.Transform.Translation.X < position.X);
             if(this.Owner.Transform.Translation.X < position.X && distance > 1)
                 this.Owner.Sprite.FlipX = false;
             else if(distance > 1)
                 this.Owner.Sprite.FlipX = true;
-            this.Owner.Transform.Translation = this.Space.GeneralAlgorithms.PreciseLerp(this.Owner.Transform.Translation, 
+                
+            var vector = position - this.Owner.Transform.Translation;
+            if(distance > 2)
+                this.Owner.RigidBody.Velocity = vector * 5;
+            /*this.Owner.Transform.Translation = this.Space.GeneralAlgorithms.PreciseLerp(this.Owner.Transform.Translation, 
                                                         position, 
-                                                        0.15);
+                                                        0.15);*/
             this.CanPlay = false;
-            
             var y = Math.Abs(position.Y - this.Owner.Transform.Translation.Y);
             
-            if((distance < this.EpsilonAutoDash) /*&& y < 0.1*/)
-            {
+            //if((distance < this.EpsilonAutoDash) /*&& y < 0.1*/)
+            //{
                 this.Space.GlobalVariables.AutoDashEnemy = false;
-            }
+            //}
         }
         else
         {

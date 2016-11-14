@@ -23,6 +23,7 @@ class PlayerHealth : ZilchComponent
             }
             else 
             {
+                this.Health = 0;
                 this.Owner.Sprite.AnimationActive = false;
                 this.Owner.KeyboardController.Enablemovement = false;
                 this.Owner.ComboTree.EnableCombo = false;

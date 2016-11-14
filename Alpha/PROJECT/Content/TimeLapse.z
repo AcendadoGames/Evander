@@ -20,7 +20,7 @@ class TimeLapse : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)  
     {
-        if(Zero.Keyboard.KeyIsDown(Keys.T) || (this.Controller.IsButtonHeld(Buttons.LeftThumb) && this.Controller.IsButtonHeld(Buttons.RightThumb)))
+        if(Zero.Keyboard.KeyIsDown(Keys.T) || (this.Controller.IsButtonHeld(Buttons.LeftShoulder) && this.Controller.IsButtonHeld(Buttons.RightShoulder)))
         {
             
             if(this.Frames.All.IsNotEmpty && this.TimeLim != 0)

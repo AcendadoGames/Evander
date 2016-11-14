@@ -62,7 +62,7 @@ class Melee_Attack_MeleeA : State
             
             if (distanceToPlayer <= this.MeleeDistance && this.AttackTime >= this.MeleeAttackRate)      /*Attack the player*/
             {
-                Console.WriteLine("DAMAGING");
+                //Console.WriteLine("DAMAGING");
                 this.MovementStateMachine.ChangeState("Move_Idle");
                 this.Owner.FindChildByName("DamageBox").BoxCollider.SendsEvents = true;
                 this.AttackTime = 0;

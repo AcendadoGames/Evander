@@ -14,8 +14,7 @@ class Rage : ZilchComponent
     function OnLogicUpdate(event : UpdateEvent)
     {
         if(this.Space.ComboText.ComboText >= 15 && !this.Space.GlobalVariables.RageMode && 
-           this.Controller.IsButtonHeld(Buttons.LeftShoulder) && 
-           this.Controller.IsButtonHeld(Buttons.RightShoulder))
+           this.Controller.IsButtonHeld(Buttons.LeftThumb) && this.Controller.IsButtonHeld(Buttons.RightThumb))
         {
             this.Space.GlobalVariables.RageMode = true;
         }

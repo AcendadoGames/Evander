@@ -2,12 +2,12 @@ ImageContent =
 {
 	SpriteSourceBuilder = 
 	{
-		string Name = "Evander_Run_Anim",
-		uint64 ResourceId = 583798a7018b0101,
+		string Name = "Evander_fall",
+		uint64 ResourceId = 58028d27c056804e,
 		uint64 AtlasId = 5274cf95e4a661fd,
-		uint FrameSizeX = 256,
-		uint FrameSizeY = 256,
-		uint FrameCount = 10,
+		uint FrameSizeX = 0,
+		uint FrameSizeY = 0,
+		uint FrameCount = 1,
 		float FrameDelay = 0.0833333358,
 		float OriginX = 128,
 		float OriginY = 128,

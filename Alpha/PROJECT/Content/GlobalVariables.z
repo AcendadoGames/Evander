@@ -15,6 +15,8 @@ class GlobalVariables : ZilchComponent
     var AutoDashEnemy : Boolean = false;
     var RageMode : Boolean = false;
     var StartPosition : Real3 = Real3(-199, -199, -199);
+    var DamageDealt : Boolean = false;
+    var EnablePlay : Boolean = false;
     
     function Initialize(init : CogInitializer)
     {
@@ -26,6 +28,7 @@ class GlobalVariables : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
+       // Console.WriteLine(this.EnablePlay);
         if(this.Controller.LeftTrigger > 0.2 && this.Space.TimeSpace.TimeScale < 0.4)
             this.Aiming = true;
         else
