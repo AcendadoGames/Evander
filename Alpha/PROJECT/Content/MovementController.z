@@ -71,7 +71,7 @@ class MovementController : ZilchComponent
                 this.Owner.RigidBody.AngularVelocity += rotation;
                 //SpriteRotation + Box Collider Rotation /*Alex*/
                 this.Owner.Sprite.FlipX = true;
-                this.Owner.BoxCollider.Offset = Real3(0.8, 0, 0);
+                this.Owner.Collider.Offset = Real3(0.8, 0, 0);
             }
             if(event.EventId == "DashLeft")
             {
@@ -92,7 +92,7 @@ class MovementController : ZilchComponent
                 this.Owner.RigidBody.AngularVelocity += rotation;
                 //SpriteRotation + Box Collider Rotation /*Alex*/
                 this.Owner.Sprite.FlipX = false;
-                this.Owner.BoxCollider.Offset = Real3(-0.8, 0, 0);
+                this.Owner.Collider.Offset = Real3(-0.8, 0, 0);
             }
             if(event.EventId == "DashRight")
             {
@@ -148,11 +148,16 @@ class MovementController : ZilchComponent
             var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
             var position = this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition;
             var offset = -2;
-            if(this.Owner.Sprite.FlipX)
+            if(!this.Owner.Sprite.FlipX)
                 offset = -offset;
             
             position = Real3(position.X + offset, position.Y, position.Z);
             
+            Console.WriteLine(this.Owner.Transform.Translation.X < position.X);
+            if(this.Owner.Transform.Translation.X < position.X && distance > 1)
+                this.Owner.Sprite.FlipX = false;
+            else if(distance > 1)
+                this.Owner.Sprite.FlipX = true;
             this.Owner.Transform.Translation = this.Space.GeneralAlgorithms.PreciseLerp(this.Owner.Transform.Translation, 
                                                         position, 
                                                         0.15);
@@ -176,7 +181,7 @@ class MovementController : ZilchComponent
 
     function CanJump(event : CollisionEvent)
     {
-        if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Ground || event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Wall)
+        if(event.OtherObject.Collider.CollisionGroup == CollisionGroup.Ground )
         {
             this.Space.GlobalVariables.CanJump = true;
         }
@@ -195,9 +200,9 @@ class MovementController : ZilchComponent
         {
             if (otherObject.Name == ("JumpWall") && this.InGround == false)
             {
-                if(event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
-                    event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
-                    event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X < 0)
+                if(event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
+                    event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
+                    event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X < 0)
                     {
                         this.CanPlay = false;
                         this.Space.GlobalVariables.WallDampening = true;
@@ -209,9 +214,9 @@ class MovementController : ZilchComponent
                             this.Owner.RigidBody.Velocity += move;
                         }
                     }
-                else if(event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
-                       event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
-                       event.Object.BoxCollider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X > 0 )
+                else if(event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
+                       event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
+                       event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X > 0 )
                     {
                         this.CanPlay = false;
                         this.Space.GlobalVariables.WallDampening = true;

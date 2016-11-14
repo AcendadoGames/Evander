@@ -10,11 +10,11 @@ class PlayerCollisionHandler : ZilchComponent
     {
         if(this.Space.GlobalVariables.Dashing)
         {
-            this.Owner.BoxCollider.CollisionGroup = CollisionGroup.Null;
+            this.Owner.Collider.CollisionGroup = CollisionGroup.Null;
         }
         else if(!this.Space.GlobalVariables.Dashing)
         {
-            this.Owner.BoxCollider.CollisionGroup = CollisionGroup.Player;
+            this.Owner.Collider.CollisionGroup = CollisionGroup.Player;
         }
     }
 }

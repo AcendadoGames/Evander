@@ -14,9 +14,7 @@ class GlobalVariables : ZilchComponent
     var Temp1 : Real;
     var AutoDashEnemy : Boolean = false;
     var RageMode : Boolean = false;
-
-    [Property]
-    var StartPosition : Real3 = Real3(-126, 1, 0);
+    var StartPosition : Real3 = Real3(-199, -199, -199);
     
     function Initialize(init : CogInitializer)
     {

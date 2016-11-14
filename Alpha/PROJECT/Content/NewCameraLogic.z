@@ -10,6 +10,8 @@ class NewCameraLogic : ZilchComponent
     var TargetBoss : Cog = null;
     var TargetObject : Cog = null;
     
+    var Offset : Real3 =  Real3(5 ,7,0);
+    
     function Initialize(init : CogInitializer)
     {
         this.TargetObject = this.TargetObjectCogPath.Cog;
@@ -34,7 +36,7 @@ class NewCameraLogic : ZilchComponent
             var distanceFromBossToPlayer = Math.Distance(playerPosition, bossPosition);
             
             /*Just some offsets for the design of the game*/
-            var offSet : Real3 = Real3(5 ,7,0);
+            var offSet = this.Offset;
             var offSetBoss : Real3 = Real3(5, 10, 0);
             
             /*Now that we have the computing values setting them to other variableswith Lerps*/

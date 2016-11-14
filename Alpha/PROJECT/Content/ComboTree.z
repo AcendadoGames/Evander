@@ -2,9 +2,11 @@ class ComboTree : ZilchComponent
 {
     var Combos : Cog = null;
     var CurrentState : Cog = null;
-    var TimeToCancelCombo : Real = 0.7;
+    var TimeToCancelCombo : Real = 1;
     var Temp1 : Real;
     var TimeInCombo : Real = 0;
+    
+    var EnableCombo : Boolean = true;
     
     function Initialize(init : CogInitializer)
     {
@@ -37,42 +39,63 @@ class ComboTree : ZilchComponent
     
     function ReceiveLevent(event : ZilchEvent)
     {
-        if(this.CurrentState == null)
+        if(this.EnableCombo)
         {
-            return;
-        }
-        if(!this.Space.GlobalVariables.RageMode)
-        {
-            var temp = this.CurrentState.Children;
-        
-            while (temp.IsNotEmpty)
+            if(this.CurrentState == null)
             {
-                if(temp.Current.Name == "L" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
-                {
-                    this.CurrentState = temp.Current;
-                    if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
-                    {
-                        this.Owner.TargetSelector.GetNearestTarget();
-                        if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
-                            this.Space.GlobalVariables.AutoDashEnemy = true;
-
-                    }
-                    this.TimeToCancelCombo = this.Temp1;
-                    this.TimeInCombo = 0;
-                    return;
-                }
-                temp.MoveNext();
+                return;
             }
-        }
-        else
-        {
-            var temp = this.CurrentState.Children;
-                
-            while (temp.IsNotEmpty)
-            {    
-                if(temp.Current.Name == "X")
+            if(!this.Space.GlobalVariables.RageMode)
+            {
+                var temp = this.CurrentState.Children;
+            
+                while (temp.IsNotEmpty)
                 {
-                    this.CurrentState = temp.Current;
+                    if(temp.Current.Name == "L" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
+                    {
+                        this.CurrentState = temp.Current;
+                        if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                        {
+                            this.Owner.TargetSelector.GetNearestTarget();
+                            if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                                this.Space.GlobalVariables.AutoDashEnemy = true;
+
+                        }
+                        this.TimeToCancelCombo = this.Temp1;
+                        this.TimeInCombo = 0;
+                        return;
+                    }
+                    temp.MoveNext();
+                }
+            }
+            else
+            {
+                var temp = this.CurrentState.Children;
+                    
+                while (temp.IsNotEmpty)
+                {    
+                    if(temp.Current.Name == "X")
+                    {
+                        this.CurrentState = temp.Current;
+                        if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                        {
+                            this.Owner.TargetSelector.GetNearestTarget();
+                            if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                                this.Space.GlobalVariables.AutoDashEnemy = true;
+                        }
+                        this.TimeToCancelCombo = this.Temp1;
+                        this.TimeInCombo = 0;
+                        return;
+                        
+                    }
+                    temp.MoveNext();
+                }
+                
+                var temp2 = this.CurrentState.Parent;
+                       
+                if(temp2.Name == "X")
+                {
+                    this.CurrentState = temp2;
                     if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
                     {
                         this.Owner.TargetSelector.GetNearestTarget();
@@ -84,66 +107,69 @@ class ComboTree : ZilchComponent
                     return;
                     
                 }
-                temp.MoveNext();
-            }
-            
-            var temp2 = this.CurrentState.Parent;
-                   
-            if(temp2.Name == "X")
-            {
-                this.CurrentState = temp2;
-                if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
-                {
-                    this.Owner.TargetSelector.GetNearestTarget();
-                    if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
-                        this.Space.GlobalVariables.AutoDashEnemy = true;
-                }
-                this.TimeToCancelCombo = this.Temp1;
-                this.TimeInCombo = 0;
-                return;
-                
             }
         }
     }
     function ReceiveRevent(event : ZilchEvent)
     {
-        if(this.CurrentState == null)
+        if(this.EnableCombo)
         {
-            return;
-        }
-
-        if(!this.Space.GlobalVariables.RageMode)
-        {
-            var temp = this.CurrentState.Children;
-        
-            while (temp.IsNotEmpty)
+            if(this.CurrentState == null)
             {
-                if(temp.Current.Name == "R" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
+                return;
+            }
+
+            if(!this.Space.GlobalVariables.RageMode)
+            {
+                var temp = this.CurrentState.Children;
+            
+                while (temp.IsNotEmpty)
                 {
-                    this.CurrentState = temp.Current;
-                    if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                    if(temp.Current.Name == "R" && this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming))
                     {
-                        this.Owner.TargetSelector.GetNearestTarget();
-                        if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
-                            this.Space.GlobalVariables.AutoDashEnemy = true;
+                        this.CurrentState = temp.Current;
+                        if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                        {
+                            this.Owner.TargetSelector.GetNearestTarget();
+                            if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                                this.Space.GlobalVariables.AutoDashEnemy = true;
+                        }
+                        this.TimeToCancelCombo = this.Temp1;
+                        this.TimeInCombo = 0;
+                        return;
                     }
-                    this.TimeToCancelCombo = this.Temp1;
-                    this.TimeInCombo = 0;
-                    return;
+                    
+                    temp.MoveNext();
+                }
+            }
+            else
+            {
+                var temp = this.CurrentState.Children;
+                    
+                while (temp.IsNotEmpty)
+                {    
+                    if(temp.Current.Name == "X")
+                    {
+                        this.CurrentState = temp.Current;
+                        if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                        {
+                            this.Owner.TargetSelector.GetNearestTarget();
+                            if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                                this.Space.GlobalVariables.AutoDashEnemy = true;
+                        }
+                        this.TimeToCancelCombo = this.Temp1;
+                        this.TimeInCombo = 0;
+                        return;
+                        
+                    }
+                    temp.MoveNext();
                 }
                 
-                temp.MoveNext();
-            }
-        }
-        else
-        {
-            var temp = this.CurrentState.Children;
-                
-            while (temp.IsNotEmpty)
-            {    
-                if(temp.Current.Name == "X")
+                var temp2 = this.CurrentState.Parent;
+                       
+                if(temp2.Name == "X")
                 {
-                    this.CurrentState = temp.Current;
+                    this.CurrentState = temp2;
                     if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
                     {
                         this.Owner.TargetSelector.GetNearestTarget();
@@ -155,24 +181,6 @@ class ComboTree : ZilchComponent
                     return;
                     
                 }
-                temp.MoveNext();
-            }
-            
-            var temp2 = this.CurrentState.Parent;
-                   
-            if(temp2.Name == "X")
-            {
-                this.CurrentState = temp2;
-                if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
-                {
-                    this.Owner.TargetSelector.GetNearestTarget();
-                    if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
-                        this.Space.GlobalVariables.AutoDashEnemy = true;
-                }
-                this.TimeToCancelCombo = this.Temp1;
-                this.TimeInCombo = 0;
-                return;
-                
             }
         }
     }

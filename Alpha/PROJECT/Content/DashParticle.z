@@ -17,6 +17,20 @@ class DashParticle : ZilchComponent
         var player : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
         this.Owner.Transform.Translation = player;
         
+        if(!this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeIsSlowed)
+        {
+            this.Smoke.SphericalParticleEmitter.EmitRate = 30;
+            this.Smoke.SphericalParticleEmitter.Lifetime = 1.2;
+            this.BlueParticle.SphericalParticleEmitter.EmitRate = 30;
+            this.BlueParticle.SphericalParticleEmitter.Lifetime = 1.2;
+        }
+        else
+        {
+            this.Smoke.SphericalParticleEmitter.EmitRate = 250;
+            this.Smoke.SphericalParticleEmitter.Lifetime = 0.15;
+            this.BlueParticle.SphericalParticleEmitter.EmitRate = 250;
+            this.BlueParticle.SphericalParticleEmitter.Lifetime = 0.15;
+        }
         this.DashOn = this.Space.GlobalVariables.Dashing;
         this.Smoke.SpriteParticleSystem.Visible = this.DashOn;
         this.BlueParticle.SpriteParticleSystem.Visible = this.DashOn;
