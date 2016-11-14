@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-35.3159676, -4.07873631, 0],
+		Vec3 Translation = [109.296967, 22.9538994, 1.90734863e-05],
 		Vec3 Scale = [1.10000002, 1.10000002, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -72,7 +72,7 @@ Cog =
 	},
 	EnemyHealth = 
 	{
-		float EnemyLife = 100,
+		float EnemyLife = 150,
 	},
 	VelRotDampening = 
 	{
@@ -83,6 +83,22 @@ Cog =
 	},
 	EnemiesCollision = 
 	{
+	},
+	IgnoreSpaceEffects = 
+	{
+		bool Drag = false,
+		bool Flow = false,
+		bool Force = false,
+		bool Gravity = false,
+		bool Thrust = false,
+		bool Vortex = false,
+		bool Wind = false,
+		bool Invalid = false,
+		bool Torque = false,
+		bool PointGravity = false,
+		bool PointForce = false,
+		bool Buoyancy = false,
+		bool Custom = false,
 	},
 	Hierarchy = 
 	{
