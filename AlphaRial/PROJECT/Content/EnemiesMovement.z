@@ -35,6 +35,18 @@ class Move_Walk : State
     {
         var body = this.Actor.RigidBody;
         
+        if (this.Direction == -1 && this.Actor.Name == "Melee")
+            this.Actor.Sprite.FlipX = true;
+            
+        if (this.Direction == 1 && this.Actor.Name == "Melee")
+            this.Actor.Sprite.FlipX = false;
+        
+        if (this.Direction == -1  && this.Actor.Name == "Archer")
+            this.Actor.Sprite.FlipX = false;
+            
+        if (this.Direction == 1 && this.Actor.Name == "Archer")
+            this.Actor.Sprite.FlipX = true;
+            
         if (this.Actor.Name == "Archer")
         {
             body.Velocity += Real3(this.SpeedArcher * this.Direction, 0, 0);

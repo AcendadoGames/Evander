@@ -41,6 +41,9 @@ class PlayerHealth : ZilchComponent
                 this.Space.FindObjectByName("Camera").Camera.Size -= 0.05;
                 if(this.Timer >= 2)
                 {
+                    this.Space.ComboText.ComboText = 0;
+                    this.Space.ComboText.Scale = 0;
+                    this.Space.ComboText.ComboTime = 0;
                     this.GameSession.FindSpaceByName("HudSpace").Destroy();
                     this.Space.ReloadLevel();
                 }
