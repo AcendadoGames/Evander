@@ -1,0 +1,204 @@
+class ComboTree : ZilchComponent
+{
+    var Combos : Cog = null;
+    var CurrentState : Cog = null;
+    var TimeToCancelCombo : Real = 1;
+    var Temp1 : Real;
+    var TimeInCombo : Real = 0;
+    
+    var EnableCombo : Boolean = true;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.CurrentState = this.Owner.FindChildByName("Combo");
+        this.Temp1 = this.TimeToCancelCombo;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Space, "L", this.ReceiveLevent);
+        Zero.Connect(this.Space, "R", this.ReceiveRevent);
+    }
+
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.TimeToCancelCombo > 0)
+        {
+            this.TimeToCancelCombo -= event.Dt;
+            this.TimeToCancelCombo = Math.Round(this.TimeToCancelCombo, -2);
+        }
+        else
+            this.ResetCombo();
+        
+        if(this.CurrentState != null && this.CurrentState.Parent != null)
+        {
+            this.TimeInCombo += event.Dt;
+            this.TimeInCombo = Math.Round(this.TimeInCombo, -2);
+            this.CurrentState.ComboState.ExecuteCombo(this.TimeInCombo - 0.02);
+        }
+        
+    }
+    
+    function ReceiveLevent(event : ZilchEvent)
+    {
+        if(this.EnableCombo)
+        {
+            if(this.CurrentState == null)
+            {
+                return;
+            }
+            if(!this.Space.GlobalVariables.RageMode)
+            {
+                var temp = this.CurrentState.Children;
+            
+                while (temp.IsNotEmpty)
+                {
+                    if(temp.Current.Name == "L" /*&& this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming)*/)
+                    {
+                        this.CurrentState = temp.Current;
+                        this.Space.GlobalVariables.DamageDealt = false;
+                        if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                        {
+                            this.Owner.TargetSelector.GetNearestTarget();
+                            if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                                this.Space.GlobalVariables.AutoDashEnemy = true;
+
+                        }
+                        this.TimeToCancelCombo = this.Temp1;
+                        this.TimeInCombo = 0;
+                        return;
+                    }
+                    temp.MoveNext();
+                }
+            }
+            else
+            {
+                var temp = this.CurrentState.Children;
+                    
+                while (temp.IsNotEmpty)
+                {    
+                    if(temp.Current.Name == "X")
+                    {
+                        this.CurrentState = temp.Current;
+                        this.Space.GlobalVariables.DamageDealt = false;
+                        if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                        {
+                            this.Owner.TargetSelector.GetNearestTarget();
+                            if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                                this.Space.GlobalVariables.AutoDashEnemy = true;
+                        }
+                        this.TimeToCancelCombo = this.Temp1;
+                        this.TimeInCombo = 0;
+                        return;
+                        
+                    }
+                    temp.MoveNext();
+                }
+                
+                var temp2 = this.CurrentState.Parent;
+                       
+                if(temp2.Name == "X")
+                {
+                    this.CurrentState = temp2;
+                    this.Space.GlobalVariables.DamageDealt = false;
+                    if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                    {
+                        this.Owner.TargetSelector.GetNearestTarget();
+                        if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                            this.Space.GlobalVariables.AutoDashEnemy = true;
+                    }
+                    this.TimeToCancelCombo = this.Temp1;
+                    this.TimeInCombo = 0;
+                    return;
+                    
+                }
+            }
+        }
+    }
+    function ReceiveRevent(event : ZilchEvent)
+    {
+        if(this.EnableCombo)
+        {
+            if(this.CurrentState == null)
+            {
+                return;
+            }
+
+            if(!this.Space.GlobalVariables.RageMode)
+            {
+                var temp = this.CurrentState.Children;
+            
+                while (temp.IsNotEmpty)
+                {
+                    if(temp.Current.Name == "R" /*&& this.TimeToCancelCombo < (this.Temp1 - temp.Current.ComboState.InputTiming)*/)
+                    {
+                        this.CurrentState = temp.Current;
+                        this.Space.GlobalVariables.DamageDealt = false;
+                        if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                        {
+                            this.Owner.TargetSelector.GetNearestTarget();
+                            if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                                this.Space.GlobalVariables.AutoDashEnemy = true;
+                        }
+                        this.TimeToCancelCombo = this.Temp1;
+                        this.TimeInCombo = 0;
+                        return;
+                    }
+                    
+                    temp.MoveNext();
+                }
+            }
+            else
+            {
+                var temp = this.CurrentState.Children;
+                    
+                while (temp.IsNotEmpty)
+                {    
+                    if(temp.Current.Name == "X")
+                    {
+                        this.CurrentState = temp.Current;
+                        this.Space.GlobalVariables.DamageDealt = false;
+                        if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                        {
+                            this.Owner.TargetSelector.GetNearestTarget();
+                            if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                                this.Space.GlobalVariables.AutoDashEnemy = true;
+                        }
+                        this.TimeToCancelCombo = this.Temp1;
+                        this.TimeInCombo = 0;
+                        return;
+                        
+                    }
+                    temp.MoveNext();
+                }
+                
+                var temp2 = this.CurrentState.Parent;
+                       
+                if(temp2.Name == "X")
+                {
+                    this.CurrentState = temp2;
+                    this.Space.GlobalVariables.DamageDealt = false;
+                    if(!this.Space.GlobalVariables.Aiming && !this.Space.GlobalVariables.NoEnemies)
+                    {
+                        this.Owner.TargetSelector.GetNearestTarget();
+                        if(Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition) < 10)
+                            this.Space.GlobalVariables.AutoDashEnemy = true;
+                    }
+                    this.TimeToCancelCombo = this.Temp1;
+                    this.TimeInCombo = 0;
+                    return;
+                    
+                }
+            }
+        }
+    }
+    
+    function ResetCombo()
+    {
+        this.TimeInCombo = 0;
+        this.CurrentState = this.Owner.FindChildByName("Combo");
+        if(this.Space.FindObjectByName("Camera").NewCameraLogic != null)
+        {
+            this.Space.FindObjectByName("Camera").NewCameraLogic.Size = 30;
+            this.Space.FindObjectByName("Camera").NewCameraLogic.Offset.Y = 7;
+        }
+    }
+}

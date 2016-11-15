@@ -1,0 +1,244 @@
+class MovementController : ZilchComponent
+{
+    [Property]
+    var MoveSpeed : Real = 10.0;
+    
+    [Property]
+    var DashSpeed : Real = 50;
+    
+    [Property]
+    var JumpSpeed : Real = 10.0;
+    
+    [Property]
+    var RotationSpeed : Real = 2;
+    
+    var CanPlay : Boolean =  true;
+    
+    var Epsilon : Real = Real(0.5);
+    
+    var EpsilonAutoDash : Real = Real(2);
+    
+    var Controller:Gamepad = null;
+    
+    var InGround : Boolean = false;
+    
+        /*Animation Variables*/
+    var NotMoving : Boolean = false;
+    var MovingRight : Boolean = false;
+    var MovingLeft : Boolean = false;
+    var WallStandingRight : Boolean = false;
+    var WallStandingLeft : Boolean = false;
+    var Jumping : Boolean = false;
+    var WallJumping : Boolean = false;
+
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, "MoveLeft", this.OnKeyboardEvent);
+        Zero.Connect(this.Owner, "MoveRight", this.OnKeyboardEvent);
+        Zero.Connect(this.Owner, "DashLeft", this.OnKeyboardEvent);
+        Zero.Connect(this.Owner, "DashRight", this.OnKeyboardEvent);
+        Zero.Connect(this.Owner, "Jump", this.OnKeyboardEvent);
+        Zero.Connect(this.Owner, "MoveDown", this.OnKeyboardEvent);
+        Zero.Connect(this.Owner, "PlayerDead", this.AllowPlay);
+        Zero.Connect(this.Owner, "NotMoving", this.OnKeyboardEvent);
+        Zero.Connect(this.Owner, Events.CollisionPersisted, this.CanJump);
+        Zero.Connect(this.Owner, Events.CollisionPersisted, this.Jump);
+        Zero.Connect(this.Owner, Events.CollisionEnded, this.WallJumpEnded);
+    }
+    function AllowPlay(event : ZilchEvent)
+    {
+        if(event.EventId == "PlayerDead")
+            this.CanPlay = false;
+    }
+        function OnKeyboardEvent(event : ZilchEvent)
+    {
+        if(this.CanPlay && !this.Space.GlobalVariables.Dashing)
+        {
+            var move : Real3 = Real3(0,0,0);
+        
+            var rotation = Real3(0,0,0);
+            
+            this.MovingLeft  = false;
+            if(event.EventId == "MoveLeft")
+            {
+                this.MovingLeft = true;
+                //movement
+                move = Real3(-1,0,0) * this.MoveSpeed;
+                //rotation
+                rotation = Real3(-1,0,0) * this.RotationSpeed;      
+                this.Owner.RigidBody.AngularVelocity += rotation;
+                //SpriteRotation + Box Collider Rotation /*Alex*/
+                this.Owner.Sprite.FlipX = true;
+                this.Owner.Collider.Offset = Real3(0.8, 0, 0);
+            }
+            if(event.EventId == "DashLeft")
+            {
+                //movement
+                move = Real3(-1,0,0) * this.DashSpeed;
+                //rotation
+                rotation = Real3(-1,0,0) * this.RotationSpeed;      
+                this.Owner.RigidBody.AngularVelocity += rotation;
+            }
+            this.MovingRight = false;
+            if(event.EventId == "MoveRight")
+            {
+                this.MovingRight = true;
+                //movement
+                move = Real3(1,0,0) * this.MoveSpeed;
+                //rotation
+                rotation = Real3(-1,0,0) * this.RotationSpeed;      
+                this.Owner.RigidBody.AngularVelocity += rotation;
+                //SpriteRotation + Box Collider Rotation /*Alex*/
+                this.Owner.Sprite.FlipX = false;
+                this.Owner.Collider.Offset = Real3(-0.8, 0, 0);
+            }
+            if(event.EventId == "DashRight")
+            {
+                //movement
+                move = Real3(1,0,0) * this.DashSpeed;
+                //rotation
+                rotation = Real3(-1,0,0) * this.RotationSpeed;
+                this.Owner.RigidBody.AngularVelocity += rotation;
+            }
+            
+            this.NotMoving = false;
+            if(event.EventId == "NotMoving" && this.InGround == true)
+            {
+                this.NotMoving = true;
+            }
+            
+            this.Jumping = false;
+            if(event.EventId == "Jump")
+            {
+                this.Jumping = true;
+                //movement
+                move = Real3(0,1,0) * this.JumpSpeed;
+                //rotation
+                rotation = Real3(-1,0,0) * this.RotationSpeed;      
+                this.Owner.RigidBody.AngularVelocity += rotation;
+                this.InGround = false; 
+            }
+            //movement
+            this.Owner.RigidBody.Velocity += move;
+        }
+    }
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+
+        if(this.Space.GlobalVariables.Dashing)
+        {
+            var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
+            //Console.WriteLine("here");
+            this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
+                                                        this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition, 
+                                                        0.075);
+            this.CanPlay = false;
+            if(distance < this.Epsilon)
+            {
+                this.Space.GlobalVariables.Dashing = false;
+            }
+        }
+        if(this.Space.GlobalVariables.AutoDashEnemy)
+        {
+            
+            var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
+            var position = this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition;
+            var offset = -2;
+            if(!this.Owner.Sprite.FlipX)
+                offset = -offset;
+            
+            position = Real3(position.X + offset, position.Y, position.Z);
+            
+            //Console.WriteLine(this.Owner.Transform.Translation.X < position.X);
+            if(this.Owner.Transform.Translation.X < position.X && distance > 1)
+                this.Owner.Sprite.FlipX = false;
+            else if(distance > 1)
+                this.Owner.Sprite.FlipX = true;
+                
+            var vector = position - this.Owner.Transform.Translation;
+            if(distance > 2)
+                this.Owner.RigidBody.Velocity = vector * 5;
+            /*this.Owner.Transform.Translation = this.Space.GeneralAlgorithms.PreciseLerp(this.Owner.Transform.Translation, 
+                                                        position, 
+                                                        0.15);*/
+            this.CanPlay = false;
+            var y = Math.Abs(position.Y - this.Owner.Transform.Translation.Y);
+            
+            //if((distance < this.EpsilonAutoDash) /*&& y < 0.1*/)
+            //{
+                this.Space.GlobalVariables.AutoDashEnemy = false;
+            //}
+        }
+        else
+        {
+                this.Space.GlobalVariables.Spell1TimeToJump = this.Space.GlobalVariables.Temp;
+                this.CanPlay = true;
+        }
+        if(!this.Space.GlobalVariables.WallDampening && this.Owner.RigidBody.Velocity.Y < 0)
+            this.CanPlay = true;
+    }
+
+    function CanJump(event : CollisionEvent)
+    {
+        if(event.OtherObject.Collider.CollisionGroup == CollisionGroup.Ground )
+        {
+            this.Space.GlobalVariables.CanJump = true;
+        }
+    }
+    function Jump (event : CollisionEvent)
+    {
+        var otherObject = event.OtherObject;
+        
+        if(event.OtherObject.Name == ("Ground"))
+        {
+            this.InGround = true;
+            this.CanPlay = true;
+            this.Space.GlobalVariables.WallDampening = false;
+        }
+        else
+        {
+            if (otherObject.Name == ("JumpWall") && this.InGround == false)
+            {
+                if(event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
+                    event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
+                    event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X < 0)
+                    {
+                        this.CanPlay = false;
+                        this.Space.GlobalVariables.WallDampening = true;
+                        
+                        if(Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A))
+                        {
+                            //Console.WriteLine("que colo");
+                            var move = Real3(1,1,0) * this.JumpSpeed;
+                            this.Owner.RigidBody.Velocity += move;
+                        }
+                    }
+                else if(event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y < 0.1 &&
+                       event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.Y > -0.1 &&
+                       event.Object.Collider.Contacts.Current.FirstPoint.WorldNormalTowardsOther.X > 0 )
+                    {
+                        this.CanPlay = false;
+                        this.Space.GlobalVariables.WallDampening = true;
+                        
+                        if(Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A))
+                        {
+                            var move = Real3(-1,1,0) * this.JumpSpeed;
+                            this.Owner.RigidBody.Velocity += move;
+                        }
+                    }
+                if (this.Owner.RigidBody.Velocity == Real3(0,0,0))
+                    this.CanPlay = true;
+            }
+        }
+    }
+    
+    function WallJumpEnded(event : CollisionEvent)
+    {
+        this.Space.GlobalVariables.WallDampening = false;
+        this.Space.GlobalVariables.CanJump = false;
+        this.InGround = false;
+    }
+}

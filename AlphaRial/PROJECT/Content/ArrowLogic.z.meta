@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ArrowLogic",
+		uint64 ResourceId = 589a25981ea8cc2a,
+	},
+},

@@ -1,0 +1,101 @@
+class Janus_Phase_1 : SuperState
+{
+    [Property]
+    var JanusTotalHealth : Real = 1000;
+    [Property]
+    var Phase1MinHealth : Real = 666;
+    
+    var CurrentHealth : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    [Override]function Update(event : UpdateEvent)
+        {
+            var playerPosition : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+            this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_1_Attack);
+        }
+}
+class Janus_Phase_1_Attack : State
+{
+    [Property]
+    var JanusTotalHealth : Real = 1000;
+    [Property]
+    var Phase1RecoveryHealth : Real = 750;
+    [Property]
+    var AttackTime : Real = 7;
+    [Property]
+    var ArmAttackSpeed : Real = 2;
+    
+    var RandomGenerator : Random = Random();
+    var RandomNum : Integer;
+    var CurrentHealth : Real;
+    var TimerForNextAttack : Real = 0.0;
+    var TimerForArmAttack : Real = 0.0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+        this.RandomGenerator = Random();
+        
+    }
+    function ArmAttack()
+    {
+            this.Owner.FindChildByName("ArmDamage1").BoxCollider.SendsEvents = true;
+    }
+    
+    [Override]function Update(event : UpdateEvent)
+        {
+            this.JanusTotalHealth = this.Space.FindObjectByName("Janus").JanusHealth.JanusHealth;
+            //Console.WriteLine (this.JanusTotalHealth);
+            
+            if(this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true)
+            {
+                this.TimerForNextAttack += event.Dt;
+                
+                if (this.TimerForNextAttack >= this.AttackTime)
+                {
+                    this.RandomNum = this.RandomGenerator.DieRoll(4);
+                    this.TimerForNextAttack = 0;
+                }
+                /*--------------------------------------First Attack-----------------------------------------------*/
+                if (this.RandomNum == 1)
+                {
+                    this.TimerForArmAttack += event.Dt;
+                    //Console.WriteLine(this.TimerForArmAttack);
+                    
+                    if(this.TimerForArmAttack >= this.ArmAttackSpeed)
+                    {
+                        this.ArmAttack();
+                        this.TimerForArmAttack = 0;
+                        this.RandomNum = 0;
+                    }
+                }
+                /*--------------------------------------------------------------------------------------------------*/
+                if (this.JanusTotalHealth <= this.Phase1RecoveryHealth)
+                {
+                    this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_1_Recover);
+                }
+            }
+        }
+    }
+    
+class Janus_Phase_1_Recover : State
+{
+    [Property]
+    var JanusTotalHealth : Real = 1000;
+    [Property]
+    var Phase1MinHealth : Real = 666;
+    
+    var CurrentHealth : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    [Override] function Enter()
+    {
+        //Console.WriteLine("Recovering");
+    }
+}

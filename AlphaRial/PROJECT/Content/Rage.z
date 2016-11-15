@@ -1,0 +1,33 @@
+class Rage : ZilchComponent
+{
+    var Controller:Gamepad = null;
+    var Duration : Real = 5;
+    var Temp : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        this.Temp = this.Duration;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Space.ComboText.ComboText >= 15 && !this.Space.GlobalVariables.RageMode && 
+           this.Controller.IsButtonHeld(Buttons.LeftThumb) && this.Controller.IsButtonHeld(Buttons.RightThumb))
+        {
+            this.Space.GlobalVariables.RageMode = true;
+        }
+        
+        if(this.Space.GlobalVariables.RageMode && this.Duration > 0)
+        {
+            this.Duration -= event.Dt;
+        }
+        else if (this.Space.GlobalVariables.RageMode && this.Duration < 0)
+        {
+            this.Space.GlobalVariables.RageMode = false;
+            this.Duration = this.Temp;
+            this.Space.ComboText.ComboText = 0;
+        }
+    }
+}
