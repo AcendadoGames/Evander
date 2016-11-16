@@ -14,13 +14,13 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [0.140543461, 15.5678387, -39.5009727],
+		Vec3 Translation = [2.64982605, 19.1094055, -41],
 		Vec3 Scale = [60, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
 	Sprite = 
 	{
-		bool Visible = true,
+		bool Visible = false,
 		bool VisibilityCulling = true,
 		bool VisibilityEvents = true,
 		bool CastShadows = false,
@@ -51,7 +51,7 @@ Cog =
 		ParticleRenderMode RenderMode = Additive,
 		ParticleSortMode SortMode = Youngest,
 		ParticleAnimation ParticleAnimation = Single,
-		string Texture = "5310e87946eb1d76:Cloud",
+		string Texture = "559dbaeb34c81bf2:Cloud",
 		float VelocityScale = 0.5,
 		float LengthScale = 1,
 		float MaxParticleSize = 100,
@@ -61,7 +61,7 @@ Cog =
 	{
 		bool Active = true,
 		uint EmitCount = 0,
-		float EmitRate = 1000,
+		float EmitRate = 0,
 		float EmitVariance = 0,
 		float Size = 0.400000006,
 		float SizeVariance = 0.200000003,

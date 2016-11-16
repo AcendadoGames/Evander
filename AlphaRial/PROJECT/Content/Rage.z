@@ -29,6 +29,9 @@ class Rage : ZilchComponent
                 var seq = Action.Sequence(this.Owner.Actions);
                 Action.Delay(seq, this.Space.FindObjectByName("thunder").ThunderAnim.FadeInDelay);
                 Action.Call(seq, this.StartEffect);
+                var seq2 = Action.Sequence(this.Owner.Actions);
+                Action.Delay(seq2, 5);
+                Action.Call(seq2, this.ChangeWeather);
             }
         }
         
@@ -54,5 +57,13 @@ class Rage : ZilchComponent
         this.Space.TimeSpace.TimeScale = 1;
         this.Space.FindObjectByName("thunder").ThunderShake.SingleShake();
         this.Space.FindObjectByName("Camera").CameraShake.SingleShake(true);
+        if(this.Space.FindObjectByName("RainMaker").BoxParticleEmitter.EmitRate == 0)
+            this.Space.DynamicWeather.RainIn();
+        if(this.Space.FindObjectByName("SnowMaker").BoxParticleEmitter.EmitRate != 0)
+            this.Space.DynamicWeather.SnowOut();
+    }
+    function ChangeWeather()
+    {
+        this.Space.DynamicWeather.RandomWeather();
     }
 }

@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "DynamicWeather",
+		uint64 ResourceId = 5807e2f898f9f59a,
+	},
+},

@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-0.407402039, 37.7579727, -39.5009727],
+		Vec3 Translation = [2.70103836, 19.0076427, -40.0000038],
 		Vec3 Scale = [60, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -45,13 +45,13 @@ Cog =
 		SystemChildMode ChildMode = Independent,
 		SystemSpace SystemSpace = WorldSpace,
 		uint DrawOrder = 0,
-		Vec4 Tint = [1, 1, 1, 0.699999988],
+		Vec4 Tint = [1, 1, 1, 0.850000024],
 		float WarmUpTime = 0,
 		ParticleGeometry GeometryMode = Beam,
 		ParticleRenderMode RenderMode = Additive,
 		ParticleSortMode SortMode = Youngest,
 		ParticleAnimation ParticleAnimation = Single,
-		string Texture = "5310e87946e94ef2:FastSpark",
+		string Texture = "559dbaea34c84798:FastSpark",
 		float VelocityScale = 0.5,
 		float LengthScale = 1,
 		float MaxParticleSize = 100,
@@ -61,7 +61,7 @@ Cog =
 	{
 		bool Active = true,
 		uint EmitCount = 0,
-		float EmitRate = 750,
+		float EmitRate = 0,
 		float EmitVariance = 0,
 		float Size = 0.100000001,
 		float SizeVariance = 0.100000001,
