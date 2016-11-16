@@ -44,10 +44,10 @@ class ComboText : ZilchComponent
     }
     function AddCombo()
     {
-        if(this.Space.FindObjectByName("Camera").NewCameraLogic.Size > 15)
+        if(this.Space.FindObjectByName("Camera").NewCameraLogic.Size > 22.5)
         {
-            this.Space.FindObjectByName("Camera").NewCameraLogic.Size -= 3;
-            this.Space.FindObjectByName("Camera").NewCameraLogic.Offset.Y -= 1;   
+            this.Space.FindObjectByName("Camera").NewCameraLogic.Size -= 1.5;
+            this.Space.FindObjectByName("Camera").NewCameraLogic.Offset.Y -= 0.5;   
         }
         this.ComboText += 1;
         this.ComboTime = 3;

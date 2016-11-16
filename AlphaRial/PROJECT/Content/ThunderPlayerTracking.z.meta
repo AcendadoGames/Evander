@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ThunderPlayerTracking",
+		uint64 ResourceId = 58008246c20aa39a,
+	},
+},

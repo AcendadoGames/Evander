@@ -18,6 +18,7 @@ class GlobalVariables : ZilchComponent
     var DamageDealt : Boolean = false;
     var EnablePlay : Boolean = false;
     var ComboSlowTime : Real = 0;
+    var TransitioningToRage : Boolean = false;
     
     function Initialize(init : CogInitializer)
     {

@@ -8,7 +8,7 @@ class Background : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        this.Owner.Transform.Translation = Real3(this.Offset.X + (this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.X * 0.95),
+        this.Owner.Transform.Translation = Real3(this.Offset.X + (this.Space.FindObjectByName("PrototypePlayer").Transform.Translation.X * 0.3),
                                                  this.Offset.Y,
                                                  this.Offset.Z);
     }
