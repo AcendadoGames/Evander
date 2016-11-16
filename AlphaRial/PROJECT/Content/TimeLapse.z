@@ -39,8 +39,8 @@ class TimeLapse : ZilchComponent
             }
             else
             {
+                this.Space.TimeSpace.TimeScale = 1;
                 this.Owner.Sprite.SpriteSource = this.Owner.PlayerAnimation.IdleAnimation;
-                this.Owner.PlayerAnimation.TimeRewinding = false;
             }
             
         }
@@ -49,14 +49,16 @@ class TimeLapse : ZilchComponent
             this.Frames.Push(Frame(this.Owner.Transform.Translation, this.Owner.Transform.EulerAngles, 
                                    this.Owner.PlayerHealth.Health, this.Owner.Sprite.SpriteSource,
                                    this.Owner.Sprite.CurrentFrame, this.Owner.Sprite.FlipX));
+            this.Owner.PlayerAnimation.TimeRewinding = false;
         }
         else
-            {
+        {
             this.Frames.RemoveAt(0);
-            
+                
             if(this.TimeLim < 120)/***************time lapse refill by time*********************/
                 this.TimeLim += 1;
-            }
+                
+        }
     }
     
     
