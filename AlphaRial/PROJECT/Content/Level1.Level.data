@@ -117,7 +117,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-52.5554466, 2.16460729, 49.9999962],
+			Vec3 Translation = [-46.2240715, -0.463036209, 49.9999962],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -129,7 +129,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 54.8811989,
+			float Size = 18.2683792,
 		},
 		EditorCameraController = 
 		{
@@ -137,7 +137,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-52.5554466, 2.16460729, -4.15905288e-06],
+			Vec3 LookTarget = [-46.2240715, -0.463036209, -3.88229955e-06],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -897,7 +897,7 @@ Level =
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "582445ed3b59c726:Idle",
+			string SpriteSource = "58078ceadc760527:Evander_IDLE",
 			bool RenderMask = false,
 			bool FlipX = false,
 			bool FlipY = false,
@@ -971,7 +971,7 @@ Level =
 		},
 		PlayerAnimation = 
 		{
-			string IdleAnimation = "582445ed3b59c726:Idle",
+			string IdleAnimation = "58078ceadc760527:Evander_IDLE",
 			string RunAnimation = "583798a7018b0101:Evander_Run_Anim",
 			string JumpAnimation = "58028efef371e259:Evander_Jump_Anim",
 			string WallJumpAnimation = "",

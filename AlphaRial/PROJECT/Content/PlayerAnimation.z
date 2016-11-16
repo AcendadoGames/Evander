@@ -27,7 +27,7 @@ class PlayerAnimation : ZilchComponent
         if (!this.InCombo && !this.TimeRewinding)
         {
             //Idle Animation
-            if (this.Owner.MovementController.NotMoving == true )
+            if (this.Owner.MovementController.NotMoving == true && this.Owner.Sprite.SpriteSource.Name != "Evander_IDLE")
             {
                 this.Owner.Sprite.SpriteSource = this.IdleAnimation;
             }

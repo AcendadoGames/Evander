@@ -40,7 +40,8 @@ class TimeLapse : ZilchComponent
             else
             {
                 this.Space.TimeSpace.TimeScale = 1;
-                this.Owner.Sprite.SpriteSource = this.Owner.PlayerAnimation.IdleAnimation;
+                if(this.Owner.Sprite.SpriteSource.Name != "Evander_IDLE")
+                    this.Owner.Sprite.SpriteSource = this.Owner.PlayerAnimation.IdleAnimation;
             }
             
         }
