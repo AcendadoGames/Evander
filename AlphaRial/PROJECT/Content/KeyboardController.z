@@ -174,7 +174,7 @@ class KeyboardController : ZilchComponent
             if(distance < 25 && distance > 3 && this.TimeSlowMo > 0)
                 this.Space.GlobalVariables.CanDash = true;
         }
-        else if(this.Space.GlobalVariables.ComboSlowTime <= 0 && !this.Space.GlobalVariables.TransitioningToRage)/*This is putting the time as it was*/
+        else if(this.Space.GlobalVariables.ComboSlowTime <= 0 && !this.Space.GlobalVariables.TransitioningToRage && !this.Owner.PlayerAnimation.TimeRewinding)/*This is putting the time as it was*/
         {
             this.Space.TimeSpace.TimeScale = 1;
             this.Space.GlobalVariables.CanDash = false;

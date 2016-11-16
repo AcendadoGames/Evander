@@ -25,18 +25,30 @@ class TimeLapse : ZilchComponent
             
             if(this.Frames.All.IsNotEmpty && this.TimeLim != 0)
             {
+                this.Owner.PlayerAnimation.TimeRewinding = true;
+                this.Space.TimeSpace.TimeScale = 0.2;
                 this.Owner.Transform.Translation = this.Frames[this.Frames.Count - 1].Position;
                 this.Owner.Transform.EulerAngles = this.Frames[this.Frames.Count - 1].Rotation;
                 this.Owner.PlayerHealth.Health = this.Frames[this.Frames.Count - 1].HP;
                 this.Owner.PlayerHealth.CurrentHealth = this.Frames[this.Frames.Count - 1].HP;
+                this.Owner.Sprite.SpriteSource = this.Frames[this.Frames.Count - 1].Animation;
+                this.Owner.Sprite.CurrentFrame = this.Frames[this.Frames.Count - 1].CurrentFrame;
+                this.Owner.Sprite.FlipX = this.Frames[this.Frames.Count - 1].FlipX;
                 this.Frames.Pop();
                 this.TimeLim -= 1;
+            }
+            else
+            {
+                this.Owner.Sprite.SpriteSource = this.Owner.PlayerAnimation.IdleAnimation;
+                this.Owner.PlayerAnimation.TimeRewinding = false;
             }
             
         }
         else if(this.Frames.Count <= this.MaxFrames)
         {
-            this.Frames.Push(Frame(this.Owner.Transform.Translation, this.Owner.Transform.EulerAngles, this.Owner.PlayerHealth.Health));
+            this.Frames.Push(Frame(this.Owner.Transform.Translation, this.Owner.Transform.EulerAngles, 
+                                   this.Owner.PlayerHealth.Health, this.Owner.Sprite.SpriteSource,
+                                   this.Owner.Sprite.CurrentFrame, this.Owner.Sprite.FlipX));
         }
         else
             {
@@ -50,16 +62,22 @@ class TimeLapse : ZilchComponent
     
 }
 
-struct Frame
+class Frame
 {
     var Position : Real3 = Real3(0,0,0);
     var Rotation : Real3 = Real3(0,0,0);
     var HP : Integer = Integer(0);
-    constructor (pos : Real3, rot : Real3, heal : Integer)
+    var Animation : SpriteSource;
+    var CurrentFrame : Integer;
+    var FlipX : Boolean;
+    constructor (pos : Real3, rot : Real3, heal : Integer, animation : SpriteSource, currentFrame : Integer, flipX : Boolean)
     {
         this.Position = pos;
         this.Rotation = rot;
         this.HP = heal;
+        this.Animation = animation;
+        this.CurrentFrame = currentFrame;
+        this.FlipX = flipX;
     }
     constructor() {}
 
