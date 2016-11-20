@@ -14,7 +14,7 @@ class MovementController : ZilchComponent
     
     var CanPlay : Boolean =  true;
     
-    var Epsilon : Real = Real(0.5);
+    var Epsilon : Real = Real(1.5);
     
     var EpsilonAutoDash : Real = Real(2);
     
@@ -70,8 +70,11 @@ class MovementController : ZilchComponent
                 rotation = Real3(-1,0,0) * this.RotationSpeed;      
                 this.Owner.RigidBody.AngularVelocity += rotation;
                 //SpriteRotation + Box Collider Rotation /*Alex*/
-                this.Owner.Sprite.FlipX = true;
-                this.Owner.Collider.Offset = Real3(0.8, 0, 0);
+                if(Zero.Keyboard.KeyIsUp(Keys.D))
+                {
+                    this.Owner.Sprite.FlipX = true;
+                    this.Owner.Collider.Offset = Real3(0.8, 0, 0);
+                }
             }
             if(event.EventId == "DashLeft")
             {
@@ -91,8 +94,11 @@ class MovementController : ZilchComponent
                 rotation = Real3(-1,0,0) * this.RotationSpeed;      
                 this.Owner.RigidBody.AngularVelocity += rotation;
                 //SpriteRotation + Box Collider Rotation /*Alex*/
-                this.Owner.Sprite.FlipX = false;
-                this.Owner.Collider.Offset = Real3(-0.8, 0, 0);
+                if(Zero.Keyboard.KeyIsUp(Keys.A))
+                {
+                    this.Owner.Sprite.FlipX = false;
+                    this.Owner.Collider.Offset = Real3(-0.8, 0, 0);
+                }
             }
             if(event.EventId == "DashRight")
             {
@@ -131,7 +137,19 @@ class MovementController : ZilchComponent
         if(this.Space.GlobalVariables.Dashing)
         {
             var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
-            //Console.WriteLine("here");
+            var position = this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition;
+            var offset = -2;
+            if(!this.Owner.Sprite.FlipX)
+                offset = -offset;
+            
+            position = Real3(position.X + offset, position.Y, position.Z);
+            
+            //Console.WriteLine(this.Owner.Transform.Translation.X < position.X);
+            if(this.Owner.Transform.Translation.X < position.X && distance > 1)
+                this.Owner.Sprite.FlipX = false;
+            else if(distance > 1)
+                this.Owner.Sprite.FlipX = true;
+                
             this.Owner.Transform.Translation = Math.Lerp(this.Owner.Transform.Translation, 
                                                         this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition, 
                                                         0.075);
@@ -211,7 +229,7 @@ class MovementController : ZilchComponent
                         
                         if(Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A))
                         {
-                            //Console.WriteLine("que colo");
+                            this.Owner.Sprite.FlipX = false;
                             var move = Real3(1,1,0) * this.JumpSpeed;
                             this.Owner.RigidBody.Velocity += move;
                         }
@@ -225,6 +243,7 @@ class MovementController : ZilchComponent
                         
                         if(Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.A))
                         {
+                            this.Owner.Sprite.FlipX = true;
                             var move = Real3(-1,1,0) * this.JumpSpeed;
                             this.Owner.RigidBody.Velocity += move;
                         }

@@ -139,7 +139,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-21.5898781, 9.42410374, 50],
+			Vec3 Translation = [-23.6562214, 12.5556812, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -151,7 +151,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 22.0463181,
+			float Size = 32.8892517,
 		},
 		EditorCameraController = 
 		{
@@ -159,7 +159,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-21.5898781, 9.42410374, 9.06873652e-08],
+			Vec3 LookTarget = [-23.6562214, 12.5556812, 3.64793751e-10],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -440,7 +440,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-24.8836498, 12.7586727, -1],
+			Vec3 Translation = [-24.9172573, 12.7586727, -1],
 			Vec3 Scale = [0.689999998, 0.689999998, 0.99999994],
 			Quat Rotation = [0, 0, -0.0092052212, 0.999957621],
 		},
@@ -592,6 +592,44 @@ Level =
 			bool AnimationActive = true,
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 15,
+		},
+		Named = 
+		{
+			string Name = "TimeRewind",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-25.059269, 12.8977699, 0.200000003],
+			Vec3 Scale = [0.140000001, 0.140000001, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "58b9cab8c783b2d6:time2",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		TimeRotation = 
+		{
 		},
 	},
 },

@@ -145,7 +145,7 @@ class KeyboardController : ZilchComponent
         //-----------------------------------SLOW MOTION-------------------------------------------------
         this.LeftTriggerInput();
         
-        if ((Zero.Keyboard.KeyIsPressed(Keys.J) || this.LeftTriggerPressed) && this.TimeSlowMo >= 0.0 
+        if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0 
             && this.Space.GlobalVariables.Dashing == false && !this.Space.GlobalVariables.NoEnemies) /*Targetting while not in dash, creating the target*/
         { 
             this.A = this.Space.CreateAtPosition(this.TargetSprite1, position);
@@ -204,19 +204,20 @@ class KeyboardController : ZilchComponent
     }
     function LeftTriggerInput()
     {
-        if(this.Controller.LeftTrigger > 0.2 && !this.Temp2)
+        if((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && !this.Temp2)
         {
+            Console.WriteLine("asdfg");
             this.LeftTriggerPressed = true;
             this.Temp2 = true;
         }
         else
             this.LeftTriggerPressed = false;  
         
-        if(this.Controller.LeftTrigger < 0.2)
+        if(this.Controller.LeftTrigger < 0.2 || Zero.Keyboard.KeyIsReleased(Keys.J))
             this.Temp2 = false;
         
     }
-    function OnCollisionPersisted(event : CollisionEvent)
+    function OnCollisionPersisted(event : CollisionEvent) 
     {
         if(this.Space.GlobalVariables.CanDash == true && (event.OtherObject.Name == "Ground" || event.OtherObject.Name == "Wall"))
         {

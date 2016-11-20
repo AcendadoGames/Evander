@@ -31,7 +31,7 @@ class GlobalVariables : ZilchComponent
     function OnLogicUpdate(event : UpdateEvent)
     {
        // Console.WriteLine(this.EnablePlay);
-        if(this.Controller.LeftTrigger > 0.2 && this.Space.TimeSpace.TimeScale < 0.4)
+        if((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.Space.TimeSpace.TimeScale < 0.4)
             this.Aiming = true;
         else
             this.Aiming = false;

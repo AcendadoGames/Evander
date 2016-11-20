@@ -24,6 +24,7 @@ class PlayerHealth : ZilchComponent
             else 
             {
                 this.Health = 0;
+                this.Space.FindObjectByName("Camera").Camera.Size -= 0.5;
                 this.Owner.Sprite.AnimationActive = false;
                 this.Owner.KeyboardController.Enablemovement = false;
                 this.Owner.ComboTree.EnableCombo = false;
@@ -38,7 +39,6 @@ class PlayerHealth : ZilchComponent
                 this.Space.GlobalVariables.Dashing = false;
                 this.Space.GlobalVariables.RageMode = false;
                 this.Owner.MovementController.CanPlay = false;
-                this.Space.FindObjectByName("Camera").Camera.Size -= 0.05;
                 if(this.Timer >= 2)
                 {
                     this.Space.ComboText.ComboText = 0;

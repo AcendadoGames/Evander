@@ -18,7 +18,7 @@ class TargetSprite : ZilchComponent
             this.Owner.Transform.Translation = this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition;
             this.Owner.RigidBody.AngularVelocity = Real3(0,0,this.AngVel);
         }
-        if((Zero.Keyboard.KeyIsUp(Keys.J) && this.Controller.LeftTrigger < 0.2) || this.Space.TimeSpace.TimeScale > 0.4)
+        if((Zero.Keyboard.KeyIsUp(Keys.J) || this.Controller.LeftTrigger < 0.2) && this.Space.TimeSpace.TimeScale > 0.4)
             this.Owner.Destroy();
     }
     function DestroySprite(event : ZilchEvent)
