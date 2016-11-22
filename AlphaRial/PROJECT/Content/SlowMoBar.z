@@ -1,7 +1,7 @@
 class SlowMoBar : ZilchComponent
 {
     [Property]
-    var Counter: Real = 4.0;
+    var Counter: Real = 2.0;
     var TimeLim : Real;
     var TimeIsSlowed : Boolean;
     
@@ -12,17 +12,17 @@ class SlowMoBar : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if (this.TimeLim <= this.Counter  && this.TimeIsSlowed == true)
+        if (this.TimeLim < this.Counter)
         {
-            this.Owner.Transform.EulerAngles -= Real3(0, 0, 2 * Math.Pi / 200);
-            this.Counter -= 0.05;
+            this.Owner.Transform.EulerAngles = Real3(0, 0, 0);
+            this.Owner.Transform.EulerAngles -= Real3(0, 0, -60);
+            this.Counter = 0;
         }
-        if (this.TimeLim >= this.Counter  && this.TimeIsSlowed == false)
+        if (1.983334 > this.Counter)
         {
-            this.Owner.Transform.EulerAngles += Real3(0, 0, 2 * Math.Pi / 200);
-            this.Counter += 0.05;
+            this.Owner.Transform.EulerAngles += Real3(0, 0, 0.024);
+            this.Counter += 0.01666666;
         }
-        //Console.WriteLine(this.TimeLim);
     }
     
 }

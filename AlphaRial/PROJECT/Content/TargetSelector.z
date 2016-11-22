@@ -41,8 +41,7 @@ class TargetSelector : ZilchComponent
         
         this.Space.GeneralAlgorithms.ArraySorting(this.A, 0, this.A.LastIndex);
                 
-        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 25
-            || this.Space.FindObjectByName("PrototypePlayer").KeyboardController.TimeSlowMo <= 0)
+        if (Math.Distance(this.TargetPosition, this.Owner.Transform.Translation) > 25)
         {
             this.Space.GlobalVariables.CanDash = false;
         }
@@ -62,7 +61,6 @@ class TargetSelector : ZilchComponent
                 this.RightStickInput();
                 if(this.Owner.KeyboardController.LeftTriggerPressed)
                 {
-                    Console.WriteLine("alo");
                     this.GetNearestTarget();
                 }
                 else if((this.RightStickRightPressed || Zero.Keyboard.KeyIsPressed(Keys.L)) && this.EnemyIndex < this.A.LastIndex && (this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing)
@@ -87,14 +85,21 @@ class TargetSelector : ZilchComponent
             }
             else
             {
-                for(var i = 0; i < this.A.Count; i += 1)
+                if(Zero.Keyboard.KeyIsPressed(Keys.J))
                 {
-                    if(Math.Distance(this.A[i], mouseWorldPosition) < 
-                       Math.Distance(this.TargetPosition, mouseWorldPosition))
-                        {
-                            if(this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing)
-                                this.TargetPosition = this.A[i]; 
-                        }   
+                    this.GetNearestTarget();
+                }
+                else
+                {
+                    for(var i = 0; i < this.A.Count; i += 1)
+                    {
+                        if(Math.Distance(this.A[i], mouseWorldPosition) < 
+                           Math.Distance(this.TargetPosition, mouseWorldPosition))
+                            {
+                                if(this.Space.GlobalVariables.CanDash || this.Space.GlobalVariables.Dashing)
+                                    this.TargetPosition = this.A[i]; 
+                            }   
+                    }
                 }
             }
             

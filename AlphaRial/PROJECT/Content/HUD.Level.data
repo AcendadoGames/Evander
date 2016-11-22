@@ -446,7 +446,7 @@ Level =
 		},
 		SlowMoBar = 
 		{
-			float Counter = 4,
+			float Counter = 2,
 		},
 		Hierarchy = 
 		{
@@ -458,7 +458,7 @@ Level =
 				},
 				Named = 
 				{
-					string Name = "SlowMoBar",
+					string Name = "DashBar",
 				},
 				Transform = 
 				{

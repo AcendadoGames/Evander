@@ -1,11 +1,8 @@
 class KeyboardController : ZilchComponent
 {
     [Property]
-    var DashTime : Real = 2.0;
-    [Property]
-    var TimeSlowMo : Real = 2.0;
-    [Property]
-    var MaxTimeSlowed : Real = 4.0;
+    var DashTime : Integer = 2;
+    
     var TimeIsSlowed : Boolean = false;
     [Property]
     var TargetSprite1 : Archetype;
@@ -88,7 +85,9 @@ class KeyboardController : ZilchComponent
         var ev  = ZilchEvent();
         var position = Real3(this.Owner.TargetSelector.TargetPosition.X, this.Owner.TargetSelector.TargetPosition.Y, 6);
         
-        this.Timer += event.Dt;
+        if(this.Timer < 2 )
+            this.Timer += event.Dt;
+        Math.Round(this.Timer);
         
         if(this.Enablemovement && this.Space.GlobalVariables.EnablePlay)
         {
@@ -145,7 +144,7 @@ class KeyboardController : ZilchComponent
         //-----------------------------------SLOW MOTION-------------------------------------------------
         this.LeftTriggerInput();
         
-        if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0 
+        if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2)
             && this.Space.GlobalVariables.Dashing == false && !this.Space.GlobalVariables.NoEnemies) /*Targetting while not in dash, creating the target*/
         { 
             this.A = this.Space.CreateAtPosition(this.TargetSprite1, position);
@@ -163,15 +162,12 @@ class KeyboardController : ZilchComponent
             this.B.Sprite.Color = Real4(0 , 1, 224/255, 1);
         }
         
-        if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && this.TimeSlowMo >= 0.0) /*Slowing the Time*/
+        if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2)) /*Slowing the Time*/
         {
             this.TimeIsSlowed = true;
-            this.TimeSlowMo -= event.Dt / this.Space.TimeSpace.TimeScale;
             this.Space.TimeSpace.TimeScale = 0.1;
                 
-            if(this.TimeSlowMo <= 0.5) /* Lerping At the end of the time if the player stays in SlowMo*/
-                this.Space.TimeSpace.TimeScale = Math.Lerp(this.Space.TimeSpace.TimeScale, 1, 0.01);
-            if(distance < 25 && distance > 3 && this.TimeSlowMo > 0)
+            if(distance < 25 && distance > 3)
                 this.Space.GlobalVariables.CanDash = true;
         }
         else if(this.Space.GlobalVariables.ComboSlowTime <= 0 && !this.Space.GlobalVariables.TransitioningToRage && !this.Owner.PlayerAnimation.TimeRewinding)/*This is putting the time as it was*/
@@ -179,11 +175,7 @@ class KeyboardController : ZilchComponent
             this.Space.TimeSpace.TimeScale = 1;
             this.Space.GlobalVariables.CanDash = false;
         }
-        if ((this.Space.TimeSpace.TimeScale) == 1 && (this.TimeSlowMo <= this.MaxTimeSlowed)) /* Reloading the SlowMo Aiming Power*/
-        {
-            this.TimeIsSlowed = false;
-            this.TimeSlowMo += event.Dt;
-        }
+
         //-----------------------------------SPECIAL DASH-------------------------------------------------
         if((Zero.Keyboard.KeyIsPressed(Keys.Space) || this.Controller.RightTrigger > 0.2) && 
           (Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2) && 
