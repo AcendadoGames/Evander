@@ -63,9 +63,6 @@ Cog =
 		string InitStateName = "Archer_Patrol",
 		bool PrintDebug = false,
 	},
-	FindPath = 
-	{
-	},
 	VelRotDampening = 
 	{
 		float VelocityDampening = 0.899999976,
