@@ -1,0 +1,121 @@
+class InMenuSelector : ZilchComponent
+{
+    var Selected : Integer = 1;
+    
+    var Controller:Gamepad = null;
+    
+    var Menu : Level = Level.Menu;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Space.TimeSpace.TogglePause();
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        /*************************SWITCHING SELECTED***************************/
+        
+        if(this.Selected != 1 && (Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.StickUp)))
+        {
+            this.Selected -= 1;
+        }
+        
+        if(this.Selected != 4 && (Zero.Keyboard.KeyIsPressed(Keys.S) || this.Controller.IsButtonPressed(Buttons.StickDown)))
+        {
+            this.Selected += 1;
+        }
+        
+        /******************************FOCUS************************************/
+        
+        if(this.Selected == 1)
+        {
+            this.Space.FindObjectByName("Restart").SpriteText.Color = Real4(1,1,1,1);
+            this.Space.FindObjectByName("Continue").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Quit").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("ExitToMenu").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+        }
+        
+        if(this.Selected == 2)
+        {
+            this.Space.FindObjectByName("Restart").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Continue").SpriteText.Color = Real4(1 ,1 ,1 ,1);
+            this.Space.FindObjectByName("Quit").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("ExitToMenu").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+        }
+        
+        if(this.Selected == 3)
+        {
+            this.Space.FindObjectByName("Restart").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Continue").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Quit").SpriteText.Color = Real4(1 ,1 ,1 ,1);
+            this.Space.FindObjectByName("ExitToMenu").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+        
+        }
+        if(this.Selected == 4)
+        {
+            this.Space.FindObjectByName("Restart").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Continue").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Quit").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("ExitToMenu").SpriteText.Color = Real4(1 ,1 ,1 ,1);
+        }
+        /*************************SELECTING CASE*******************************/
+        
+        if(this.Selected == 1 && (Zero.Keyboard.KeyIsDown(Keys.Enter) || this.Controller.IsButtonPressed(Buttons.A)))
+        {
+            var spaces = this.GameSession.AllSpaces;
+            foreach( var space in spaces)
+            {
+                space.TimeSpace.TogglePause();
+            }
+            if(this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active == false)
+                this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = true;
+            else
+                this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = false;
+                
+            this.GameSession.FindSpaceByName("HudSpace").ReloadLevel();
+            this.GameSession.FindSpaceByName("HudSpace").Destroy();
+            this.GameSession.FindSpaceByName("Main").ReloadLevel();
+            this.GameSession.FindSpaceByName("InGameMenuSpace").Destroy();
+        }
+        
+        if(this.Selected == 2 && (Zero.Keyboard.KeyIsDown(Keys.Enter) || this.Controller.IsButtonPressed(Buttons.A)))
+        {
+            var spaces = this.GameSession.AllSpaces;
+            foreach( var space in spaces)
+            {
+                space.TimeSpace.TogglePause();
+            }
+            if(this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active == false)
+                this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = true;
+            else
+                this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = false;
+        }
+        
+        if(this.Selected == 3 && (Zero.Keyboard.KeyIsDown(Keys.Enter) || this.Controller.IsButtonPressed(Buttons.A)))
+        {
+            this.GameSession.Quit();
+        }
+        
+        if(this.Selected == 4 && (Zero.Keyboard.KeyIsDown(Keys.Enter) || this.Controller.IsButtonPressed(Buttons.A)))
+        {
+            var spaces = this.GameSession.AllSpaces;
+            
+            this.GameSession.FindSpaceByName("HudSpace").ReloadLevel();
+            this.GameSession.FindSpaceByName("HudSpace").Destroy();
+            
+            foreach( var space in spaces)
+            {
+                space.TimeSpace.TogglePause();
+            }
+            
+            if(this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active == false)
+                this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = true;
+            else
+                this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = false;
+            
+            this.GameSession.FindSpaceByName("Main").LoadLevel(this.Menu);
+        }
+    }
+}

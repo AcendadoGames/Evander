@@ -1,0 +1,30 @@
+class InGameMenuScript : ZilchComponent
+{
+    [Property]
+    var InGameMenu: Level = null; 
+    [Property]
+    var InGameMenuSpace: Archetype = null;
+    var Space2: Space = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.GameSession, Events.GameRequestQuit, this.GameRequestQuit);
+        this.Space2 = this.GameSession.CreateNamedSpace("InGameMenuSpace", this.InGameMenuSpace);
+        this.Space2.LoadLevel(this.InGameMenu); 
+    }
+
+    function GameRequestQuit (event : GameEvent)
+    {
+        event.Handled = true;
+        
+        var spaces = this.GameSession.AllSpaces;
+        foreach( var space in spaces)
+        {
+            space.TimeSpace.TogglePause();
+        }
+        if(this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active == false)
+            this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = true;
+        else
+            this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = false;
+    }
+}
