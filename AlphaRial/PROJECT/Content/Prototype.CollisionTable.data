@@ -13,6 +13,7 @@ CollisionTable =
 		"5831f2a61e419268:Sensor",
 		"57c69c8abe6fc515:Null",
 		"58308668e8f84eed:OnlyKnockUpEnemy",
+		"581817c7157ac026:ArrowsForJanus",
 	],
 	Array CollisionFilters = 
 	[

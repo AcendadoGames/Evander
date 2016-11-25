@@ -2,8 +2,8 @@ TextContent =
 {
 	ZilchScriptBuilder = 
 	{
-		string Name = "BulletDestructionLogic",
-		uint64 ResourceId = 57de7c8c4f5ab894,
+		string Name = "MovingArrowSpawner",
+		uint64 ResourceId = 581f23eebbdb9d15,
 	},
 	ContentTags = 
 	{

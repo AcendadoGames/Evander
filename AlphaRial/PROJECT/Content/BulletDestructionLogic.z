@@ -30,7 +30,7 @@ class BulletDestructionLogic : ZilchComponent
             otherObject.PlayerHealth.CurrentHealth -= this.BulletDamage;
             this.Owner.Destroy();
         }
-        else
-        this.Owner.Destroy();
+        else if (otherObject.Name != "ArrowSpawner")
+            this.Owner.Destroy();
     }
 }

@@ -3,6 +3,8 @@ class JanusHealth : ZilchComponent
     [Property]
     var JanusHealth : Real = 1000;
     
+    var Recovering : Boolean = false;
+    
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
@@ -11,13 +13,17 @@ class JanusHealth : ZilchComponent
 
     function DamageReceived(event : CollisionEvent)
     {
-        if(event.OtherObject.Name == "damage")
+        
+        //Console.WriteLine("hereindamageRECEIVED");
+        if(event.OtherObject.Name == "damage" && this.Recovering == false)
         {
-            //Console.WriteLine(event.OtherObject.Attack.Damage);
+            Console.WriteLine(event.OtherObject.Attack.Damage);
             this.JanusHealth -= event.OtherObject.Attack.Damage;
+            
         }
     }
     function OnLogicUpdate(event : UpdateEvent)
     {
+
     }
 }
