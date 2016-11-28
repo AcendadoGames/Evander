@@ -18,7 +18,7 @@ class MovingArrowSpawner : ZilchComponent
         {
             var playerPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
             
-            this.Owner.Transform.Translation = playerPosition + this.Offset;
+            this.Owner.Transform.Translation = Real3(playerPosition.X , 20, 0);
         }
         else if(this.Shooting)
         {

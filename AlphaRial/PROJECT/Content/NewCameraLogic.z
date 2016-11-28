@@ -37,7 +37,7 @@ class NewCameraLogic : ZilchComponent
             
             /*Just some offsets for the design of the game*/
             var offSet = this.Offset;
-            var offSetBoss : Real3 = Real3(5, 10, 0);
+            var offSetBoss : Real3 = Real3(5, 15, 0);
             
             /*Now that we have the computing values setting them to other variableswith Lerps*/
             var newCameraPos = this.TargetObject.Transform.LocalTranslation;

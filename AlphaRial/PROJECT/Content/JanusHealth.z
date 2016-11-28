@@ -14,16 +14,14 @@ class JanusHealth : ZilchComponent
     function DamageReceived(event : CollisionEvent)
     {
         
-        //Console.WriteLine("hereindamageRECEIVED");
         if(event.OtherObject.Name == "damage" && this.Recovering == false)
         {
-            Console.WriteLine(event.OtherObject.Attack.Damage);
             this.JanusHealth -= event.OtherObject.Attack.Damage;
             
         }
     }
     function OnLogicUpdate(event : UpdateEvent)
     {
-
+        //Console.WriteLine(this.JanusHealth);
     }
 }
