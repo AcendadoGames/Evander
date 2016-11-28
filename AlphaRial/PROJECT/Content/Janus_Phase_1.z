@@ -122,6 +122,7 @@ class Janus_Phase_1_Attack : State
                     this.TimerForArrowAttack += event.Dt;
                     this.Space.FindObjectByName("ArrowSpawner").MovingArrowSpawner.Shooting = true;
                     this.Space.FindObjectByName("Portal").BoxParticleEmitter.Active = true;
+                    this.Space.FindObjectByName("BackGroundPortal").BoxParticleEmitter.Active = true;
                     
                     if(this.TimerForArrowAttack >= this.ArrowAttackSpeed)
                     {

@@ -28,6 +28,7 @@ class MovingArrowSpawner : ZilchComponent
                 this.Timer = 0;
                 this.Shooting = false;
                 this.Owner.FindChildByName("Portal").BoxParticleEmitter.Active = false;
+                this.Space.FindObjectByName("BackGroundPortal").BoxParticleEmitter.Active = false;
             }
         }
      }

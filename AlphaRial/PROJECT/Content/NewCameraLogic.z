@@ -56,6 +56,11 @@ class NewCameraLogic : ZilchComponent
                 this.Owner.Transform.LocalTranslation = Real3(newCameraPosBoss.X, newCameraPosBoss.Y, camZ);
                 this.Owner.Camera.Size = newCameraSizeBoss;
             }
+            if(this.Owner.Transform.LocalTranslation.Y >= 12.9 || this.Owner.Transform.LocalTranslation.Y <= 12.6 && this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true)
+            {
+                this.Owner.Transform.LocalTranslation = Real3(this.Owner.Transform.LocalTranslation.X, newCameraPosBoss.Y, camZ);
+            }
+            
             /*if there is no boss set this values*/
             if (this.IsThereBoss != true || this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == false)
                 this.Owner.Transform.LocalTranslation = Real3(newCameraPos.X, newCameraPos.Y, camZ);
