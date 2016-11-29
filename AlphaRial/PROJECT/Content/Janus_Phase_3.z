@@ -1,8 +1,8 @@
-class Janus_Phase_2 : SuperState
+class Janus_Phase_3 : SuperState
 {
-    var JanusTotalHealth : Real = 1000;
+    var JanusTotalHealth : Real;
     [Property]
-    var Phase1MinHealth : Real = 333;
+    var Phase1MinHealth : Real = 100;
     
     var CurrentHealth : Real;
     
@@ -13,24 +13,24 @@ class Janus_Phase_2 : SuperState
     [Override]function Enter()
     {
         this.JanusTotalHealth = this.Space.FindObjectByName("Janus").JanusHealth.JanusHealth;
-        this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_2_Attack);
+        this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_3_Attack);
     }
 }
-class Janus_Phase_2_Attack : State
+class Janus_Phase_3_Attack : State
 {
     var JanusTotalHealth : Real;
     [Property]
-    var Phase2RecoveryHealth : Real = 333;
+    var Phase3RecoveryHealth : Real = 100;
     [Property]
-    var AttackTime : Real = 5;
+    var AttackTime : Real = 4;
     [Property]
-    var ArmAttackSpeed : Real = 1;
+    var ArmAttackSpeed : Real = 0.7;
     [Property]
-    var ArrowAttackSpeed : Real = 1;
+    var ArrowAttackSpeed : Real = 0.7;
     [Property]
-    var NumberOfArrows : Real = 25;
+    var NumberOfArrows : Real = 30;
     [Property]
-    var WaveAttackSpeed : Real = 1;
+    var WaveAttackSpeed : Real = 0.7;
     
     var RandomGenerator : Random = Random();
     var RandomNum : Integer;
@@ -82,9 +82,9 @@ class Janus_Phase_2_Attack : State
 
     function ArmAttack()
     {
-        this.Owner.FindChildByName("ArmDamage2").Sprite.Color = this.ColorForAttack;
-        this.Owner.FindChildByName("ArmDamage2").BoxCollider.SendsEvents = true;
-        this.Owner.FindChildByName("ArmDamage2").JanusArmDamage.DoingTheAttack = true;
+        this.Owner.FindChildByName("ArmDamage3").Sprite.Color = this.ColorForAttack;
+        this.Owner.FindChildByName("ArmDamage3").BoxCollider.SendsEvents = true;
+        this.Owner.FindChildByName("ArmDamage3").JanusArmDamage.DoingTheAttack = true;
     }
     
     [Override]function Update(event : UpdateEvent)
@@ -94,7 +94,7 @@ class Janus_Phase_2_Attack : State
             
             var distanceToPlayer = Math.Distance(playerPosition,ownerPosition);
             
-            Console.WriteLine(distanceToPlayer);
+            //Console.WriteLine(distanceToPlayer);
             
             this.JanusTotalHealth = this.Space.FindObjectByName("Janus").JanusHealth.JanusHealth;
             
@@ -111,8 +111,8 @@ class Janus_Phase_2_Attack : State
                 if (this.RandomNum == 1)
                 {
                     this.TimerForArmAttack += event.Dt;
-                    this.Owner.FindChildByName("ArmDamage2").Sprite.Visible = true;
-                    this.Owner.FindChildByName("ArmDamage2").Sprite.Color = this.ColorForPreAttack;
+                    this.Owner.FindChildByName("ArmDamage3").Sprite.Visible = true;
+                    this.Owner.FindChildByName("ArmDamage3").Sprite.Color = this.ColorForPreAttack;
                     if(this.TimerForArmAttack >= this.ArmAttackSpeed)
                     {
                         this.ArmAttack();
@@ -141,9 +141,9 @@ class Janus_Phase_2_Attack : State
 
                 }
                 /*--------------------------------------------------------------------------------------------------*/
-                if (this.JanusTotalHealth <= this.Phase2RecoveryHealth)
+                if (this.JanusTotalHealth <= this.Phase3RecoveryHealth)
                 {
-                    this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_2_Recover);
+                    this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_3_Recover);
                 }
             }
         }
@@ -154,17 +154,18 @@ class Janus_Phase_2_Attack : State
             this.TimerForArrowAttack = 0;
             this.TimerForArmAttack = 0;
             
-            this.Owner.FindChildByName("ArmDamage2").Sprite.Visible = false;
+            this.Owner.FindChildByName("ArmDamage3").Sprite.Visible = false;
             
             this.RandomNum = 0;
         }
     }
     
-class Janus_Phase_2_Recover : State
+class Janus_Phase_3_Recover : State
 {
     var JanusTotalHealth : Real;
+    
     [Property]
-    var Phase1MinHealth : Real = 333;
+    var Phase1MinHealth : Real = 100;
     
     var HitCounter : Integer;
     var CanHeal :  Boolean = true;
@@ -181,7 +182,7 @@ class Janus_Phase_2_Recover : State
         Zero.Connect(this.Owner, Events.CollisionStarted, this.DamageReceived);
         this.Space.FindObjectByName("Janus").JanusHealth.Recovering = true;
         this.JanusTotalHealth = this.Space.FindObjectByName("Janus").JanusHealth.JanusHealth;
-        this.HitCounter = 7;
+        this.HitCounter = 10;
         
         Console.WriteLine("Recovering");
     }
@@ -189,21 +190,21 @@ class Janus_Phase_2_Recover : State
     [Override] function Update(event: UpdateEvent)
     {
         //Console.WriteLine (this.JanusTotalHealth);
-        //Console.WriteLine(this.HitCounter);
         if(this.HitCounter <= 0)
             this.CanHeal = false;
         
         if(this.CanHeal == true)
-            this.Owner.Parent.Parent.Parent.JanusHealth.JanusHealth += 0.7;
+            this.Owner.Parent.Parent.Parent.JanusHealth.JanusHealth += 0.9;
             
             
-        if (this.Owner.Parent.Parent.Parent.JanusHealth.JanusHealth >= 550)
+        if (this.Owner.Parent.Parent.Parent.JanusHealth.JanusHealth >= 300)
         {
-            this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_2_Attack);
+            this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_3_Attack);
             this.Exit();
         }
         if(this.CanHeal == false)
-            this.Owner.StateMachine.FindStateMachineFromRoot("Janus_Ai").ChangeState("Janus_Phase_3");
+        {}
+            //this.Owner.StateMachine.FindStateMachineFromRoot("Janus_Ai").ChangeState("Janus_Phase_3");
     }
     [Override] function Exit()
     {
