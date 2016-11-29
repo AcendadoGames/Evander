@@ -122,7 +122,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [0, 0, 50],
+			Vec3 Translation = [20.6021385, 26.3749142, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -134,7 +134,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 100,
+			float Size = 80.118309,
 		},
 		EditorCameraController = 
 		{
@@ -142,7 +142,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [0, 0, 0],
+			Vec3 LookTarget = [20.6021385, 26.3749142, 9.00547263e-07],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -1441,7 +1441,7 @@ Level =
 		Transform = 
 		{
 			Vec3 Translation = [126.194603, 32.6147575, -0.999996185],
-			Vec3 Scale = [2.93596339, 3.03979802, 3.90311146],
+			Vec3 Scale = [2.93596339, 3.00793624, 3.90311146],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -2457,8 +2457,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-7.31643677, -5.54469204, 0],
-			Vec3 Scale = [2, 2, 1],
+			Vec3 Translation = [-7.45455551, -5.54469204, 0],
+			Vec3 Scale = [2, 2, 10],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -2467,7 +2467,7 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [0.00162500143, 0.0145600652, 0.324999988, 1],
+			Vec4 Color = [0.110000134, 0, 1, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -2486,7 +2486,7 @@ Level =
 			bool Kinematic = false,
 			bool RotationLocked = true,
 			bool Mode2D = true,
-			bool AllowSleep = false,
+			bool AllowSleep = true,
 			bool Inherit2DMode = true,
 			Vec3 Velocity = [0, 0, 0],
 			Vec3 AngularVelocity = [0, 0, 0],
@@ -2505,19 +2505,53 @@ Level =
 		{
 			float VelocityDampening = 0.899999976,
 			float JumpDampening = 0.899999976,
-			float NegativeJumpDampening = 1.10000002,
+			float NegativeJumpDampening = 1,
 			float RotationDampening = 0.899999976,
 		},
-		EnemyHealth = 
+		Hierarchy = 
 		{
-			float EnemyLife = 1000000,
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 61,
+				},
+				Named = 
+				{
+					string Name = "shadow",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, 0, -1],
+					Vec3 Scale = [1.29999995, 1.29999995, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = false,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.436800003, 0.912912011, 0.959999979, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5275aa4d802dd6dc:Square",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 61,
+			uint Id = 62,
 		},
 		Named = 
 		{
@@ -2530,7 +2564,7 @@ Level =
 		Transform = 
 		{
 			Vec3 Translation = [2.49019814, -4.99220371, 0],
-			Vec3 Scale = [2, 2, 1],
+			Vec3 Scale = [2, 2, 10],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -2539,7 +2573,7 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [0.00162500143, 0.0145600652, 0.324999988, 1],
+			Vec4 Color = [0.110000134, 0, 1, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -2558,7 +2592,7 @@ Level =
 			bool Kinematic = false,
 			bool RotationLocked = true,
 			bool Mode2D = true,
-			bool AllowSleep = false,
+			bool AllowSleep = true,
 			bool Inherit2DMode = true,
 			Vec3 Velocity = [0, 0, 0],
 			Vec3 AngularVelocity = [0, 0, 0],
@@ -2577,12 +2611,46 @@ Level =
 		{
 			float VelocityDampening = 0.899999976,
 			float JumpDampening = 0.899999976,
-			float NegativeJumpDampening = 1.10000002,
+			float NegativeJumpDampening = 1,
 			float RotationDampening = 0.899999976,
 		},
-		EnemyHealth = 
+		Hierarchy = 
 		{
-			float EnemyLife = 1000000,
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 63,
+				},
+				Named = 
+				{
+					string Name = "shadow",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0.000808238983, -0.00188827515, -1],
+					Vec3 Scale = [1.29999995, 1.29999995, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = false,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0.436800003, 0.912912011, 0.959999979, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5275aa4d802dd6dc:Square",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
 		},
 	},
 	ArchetypeInstance = 
@@ -2590,7 +2658,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 62,
+			uint Id = 64,
 		},
 		Transform = 
 		{
@@ -2608,7 +2676,7 @@ Level =
 		string Name = "587aba45ac959f98:CheckPoint",
 		LinkId = 
 		{
-			uint Id = 63,
+			uint Id = 65,
 		},
 		Transform = 
 		{
@@ -2626,7 +2694,7 @@ Level =
 		string Name = "587aba45ac959f98:CheckPoint",
 		LinkId = 
 		{
-			uint Id = 64,
+			uint Id = 66,
 		},
 		Transform = 
 		{
@@ -2644,7 +2712,7 @@ Level =
 		string Name = "587aba45ac959f98:CheckPoint",
 		LinkId = 
 		{
-			uint Id = 65,
+			uint Id = 67,
 		},
 		Transform = 
 		{
@@ -2662,7 +2730,7 @@ Level =
 		string Name = "587aba45ac959f98:CheckPoint",
 		LinkId = 
 		{
-			uint Id = 66,
+			uint Id = 68,
 		},
 		Transform = 
 		{
@@ -2680,7 +2748,7 @@ Level =
 		string Name = "58085e5813f07145:JumpWall",
 		LinkId = 
 		{
-			uint Id = 67,
+			uint Id = 69,
 		},
 		Transform = 
 		{
@@ -2698,7 +2766,7 @@ Level =
 		string Name = "58085e5813f07145:JumpWall",
 		LinkId = 
 		{
-			uint Id = 68,
+			uint Id = 70,
 		},
 		Transform = 
 		{
@@ -2715,7 +2783,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 69,
+			uint Id = 71,
 		},
 		Named = 
 		{
@@ -2824,7 +2892,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 70,
+					uint Id = 72,
 				},
 				Named = 
 				{
@@ -2847,7 +2915,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 71,
+							uint Id = 73,
 						},
 						Named = 
 						{
@@ -2882,7 +2950,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 72,
+							uint Id = 74,
 						},
 						Named = 
 						{
@@ -2911,7 +2979,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 73,
+								uint ResolvedCog = 75,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -2931,7 +2999,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 73,
+								uint ResolvedCog = 75,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -2953,7 +3021,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 74,
+									uint Id = 76,
 								},
 								Named = 
 								{
@@ -2984,7 +3052,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 75,
+									uint Id = 77,
 								},
 								Named = 
 								{
@@ -3017,7 +3085,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 76,
+									uint Id = 78,
 								},
 								Named = 
 								{
@@ -3054,7 +3122,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 77,
+											uint Id = 79,
 										},
 										Named = 
 										{
@@ -3114,7 +3182,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 78,
+											uint Id = 80,
 										},
 										Named = 
 										{
@@ -3151,7 +3219,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 79,
+									uint Id = 81,
 								},
 								Named = 
 								{
@@ -3181,7 +3249,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 73,
+					uint Id = 75,
 				},
 				Named = 
 				{
@@ -3208,7 +3276,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 80,
+					uint Id = 82,
 				},
 				Named = 
 				{
@@ -3283,13 +3351,31 @@ Level =
 				{
 				},
 			},
+			ArchetypeInstance = 
+			{
+				string Name = "58b66ed179c9e848:archershadow",
+				LinkId = 
+				{
+					uint Id = 83,
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, 0, 0],
+					Vec3 Scale = [1.14999998, 1.14999998, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Named = 
+				{
+					string Name = "shadow",
+				},
+			},
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 81,
+			uint Id = 84,
 		},
 		Named = 
 		{
@@ -3398,7 +3484,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 82,
+					uint Id = 85,
 				},
 				Named = 
 				{
@@ -3421,7 +3507,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 83,
+							uint Id = 86,
 						},
 						Named = 
 						{
@@ -3456,7 +3542,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 84,
+							uint Id = 87,
 						},
 						Named = 
 						{
@@ -3485,7 +3571,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 85,
+								uint ResolvedCog = 88,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -3505,7 +3591,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 85,
+								uint ResolvedCog = 88,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -3527,7 +3613,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 86,
+									uint Id = 89,
 								},
 								Named = 
 								{
@@ -3558,7 +3644,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 87,
+									uint Id = 90,
 								},
 								Named = 
 								{
@@ -3591,7 +3677,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 88,
+									uint Id = 91,
 								},
 								Named = 
 								{
@@ -3628,7 +3714,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 89,
+											uint Id = 92,
 										},
 										Named = 
 										{
@@ -3688,7 +3774,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 90,
+											uint Id = 93,
 										},
 										Named = 
 										{
@@ -3725,7 +3811,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 91,
+									uint Id = 94,
 								},
 								Named = 
 								{
@@ -3755,7 +3841,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 85,
+					uint Id = 88,
 				},
 				Named = 
 				{
@@ -3782,7 +3868,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 92,
+					uint Id = 95,
 				},
 				Named = 
 				{
@@ -3864,7 +3950,7 @@ Level =
 		string Name = "587a874eb37cd710:EnemyLimit",
 		LinkId = 
 		{
-			uint Id = 93,
+			uint Id = 96,
 		},
 		Transform = 
 		{
@@ -3882,7 +3968,7 @@ Level =
 		string Name = "587a874eb37cd710:EnemyLimit",
 		LinkId = 
 		{
-			uint Id = 94,
+			uint Id = 97,
 		},
 		Transform = 
 		{
@@ -3900,7 +3986,7 @@ Level =
 		string Name = "587a874eb37cd710:EnemyLimit",
 		LinkId = 
 		{
-			uint Id = 95,
+			uint Id = 98,
 		},
 		Transform = 
 		{
@@ -3917,7 +4003,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 96,
+			uint Id = 99,
 		},
 		Named = 
 		{
@@ -3978,7 +4064,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 97,
+			uint Id = 100,
 		},
 		Named = 
 		{
@@ -4040,7 +4126,7 @@ Level =
 		string Name = "587a874eb37cd710:EnemyLimit",
 		LinkId = 
 		{
-			uint Id = 98,
+			uint Id = 101,
 		},
 		Transform = 
 		{
@@ -4053,12 +4139,19 @@ Level =
 			string Name = "EnemyLimit",
 		},
 	},
-	ArchetypeInstance = 
+	Cog = 
 	{
-		string Name = "58877e4e46a8a555:Melee",
 		LinkId = 
 		{
-			uint Id = 99,
+			uint Id = 102,
+		},
+		Named = 
+		{
+			string Name = "Melee",
+		},
+		Archetyped = 
+		{
+			string Name = "58877e4e46a8a555:Melee",
 		},
 		Transform = 
 		{
@@ -4066,9 +4159,539 @@ Level =
 			Vec3 Scale = [1.10000002, 1.10000002, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
-		Named = 
+		Sprite = 
 		{
-			string Name = "Melee",
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "587ab3f53167be36:MeleeGood",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		BoxCollider = 
+		{
+			bool Ghost = false,
+			bool SendsMessages = true,
+			bool Seamless = true,
+			string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+			string SerializedGroupName = "57c6b63fee8fbbb0:Enemy",
+			Vec3 Offset = [0, 0, 0],
+			Vec3 Size = [1.5, 2, 0.5],
+		},
+		RigidBody = 
+		{
+			bool Static = false,
+			bool Asleep = false,
+			bool Kinematic = false,
+			bool RotationLocked = true,
+			bool Mode2D = true,
+			bool AllowSleep = false,
+			bool Inherit2DMode = true,
+			Vec3 Velocity = [0, 0, 0],
+			Vec3 AngularVelocity = [0, 0, 0],
+		},
+		StateMachine = 
+		{
+			string InitStateName = "",
+			bool PrintDebug = true,
+		},
+		DragEffect = 
+		{
+			bool Active = true,
+			bool WakeUpOnChange = true,
+			float Drag = 0,
+			float AngularDrag = 0,
+		},
+		EnemyHealth = 
+		{
+			float EnemyLife = 150,
+		},
+		VelRotDampening = 
+		{
+			float VelocityDampening = 0.899999976,
+			float JumpDampening = 0.899999976,
+			float NegativeJumpDampening = 1.10000002,
+			float RotationDampening = 0.899999976,
+		},
+		EnemiesCollision = 
+		{
+		},
+		IgnoreSpaceEffects = 
+		{
+			bool Drag = false,
+			bool Flow = false,
+			bool Force = false,
+			bool Gravity = false,
+			bool Thrust = false,
+			bool Vortex = false,
+			bool Wind = false,
+			bool Invalid = false,
+			bool Torque = false,
+			bool PointGravity = false,
+			bool PointForce = false,
+			bool Buoyancy = false,
+			bool Custom = false,
+		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 103,
+				},
+				Named = 
+				{
+					string Name = "Behavior",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-0.0889358521, 0.0291893482, 0],
+					Vec3 Scale = [1, 1, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				StateMachine = 
+				{
+					string InitStateName = "",
+					bool PrintDebug = true,
+				},
+				Hierarchy = 
+				{
+					Cog = 
+					{
+						LinkId = 
+						{
+							uint Id = 104,
+						},
+						Named = 
+						{
+							string Name = "Movement",
+						},
+						Transform = 
+						{
+							Vec3 Translation = [0.123104095, -0.123103857, 0],
+							Vec3 Scale = [1, 1, 1],
+							Quat Rotation = [0, 0, 0, 1],
+						},
+						StateMachine = 
+						{
+							string InitStateName = "Move_Idle",
+							bool PrintDebug = true,
+						},
+						Move_Idle = 
+						{
+						},
+						Move_Jump = 
+						{
+							float Impulse = 5,
+						},
+						Move_Walk = 
+						{
+							float SpeedArcher = 0.5,
+							float SpeedMelee = 0.699999988,
+							float Direction = 1,
+						},
+					},
+					Cog = 
+					{
+						LinkId = 
+						{
+							uint Id = 105,
+						},
+						Named = 
+						{
+							string Name = "MeleeAI",
+						},
+						Transform = 
+						{
+							Vec3 Translation = [0.0484113693, -0.0615520477, 0],
+							Vec3 Scale = [1, 1, 1],
+							Quat Rotation = [0, 0, 0, 1],
+						},
+						StateMachine = 
+						{
+							string InitStateName = "Melee_Patrol",
+							bool PrintDebug = true,
+						},
+						Melee_Patrol = 
+						{
+							CogPath SensorCogPath = 
+							{
+								string Path = "../../Sensor",
+								bool ErrorOnResolveToNull = false,
+								bool ErrorOnPathCantCompute = false,
+								bool ErrorOnDirectLinkFail = false,
+								bool UpdateCogOnPathChange = true,
+								bool UpdatePathOnCogChange = true,
+								bool UpdateCogOnInitialize = true,
+								bool ResolvedNullErrorOccurred = false,
+								uint ResolvedCog = 106,
+								CogPathPreference PathPreference0 = CogRelative,
+								CogPathPreference PathPreference1 = SpaceRelative,
+								CogPathPreference PathPreference2 = Absolute,
+							},
+						},
+						Melee_SeekTarget = 
+						{
+							float MaxDistance = 25,
+							float MeleeDistance = 4,
+							CogPath SensorCogPath = 
+							{
+								string Path = "../../Sensor",
+								bool ErrorOnResolveToNull = false,
+								bool ErrorOnPathCantCompute = false,
+								bool ErrorOnDirectLinkFail = false,
+								bool UpdateCogOnPathChange = true,
+								bool UpdatePathOnCogChange = true,
+								bool UpdateCogOnInitialize = true,
+								bool ResolvedNullErrorOccurred = false,
+								uint ResolvedCog = 106,
+								CogPathPreference PathPreference0 = CogRelative,
+								CogPathPreference PathPreference1 = SpaceRelative,
+								CogPathPreference PathPreference2 = Absolute,
+							},
+						},
+						Melee_Attack = 
+						{
+							float MeleeDistance = 4,
+						},
+						Melee_Stuned = 
+						{
+						},
+						Hierarchy = 
+						{
+							Cog = 
+							{
+								LinkId = 
+								{
+									uint Id = 107,
+								},
+								Named = 
+								{
+									string Name = "Melee_Patrol",
+								},
+								Transform = 
+								{
+									Vec3 Translation = [-0.0828704834, 0.0366067886, -1.87661499e-07],
+									Vec3 Scale = [1, 1, 1],
+									Quat Rotation = [0, 0, 0, 1],
+								},
+								StateMachine = 
+								{
+									string InitStateName = "Melee_Patrol_Wait",
+									bool PrintDebug = true,
+								},
+								Melee_Patrol_Walking = 
+								{
+									float Direction = 1,
+									float Duration = 1.5,
+								},
+								Melee_Patrol_Wait = 
+								{
+									float Duration = 2,
+								},
+							},
+							Cog = 
+							{
+								LinkId = 
+								{
+									uint Id = 108,
+								},
+								Named = 
+								{
+									string Name = "Melee_SeekTarget",
+								},
+								Transform = 
+								{
+									Vec3 Translation = [-0.0828742981, 0.082205534, -1.87661499e-07],
+									Vec3 Scale = [1, 1, 1],
+									Quat Rotation = [0, 0, 0, 1],
+								},
+								StateMachine = 
+								{
+									string InitStateName = "Melee_SeekTarget_Chase",
+									bool PrintDebug = true,
+								},
+								Melee_SeekTarget_Chase = 
+								{
+									float MaxDistance = 40,
+									float MeleeDistance = 4,
+								},
+								Melee_SeekTarget_Lost = 
+								{
+									float Duration = 5,
+								},
+							},
+							Cog = 
+							{
+								LinkId = 
+								{
+									uint Id = 109,
+								},
+								Named = 
+								{
+									string Name = "Melee_Attack",
+								},
+								Transform = 
+								{
+									Vec3 Translation = [-0.0745849609, -0.0123188496, 4.23751771e-07],
+									Vec3 Scale = [1, 1, 1],
+									Quat Rotation = [0, 0, 0, 1],
+								},
+								StateMachine = 
+								{
+									string InitStateName = "Melee_Attack_MeleeA",
+									bool PrintDebug = true,
+								},
+								Melee_Attack_MeleeA = 
+								{
+									float MeleeDistance = 4,
+									float MeleeAttackRate = 1,
+								},
+								Hierarchy = 
+								{
+									Cog = 
+									{
+										LinkId = 
+										{
+											uint Id = 110,
+										},
+										Named = 
+										{
+											string Name = "DamageBox",
+										},
+										Transform = 
+										{
+											Vec3 Translation = [0.158313751, 0.024895668, 0],
+											Vec3 Scale = [5, 5, 1],
+											Quat Rotation = [0, 0, 0, 1],
+										},
+										Sprite = 
+										{
+											bool Visible = false,
+											bool VisibilityCulling = true,
+											bool VisibilityEvents = true,
+											bool CastShadows = false,
+											Vec4 Color = [1, 0, 0, 0.5],
+											BlendMode BlendMode = Alpha,
+											SpriteGeometryMode GeometryMode = ZPlane,
+											string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+											string SpriteSource = "5275aa4d802dd6dc:Square",
+											bool RenderMask = false,
+											bool FlipX = false,
+											bool FlipY = false,
+											bool AnimationActive = true,
+											float AnimationSpeed = 1,
+											uint StartFrame = 0,
+										},
+										BoxCollider = 
+										{
+											bool Ghost = true,
+											bool SendsMessages = false,
+											bool Seamless = true,
+											string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+											string SerializedGroupName = "4e740859314e5515:DefaultGroup",
+											Vec3 Offset = [0, 0, 0],
+											Vec3 Size = [0.5, 0.5, 0.5],
+										},
+										RigidBody = 
+										{
+											bool Static = true,
+											bool Asleep = false,
+											bool Kinematic = false,
+											bool RotationLocked = false,
+											bool Mode2D = true,
+											bool AllowSleep = false,
+											bool Inherit2DMode = true,
+											Vec3 Velocity = [0, 0, 0],
+											Vec3 AngularVelocity = [0, 0, 0],
+										},
+										MeleeEnemiesDamage = 
+										{
+										},
+									},
+								},
+							},
+							Cog = 
+							{
+								LinkId = 
+								{
+									uint Id = 111,
+								},
+								Named = 
+								{
+									string Name = "Melee_Stuned",
+								},
+								Transform = 
+								{
+									Vec3 Translation = [-0.104863167, 0.0107212067, 0.00200055237],
+									Vec3 Scale = [1, 1, 1],
+									Quat Rotation = [0, 0, 0, 1],
+								},
+								StateMachine = 
+								{
+									string InitStateName = "Melee_Stuned_True",
+									bool PrintDebug = true,
+								},
+								Melee_Stuned_True = 
+								{
+									float StunTime = 1,
+								},
+							},
+						},
+					},
+					Cog = 
+					{
+						LinkId = 
+						{
+							uint Id = 112,
+						},
+						Named = 
+						{
+							string Name = "RageModeSmoke",
+						},
+						Transform = 
+						{
+							Vec3 Translation = [0, 0, 0],
+							Vec3 Scale = [1, 1, 1],
+							Quat Rotation = [0, 0, 0, 1],
+						},
+						SpriteParticleSystem = 
+						{
+							bool Visible = true,
+							bool VisibilityCulling = true,
+							bool VisibilityEvents = true,
+							bool CastShadows = false,
+							SystemChildMode ChildMode = Independent,
+							SystemSpace SystemSpace = WorldSpace,
+							uint DrawOrder = 0,
+							Vec4 Tint = [0.769999981, 0.138599992, 0.138599992, 0.100000001],
+							float WarmUpTime = 0,
+							ParticleGeometry GeometryMode = Billboarded,
+							ParticleRenderMode RenderMode = Blended,
+							ParticleSortMode SortMode = Sorted,
+							ParticleAnimation ParticleAnimation = Single,
+							string Texture = "559dbaeb34c81bf2:Cloud",
+							float VelocityScale = 1,
+							float LengthScale = 1,
+							float MaxParticleSize = 100,
+							Vec3 SystemSize = [50, 50, 4],
+						},
+						LinearParticleAnimator = 
+						{
+							Vec3 Force = [0, 0, 0],
+							Vec3 RandomForce = [0, 0, 0],
+							float Torque = 0,
+							float Growth = 0,
+							float Dampening = 0,
+							Vec3 Twist = [0, 0, 0],
+						},
+						ParticleColorAnimator = 
+						{
+							Vec4 Color0 = [1, 1, 1, 0],
+							Vec4 Color1 = [1, 1, 1, 1],
+							Vec4 Color2 = [1, 1, 1, 1],
+							Vec4 Color3 = [1, 1, 1, 1],
+							Vec4 Color4 = [1, 1, 1, 0],
+						},
+						BoxParticleEmitter = 
+						{
+							bool Active = false,
+							uint EmitCount = 0,
+							float EmitRate = 1000,
+							float EmitVariance = 0,
+							float Size = 3,
+							float SizeVariance = 2,
+							float Lifetime = 0.100000001,
+							float LifetimeVariance = 0.100000001,
+							float Spin = 0,
+							float SpinVariance = 50,
+							bool RandomSpin = true,
+							float Fill = 1,
+							float EmitterVelocityPercent = 0,
+							Vec3 StartVelocity = [0, 12, 0],
+							Vec3 RandomVelocity = [0.25, 0.0500000007, 0.25],
+							Vec3 TangentVelocity = [0, 0, 0],
+							Vec3 EmitterSize = [2, 2, 0],
+							bool FastMovingEmitter = false,
+						},
+						RageActive = 
+						{
+						},
+					},
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 106,
+				},
+				Named = 
+				{
+					string Name = "Sensor",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [1.90734863e-06, -2.38418579e-07, 0],
+					Vec3 Scale = [1, 1, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				BoxCollider = 
+				{
+					bool Ghost = true,
+					bool SendsMessages = true,
+					bool Seamless = true,
+					string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
+					string SerializedGroupName = "5831f2a61e419268:Sensor",
+					Vec3 Offset = [0, 0, 0],
+					Vec3 Size = [10, 5, 0.5],
+				},
+			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 113,
+				},
+				Named = 
+				{
+					string Name = "shadow",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-0.0623529591, 0, -7.62195414e-05],
+					Vec3 Scale = [1.70000005, 1.70000005, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = false,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0, 0.910000086, 1, 1],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "58b66775784e5556:Mele2",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
 		},
 	},
 	ArchetypeInstance = 
@@ -4076,11 +4699,11 @@ Level =
 		string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		LinkId = 
 		{
-			uint Id = 100,
+			uint Id = 114,
 		},
 		Transform = 
 		{
-			Vec3 Translation = [135.19957, 25.6232777, 3.81469727e-06],
+			Vec3 Translation = [135.351181, 25.5, -3],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -4094,7 +4717,7 @@ Level =
 		string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		LinkId = 
 		{
-			uint Id = 101,
+			uint Id = 115,
 		},
 		Transform = 
 		{
@@ -4112,7 +4735,7 @@ Level =
 		string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		LinkId = 
 		{
-			uint Id = 102,
+			uint Id = 116,
 		},
 		Transform = 
 		{
@@ -4130,7 +4753,7 @@ Level =
 		string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		LinkId = 
 		{
-			uint Id = 103,
+			uint Id = 117,
 		},
 		Transform = 
 		{
@@ -4148,7 +4771,7 @@ Level =
 		string Name = "57c6f3818ec7874f:PrototypeEnemy",
 		LinkId = 
 		{
-			uint Id = 104,
+			uint Id = 118,
 		},
 		Transform = 
 		{
@@ -4165,7 +4788,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 105,
+			uint Id = 119,
 		},
 		Named = 
 		{
@@ -4204,7 +4827,7 @@ Level =
 		string Name = "58085e5813f07145:JumpWall",
 		LinkId = 
 		{
-			uint Id = 106,
+			uint Id = 120,
 		},
 		Transform = 
 		{
@@ -4222,7 +4845,7 @@ Level =
 		string Name = "58085e5813f07145:JumpWall",
 		LinkId = 
 		{
-			uint Id = 107,
+			uint Id = 121,
 		},
 		Transform = 
 		{
@@ -4239,7 +4862,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 108,
+			uint Id = 122,
 		},
 		Named = 
 		{
@@ -4272,7 +4895,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 109,
+			uint Id = 123,
 		},
 		Named = 
 		{
@@ -4359,7 +4982,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 110,
+			uint Id = 124,
 		},
 		Named = 
 		{
@@ -4446,7 +5069,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 111,
+			uint Id = 125,
 		},
 		Named = 
 		{
@@ -4533,7 +5156,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 112,
+			uint Id = 126,
 		},
 		Named = 
 		{
@@ -4620,7 +5243,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 113,
+			uint Id = 127,
 		},
 		Named = 
 		{
@@ -4707,7 +5330,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 114,
+			uint Id = 128,
 		},
 		Named = 
 		{
@@ -4794,7 +5417,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 115,
+			uint Id = 129,
 		},
 		Named = 
 		{
@@ -4903,7 +5526,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 116,
+					uint Id = 130,
 				},
 				Named = 
 				{
@@ -4926,7 +5549,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 117,
+							uint Id = 131,
 						},
 						Named = 
 						{
@@ -4961,7 +5584,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 118,
+							uint Id = 132,
 						},
 						Named = 
 						{
@@ -4990,7 +5613,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 119,
+								uint ResolvedCog = 133,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -5010,7 +5633,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 119,
+								uint ResolvedCog = 133,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -5032,7 +5655,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 120,
+									uint Id = 134,
 								},
 								Named = 
 								{
@@ -5063,7 +5686,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 121,
+									uint Id = 135,
 								},
 								Named = 
 								{
@@ -5096,7 +5719,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 122,
+									uint Id = 136,
 								},
 								Named = 
 								{
@@ -5133,7 +5756,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 123,
+											uint Id = 137,
 										},
 										Named = 
 										{
@@ -5193,7 +5816,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 124,
+											uint Id = 138,
 										},
 										Named = 
 										{
@@ -5230,7 +5853,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 125,
+									uint Id = 139,
 								},
 								Named = 
 								{
@@ -5260,7 +5883,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 119,
+					uint Id = 133,
 				},
 				Named = 
 				{
@@ -5287,7 +5910,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 126,
+					uint Id = 140,
 				},
 				Named = 
 				{
@@ -5368,7 +5991,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 127,
+			uint Id = 141,
 		},
 		Named = 
 		{
@@ -5477,7 +6100,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 128,
+					uint Id = 142,
 				},
 				Named = 
 				{
@@ -5500,7 +6123,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 129,
+							uint Id = 143,
 						},
 						Named = 
 						{
@@ -5535,7 +6158,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 130,
+							uint Id = 144,
 						},
 						Named = 
 						{
@@ -5564,7 +6187,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 131,
+								uint ResolvedCog = 145,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -5584,7 +6207,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 131,
+								uint ResolvedCog = 145,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -5606,7 +6229,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 132,
+									uint Id = 146,
 								},
 								Named = 
 								{
@@ -5637,7 +6260,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 133,
+									uint Id = 147,
 								},
 								Named = 
 								{
@@ -5670,7 +6293,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 134,
+									uint Id = 148,
 								},
 								Named = 
 								{
@@ -5707,7 +6330,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 135,
+											uint Id = 149,
 										},
 										Named = 
 										{
@@ -5767,7 +6390,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 136,
+											uint Id = 150,
 										},
 										Named = 
 										{
@@ -5804,7 +6427,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 137,
+									uint Id = 151,
 								},
 								Named = 
 								{
@@ -5834,7 +6457,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 131,
+					uint Id = 145,
 				},
 				Named = 
 				{
@@ -5861,7 +6484,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 138,
+					uint Id = 152,
 				},
 				Named = 
 				{
@@ -5942,7 +6565,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 139,
+			uint Id = 153,
 		},
 		Named = 
 		{
@@ -6046,7 +6669,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 140,
+					uint Id = 154,
 				},
 				Named = 
 				{
@@ -6069,7 +6692,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 141,
+							uint Id = 155,
 						},
 						Named = 
 						{
@@ -6104,7 +6727,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 142,
+							uint Id = 156,
 						},
 						Named = 
 						{
@@ -6133,7 +6756,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 143,
+								uint ResolvedCog = 157,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -6153,7 +6776,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 143,
+								uint ResolvedCog = 157,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -6172,7 +6795,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 144,
+									uint Id = 158,
 								},
 								Named = 
 								{
@@ -6203,7 +6826,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 145,
+									uint Id = 159,
 								},
 								Named = 
 								{
@@ -6234,7 +6857,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 146,
+									uint Id = 160,
 								},
 								Named = 
 								{
@@ -6262,7 +6885,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 147,
+											uint Id = 161,
 										},
 										Named = 
 										{
@@ -6324,7 +6947,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 148,
+									uint Id = 162,
 								},
 								Named = 
 								{
@@ -6352,7 +6975,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 149,
+							uint Id = 163,
 						},
 						Named = 
 						{
@@ -6433,7 +7056,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 143,
+					uint Id = 157,
 				},
 				Named = 
 				{
@@ -6462,7 +7085,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 150,
+			uint Id = 164,
 		},
 		Named = 
 		{
@@ -6566,7 +7189,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 151,
+					uint Id = 165,
 				},
 				Named = 
 				{
@@ -6589,7 +7212,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 152,
+							uint Id = 166,
 						},
 						Named = 
 						{
@@ -6624,7 +7247,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 153,
+							uint Id = 167,
 						},
 						Named = 
 						{
@@ -6653,7 +7276,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 154,
+								uint ResolvedCog = 168,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -6673,7 +7296,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 154,
+								uint ResolvedCog = 168,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -6692,7 +7315,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 155,
+									uint Id = 169,
 								},
 								Named = 
 								{
@@ -6723,7 +7346,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 156,
+									uint Id = 170,
 								},
 								Named = 
 								{
@@ -6754,7 +7377,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 157,
+									uint Id = 171,
 								},
 								Named = 
 								{
@@ -6782,7 +7405,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 158,
+											uint Id = 172,
 										},
 										Named = 
 										{
@@ -6844,7 +7467,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 159,
+									uint Id = 173,
 								},
 								Named = 
 								{
@@ -6872,7 +7495,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 160,
+							uint Id = 174,
 						},
 						Named = 
 						{
@@ -6953,7 +7576,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 154,
+					uint Id = 168,
 				},
 				Named = 
 				{
@@ -6982,7 +7605,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 161,
+			uint Id = 175,
 		},
 		Named = 
 		{
@@ -7086,7 +7709,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 162,
+					uint Id = 176,
 				},
 				Named = 
 				{
@@ -7109,7 +7732,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 163,
+							uint Id = 177,
 						},
 						Named = 
 						{
@@ -7144,7 +7767,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 164,
+							uint Id = 178,
 						},
 						Named = 
 						{
@@ -7173,7 +7796,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 165,
+								uint ResolvedCog = 179,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -7193,7 +7816,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 165,
+								uint ResolvedCog = 179,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -7212,7 +7835,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 166,
+									uint Id = 180,
 								},
 								Named = 
 								{
@@ -7243,7 +7866,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 167,
+									uint Id = 181,
 								},
 								Named = 
 								{
@@ -7274,7 +7897,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 168,
+									uint Id = 182,
 								},
 								Named = 
 								{
@@ -7302,7 +7925,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 169,
+											uint Id = 183,
 										},
 										Named = 
 										{
@@ -7364,7 +7987,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 170,
+									uint Id = 184,
 								},
 								Named = 
 								{
@@ -7392,7 +8015,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 171,
+							uint Id = 185,
 						},
 						Named = 
 						{
@@ -7473,7 +8096,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 165,
+					uint Id = 179,
 				},
 				Named = 
 				{
@@ -7502,7 +8125,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 172,
+			uint Id = 186,
 		},
 		Named = 
 		{
@@ -7606,7 +8229,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 173,
+					uint Id = 187,
 				},
 				Named = 
 				{
@@ -7629,7 +8252,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 174,
+							uint Id = 188,
 						},
 						Named = 
 						{
@@ -7664,7 +8287,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 175,
+							uint Id = 189,
 						},
 						Named = 
 						{
@@ -7693,7 +8316,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 176,
+								uint ResolvedCog = 190,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -7713,7 +8336,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 176,
+								uint ResolvedCog = 190,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -7732,7 +8355,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 177,
+									uint Id = 191,
 								},
 								Named = 
 								{
@@ -7763,7 +8386,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 178,
+									uint Id = 192,
 								},
 								Named = 
 								{
@@ -7794,7 +8417,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 179,
+									uint Id = 193,
 								},
 								Named = 
 								{
@@ -7822,7 +8445,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 180,
+											uint Id = 194,
 										},
 										Named = 
 										{
@@ -7884,7 +8507,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 181,
+									uint Id = 195,
 								},
 								Named = 
 								{
@@ -7912,7 +8535,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 182,
+							uint Id = 196,
 						},
 						Named = 
 						{
@@ -7993,7 +8616,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 176,
+					uint Id = 190,
 				},
 				Named = 
 				{
@@ -8023,7 +8646,7 @@ Level =
 		string Name = "587a874eb37cd710:EnemyLimit",
 		LinkId = 
 		{
-			uint Id = 183,
+			uint Id = 197,
 		},
 		Transform = 
 		{
@@ -8040,7 +8663,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 184,
+			uint Id = 198,
 		},
 		Named = 
 		{
@@ -8075,7 +8698,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 185,
+			uint Id = 199,
 		},
 		Named = 
 		{
@@ -8110,7 +8733,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 186,
+			uint Id = 200,
 		},
 		Named = 
 		{
@@ -8145,7 +8768,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 187,
+			uint Id = 201,
 		},
 		Named = 
 		{
@@ -8180,7 +8803,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 188,
+			uint Id = 202,
 		},
 		Named = 
 		{
@@ -8215,7 +8838,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 189,
+			uint Id = 203,
 		},
 		Named = 
 		{
@@ -8250,7 +8873,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 190,
+			uint Id = 204,
 		},
 		Named = 
 		{
@@ -8285,7 +8908,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 191,
+			uint Id = 205,
 		},
 		Named = 
 		{
@@ -8320,7 +8943,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 192,
+			uint Id = 206,
 		},
 		Named = 
 		{
@@ -8355,7 +8978,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 193,
+			uint Id = 207,
 		},
 		Named = 
 		{
@@ -8390,7 +9013,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 194,
+			uint Id = 208,
 		},
 		Named = 
 		{
@@ -8425,7 +9048,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 195,
+			uint Id = 209,
 		},
 		Named = 
 		{
@@ -8460,7 +9083,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 196,
+			uint Id = 210,
 		},
 		Named = 
 		{
@@ -8495,7 +9118,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 197,
+			uint Id = 211,
 		},
 		Named = 
 		{
@@ -8530,7 +9153,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 198,
+			uint Id = 212,
 		},
 		Named = 
 		{
@@ -8565,7 +9188,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 199,
+			uint Id = 213,
 		},
 		Named = 
 		{
@@ -8601,7 +9224,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 200,
+			uint Id = 214,
 		},
 		Transform = 
 		{
@@ -8619,7 +9242,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 201,
+			uint Id = 215,
 		},
 		Transform = 
 		{
@@ -8636,7 +9259,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 202,
+			uint Id = 216,
 		},
 		Named = 
 		{
@@ -8657,7 +9280,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 203,
+					uint Id = 217,
 				},
 				Named = 
 				{

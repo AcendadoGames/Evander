@@ -81,7 +81,7 @@ class KeyboardController : ZilchComponent
     function OnLogicUpdate(event : UpdateEvent)
     {
         var player : Real3 = this.Owner.Transform.Translation;
-        var distance = Math.Distance(this.Owner.Transform.Translation, this.Space.FindObjectByName("PrototypePlayer").TargetSelector.TargetPosition); 
+        var distance = Math.Distance(this.Owner.Transform.Translation, this.Owner.TargetSelector.TargetPosition); 
         var ev  = ZilchEvent();
         var position = Real3(this.Owner.TargetSelector.TargetPosition.X, this.Owner.TargetSelector.TargetPosition.Y, 6);
         
@@ -147,8 +147,13 @@ class KeyboardController : ZilchComponent
         if ((Zero.Keyboard.KeyIsDown(Keys.J) || this.Controller.LeftTrigger > 0.2)
             && this.Space.GlobalVariables.Dashing == false && !this.Space.GlobalVariables.NoEnemies) /*Targetting while not in dash, creating the target*/
         { 
-            this.A = this.Space.CreateAtPosition(this.TargetSprite1, position);
-            this.B = this.Space.CreateAtPosition(this.TargetSprite2, position);
+            if(this.A != null)
+            {
+                this.A.Destroy();
+                this.B.Destroy();
+            }
+                this.A = this.Space.CreateAtPosition(this.TargetSprite1, position);
+                this.B = this.Space.CreateAtPosition(this.TargetSprite2, position);
         }
         
         if( (this.Space.GlobalVariables.OnGroundCanDash == false || distance > 25) && this.A != null && position != Real3(0, 0, 0))/*selcting the color if you can dash*/

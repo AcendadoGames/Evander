@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [-74.9577026, 5.11144018, 0],
+		Vec3 Translation = [85.1183319, 22.546833, 1.14440918e-05],
 		Vec3 Scale = [0.140000001, 0.140000001, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -63,6 +63,9 @@ Cog =
 		string InitStateName = "Archer_Patrol",
 		bool PrintDebug = false,
 	},
+	FindPath = 
+	{
+	},
 	VelRotDampening = 
 	{
 		float VelocityDampening = 0.899999976,
@@ -72,7 +75,7 @@ Cog =
 	},
 	EnemyHealth = 
 	{
-		float EnemyLife = 1000,
+		float EnemyLife = 100,
 	},
 	MassOverride = 
 	{
@@ -474,7 +477,7 @@ Cog =
 			Transform = 
 			{
 				Vec3 Translation = [0.027009964, 0.0395934582, 1.37230381e-06],
-				Vec3 Scale = [1, 0.5, 1],
+				Vec3 Scale = [5, 2, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},
 			BoxCollider = 
@@ -485,7 +488,7 @@ Cog =
 				string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
 				string SerializedGroupName = "5831f2a61e419268:Sensor",
 				Vec3 Offset = [0, 0, 0],
-				Vec3 Size = [60, 25, 0.5],
+				Vec3 Size = [15, 15, 0.5],
 			},
 		},
 		Cog = 
@@ -565,6 +568,24 @@ Cog =
 			},
 			RageActive = 
 			{
+			},
+		},
+		ArchetypeInstance = 
+		{
+			string Name = "58b66ed179c9e848:archershadow",
+			LinkId = 
+			{
+				uint Id = 13,
+			},
+			Transform = 
+			{
+				Vec3 Translation = [0, 0, 0],
+				Vec3 Scale = [1.14999998, 1.14999998, 1],
+				Quat Rotation = [0, 0, 0, 1],
+			},
+			Named = 
+			{
+				string Name = "Archershadow",
 			},
 		},
 	},

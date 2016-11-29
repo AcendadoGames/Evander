@@ -55,7 +55,6 @@ class TargetSelector : ZilchComponent
             
         if(this.A.All.IsNotEmpty)
         {
-            //this.TargetPosition = this.A[0];
             if(this.Controller.IsActive)
             {
                 this.RightStickInput();

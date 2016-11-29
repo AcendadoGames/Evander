@@ -8,13 +8,9 @@ Cog =
 	{
 		string Name = "PrototypeEnemy",
 	},
-	Archetyped = 
-	{
-		string Name = "57c6f3818ec7874f:PrototypeEnemy",
-	},
 	Transform = 
 	{
-		Vec3 Translation = [135.351181, 25.5, -3],
+		Vec3 Translation = [135.19957, 25.6232777, 3.81469727e-06],
 		Vec3 Scale = [1, 1, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -24,7 +20,7 @@ Cog =
 		bool VisibilityCulling = true,
 		bool VisibilityEvents = true,
 		bool CastShadows = false,
-		Vec4 Color = [1, 0, 0.000599861145, 1],
+		Vec4 Color = [1, 0, 0, 1],
 		BlendMode BlendMode = Alpha,
 		SpriteGeometryMode GeometryMode = ZPlane,
 		string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -80,43 +76,5 @@ Cog =
 		bool PointForce = false,
 		bool Buoyancy = false,
 		bool Custom = false,
-	},
-	Hierarchy = 
-	{
-		Cog = 
-		{
-			LinkId = 
-			{
-				uint Id = 2,
-			},
-			Named = 
-			{
-				string Name = "shadow",
-			},
-			Transform = 
-			{
-				Vec3 Translation = [0, 0, -1],
-				Vec3 Scale = [1.29999995, 1.29999995, 1],
-				Quat Rotation = [0, 0, 0, 1],
-			},
-			Sprite = 
-			{
-				bool Visible = false,
-				bool VisibilityCulling = true,
-				bool VisibilityEvents = true,
-				bool CastShadows = false,
-				Vec4 Color = [0.436800003, 0.912912011, 0.959999979, 1],
-				BlendMode BlendMode = Alpha,
-				SpriteGeometryMode GeometryMode = ZPlane,
-				string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-				string SpriteSource = "5275aa4d802dd6dc:Square",
-				bool RenderMask = false,
-				bool FlipX = false,
-				bool FlipY = false,
-				bool AnimationActive = true,
-				float AnimationSpeed = 1,
-				uint StartFrame = 0,
-			},
-		},
 	},
 },

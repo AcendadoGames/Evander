@@ -4,27 +4,51 @@ class InGameMenuScript : ZilchComponent
     var InGameMenu: Level = null; 
     [Property]
     var InGameMenuSpace: Archetype = null;
+    
     var Space2: Space = null;
+    
+    var Controller:Gamepad = null;
     
     function Initialize(init : CogInitializer)
     {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
         Zero.Connect(this.GameSession, Events.GameRequestQuit, this.GameRequestQuit);
         this.Space2 = this.GameSession.CreateNamedSpace("InGameMenuSpace", this.InGameMenuSpace);
         this.Space2.LoadLevel(this.InGameMenu); 
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
 
     function GameRequestQuit (event : GameEvent)
     {
         event.Handled = true;
         
-        var spaces = this.GameSession.AllSpaces;
-        foreach( var space in spaces)
+        if(!this.Space.TimeSpace.Paused)
         {
-            space.TimeSpace.TogglePause();
+            var spaces = this.GameSession.AllSpaces;
+            
+            foreach( var space in spaces)
+            {
+                space.TimeSpace.TogglePause();
+            }
+            
+            this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = this.Space.TimeSpace.Paused;
         }
-        if(this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active == false)
-            this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = true;
-        else
-            this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = false;
+    }
+    
+    function OnLogicUpdate (event :UpdateEvent)
+    {
+        this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = this.Space.TimeSpace.Paused;
+        if(this.Controller.IsButtonPressed(Buttons.Start))
+            {
+            var spaces = this.GameSession.AllSpaces;
+            
+            foreach( var space in spaces)
+            {
+                space.TimeSpace.TogglePause();
+            }
+            
+            this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = this.Space.TimeSpace.Paused;
+
+            }
     }
 }
