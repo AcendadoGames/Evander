@@ -145,6 +145,7 @@ class Janus_Phase_1_Attack : State
             this.TimerForArrowAttack = 0;
             this.TimerForArmAttack = 0;
             
+            
             this.Owner.FindChildByName("ArmDamage1").Sprite.Visible = false;
             
             this.RandomNum = 0;

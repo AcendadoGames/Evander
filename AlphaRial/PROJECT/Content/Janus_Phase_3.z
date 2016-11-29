@@ -49,7 +49,7 @@ class Janus_Phase_3_Attack : State
     }
     [Override]function Enter()
     {
-        Console.WriteLine("Phase2");
+        Console.WriteLine("Phase3");
         Console.WriteLine("Attacking");
         this.JanusTotalHealth = this.Space.FindObjectByName("Janus").JanusHealth.JanusHealth;
     }
@@ -104,7 +104,7 @@ class Janus_Phase_3_Attack : State
                 
                 if (this.TimerForNextAttack >= this.AttackTime)
                 {
-                    this.RandomNum = this.RandomGenerator.DieRoll(3);
+                    this.RandomNum = this.RandomGenerator.DieRoll(2);
                     this.TimerForNextAttack = 0;
                 }
                 /*--------------------------------------First Attack-----------------------------------------------*/
@@ -143,10 +143,11 @@ class Janus_Phase_3_Attack : State
                 /*--------------------------------------------------------------------------------------------------*/
                 if (this.JanusTotalHealth <= this.Phase3RecoveryHealth)
                 {
-                    this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_3_Recover);
+                    this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_3_Explosion);
                 }
             }
         }
+
     [Override] function Exit()
         {
             this.TimerForNextAttack = 0;
@@ -159,65 +160,75 @@ class Janus_Phase_3_Attack : State
             this.RandomNum = 0;
         }
     }
-    
-class Janus_Phase_3_Recover : State
+class Janus_Phase_3_Explosion : State
 {
-    var JanusTotalHealth : Real;
-    
     [Property]
-    var Phase1MinHealth : Real = 100;
+    var ExplosionTimer : Real = 3;
+    [Property]
+    var Change : Real = 0.07;
     
-    var HitCounter : Integer;
-    var CanHeal :  Boolean = true;
+    var Janus :Cog = null;
+    var JanusPos : Real3;
+    var JanusScale : Real3;
+    var Timer1 : Real = 0;
+    var Timer : Real = 0;
+    var RandomGenerator : Random = Random();
+    
+    
+    var RandomNum1Color : Real;
+    var RandomNum2Color : Real;
+    
+    var RandomNum1Pos : Real;
+    var RandomNum2Pos : Real;
+    
+    var RandomNum1Scale : Real;
+    var RandomNum2Scale : Real;
     
     function Initialize(init : CogInitializer)
     {
         this.StateInitialize(init);
+        this.Janus = this.Owner.Parent.Parent.Parent;
+        this.JanusPos = this.Janus.Transform.Translation;
+        this.JanusScale = this.Janus.Transform.Scale;
     }
     
-    [Override] function Enter()
+    [Override]function Update(event : UpdateEvent)
     {
-        this.Space.FindObjectByName("HealingEffect").BoxParticleEmitter.Active = true;
         
-        Zero.Connect(this.Owner, Events.CollisionStarted, this.DamageReceived);
-        this.Space.FindObjectByName("Janus").JanusHealth.Recovering = true;
-        this.JanusTotalHealth = this.Space.FindObjectByName("Janus").JanusHealth.JanusHealth;
-        this.HitCounter = 10;
+        this.Janus.Transform.Translation = this.JanusPos;
         
-        Console.WriteLine("Recovering");
-    }
-    
-    [Override] function Update(event: UpdateEvent)
-    {
-        //Console.WriteLine (this.JanusTotalHealth);
-        if(this.HitCounter <= 0)
-            this.CanHeal = false;
+        this.RandomNum1Color = this.RandomGenerator.Range(0,0.7);
+        this.RandomNum2Color = this.RandomGenerator.Range(0,0.2);
         
-        if(this.CanHeal == true)
-            this.Owner.Parent.Parent.Parent.JanusHealth.JanusHealth += 0.9;
-            
-            
-        if (this.Owner.Parent.Parent.Parent.JanusHealth.JanusHealth >= 300)
+        
+        this.RandomNum1Pos = this.RandomGenerator.Range(-3,3);
+        this.RandomNum2Pos = this.RandomGenerator.Range(-3,3);
+        
+        this.RandomNum1Scale = this.RandomGenerator.Range(1 ,1.5);
+        this.RandomNum2Scale = this.RandomGenerator.Range(1 ,1.5);
+        
+        this.Timer += event.Dt;
+        
+        
+        
+        if(this.Timer >= this.ExplosionTimer)
         {
-            this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_3_Attack);
-            this.Exit();
+            Console.WriteLine("BOOOOM CHAKALAKA");
+            
+            
         }
-        if(this.CanHeal == false)
-        {}
-            //this.Owner.StateMachine.FindStateMachineFromRoot("Janus_Ai").ChangeState("Janus_Phase_3");
-    }
-    [Override] function Exit()
-    {
-        this.Space.FindObjectByName("HealingEffect").BoxParticleEmitter.Active = false;
-        this.Space.FindObjectByName("Janus").JanusHealth.Recovering = false;
-        this.CanHeal = true;
-        Zero.Disconnect(this.Owner, Events.CollisionStarted, this);
-    }
-    function DamageReceived(event : CollisionEvent)
-    {
-        if(event.OtherObject.Name == "damage")
+        else
         {
-            this.HitCounter -= 1;
+            this.Timer1 += event.Dt;
+            
+            if(this.Timer1 >= this.Change)
+            {
+                this.Janus.Transform.Translation = Real3(this.JanusPos.X + this.RandomNum1Pos, this.JanusPos.Y + this.RandomNum2Pos , 0);
+                this.Janus.Sprite.Color = Real4(1, this.RandomNum1Color, this.RandomNum2Color, 1);
+                this.Janus.Transform.Scale = Real3(this.RandomNum1Scale, this.RandomNum2Scale, this.JanusScale.Z);
+                this.Timer1 = 0;
+            }
+            
         }
     }
 }

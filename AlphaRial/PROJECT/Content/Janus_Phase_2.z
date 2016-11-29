@@ -104,7 +104,7 @@ class Janus_Phase_2_Attack : State
                 
                 if (this.TimerForNextAttack >= this.AttackTime)
                 {
-                    this.RandomNum = this.RandomGenerator.DieRoll(3);
+                    this.RandomNum = this.RandomGenerator.DieRoll(2);
                     this.TimerForNextAttack = 0;
                 }
                 /*--------------------------------------First Attack-----------------------------------------------*/
