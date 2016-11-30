@@ -31,6 +31,11 @@ class Janus_Phase_3_Attack : State
     var NumberOfArrows : Real = 30;
     [Property]
     var WaveAttackSpeed : Real = 0.7;
+    [Property]
+    var FadeTime : Real = 3;
+    [Property]
+    var BlackTime : Real = 1;
+    
     
     var RandomGenerator : Random = Random();
     var RandomNum : Integer;
@@ -38,8 +43,12 @@ class Janus_Phase_3_Attack : State
     var TimerForArmAttack : Real = 0.0;
     var TimerForArrowAttack : Real = 0.0;
     var TimerForWaveAttack : Real = 0.0;
+    var TimerForFade : Real =0.0;
+    var TimerForBlackS :  Real = 0.0; 
     var ColorForPreAttack : Real4 = Real4(0.0, 0.0, 1, 1);
     var ColorForAttack : Real4 = Real4(1, 0.0, 0.0, 1);
+    
+    var Attack : Boolean = true;
     
     function Initialize(init : CogInitializer)
     {
@@ -95,10 +104,10 @@ class Janus_Phase_3_Attack : State
             var distanceToPlayer = Math.Distance(playerPosition,ownerPosition);
             
             //Console.WriteLine(distanceToPlayer);
-            
+           // Console.WriteLine(this.JanusTotalHealth);
             this.JanusTotalHealth = this.Space.FindObjectByName("Janus").JanusHealth.JanusHealth;
             
-            if(this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true)
+            if(this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true && this.Attack == true)
             {
                 this.TimerForNextAttack += event.Dt;
                 
@@ -141,9 +150,24 @@ class Janus_Phase_3_Attack : State
 
                 }
                 /*--------------------------------------------------------------------------------------------------*/
-                if (this.JanusTotalHealth <= this.Phase3RecoveryHealth)
+            }
+        if (this.JanusTotalHealth <= this.Phase3RecoveryHealth)
+            {
+                Console.WriteLine(this.Space.FindObjectByName("FadeOut").Sprite.Color.W);
+                this.GameSession.FindSpaceByName("HudSpace").LevelSettings.CameraViewport.Active = false;
+                this.Attack = false;
+                this.TimerForFade += event.Dt;
+                    
+                if(this.TimerForFade >= this.FadeTime)
                 {
-                    this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_3_Explosion);
+                    if (this.Space.FindObjectByName("FadeOut").Sprite.Color.W <= 0.999999 )
+                            this.Space.FindObjectByName("FadeOut").Sprite.Color += Real4(0,0,0,0.01);
+                }
+                if (this.Space.FindObjectByName("FadeOut").Sprite.Color.W >= 0.999999 )
+                {
+                    this.TimerForBlackS += event.Dt;
+                    if (this.TimerForBlackS >= this.BlackTime)
+                        this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_3_Explosion);
                 }
             }
         }
@@ -191,9 +215,20 @@ class Janus_Phase_3_Explosion : State
         this.JanusPos = this.Janus.Transform.Translation;
         this.JanusScale = this.Janus.Transform.Scale;
     }
-    
+    [Override]function Enter()
+    {
+        this.Space.FindObjectByName("PrototypePlayer").Transform.Translation = Real3(-14,2,0);
+        this.Space.FindObjectByName("PrototypePlayer").MovementController.CanPlay = false;
+        this.Space.GlobalVariables.EnablePlay = false;
+        this.Space.FindObjectByName("Camera").NewCameraLogic.CameraCanMove = false;
+        this.Space.FindObjectByName("Camera").Transform.Translation = Real3(this.Janus.Transform.Translation.X, this.Janus.Transform.Translation.Y + 5,this.Space.FindObjectByName("Camera").Transform.Translation.Z);
+    }
     [Override]function Update(event : UpdateEvent)
     {
+        //Console.WriteLine(this.Space.FindObjectByName("FadeOut").Sprite.Color.W);
+        var change : Boolean = false;
+        if(this.Space.FindObjectByName("FadeOut").Sprite.Color.W >= 0.02)
+            this.Space.FindObjectByName("FadeOut").Sprite.Color -= Real4(0,0,0,0.015);
         
         this.Janus.Transform.Translation = this.JanusPos;
         
@@ -207,21 +242,22 @@ class Janus_Phase_3_Explosion : State
         this.RandomNum1Scale = this.RandomGenerator.Range(1 ,1.5);
         this.RandomNum2Scale = this.RandomGenerator.Range(1 ,1.5);
         
-        this.Timer += event.Dt;
-        
-        
-        
+        if (this.Space.FindObjectByName("FadeOut").Sprite.Color.W <= 0.5)
+        {
+            this.Timer += event.Dt;
+            change = true;
+        }
         if(this.Timer >= this.ExplosionTimer)
         {
+            this.Space.FindObjectByName("Explosion1").BoxParticleEmitter.Active = true;
+            this.Space.FindObjectByName("Explosion2").BoxParticleEmitter.Active = true;
             Console.WriteLine("BOOOOM CHAKALAKA");
-            
-            
         }
         else
         {
             this.Timer1 += event.Dt;
             
-            if(this.Timer1 >= this.Change)
+            if(this.Timer1 >= this.Change && change == true)
             {
                 this.Janus.Transform.Translation = Real3(this.JanusPos.X + this.RandomNum1Pos, this.JanusPos.Y + this.RandomNum2Pos , 0);
                 this.Janus.Sprite.Color = Real4(1, this.RandomNum1Color, this.RandomNum2Color, 1);

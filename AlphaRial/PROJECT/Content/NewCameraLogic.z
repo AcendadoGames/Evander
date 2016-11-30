@@ -6,9 +6,12 @@ class NewCameraLogic : ZilchComponent
     var TargetBossCogPath : CogPath = null;
     [Property]
     var IsThereBoss : Boolean = false;
+    
     var Size : Real = 30;
     var TargetBoss : Cog = null;
     var TargetObject : Cog = null;
+    
+    var CameraCanMove : Boolean = true; 
     
     var Offset : Real3 =  Real3(5 ,7,0);
     
@@ -24,67 +27,70 @@ class NewCameraLogic : ZilchComponent
     
     function OnLogicUpdate(event : UpdateEvent)
     {
-        if (this.IsThereBoss == true)
+        if(this.CameraCanMove)
         {
-                /*Setting the variables for the positions*/
-            var ownerPosition = this.Owner.Transform.Translation;
-            var playerPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
-            var bossPosition = this.TargetBoss.Transform.Translation;
-            
-            /*Computing some needed values*/
-            var vectorFromBossToPlayer = playerPosition - bossPosition;
-            var distanceFromBossToPlayer = Math.Distance(playerPosition, bossPosition);
-            
-            /*Just some offsets for the design of the game*/
-            var offSet = this.Offset;
-            var offSetBoss : Real3 = Real3(5, 15, 0);
-            
-            /*Now that we have the computing values setting them to other variableswith Lerps*/
-            var newCameraPos = this.TargetObject.Transform.LocalTranslation;
-                newCameraPos = Math.Lerp(this.Owner.Transform.Translation, playerPosition + offSet, 0.05);
-            var newCameraPosBoss = Math.Lerp(this.Owner.Transform.Translation, vectorFromBossToPlayer/2 + offSetBoss, 0.04);
-            
-            /*When there is a boss the CameraSize will be modified*/
-            var newCameraSizeBoss = Math.Lerp(this.Owner.Camera.Size, distanceFromBossToPlayer, 0.03);
-            
-            /*Just so that we wont mess with the Hud*/
-            var camZ = this.Owner.Transform.LocalTranslation.Z;
-            
-            /*If there is a boss set this values :*/
-            if (this.TargetBoss != null && this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true && newCameraSizeBoss >= 30.0)
+            if (this.IsThereBoss == true)
             {
-                this.Owner.Transform.LocalTranslation = Real3(newCameraPosBoss.X, newCameraPosBoss.Y, camZ);
-                this.Owner.Camera.Size = newCameraSizeBoss;
-            }
-            if(this.Owner.Transform.LocalTranslation.Y >= 12.9 || this.Owner.Transform.LocalTranslation.Y <= 12.6 && this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true)
-            {
-                this.Owner.Transform.LocalTranslation = Real3(this.Owner.Transform.LocalTranslation.X, newCameraPosBoss.Y, camZ);
-            }
-            
-            /*if there is no boss set this values*/
-            if (this.IsThereBoss != true || this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == false)
-                this.Owner.Transform.LocalTranslation = Real3(newCameraPos.X, newCameraPos.Y, camZ);
-        }
-        
-        if (this.IsThereBoss == false)
-        {
-            /*Setting the variables for the positions*/
-            var ownerPosition = this.Owner.Transform.Translation;
-            var playerPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
-            
-            /*Just some offsets for the design of the game*/
-            
-            /*Now that we have the computing values setting them to other variableswith Lerps*/
-            var newCameraPos = this.TargetObject.Transform.LocalTranslation;
-                newCameraPos = Math.Lerp(this.Owner.Transform.Translation, playerPosition + this.Offset, 0.05);
+                    /*Setting the variables for the positions*/
+                var ownerPosition = this.Owner.Transform.Translation;
+                var playerPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+                var bossPosition = this.TargetBoss.Transform.Translation;
                 
-            this.Owner.Camera.Size = Math.Lerp(this.Owner.Camera.Size, this.Size, 0.05);
-            /*Just so that we wont mess with the Hud*/
-            var camZ = this.Owner.Transform.LocalTranslation.Z;
+                /*Computing some needed values*/
+                var vectorFromBossToPlayer = playerPosition - bossPosition;
+                var distanceFromBossToPlayer = Math.Distance(playerPosition, bossPosition);
+                
+                /*Just some offsets for the design of the game*/
+                var offSet = this.Offset;
+                var offSetBoss : Real3 = Real3(5, 15, 0);
+                
+                /*Now that we have the computing values setting them to other variableswith Lerps*/
+                var newCameraPos = this.TargetObject.Transform.LocalTranslation;
+                    newCameraPos = Math.Lerp(this.Owner.Transform.Translation, playerPosition + offSet, 0.05);
+                var newCameraPosBoss = Math.Lerp(this.Owner.Transform.Translation, vectorFromBossToPlayer/2 + offSetBoss, 0.04);
+                
+                /*When there is a boss the CameraSize will be modified*/
+                var newCameraSizeBoss = Math.Lerp(this.Owner.Camera.Size, distanceFromBossToPlayer, 0.03);
+                
+                /*Just so that we wont mess with the Hud*/
+                var camZ = this.Owner.Transform.LocalTranslation.Z;
+                
+                /*If there is a boss set this values :*/
+                if (this.TargetBoss != null && this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true && newCameraSizeBoss >= 30.0)
+                {
+                    this.Owner.Transform.LocalTranslation = Real3(newCameraPosBoss.X, newCameraPosBoss.Y, camZ);
+                    this.Owner.Camera.Size = newCameraSizeBoss;
+                }
+                if(this.Owner.Transform.LocalTranslation.Y >= 12.9 || this.Owner.Transform.LocalTranslation.Y <= 12.6 && this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true)
+                {
+                    this.Owner.Transform.LocalTranslation = Real3(this.Owner.Transform.LocalTranslation.X, newCameraPosBoss.Y, camZ);
+                }
+                
+                /*if there is no boss set this values*/
+                if (this.IsThereBoss != true || this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == false)
+                    this.Owner.Transform.LocalTranslation = Real3(newCameraPos.X, newCameraPos.Y, camZ);
+            }
             
-            /*if there is no boss set this values*/
-            if (this.IsThereBoss == false || this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == false)
-                this.Owner.Transform.LocalTranslation = Real3(newCameraPos.X, newCameraPos.Y, camZ);
+            if (this.IsThereBoss == false)
+            {
+                /*Setting the variables for the positions*/
+                var ownerPosition = this.Owner.Transform.Translation;
+                var playerPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+                
+                /*Just some offsets for the design of the game*/
+                
+                /*Now that we have the computing values setting them to other variableswith Lerps*/
+                var newCameraPos = this.TargetObject.Transform.LocalTranslation;
+                    newCameraPos = Math.Lerp(this.Owner.Transform.Translation, playerPosition + this.Offset, 0.05);
+                    
+                this.Owner.Camera.Size = Math.Lerp(this.Owner.Camera.Size, this.Size, 0.05);
+                /*Just so that we wont mess with the Hud*/
+                var camZ = this.Owner.Transform.LocalTranslation.Z;
+                
+                /*if there is no boss set this values*/
+                if (this.IsThereBoss == false || this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == false)
+                    this.Owner.Transform.LocalTranslation = Real3(newCameraPos.X, newCameraPos.Y, camZ);
+            }
         }
     }
 }

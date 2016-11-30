@@ -122,7 +122,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-2.52436352, 6.68633223, 50.0002403],
+			Vec3 Translation = [31.1741829, 16.1520424, 114.44339],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -134,7 +134,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 30.1194077,
+			float Size = 100,
 		},
 		EditorCameraController = 
 		{
@@ -142,7 +142,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-2.52436352, 6.68633223, 0.000240683556],
+			Vec3 LookTarget = [31.1741829, 16.1520424, 64.4433899],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -356,13 +356,48 @@ Level =
 					Vec3 Twist = [0, 0, 0],
 				},
 			},
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 8,
+				},
+				Named = 
+				{
+					string Name = "FadeOut",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [0, 0, -2],
+					Vec3 Scale = [100, 50, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [0, 0, 0, 0],
+					BlendMode BlendMode = Alpha,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5275aa4d802dd6dc:Square",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+			},
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
-			uint Id = 8,
+			uint Id = 9,
 		},
 		Named = 
 		{
@@ -415,7 +450,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 9,
+					uint Id = 10,
 				},
 				Named = 
 				{
@@ -483,7 +518,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 10,
+					uint Id = 11,
 				},
 				Named = 
 				{
@@ -554,7 +589,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 11,
+			uint Id = 12,
 		},
 		Transform = 
 		{
@@ -572,7 +607,7 @@ Level =
 		string Name = "58386991c84b0bf9:Ground",
 		LinkId = 
 		{
-			uint Id = 12,
+			uint Id = 13,
 		},
 		Transform = 
 		{
@@ -589,7 +624,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 13,
+			uint Id = 14,
 		},
 		Named = 
 		{
@@ -650,7 +685,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 14,
+			uint Id = 15,
 		},
 		Named = 
 		{
@@ -711,7 +746,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 15,
+			uint Id = 16,
 		},
 		Named = 
 		{
@@ -773,7 +808,7 @@ Level =
 		string Name = "58385de5011b74a3:Ceiling",
 		LinkId = 
 		{
-			uint Id = 16,
+			uint Id = 17,
 		},
 		Transform = 
 		{
@@ -790,7 +825,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 17,
+			uint Id = 18,
 		},
 		Named = 
 		{
@@ -826,7 +861,7 @@ Level =
 		string Name = "58386991c84b0bf9:Ground",
 		LinkId = 
 		{
-			uint Id = 18,
+			uint Id = 19,
 		},
 		Transform = 
 		{
@@ -897,7 +932,7 @@ Level =
 		},
 		JanusHealth = 
 		{
-			float JanusHealth = 1000,
+			float JanusHealth = 10,
 		},
 		Hierarchy = 
 		{
@@ -905,7 +940,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 19,
+					uint Id = 20,
 				},
 				Named = 
 				{
@@ -928,7 +963,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 20,
+							uint Id = 21,
 						},
 						Named = 
 						{
@@ -963,7 +998,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 21,
+							uint Id = 22,
 						},
 						Named = 
 						{
@@ -999,7 +1034,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 22,
+									uint Id = 23,
 								},
 								Named = 
 								{
@@ -1058,7 +1093,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 23,
+											uint Id = 24,
 										},
 										Named = 
 										{
@@ -1121,7 +1156,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 24,
+									uint Id = 25,
 								},
 								Named = 
 								{
@@ -1179,7 +1214,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 25,
+											uint Id = 26,
 										},
 										Named = 
 										{
@@ -1242,7 +1277,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 26,
+									uint Id = 27,
 								},
 								Named = 
 								{
@@ -1278,17 +1313,19 @@ Level =
 								},
 								StateMachine = 
 								{
-									string InitStateName = "Janus_Phase_3_Explosion",
+									string InitStateName = "Janus_Phase_3_Attack",
 									bool PrintDebug = true,
 								},
 								Janus_Phase_3_Attack = 
 								{
-									float Phase3RecoveryHealth = 100,
+									float Phase3RecoveryHealth = 0,
 									float AttackTime = 4,
 									float ArmAttackSpeed = 0.699999988,
 									float ArrowAttackSpeed = 0.699999988,
 									float NumberOfArrows = 30,
 									float WaveAttackSpeed = 0.699999988,
+									float FadeTime = 3,
+									float BlackTime = 1,
 								},
 								Janus_Phase_3_Explosion = 
 								{
@@ -1301,7 +1338,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 27,
+											uint Id = 28,
 										},
 										Named = 
 										{
@@ -1362,15 +1399,15 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 28,
+											uint Id = 29,
 										},
 										Named = 
 										{
-											string Name = "RedEyes",
+											string Name = "Explosion1",
 										},
 										Transform = 
 										{
-											Vec3 Translation = [-4.43530083, 4.49283504, 0.000240325928],
+											Vec3 Translation = [-2.24309921, 0, 4],
 											Vec3 Scale = [1, 1, 1],
 											Quat Rotation = [0, 0, 0, 1],
 										},
@@ -1383,7 +1420,7 @@ Level =
 											SystemChildMode ChildMode = Independent,
 											SystemSpace SystemSpace = WorldSpace,
 											uint DrawOrder = 0,
-											Vec4 Tint = [0.0299999714, 0.0107999919, 0, 0.920000017],
+											Vec4 Tint = [0.415000021, 0.166664019, 0.0269750059, 0.999899983],
 											float WarmUpTime = 0,
 											ParticleGeometry GeometryMode = Billboarded,
 											ParticleRenderMode RenderMode = Additive,
@@ -1397,11 +1434,11 @@ Level =
 										},
 										BoxParticleEmitter = 
 										{
-											bool Active = true,
+											bool Active = false,
 											uint EmitCount = 0,
 											float EmitRate = 1000,
 											float EmitVariance = 0,
-											float Size = 0.5,
+											float Size = 10,
 											float SizeVariance = 0.5,
 											float Lifetime = 2,
 											float LifetimeVariance = 0.200000003,
@@ -1411,14 +1448,14 @@ Level =
 											float Fill = 1,
 											float EmitterVelocityPercent = 0,
 											Vec3 StartVelocity = [0, 0, 0],
-											Vec3 RandomVelocity = [2, 2, 2],
+											Vec3 RandomVelocity = [50, 50, 2],
 											Vec3 TangentVelocity = [0, 0, 0],
 											Vec3 EmitterSize = [0, 0, 0],
 											bool FastMovingEmitter = false,
 										},
 										LinearParticleAnimator = 
 										{
-											Vec3 Force = [0, 10, 200],
+											Vec3 Force = [0, 0, 0],
 											Vec3 RandomForce = [0, 0, 0],
 											float Torque = 0,
 											float Growth = 0,
@@ -1430,15 +1467,15 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 29,
+											uint Id = 30,
 										},
 										Named = 
 										{
-											string Name = "RedEyes",
+											string Name = "Explosion2",
 										},
 										Transform = 
 										{
-											Vec3 Translation = [-0.832408905, 4.82448292, 0.000240325928],
+											Vec3 Translation = [-2.24309921, 0, 4],
 											Vec3 Scale = [1, 1, 1],
 											Quat Rotation = [0, 0, 0, 1],
 										},
@@ -1451,7 +1488,7 @@ Level =
 											SystemChildMode ChildMode = Independent,
 											SystemSpace SystemSpace = WorldSpace,
 											uint DrawOrder = 0,
-											Vec4 Tint = [0.0299999714, 0.0107999919, 0, 0.920000017],
+											Vec4 Tint = [0.814999998, 0.293400019, 0, 0.999899983],
 											float WarmUpTime = 0,
 											ParticleGeometry GeometryMode = Billboarded,
 											ParticleRenderMode RenderMode = Additive,
@@ -1465,11 +1502,11 @@ Level =
 										},
 										BoxParticleEmitter = 
 										{
-											bool Active = true,
+											bool Active = false,
 											uint EmitCount = 0,
 											float EmitRate = 1000,
 											float EmitVariance = 0,
-											float Size = 0.5,
+											float Size = 10,
 											float SizeVariance = 0.5,
 											float Lifetime = 2,
 											float LifetimeVariance = 0.200000003,
@@ -1479,14 +1516,14 @@ Level =
 											float Fill = 1,
 											float EmitterVelocityPercent = 0,
 											Vec3 StartVelocity = [0, 0, 0],
-											Vec3 RandomVelocity = [2, 2, 2],
+											Vec3 RandomVelocity = [50, 50, 2],
 											Vec3 TangentVelocity = [0, 0, 0],
 											Vec3 EmitterSize = [0, 0, 0],
 											bool FastMovingEmitter = false,
 										},
 										LinearParticleAnimator = 
 										{
-											Vec3 Force = [0, 10, 200],
+											Vec3 Force = [0, 0, 0],
 											Vec3 RandomForce = [0, 0, 0],
 											float Torque = 0,
 											float Growth = 0,
@@ -1504,7 +1541,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 30,
+					uint Id = 31,
 				},
 				Named = 
 				{
@@ -1582,7 +1619,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 31,
+			uint Id = 32,
 		},
 		Named = 
 		{
@@ -1688,7 +1725,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 32,
+					uint Id = 33,
 				},
 				Named = 
 				{
@@ -1711,7 +1748,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 33,
+							uint Id = 34,
 						},
 						Named = 
 						{
@@ -1746,7 +1783,7 @@ Level =
 					{
 						LinkId = 
 						{
-							uint Id = 34,
+							uint Id = 35,
 						},
 						Named = 
 						{
@@ -1775,7 +1812,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 35,
+								uint ResolvedCog = 36,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -1795,7 +1832,7 @@ Level =
 								bool UpdatePathOnCogChange = true,
 								bool UpdateCogOnInitialize = true,
 								bool ResolvedNullErrorOccurred = false,
-								uint ResolvedCog = 35,
+								uint ResolvedCog = 36,
 								CogPathPreference PathPreference0 = CogRelative,
 								CogPathPreference PathPreference1 = SpaceRelative,
 								CogPathPreference PathPreference2 = Absolute,
@@ -1817,7 +1854,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 36,
+									uint Id = 37,
 								},
 								Named = 
 								{
@@ -1848,7 +1885,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 37,
+									uint Id = 38,
 								},
 								Named = 
 								{
@@ -1881,7 +1918,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 38,
+									uint Id = 39,
 								},
 								Named = 
 								{
@@ -1918,7 +1955,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 39,
+											uint Id = 40,
 										},
 										Named = 
 										{
@@ -1978,7 +2015,7 @@ Level =
 									{
 										LinkId = 
 										{
-											uint Id = 40,
+											uint Id = 41,
 										},
 										Named = 
 										{
@@ -2015,7 +2052,7 @@ Level =
 							{
 								LinkId = 
 								{
-									uint Id = 41,
+									uint Id = 42,
 								},
 								Named = 
 								{
@@ -2045,7 +2082,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 35,
+					uint Id = 36,
 				},
 				Named = 
 				{
@@ -2072,7 +2109,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 42,
+					uint Id = 43,
 				},
 				Named = 
 				{
@@ -2154,7 +2191,7 @@ Level =
 		string Name = "58386991c84b0bf9:Ground",
 		LinkId = 
 		{
-			uint Id = 43,
+			uint Id = 44,
 		},
 		Transform = 
 		{
@@ -2171,7 +2208,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 44,
+			uint Id = 45,
 		},
 		Named = 
 		{
@@ -2219,7 +2256,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 45,
+			uint Id = 46,
 		},
 		Named = 
 		{
@@ -2255,7 +2292,7 @@ Level =
 		string Name = "58385de5011b74a3:Ceiling",
 		LinkId = 
 		{
-			uint Id = 46,
+			uint Id = 47,
 		},
 		Transform = 
 		{
@@ -2272,7 +2309,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 47,
+			uint Id = 48,
 		},
 		Named = 
 		{
@@ -2333,7 +2370,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 48,
+			uint Id = 49,
 		},
 		Named = 
 		{
@@ -2369,7 +2406,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 49,
+					uint Id = 50,
 				},
 				Named = 
 				{
@@ -2403,7 +2440,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 50,
+					uint Id = 51,
 				},
 				Named = 
 				{
@@ -2437,7 +2474,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 51,
+					uint Id = 52,
 				},
 				Named = 
 				{
@@ -2472,7 +2509,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 52,
+					uint Id = 53,
 				},
 				Named = 
 				{
@@ -2509,7 +2546,7 @@ Level =
 		string Name = "58386991c84b0bf9:Ground",
 		LinkId = 
 		{
-			uint Id = 53,
+			uint Id = 54,
 		},
 		Transform = 
 		{
@@ -2531,7 +2568,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-21.8231583, 5.63854122, 7.62939453e-06],
+			Vec3 Translation = [-14, 2, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -2544,7 +2581,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 54,
+			uint Id = 55,
 		},
 		Named = 
 		{
@@ -2562,42 +2599,7 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "58177ae6b3d7dde5:BackgroundPainted",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 55,
-		},
-		Named = 
-		{
-			string Name = "Background",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-96.8093338, 17.6789894, -9.5],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
+			Vec4 Color = [0.735000014, 0.727649987, 0.727649987, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -2618,6 +2620,41 @@ Level =
 		},
 		Named = 
 		{
+			string Name = "Background",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-96.8093338, 17.6789894, -9.5],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.735000014, 0.727649987, 0.727649987, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "58177ae6b3d7dde5:BackgroundPainted",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 57,
+		},
+		Named = 
+		{
 			string Name = "BackGround",
 		},
 		Transform = 
@@ -2632,7 +2669,7 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
+			Vec4 Color = [0.735000014, 0.727649987, 0.727649987, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -2649,7 +2686,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 57,
+			uint Id = 58,
 		},
 		Named = 
 		{
@@ -2684,7 +2721,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 58,
+			uint Id = 59,
 		},
 		Named = 
 		{
@@ -2719,7 +2756,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 59,
+			uint Id = 60,
 		},
 		Named = 
 		{
@@ -2737,42 +2774,7 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [0.36470589, 0.545098066, 0.776470661, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 60,
-		},
-		Named = 
-		{
-			string Name = "BackgroundGround",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [-14.767231, 45.9179573, -5],
-			Vec3 Scale = [100, 20, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [0.36470589, 0.545098066, 0.776470661, 1],
+			Vec4 Color = [0.266666681, 0.396078467, 0.564705908, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -2793,12 +2795,47 @@ Level =
 		},
 		Named = 
 		{
+			string Name = "BackgroundGround",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-14.767231, 45.9179573, -5],
+			Vec3 Scale = [100, 20, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0.266666681, 0.396078467, 0.564705908, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "5275aa4d802dd6dc:Square",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 62,
+		},
+		Named = 
+		{
 			string Name = "JanusLifebar",
 		},
 		Transform = 
 		{
-			Vec3 Translation = [2.75, 19.7143307, 0.330763459],
-			Vec3 Scale = [1.5, 1.5, 1],
+			Vec3 Translation = [3.04101157, 20.6277027, 0.330763459],
+			Vec3 Scale = [1.99511468, 1.99511468, 1.33007646],
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		Sprite = 
@@ -2824,7 +2861,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 62,
+			uint Id = 63,
 		},
 		Named = 
 		{
@@ -2832,8 +2869,8 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [1.4866991, 19.6800003, 0.330763459],
-			Vec3 Scale = [1.5, 1.5, 1],
+			Vec3 Translation = [1.36072493, 20.5820408, 0.330763459],
+			Vec3 Scale = [1.99511468, 1.99511468, 1.33007646],
 			Quat Rotation = [0, 0, 0.00261799083, 0.999996603],
 		},
 		Sprite = 
