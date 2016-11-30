@@ -8,8 +8,8 @@ class Fading : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-        
         var fading : Real4 = Real4(0, 0, 0, 0.002);
+        
         if(this.Owner.Sprite.Color.W < 0.99 && this.Space.FindObjectByName("Board").White.Ended == true)
         {
             this.Owner.Sprite.Color += fading;

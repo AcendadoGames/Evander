@@ -22,6 +22,6 @@ class JanusHealth : ZilchComponent
     }
     function OnLogicUpdate(event : UpdateEvent)
     {
-        //Console.WriteLine(this.JanusHealth);
+        Console.WriteLine(this.JanusHealth);
     }
 }

@@ -31,6 +31,10 @@ class NewCameraLogic : ZilchComponent
         {
             if (this.IsThereBoss == true)
             {
+                
+                Console.WriteLine(this.Owner.Transform.Translation.X)
+                ;
+                
                     /*Setting the variables for the positions*/
                 var ownerPosition = this.Owner.Transform.Translation;
                 var playerPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
@@ -64,6 +68,10 @@ class NewCameraLogic : ZilchComponent
                 if(this.Owner.Transform.LocalTranslation.Y >= 12.9 || this.Owner.Transform.LocalTranslation.Y <= 12.6 && this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true)
                 {
                     this.Owner.Transform.LocalTranslation = Real3(this.Owner.Transform.LocalTranslation.X, newCameraPosBoss.Y, camZ);
+                }
+                if(this.Owner.Transform.LocalTranslation.X >= -10.5 || this.Owner.Transform.LocalTranslation.Y <= -9 && this.Space.FindObjectByName("BossStartingLine").StartingBossScript.BossFight == true)
+                {
+                   this.Owner.Transform.LocalTranslation = Real3(newCameraPosBoss.X, this.Owner.Transform.Translation.Y, camZ);
                 }
                 
                 /*if there is no boss set this values*/

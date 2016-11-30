@@ -1,9 +1,9 @@
 class Janus_Phase_1 : SuperState
 {
     [Property]
-    var JanusTotalHealth : Real = 1000;
+    var JanusTotalHealth : Real = 1500;
     [Property]
-    var Phase1MinHealth : Real = 666;
+    var Phase1MinHealth : Real = 1000;
     
     var CurrentHealth : Real;
     
@@ -20,15 +20,15 @@ class Janus_Phase_1 : SuperState
 class Janus_Phase_1_Attack : State
 {
     [Property]
-    var JanusTotalHealth : Real = 1000;
+    var JanusTotalHealth : Real = 1500;
     [Property]
-    var Phase1RecoveryHealth : Real = 750;
+    var Phase1RecoveryHealth : Real = 1000;
     [Property]
-    var AttackTime : Real = 7;
+    var AttackTime : Real = 4;
     [Property]
-    var ArmAttackSpeed : Real = 2;
+    var ArmAttackSpeed : Real = 1.5;
     [Property]
-    var ArrowAttackSpeed : Real = 2;
+    var ArrowAttackSpeed : Real = 1;
     [Property]
     var NumberOfArrows : Real = 15;
     
@@ -154,10 +154,7 @@ class Janus_Phase_1_Attack : State
     
 class Janus_Phase_1_Recover : State
 {
-    [Property]
-    var JanusTotalHealth : Real = 1000;
-    [Property]
-    var Phase1MinHealth : Real = 666;
+    var JanusTotalHealth : Real;
     
     var HitCounter : Integer = 5;
     var CanHeal :  Boolean = true;
@@ -190,7 +187,7 @@ class Janus_Phase_1_Recover : State
             this.Owner.Parent.Parent.Parent.JanusHealth.JanusHealth += 0.5;
             
             
-        if (this.Owner.Parent.Parent.Parent.JanusHealth.JanusHealth >= 850)
+        if (this.Owner.Parent.Parent.Parent.JanusHealth.JanusHealth >= 1150)
         {
             this.Exit();
             this.Owner.StateMachine.ChangeState(this.Owner.Janus_Phase_1_Attack);

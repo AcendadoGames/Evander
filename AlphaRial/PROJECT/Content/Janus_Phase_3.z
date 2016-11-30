@@ -1,8 +1,6 @@
 class Janus_Phase_3 : SuperState
 {
     var JanusTotalHealth : Real;
-    [Property]
-    var Phase1MinHealth : Real = 100;
     
     var CurrentHealth : Real;
     
@@ -147,17 +145,17 @@ class Janus_Phase_3_Attack : State
                 /*---------------------------------------Third Attack-----------------------------------------------*/
                 if (this.RandomNum == 3)
                 {
-
+                    
                 }
                 /*--------------------------------------------------------------------------------------------------*/
             }
         if (this.JanusTotalHealth <= this.Phase3RecoveryHealth)
             {
-                Console.WriteLine(this.Space.FindObjectByName("FadeOut").Sprite.Color.W);
+                
                 this.GameSession.FindSpaceByName("HudSpace").LevelSettings.CameraViewport.Active = false;
                 this.Attack = false;
                 this.TimerForFade += event.Dt;
-                    
+                
                 if(this.TimerForFade >= this.FadeTime)
                 {
                     if (this.Space.FindObjectByName("FadeOut").Sprite.Color.W <= 0.999999 )
@@ -225,7 +223,6 @@ class Janus_Phase_3_Explosion : State
     }
     [Override]function Update(event : UpdateEvent)
     {
-        //Console.WriteLine(this.Space.FindObjectByName("FadeOut").Sprite.Color.W);
         var change : Boolean = false;
         if(this.Space.FindObjectByName("FadeOut").Sprite.Color.W >= 0.02)
             this.Space.FindObjectByName("FadeOut").Sprite.Color -= Real4(0,0,0,0.015);
@@ -242,22 +239,30 @@ class Janus_Phase_3_Explosion : State
         this.RandomNum1Scale = this.RandomGenerator.Range(1 ,1.5);
         this.RandomNum2Scale = this.RandomGenerator.Range(1 ,1.5);
         
-        if (this.Space.FindObjectByName("FadeOut").Sprite.Color.W <= 0.5)
+        if (this.Space.FindObjectByName("FadeOut").Sprite.Color.W <= 0.9)
         {
             this.Timer += event.Dt;
-            change = true;
         }
         if(this.Timer >= this.ExplosionTimer)
         {
             this.Space.FindObjectByName("Explosion1").BoxParticleEmitter.Active = true;
             this.Space.FindObjectByName("Explosion2").BoxParticleEmitter.Active = true;
-            Console.WriteLine("BOOOOM CHAKALAKA");
+            this.Space.FindObjectByName("Camera").CameraShake.SingleShake(true);
+            
+            if(this.Space.FindObjectByName("FadeIn").Sprite.Color.W <=0.98)
+                this.Space.FindObjectByName("FadeIn").Sprite.Color +=  Real4(0,0,0,0.005);
+            else
+            {
+                this.Space.FindObjectByName("Explosion1").BoxParticleEmitter.Active = false;
+                this.Space.FindObjectByName("Explosion2").BoxParticleEmitter.Active = false;
+                this.Space.FindObjectByName("Camera").CameraShake.SingleShake(false);
+            }
         }
         else
         {
             this.Timer1 += event.Dt;
             
-            if(this.Timer1 >= this.Change && change == true)
+            if(this.Timer1 >= this.Change)
             {
                 this.Janus.Transform.Translation = Real3(this.JanusPos.X + this.RandomNum1Pos, this.JanusPos.Y + this.RandomNum2Pos , 0);
                 this.Janus.Sprite.Color = Real4(1, this.RandomNum1Color, this.RandomNum2Color, 1);
