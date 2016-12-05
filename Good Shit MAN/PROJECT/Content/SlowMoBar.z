@@ -1,0 +1,28 @@
+class SlowMoBar : ZilchComponent
+{
+    [Property]
+    var Counter: Real = 2.0;
+    var TimeLim : Real;
+    var TimeIsSlowed : Boolean;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (this.TimeLim < this.Counter)
+        {
+            this.Owner.Transform.EulerAngles = Real3(0, 0, 0);
+            this.Owner.Transform.EulerAngles -= Real3(0, 0, -60);
+            this.Counter = 0;
+        }
+        if (1.983334 > this.Counter)
+        {
+            this.Owner.Transform.EulerAngles += Real3(0, 0, 0.024);
+            this.Counter += 0.01666666;
+        }
+    }
+    
+}

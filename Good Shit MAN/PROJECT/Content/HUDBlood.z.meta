@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "HUDBlood",
+		uint64 ResourceId = 5830c28ceb1ff6aa,
+	},
+},

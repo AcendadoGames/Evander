@@ -1,0 +1,18 @@
+class PlayerDetectionCollider : ZilchComponent
+{
+    var PlayerHere : Boolean = false;
+    
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        if(event.OtherObject.Name == "PrototypePlayer")
+        {
+            this.Space.ReloadLevel();
+        }
+    }
+
+}

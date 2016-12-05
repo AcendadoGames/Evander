@@ -1,0 +1,20 @@
+class HUDCreator : ZilchComponent
+{
+    [Property]
+    var HudLevel: Level = null; // Level that has our HUD in it
+    var HudSpace: Space = null;
+    
+    var HudActive : Boolean = true;
+    
+    function Initialize(init : CogInitializer)
+    {
+        if (this.HudActive == true)
+        {
+            // Create a new Space to load our HUD level into
+            this.HudSpace = this.GameSession.CreateNamedSpace("HudSpace", Archetype.Find("Space"));
+            // Load the HUD level set in the property
+            this.HudSpace.LoadLevel(this.HudLevel);
+        }
+    }
+}
+

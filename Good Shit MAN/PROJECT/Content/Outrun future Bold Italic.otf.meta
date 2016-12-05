@@ -1,0 +1,8 @@
+FontContent = 
+{
+	FontBuilder = 
+	{
+		string Name = "Outrun future Bold Italic",
+		uint64 ResourceId = 5834f2942b1781f1,
+	},
+},

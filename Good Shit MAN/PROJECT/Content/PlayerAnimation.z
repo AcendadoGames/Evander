@@ -1,0 +1,67 @@
+class PlayerAnimation : ZilchComponent
+{
+    [Property]
+    var IdleAnimation : SpriteSource = null;
+    [Property]
+    var RunAnimation : SpriteSource = null;
+    [Property]
+    var JumpAnimation : SpriteSource = null;
+    [Property]
+    var WallJumpAnimation : SpriteSource = null;
+    [Property]
+    var FallingAnimation : SpriteSource = null;
+    
+    var JumpingAnimDone : Boolean = false;
+    
+    var InCombo : Boolean = false;
+    
+    var TimeRewinding : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (!this.InCombo && !this.TimeRewinding)
+        {
+            //Idle Animation
+            if (this.Owner.MovementController.NotMoving == true && this.Owner.Sprite.SpriteSource.Name != "Evander_IDLE")
+            {
+                this.Owner.Sprite.SpriteSource = this.IdleAnimation;
+            }
+            
+            //Moving Left Animation (same as Right but had to seperate)
+            if (this.Owner.MovementController.MovingLeft == true && this.Owner.Sprite.SpriteSource.Name != "Evander_Run_Anim" && this.Owner.MovementController.InGround == true)
+            {
+                this.Owner.Sprite.SpriteSource = this.RunAnimation;
+            }
+            
+            //Moving Right Animation
+            if (this.Owner.MovementController.MovingRight == true && this.Owner.Sprite.SpriteSource.Name != "Evander_Run_Anim" && this.Owner.MovementController.InGround == true)
+            {
+                
+                this.Owner.Sprite.SpriteSource = this.RunAnimation;
+            }
+            
+            //Jumping Animation
+            if (this.Owner.MovementController.Jumping == true && this.Owner.MovementController.InGround == false)
+            {
+                this.Owner.Sprite.SpriteSource = this.JumpAnimation;
+            }
+            //Falling Animation
+            if (this.Owner.MovementController.InGround == false && this.Owner.Sprite.SpriteSource.Name == "Evander_Jump_Anim" && this.Owner.Sprite.CurrentFrame == 2)
+                this.Owner.Sprite.SpriteSource = this.FallingAnimation;
+            
+            if (this.Owner.MovementController.InGround == false)
+                this.Owner.Sprite.SpriteSource = this.FallingAnimation;
+            
+            //WallJumpingAnimation
+            if (this.Owner.MovementController.WallJumping == true)
+            {
+                this.Owner.Sprite.SpriteSource = this.WallJumpAnimation;
+            }
+        }
+    }
+}

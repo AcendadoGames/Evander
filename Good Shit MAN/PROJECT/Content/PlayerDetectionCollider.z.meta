@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PlayerDetectionCollider",
+		uint64 ResourceId = 587a915c2efe2bea,
+	},
+},

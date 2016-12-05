@@ -1,0 +1,89 @@
+class Reproducer : ZilchComponent
+{
+    var Frames : HierarchyListrange;
+    var FrameArray : Array[Cog] = new Array[Cog]();
+    var Index : Integer = 0;
+    var Time : Real = 0;
+    var Time2 : Real = 0;
+    var FirstLoopDone : Boolean = false;
+    var GoForward : Boolean = false;
+    var GoBackwards : Boolean = true;
+    var BackwardsLimitIndex : Integer = 55;
+    
+    [Property]
+    var FPS : Real;
+    function Initialize(init : CogInitializer)
+    {
+        this.FPS = 1/this.FPS;
+        this.Time = this.FPS;
+        this.Frames = this.Owner.Children;
+        while (this.Frames.IsNotEmpty)
+        {
+            this.FrameArray.Push(this.Frames.Current);
+            this.Frames.Current.Sprite.Visible = false;
+            this.Frames.MoveNext();
+        }
+        this.FrameArray[this.Index].Sprite.Visible = true;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Time2 += event.Dt;
+        if(this.Time < this.Time2)
+        {
+            this.Time += this.FPS;
+            if(this.FrameArray.LastIndex > this.Index && !this.FirstLoopDone)
+            {
+                this.FrameArray[this.Index].Sprite.Visible = false;
+                this.FrameArray[this.Index + 1].Sprite.Visible = true;
+                this.Index += 1;
+            }
+        }
+        ////(this.Index);
+                
+                
+        /*this.Time2 += event.Dt;
+        if(this.Time < this.Time2)
+        {
+            this.Time += this.FPS;
+            if(this.FrameArray.LastIndex > this.Index && !this.FirstLoopDone)
+            {
+                this.FrameArray[this.Index].Sprite.Visible = false;
+                this.FrameArray[this.Index + 1].Sprite.Visible = true;
+                this.Index += 1;
+            }
+            else
+                this.FirstLoopDone = true;
+            
+            if(this.FirstLoopDone)
+            {
+                if(this.BackwardsLimitIndex < this.Index && this.GoBackwards)
+                {
+                    this.FrameArray[this.Index].Sprite.Visible = false;
+                    this.FrameArray[this.Index - 1].Sprite.Visible = true;
+                    this.Index -= 1;
+                }
+                else
+                {
+                    this.GoForward = true;
+                    this.GoBackwards = false;
+                }
+                
+                if(this.FrameArray.LastIndex > this.Index && this.GoForward)
+                {
+                    this.FrameArray[this.Index].Sprite.Visible = false;
+                    this.FrameArray[this.Index + 1].Sprite.Visible = true;
+                    this.Index += 1;
+                }
+                else
+                {
+                    this.GoForward = false;
+                    this.GoBackwards = true;
+                }
+                
+            }
+        }*/
+
+    }
+}
