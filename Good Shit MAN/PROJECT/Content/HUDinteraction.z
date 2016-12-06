@@ -23,11 +23,18 @@ class HUDInteraction : ZilchComponent
         var combotext = this.Owner.HUDCreator.HudSpace.FindObjectByName("ComboText");
         var comboscale = this.Owner.HUDCreator.HudSpace.FindObjectByName("ComboText");
         var comboColor = this.Owner.HUDCreator.HudSpace.FindObjectByName("ComboText");
+        var roundNum = this.Owner.HUDCreator.HudSpace.FindObjectByName("RoundNum");
+        var roundVisible = this.Owner.HUDCreator.HudSpace.FindObjectByName("RoundNum");
         var ragebarPos = this.Owner.HUDCreator.HudSpace.FindObjectByName("RageMode");
         var ragebarStartVelocity = this.Owner.HUDCreator.HudSpace.FindObjectByName("RageMode");
         var ragebarRandomVelocity = this.Owner.HUDCreator.HudSpace.FindObjectByName("RageMode");
         var ragebarEmitRate = this.Owner.HUDCreator.HudSpace.FindObjectByName("RageMode");
         var ragebarColor = this.Owner.HUDCreator.HudSpace.FindObjectByName("RageMode");
+        if(this.Space.LevelSettings.Spawner != null)
+        {
+            roundNum.SpriteText.Text = this.Space.LevelSettings.Spawner.RoundText;
+            roundVisible.SpriteText.Visible = this.Space.LevelSettings.Spawner.NextRoundMessage;
+        }
         ragebarColor.SpriteParticleSystem.Tint = this.Space.RageBar.Color;
         ragebarPos.Transform.Translation = this.Space.RageBar.CurrentPosition;
         ragebarStartVelocity.SphericalParticleEmitter.StartVelocity = this.Space.RageBar.CurrentStartVelocity;

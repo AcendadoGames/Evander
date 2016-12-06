@@ -151,7 +151,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 32.8892441,
+			float Size = 36.3482323,
 		},
 		EditorCameraController = 
 		{
@@ -635,6 +635,40 @@ Level =
 		},
 		TimeRotation = 
 		{
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 16,
+		},
+		Named = 
+		{
+			string Name = "RoundNum",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 9.6270256, 1],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		SpriteText = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 0.942249835, 0.175000012, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string FontName = "5834f2942b1781f1:Outrun future Bold Italic",
+			uint FontSize = 150,
+			string Text = "Sprite Text...",
+			TextAlign Align = Center,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
 		},
 	},
 },

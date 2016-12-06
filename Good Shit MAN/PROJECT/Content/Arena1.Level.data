@@ -109,6 +109,9 @@ Level =
 		HUDBlood = 
 		{
 		},
+		Spawner = 
+		{
+		},
 	},
 	Cog = 
 	{
@@ -122,7 +125,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-102.326981, -5.32726717, 49.9999962],
+			Vec3 Translation = [-33.1890373, 19.9762154, 50],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -134,7 +137,7 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 74.0818481,
+			float Size = 54.8811989,
 		},
 		EditorCameraController = 
 		{
@@ -142,7 +145,7 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
-			Vec3 LookTarget = [-102.326981, -5.32726717, -4.50062134e-06],
+			Vec3 LookTarget = [-33.1890373, 19.9762154, -1.47850562e-06],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -152,6 +155,51 @@ Level =
 			bool DrawDebugObjects = true,
 			bool DrawEditorIcons = true,
 			bool Wireframe = false,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 4,
+		},
+		Named = 
+		{
+			string Name = "BlackySky",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 0, -35],
+			Vec3 Scale = [1.79999995, 1.79999995, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [0, 0, 0, 0],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "58008f8fd4505383:Blackysky",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ThunderAnim = 
+		{
+			int Iterations = 1,
+			float StartOpacity = 0,
+			float EndOpacity = 0.800000012,
+			float FadeInDuration = 0.140000001,
+			float FadeOutDuration = 0.0199999996,
+			float FadeInDelay = 0,
+			float FadeOutDelay = 0.159999996,
 		},
 	},
 	Cog = 
@@ -224,7 +272,7 @@ Level =
 				bool UpdatePathOnCogChange = true,
 				bool UpdateCogOnInitialize = true,
 				bool ResolvedNullErrorOccurred = false,
-				uint ResolvedCog = 4,
+				uint ResolvedCog = 5,
 				CogPathPreference PathPreference0 = CogRelative,
 				CogPathPreference PathPreference1 = SpaceRelative,
 				CogPathPreference PathPreference2 = Absolute,
@@ -254,7 +302,7 @@ Level =
 				string Name = "5836d3c511189e4b:RainMaker",
 				LinkId = 
 				{
-					uint Id = 5,
+					uint Id = 6,
 				},
 				Transform = 
 				{
@@ -271,7 +319,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 6,
+					uint Id = 7,
 				},
 				Named = 
 				{
@@ -361,7 +409,7 @@ Level =
 			{
 				LinkId = 
 				{
-					uint Id = 7,
+					uint Id = 8,
 				},
 				Named = 
 				{
@@ -399,7 +447,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 8,
+			uint Id = 9,
 		},
 		Transform = 
 		{
@@ -417,7 +465,7 @@ Level =
 		string Name = "58385de5011b74a3:Ceiling",
 		LinkId = 
 		{
-			uint Id = 9,
+			uint Id = 10,
 		},
 		Transform = 
 		{
@@ -435,7 +483,7 @@ Level =
 		string Name = "58386991c84b0bf9:Ground",
 		LinkId = 
 		{
-			uint Id = 10,
+			uint Id = 11,
 		},
 		Transform = 
 		{
@@ -452,7 +500,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 11,
+			uint Id = 12,
 		},
 		Named = 
 		{
@@ -460,7 +508,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-45.644249, 8.5273571, -0.100000001],
+			Vec3 Translation = [-45.644249, 8.5273571, -1.00100005],
 			Vec3 Scale = [0.5, 0.5, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -487,7 +535,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 12,
+			uint Id = 13,
 		},
 		Named = 
 		{
@@ -523,7 +571,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 13,
+			uint Id = 14,
 		},
 		Transform = 
 		{
@@ -541,7 +589,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 14,
+			uint Id = 15,
 		},
 		Transform = 
 		{
@@ -558,7 +606,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 15,
+			uint Id = 16,
 		},
 		Named = 
 		{
@@ -594,7 +642,7 @@ Level =
 		string Name = "58386991c84b0bf9:Ground",
 		LinkId = 
 		{
-			uint Id = 16,
+			uint Id = 17,
 		},
 		Transform = 
 		{
@@ -611,7 +659,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 17,
+			uint Id = 18,
 		},
 		Named = 
 		{
@@ -646,7 +694,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 18,
+			uint Id = 19,
 		},
 		Named = 
 		{
@@ -682,7 +730,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 19,
+			uint Id = 20,
 		},
 		Transform = 
 		{
@@ -700,7 +748,7 @@ Level =
 		string Name = "587a874eb37cd710:EnemyLimit",
 		LinkId = 
 		{
-			uint Id = 20,
+			uint Id = 21,
 		},
 		Transform = 
 		{
@@ -717,7 +765,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 21,
+			uint Id = 22,
 		},
 		Named = 
 		{
@@ -752,7 +800,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 22,
+			uint Id = 23,
 		},
 		Named = 
 		{
@@ -760,14 +808,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-38.3263969, 2.58712769, 1],
+			Vec3 Translation = [-38.3263969, 2.58712769, -1],
 			Vec3 Scale = [1.30851865, 2.78661871, 2.77595639],
 			Quat Rotation = [-0.0638729706, -0.353204638, 0.552326083, -0.752398074],
-		},
-		Spawner = 
-		{
-			bool ArcherSpawner = false,
-			bool MeleeSpawner = true,
 		},
 		SpriteParticleSystem = 
 		{
@@ -792,7 +835,7 @@ Level =
 		},
 		SphericalParticleEmitter = 
 		{
-			bool Active = true,
+			bool Active = false,
 			uint EmitCount = 0,
 			float EmitRate = 3000,
 			float EmitVariance = 0,
@@ -826,7 +869,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 23,
+			uint Id = 24,
 		},
 		Transform = 
 		{
@@ -844,7 +887,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 24,
+			uint Id = 25,
 		},
 		Transform = 
 		{
@@ -861,7 +904,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 25,
+			uint Id = 26,
 		},
 		Named = 
 		{
@@ -909,7 +952,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 26,
+			uint Id = 27,
 		},
 		Named = 
 		{
@@ -992,7 +1035,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 27,
+			uint Id = 28,
 		},
 		Transform = 
 		{
@@ -1010,7 +1053,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 28,
+			uint Id = 29,
 		},
 		Transform = 
 		{
@@ -1028,7 +1071,7 @@ Level =
 		string Name = "587a874eb37cd710:EnemyLimit",
 		LinkId = 
 		{
-			uint Id = 29,
+			uint Id = 30,
 		},
 		Transform = 
 		{
@@ -1046,7 +1089,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 30,
+			uint Id = 31,
 		},
 		Transform = 
 		{
@@ -1063,7 +1106,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 31,
+			uint Id = 32,
 		},
 		Named = 
 		{
@@ -1074,11 +1117,6 @@ Level =
 			Vec3 Translation = [7.97234344, 18.2803974, -1],
 			Vec3 Scale = [1.30851865, 2.78661871, 2.77595639],
 			Quat Rotation = [-0.0638729706, -0.353204638, 0.552326083, -0.752398074],
-		},
-		Spawner = 
-		{
-			bool ArcherSpawner = true,
-			bool MeleeSpawner = false,
 		},
 		SpriteParticleSystem = 
 		{
@@ -1103,7 +1141,7 @@ Level =
 		},
 		SphericalParticleEmitter = 
 		{
-			bool Active = true,
+			bool Active = false,
 			uint EmitCount = 0,
 			float EmitRate = 3000,
 			float EmitVariance = 0,
@@ -1136,7 +1174,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 32,
+			uint Id = 33,
 		},
 		Named = 
 		{
@@ -1147,11 +1185,6 @@ Level =
 			Vec3 Translation = [-45.7373772, 18.2803974, -1],
 			Vec3 Scale = [1.30851865, 2.78661871, 2.77595639],
 			Quat Rotation = [-0.0638729706, -0.353204638, 0.552326083, -0.752398074],
-		},
-		Spawner = 
-		{
-			bool ArcherSpawner = true,
-			bool MeleeSpawner = false,
 		},
 		SpriteParticleSystem = 
 		{
@@ -1176,7 +1209,7 @@ Level =
 		},
 		SphericalParticleEmitter = 
 		{
-			bool Active = true,
+			bool Active = false,
 			uint EmitCount = 0,
 			float EmitRate = 3000,
 			float EmitVariance = 0,
@@ -1210,7 +1243,7 @@ Level =
 		string Name = "58386991c84b0bf9:Ground",
 		LinkId = 
 		{
-			uint Id = 33,
+			uint Id = 34,
 		},
 		Transform = 
 		{
@@ -1228,7 +1261,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 34,
+			uint Id = 35,
 		},
 		Transform = 
 		{
@@ -1246,7 +1279,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 35,
+			uint Id = 36,
 		},
 		Transform = 
 		{
@@ -1263,7 +1296,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 36,
+			uint Id = 37,
 		},
 		Named = 
 		{
@@ -1271,7 +1304,7 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [7.97112942, 8.5273571, -0.00100000005],
+			Vec3 Translation = [7.97112942, 8.5273571, -1.00100005],
 			Vec3 Scale = [0.5, 0.5, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -1299,7 +1332,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 37,
+			uint Id = 38,
 		},
 		Transform = 
 		{
@@ -1317,7 +1350,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 38,
+			uint Id = 39,
 		},
 		Transform = 
 		{
@@ -1334,7 +1367,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 39,
+			uint Id = 40,
 		},
 		Named = 
 		{
@@ -1369,7 +1402,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 40,
+			uint Id = 41,
 		},
 		Named = 
 		{
@@ -1404,7 +1437,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 41,
+			uint Id = 42,
 		},
 		Named = 
 		{
@@ -1440,7 +1473,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 42,
+			uint Id = 43,
 		},
 		Transform = 
 		{
@@ -1457,7 +1490,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 43,
+			uint Id = 44,
 		},
 		Named = 
 		{
@@ -1493,7 +1526,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 44,
+			uint Id = 45,
 		},
 		Transform = 
 		{
@@ -1511,7 +1544,7 @@ Level =
 		string Name = "58385de5011b74a3:Ceiling",
 		LinkId = 
 		{
-			uint Id = 45,
+			uint Id = 46,
 		},
 		Transform = 
 		{
@@ -1529,7 +1562,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 46,
+			uint Id = 47,
 		},
 		Transform = 
 		{
@@ -1546,7 +1579,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 47,
+			uint Id = 48,
 		},
 		Named = 
 		{
@@ -1582,7 +1615,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 48,
+			uint Id = 49,
 		},
 		Transform = 
 		{
@@ -1600,7 +1633,7 @@ Level =
 		string Name = "58386991c84b0bf9:Ground",
 		LinkId = 
 		{
-			uint Id = 49,
+			uint Id = 50,
 		},
 		Transform = 
 		{
@@ -1618,7 +1651,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 50,
+			uint Id = 51,
 		},
 		Transform = 
 		{
@@ -1636,7 +1669,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 51,
+			uint Id = 52,
 		},
 		Transform = 
 		{
@@ -1654,7 +1687,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 52,
+			uint Id = 53,
 		},
 		Transform = 
 		{
@@ -1672,7 +1705,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 53,
+			uint Id = 54,
 		},
 		Transform = 
 		{
@@ -1690,11 +1723,11 @@ Level =
 		string Name = "5891c8b6ae0a8106:Player",
 		LinkId = 
 		{
-			uint Id = 4,
+			uint Id = 5,
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-123.855293, 2.62488747, 1],
+			Vec3 Translation = [-123.855293, 2.62488747, 0],
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -1708,7 +1741,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 54,
+			uint Id = 55,
 		},
 		Transform = 
 		{
@@ -1725,7 +1758,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 55,
+			uint Id = 56,
 		},
 		Named = 
 		{
@@ -1761,7 +1794,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 56,
+			uint Id = 57,
 		},
 		Transform = 
 		{
@@ -1779,7 +1812,7 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
-			uint Id = 57,
+			uint Id = 58,
 		},
 		Transform = 
 		{
@@ -1796,7 +1829,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 58,
+			uint Id = 59,
 		},
 		Named = 
 		{
@@ -1804,14 +1837,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [-2.84023666, 2.71917343, 1],
+			Vec3 Translation = [-2.84023666, 2.71917343, -1],
 			Vec3 Scale = [1.30851865, 2.78661871, 2.77595639],
 			Quat Rotation = [-0.0638729706, -0.353204638, 0.552326083, -0.752398074],
-		},
-		Spawner = 
-		{
-			bool ArcherSpawner = false,
-			bool MeleeSpawner = true,
 		},
 		SpriteParticleSystem = 
 		{
@@ -1836,7 +1864,7 @@ Level =
 		},
 		SphericalParticleEmitter = 
 		{
-			bool Active = true,
+			bool Active = false,
 			uint EmitCount = 0,
 			float EmitRate = 3000,
 			float EmitVariance = 0,
@@ -1869,7 +1897,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 59,
+			uint Id = 60,
 		},
 		Named = 
 		{
@@ -1877,7 +1905,7 @@ Level =
 		},
 		Archetyped = 
 		{
-			string Name = "586e58fad125ddb4:ForGround",
+			string Name = "586e5821f192aacb:ForGround",
 		},
 		Transform = 
 		{
@@ -1908,7 +1936,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 60,
+			uint Id = 61,
 		},
 		Named = 
 		{
@@ -1990,7 +2018,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 61,
+			uint Id = 62,
 		},
 		Named = 
 		{
@@ -2072,7 +2100,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 62,
+			uint Id = 63,
 		},
 		Named = 
 		{
@@ -2154,7 +2182,7 @@ Level =
 	{
 		LinkId = 
 		{
-			uint Id = 63,
+			uint Id = 64,
 		},
 		Named = 
 		{
@@ -2172,7 +2200,7 @@ Level =
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
+			Vec4 Color = [0.569999993, 0.338352025, 0.208050013, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
 			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
@@ -2183,6 +2211,122 @@ Level =
 			string PaletteName = "583854436c619f4a:Testing",
 			float UnitsPerTile = 1,
 			float MeshThickness = 1.20000005,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 65,
+		},
+		Named = 
+		{
+			string Name = "ThunderWhiteSky",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 0, -35],
+			Vec3 Scale = [1.79999995, 1.79999995, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Sprite = 
+		{
+			bool Visible = true,
+			bool VisibilityCulling = true,
+			bool VisibilityEvents = true,
+			bool CastShadows = false,
+			Vec4 Color = [1, 1, 1, 0],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+			string SpriteSource = "58008ba8942c8504:ThunderWhiteSky",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+		},
+		ThunderAnim = 
+		{
+			int Iterations = 4,
+			float StartOpacity = 0,
+			float EndOpacity = 0.5,
+			float FadeInDuration = 0.0500000007,
+			float FadeOutDuration = 0.100000001,
+			float FadeInDelay = 0.180000007,
+			float FadeOutDelay = 0.280000001,
+		},
+	},
+	Cog = 
+	{
+		LinkId = 
+		{
+			uint Id = 66,
+		},
+		Named = 
+		{
+			string Name = "Thunders",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [-50.3906898, 1.11191249, -3.90777222e-06],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		ThunderPlayerTracking = 
+		{
+		},
+		Hierarchy = 
+		{
+			Cog = 
+			{
+				LinkId = 
+				{
+					uint Id = 67,
+				},
+				Named = 
+				{
+					string Name = "thunder",
+				},
+				Transform = 
+				{
+					Vec3 Translation = [-3.75017548, 11.1905699, 1.00000393],
+					Vec3 Scale = [2, 2, 1],
+					Quat Rotation = [0, 0, 0, 1],
+				},
+				Sprite = 
+				{
+					bool Visible = true,
+					bool VisibilityCulling = true,
+					bool VisibilityEvents = true,
+					bool CastShadows = false,
+					Vec4 Color = [1, 1, 1, 0],
+					BlendMode BlendMode = Additive,
+					SpriteGeometryMode GeometryMode = ZPlane,
+					string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+					string SpriteSource = "5800898e31e0ba5c:Thunder",
+					bool RenderMask = false,
+					bool FlipX = false,
+					bool FlipY = false,
+					bool AnimationActive = true,
+					float AnimationSpeed = 1,
+					uint StartFrame = 0,
+				},
+				ThunderAnim = 
+				{
+					int Iterations = 15,
+					float StartOpacity = 0.699999988,
+					float EndOpacity = 1,
+					float FadeInDuration = 0.0399999991,
+					float FadeOutDuration = 0.0399999991,
+					float FadeInDelay = 0.104000002,
+					float FadeOutDelay = 0.123999998,
+				},
+				ThunderShake = 
+				{
+				},
+			},
 		},
 	},
 },

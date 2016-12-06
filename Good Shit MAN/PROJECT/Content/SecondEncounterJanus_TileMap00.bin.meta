@@ -1,0 +1,12 @@
+BinaryContent = 
+{
+	BinaryBuilder = 
+	{
+		string Name = "SecondEncounterJanus_TileMap00",
+		uint64 ResourceId = 581642e1c5555ad4,
+		string LoaderType = "TileMapSource",
+		uint Version = 0,
+		string FilterTag = "",
+		string ResourceOwner = "581644b4ac12d91e:SecondEncounterJanus",
+	},
+},

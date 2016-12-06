@@ -14,7 +14,7 @@ Cog =
 	},
 	Transform = 
 	{
-		Vec3 Translation = [85.1183319, 22.546833, 1.14440918e-05],
+		Vec3 Translation = [-82.7185898, 5.97789526, 0],
 		Vec3 Scale = [0.140000001, 0.140000001, 1],
 		Quat Rotation = [0, 0, 0, 1],
 	},
@@ -60,11 +60,8 @@ Cog =
 	},
 	StateMachine = 
 	{
-		string InitStateName = "Archer_Patrol",
+		string InitStateName = "Archer_Patrol_LookingForEnemies",
 		bool PrintDebug = false,
-	},
-	FindPath = 
-	{
 	},
 	VelRotDampening = 
 	{
@@ -105,6 +102,9 @@ Cog =
 		bool Buoyancy = false,
 		bool Custom = false,
 	},
+	FlipArcher = 
+	{
+	},
 	Hierarchy = 
 	{
 		Cog = 
@@ -119,7 +119,7 @@ Cog =
 			},
 			Transform = 
 			{
-				Vec3 Translation = [-1.46945405, 0.628980279, 9.65548679e-07],
+				Vec3 Translation = [0, 0, 0],
 				Vec3 Scale = [1, 0.5, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},
@@ -188,48 +188,13 @@ Cog =
 					},
 					Archer_Patrol = 
 					{
-						CogPath SensorCogPath = 
-						{
-							string Path = "../../Sensor",
-							bool ErrorOnResolveToNull = false,
-							bool ErrorOnPathCantCompute = false,
-							bool ErrorOnDirectLinkFail = false,
-							bool UpdateCogOnPathChange = true,
-							bool UpdatePathOnCogChange = true,
-							bool UpdateCogOnInitialize = true,
-							bool ResolvedNullErrorOccurred = false,
-							uint ResolvedCog = 5,
-							CogPathPreference PathPreference0 = CogRelative,
-							CogPathPreference PathPreference1 = SpaceRelative,
-							CogPathPreference PathPreference2 = Absolute,
-						},
-					},
-					Archer_SeekTarget = 
-					{
-						float MaxDistance = 40,
-						float ShootingMaxDistance = 25,
-						CogPath SensorCogPath = 
-						{
-							string Path = "../../Sensor",
-							bool ErrorOnResolveToNull = false,
-							bool ErrorOnPathCantCompute = false,
-							bool ErrorOnDirectLinkFail = false,
-							bool UpdateCogOnPathChange = true,
-							bool UpdatePathOnCogChange = true,
-							bool UpdateCogOnInitialize = true,
-							bool ResolvedNullErrorOccurred = false,
-							uint ResolvedCog = 5,
-							CogPathPreference PathPreference0 = CogRelative,
-							CogPathPreference PathPreference1 = SpaceRelative,
-							CogPathPreference PathPreference2 = Absolute,
-						},
 					},
 					Archer_Attack = 
 					{
 						float Duration = 10,
 						float MaxDistance = 40,
 						float MeleeDistance = 5,
-						float ShootingMaxDistance = 25,
+						float ShootingMaxDistance = 35,
 					},
 					Archer_Stuned = 
 					{
@@ -240,7 +205,7 @@ Cog =
 						{
 							LinkId = 
 							{
-								uint Id = 6,
+								uint Id = 5,
 							},
 							Named = 
 							{
@@ -248,21 +213,16 @@ Cog =
 							},
 							Transform = 
 							{
-								Vec3 Translation = [1.49646401, -1.17877364, -2.64728442e-07],
+								Vec3 Translation = [0, 0, 0],
 								Vec3 Scale = [1, 1, 1],
 								Quat Rotation = [0, 0, 0, 1],
 							},
 							StateMachine = 
 							{
-								string InitStateName = "Archer_Patrol_Wait",
+								string InitStateName = "Archer_Patrol_LookingForEnemies",
 								bool PrintDebug = true,
 							},
-							Archer_Patrol_Walking = 
-							{
-								float Direction = 1,
-								float Duration = 1,
-							},
-							Archer_Patrol_Wait = 
+							Archer_Patrol_LookingForEnemies = 
 							{
 								float Duration = 3,
 							},
@@ -271,40 +231,7 @@ Cog =
 						{
 							LinkId = 
 							{
-								uint Id = 7,
-							},
-							Named = 
-							{
-								string Name = "Archer_SeekTarget",
-							},
-							Transform = 
-							{
-								Vec3 Translation = [1.49646401, -1.17877364, -2.64728442e-07],
-								Vec3 Scale = [1, 1, 1],
-								Quat Rotation = [0, 0, 0, 1],
-							},
-							StateMachine = 
-							{
-								string InitStateName = "Archer_SeekTarget_Chase",
-								bool PrintDebug = true,
-							},
-							Archer_SeekTarget_Chase = 
-							{
-								float Duration = 5,
-								float MaxDistance = 40,
-								float MeleeDistance = 3,
-								float ShootingMaxDistance = 25,
-							},
-							Archer_SeekTarget_Lost = 
-							{
-								float Duration = 5,
-							},
-						},
-						Cog = 
-						{
-							LinkId = 
-							{
-								uint Id = 8,
+								uint Id = 6,
 							},
 							Named = 
 							{
@@ -312,7 +239,7 @@ Cog =
 							},
 							Transform = 
 							{
-								Vec3 Translation = [1.49646401, -1.17877364, -2.64728442e-07],
+								Vec3 Translation = [0, 0, 0],
 								Vec3 Scale = [1, 1, 1],
 								Quat Rotation = [0, 0, 0, 1],
 							},
@@ -327,13 +254,7 @@ Cog =
 								string BulletArchetype = "57d8856f24342cc4:Arrow",
 								float BulletSpeed = 100,
 								float MeleeDistance = 5,
-								float LosingDistance = 25,
-							},
-							Archer_Attack_MeleeA = 
-							{
-								float MeleeDistance = 5,
-								float Range = 3,
-								float MeleeAttackRate = 1,
+								float LosingDistance = 35,
 							},
 							Hierarchy = 
 							{
@@ -341,7 +262,7 @@ Cog =
 								{
 									LinkId = 
 									{
-										uint Id = 9,
+										uint Id = 7,
 									},
 									Named = 
 									{
@@ -349,7 +270,7 @@ Cog =
 									},
 									Transform = 
 									{
-										Vec3 Translation = [0.459527373, -1.53891146, 0],
+										Vec3 Translation = [0, 0, 0],
 										Vec3 Scale = [50, 50, 1],
 										Quat Rotation = [0, 0, 0, 1],
 									},
@@ -401,7 +322,7 @@ Cog =
 								{
 									LinkId = 
 									{
-										uint Id = 10,
+										uint Id = 8,
 									},
 									Named = 
 									{
@@ -438,7 +359,7 @@ Cog =
 						{
 							LinkId = 
 							{
-								uint Id = 11,
+								uint Id = 9,
 							},
 							Named = 
 							{
@@ -446,7 +367,7 @@ Cog =
 							},
 							Transform = 
 							{
-								Vec3 Translation = [1.36206055, 0.593837261, 0.000105556079],
+								Vec3 Translation = [0, 0, 0],
 								Vec3 Scale = [7.14285707, 14.2857141, 1],
 								Quat Rotation = [0, 0, 0, 1],
 							},
@@ -468,34 +389,7 @@ Cog =
 		{
 			LinkId = 
 			{
-				uint Id = 5,
-			},
-			Named = 
-			{
-				string Name = "Sensor",
-			},
-			Transform = 
-			{
-				Vec3 Translation = [0.027009964, 0.0395934582, 1.37230381e-06],
-				Vec3 Scale = [5, 2, 1],
-				Quat Rotation = [0, 0, 0, 1],
-			},
-			BoxCollider = 
-			{
-				bool Ghost = true,
-				bool SendsMessages = true,
-				bool Seamless = true,
-				string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
-				string SerializedGroupName = "5831f2a61e419268:Sensor",
-				Vec3 Offset = [0, 0, 0],
-				Vec3 Size = [15, 15, 0.5],
-			},
-		},
-		Cog = 
-		{
-			LinkId = 
-			{
-				uint Id = 12,
+				uint Id = 10,
 			},
 			Named = 
 			{
@@ -503,7 +397,7 @@ Cog =
 			},
 			Transform = 
 			{
-				Vec3 Translation = [1.70010102, -4.72895622, 1.25],
+				Vec3 Translation = [0, 0, 1.25],
 				Vec3 Scale = [7.14285707, 7.14285707, 1],
 				Quat Rotation = [0, 0, 0, 1],
 			},
@@ -568,24 +462,6 @@ Cog =
 			},
 			RageActive = 
 			{
-			},
-		},
-		ArchetypeInstance = 
-		{
-			string Name = "58b66ed179c9e848:archershadow",
-			LinkId = 
-			{
-				uint Id = 13,
-			},
-			Transform = 
-			{
-				Vec3 Translation = [0, 0, 0],
-				Vec3 Scale = [1.14999998, 1.14999998, 1],
-				Quat Rotation = [0, 0, 0, 1],
-			},
-			Named = 
-			{
-				string Name = "Archershadow",
 			},
 		},
 	},

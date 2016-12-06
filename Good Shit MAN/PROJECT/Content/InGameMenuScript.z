@@ -15,30 +15,32 @@ class InGameMenuScript : ZilchComponent
         Zero.Connect(this.GameSession, Events.GameRequestQuit, this.GameRequestQuit);
         this.Space2 = this.GameSession.CreateNamedSpace("InGameMenuSpace", this.InGameMenuSpace);
         this.Space2.LoadLevel(this.InGameMenu); 
+        Zero.Connect(this.Controller, Events.ButtonDown, this.OnButtonDown);
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
 
     function GameRequestQuit (event : GameEvent)
     {
         event.Handled = true;
+
+        var spaces = this.GameSession.AllSpaces;
         
-        if(!this.Space.TimeSpace.Paused)
+        foreach( var space in spaces)
         {
-            var spaces = this.GameSession.AllSpaces;
-            
-            foreach( var space in spaces)
-            {
-                space.TimeSpace.TogglePause();
-            }
-            
-            this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = this.Space.TimeSpace.Paused;
+            space.TimeSpace.TogglePause();
         }
+        
+        this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = this.Space.TimeSpace.Paused;
     }
     
-    function OnLogicUpdate (event :UpdateEvent)
+    function OnLogicUpdate(event : UpdateEvent)
     {
         this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = this.Space.TimeSpace.Paused;
-        if(this.Controller.IsButtonPressed(Buttons.Start))
+    }
+    
+    function OnButtonDown (event :GamepadEvent)
+    {
+         if (event.Button == Buttons.Start)
             {
             var spaces = this.GameSession.AllSpaces;
             

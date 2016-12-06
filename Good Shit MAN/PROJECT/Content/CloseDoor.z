@@ -14,10 +14,7 @@ class CloseDoor : ZilchComponent
             this.InArena = true;
             this.Space.FindObjectByName("Door").RigidBody.DynamicState = RigidBodyDynamicState.Dynamic;
             this.Space.FindObjectByName("Camera").NewCameraLogic.Arena = true;
-            this.Space.FindObjectByName("Spawner1").Spawner.InArena = true;
-            this.Space.FindObjectByName("Spawner2").Spawner.InArena = true;
-            this.Space.FindObjectByName("Spawner3").Spawner.InArena = true;
-            this.Space.FindObjectByName("Spawner4").Spawner.InArena = true;
+            this.LevelSettings.Spawner.InArena = true;
         }
     }
 }

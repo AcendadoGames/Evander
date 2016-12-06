@@ -23,12 +23,13 @@ class PlayerHealth : ZilchComponent
             }
             else 
             {
+                this.Timer += event.Dt;
+                
                 this.Health = 0;
                 this.Space.FindObjectByName("Camera").Camera.Size -= 0.5;
                 this.Owner.Sprite.AnimationActive = false;
                 this.Owner.KeyboardController.Enablemovement = false;
                 this.Owner.ComboTree.EnableCombo = false;
-                this.Timer += event.Dt;
                 this.Owner.Sprite.Color = Real4(0,0,0,1);
                 this.Owner.MovementController.MoveSpeed = 0;
                 this.Owner.MovementController.DashSpeed = 0;

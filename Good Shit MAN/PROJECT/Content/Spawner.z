@@ -1,21 +1,19 @@
 class Spawner : ZilchComponent
 {
-    [Property]
-    var ArcherSpawner : Boolean;//Type of Spawner
-    [Property]
-    var MeleeSpawner : Boolean;//Type of Spawner
-
     var InArena : Boolean = false;//Checks if you're in the arena
     var InRound : Boolean = false;//Checks if you're in the round
-    var RoundClear : Boolean = true;//Checks if the round is cleared
+    var RoundClear : Boolean = false;//Checks if the round is cleared
     var RoundNum : Integer = 1;//Round number
-    var RoundText : String;//Round Text
+    var RoundText : String = "Round Number";//Round Text
 
     var Archer : Archetype = Archetype.Archer;//Archetypes to spawn
     var Melee : Archetype = Archetype.Melee;//Archetype to Spawn
 
-    var SpawnArcher : Boolean = true;//Control number of archers created
-    var SpawnMelee : Boolean = true;//ontrol number of melee created
+    var SpawnArcher : Boolean = false;//Control number of archers created
+    var SpawnMelee : Boolean = false;//ontrol number of melee created
+
+    var ArcherSpawner : Integer = 0;//Controls the spawner active
+    var MeleeSpawner : Integer = 0;//Controls the Spawner active
 
     var CountArcher : Real = 0;//Counts how many archers are on game
     var CountMelee : Real = 0;//Counts how many melee are on game
@@ -27,10 +25,12 @@ class Spawner : ZilchComponent
     var TimeBetweenRound : Real = 6;//Sets the time between rounds
     var TimeToNextRound : Real = 0.0;//Timer for between rounds time
 
-    var ArcherPerRound : Integer = 0;//Number of Archers per row
-    var MeleePerRound : Integer = 0;//Number of Melees per row
+    var ArcherPerRound : Integer = 1;//Number of Archers per row
+    var MeleePerRound : Integer = 1;//Number of Melees per row
 
     var NextRoundMessage : Boolean = false;//To comunicate with the HUD
+
+    var Control : Boolean = true;
 
     function Initialize(init : CogInitializer)
     {
@@ -39,81 +39,150 @@ class Spawner : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
-
         var randomGenerator : Random = Random();//Generates a random number
         var randomOffset = randomGenerator.Range(3,-3);//Generates a random offset X
-
-        var offset = this.Owner.Transform.Translation.X + randomOffset;//Generates the offset to spawn archers
-
-        var vectorFromSpawnerToCenter = Real3(0,0,1) - this.Owner.Transform.Translation;//Computes the vector the melee spawned must follow
-
+        var offset = Real3(randomOffset, 0, 1);
         /****************Checking if there are enemies********************/
-        if(!this.SpawnArcher && !this.SpawnMelee)
+        if(!this.SpawnArcher && !this.SpawnMelee && this.InArena && this.Control)
+        {
             this.RoundClear = true;
+            this.Control = false;
+        }
 
         /**************Aumenting Dificulty with time*********************/
-        if(this.SpawnRate >= 2.5 && this.InArena)
+        if(this.RoundClear)
         {
-            if(this.RoundClear)
-            {
-                this.TimeToNextRound += event.Dt;
-                this.RoundText = ("Round Number `this.RoundNum`");
-                this.NextRoundMessage = true;
-            }
+            this.TimeToNextRound += event.Dt;
+            this.RoundText = ("Round `this.RoundNum`");
+            this.NextRoundMessage = true;
         }
 
         if(this.TimeToNextRound >= this.TimeBetweenRound)
         {
             this.RoundClear = false;
-            this.SpawnRate -= 0.1;
+            this.NextRoundMessage = false;
             this.RoundNum += 1;
             this.ArcherPerRound += 1;
             this.MeleePerRound += 2;
-            this.NextRoundMessage = false;
             this.InRound = true;
             this.TimeToNextRound = 0;
+            this.SpawnArcher = true;
+            this.SpawnMelee = true;
+
+            if(this.SpawnRate >= 2.5 && this.InArena)
+            {
+                this.SpawnRate -= 0.1;
+            }
         }
 
         /**********************Seting the start for rounds******************************/
-        if(this.InArena == true )//Start when you are already in the arena and more.
-        {
-            this.TimeToMelee += event.Dt;
-            this.TimeToArcher += event.Dt;
-        }
-
         if(this.InRound)
         {
-            if(this.ArcherSpawner && this.SpawnArcher)
+            if(this.InArena == true )//Start when you are already in the arena and more.
             {
-                if(this.TimeToArcher >= this.SpawnRate)
+                this.TimeToMelee += event.Dt;
+                this.TimeToArcher += event.Dt;
+            }
+            
+            if(this.SpawnArcher)
+            {
+
+                if(this.ArcherSpawner == 0)
                 {
-                    var archer = this.Space.CreateAtPosition(this.Archer, Real3(offset, this.Owner.Transform.Translation.Y, 1));
-                    this.CountArcher +=1;
-                    this.TimeToArcher = 0;
+                    if (this.TimeToArcher > 1)
+                        this.Space.FindObjectByName("Spawner2").SphericalParticleEmitter.Active = false;
+
+                    if(this.TimeToArcher > this.SpawnRate - 0.7)
+                        this.Space.FindObjectByName("Spawner1").SphericalParticleEmitter.Active = true;
+                    
+                    if(this.TimeToArcher >= this.SpawnRate)
+                    {
+                        var archer = this.Space.CreateAtPosition(this.Archer, this.Space.FindObjectByName("Spawner1").Transform.Translation + offset);
+                        this.CountArcher +=1;
+                        this.TimeToArcher = 0;
+                        this.ArcherSpawner = 1;
+                    }
+                }
+
+                if(this.ArcherSpawner == 1)
+                {
+                    if (this.TimeToArcher > 1)
+                        this.Space.FindObjectByName("Spawner1").SphericalParticleEmitter.Active = false;
+
+                    if(this.TimeToArcher > this.SpawnRate - 0.7)
+                        this.Space.FindObjectByName("Spawner2").SphericalParticleEmitter.Active = true;
+                    
+                    if(this.TimeToArcher >= this.SpawnRate)
+                    {
+                        var archer = this.Space.CreateAtPosition(this.Archer, this.Space.FindObjectByName("Spawner2").Transform.Translation + offset);
+                        this.CountArcher +=1;
+                        this.TimeToArcher = 0;
+                        this.ArcherSpawner = 0;
+                    }
                 }
 
                 if(this.CountArcher == this.ArcherPerRound)
                 {
                     this.SpawnArcher = false;
                     this.CountArcher = 0;
+                    this.Space.FindObjectByName("Spawner1").SphericalParticleEmitter.Active = false;
+                    this.Space.FindObjectByName("Spawner2").SphericalParticleEmitter.Active = false;
                 }
             }
 
-            if(this.MeleeSpawner && this.SpawnMelee)
+            if(this.SpawnMelee)
             {
-                if(this.TimeToMelee >= this.SpawnRate)
+
+                if(this.MeleeSpawner == 0)
                 {
-                    var melee = this.Space.CreateAtPosition(this.Melee, this.Owner.Transform.Translation);
-                    melee.RigidBody.Velocity = vectorFromSpawnerToCenter;
-                    this.CountMelee +=1;
-                    this.TimeToMelee = 0;
+                    if (this.TimeToMelee > 1)
+                        this.Space.FindObjectByName("Spawner4").SphericalParticleEmitter.Active = false;
+
+                    if(this.TimeToMelee > this.SpawnRate - 0.7)
+                        this.Space.FindObjectByName("Spawner3").SphericalParticleEmitter.Active = true;
+                        
+                    if(this.TimeToMelee >= this.SpawnRate)
+                    {
+                        var melee = this.Space.CreateAtPosition(this.Melee, this.Space.FindObjectByName("Spawner3").Transform.Translation + offset);
+                        this.CountMelee +=1;
+                        this.TimeToMelee = 0;
+                        this.MeleeSpawner = 1;
+                    }
+                }
+
+                if(this.MeleeSpawner == 1)
+                {
+                    if (this.TimeToMelee > 1)
+                        this.Space.FindObjectByName("Spawner3").SphericalParticleEmitter.Active = false;
+
+                    if(this.TimeToMelee > this.SpawnRate - 0.7)
+                        this.Space.FindObjectByName("Spawner4").SphericalParticleEmitter.Active = true;
+                        
+                    if(this.TimeToMelee >= this.SpawnRate)
+                    {
+                        var melee = this.Space.CreateAtPosition(this.Melee, this.Space.FindObjectByName("Spawner4").Transform.Translation + offset);
+                        this.CountMelee +=1;
+                        this.TimeToMelee = 0;
+                        this.MeleeSpawner = 0;
+                    }
                 }
 
                 if(this.CountMelee == this.MeleePerRound)
                 {
                     this.SpawnMelee = false;
                     this.CountMelee = 0;
+                    this.Space.FindObjectByName("Spawner3").SphericalParticleEmitter.Active = false;
+                    this.Space.FindObjectByName("Spawner4").SphericalParticleEmitter.Active = false;
                 }
+            }
+
+            if(this.Space.FindObjectByName("Archer") == null && this.Space.FindObjectByName("Melee") == null)
+            {
+                this.Control = true;
+            }
+            else
+            {
+                this.Control = false;
             }
         }
     }

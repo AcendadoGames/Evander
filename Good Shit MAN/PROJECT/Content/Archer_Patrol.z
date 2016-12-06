@@ -1,100 +1,20 @@
 class Archer_Patrol : SuperState
 {
-    //PROPERTIES
-    [Property] var SensorCogPath : CogPath = null;
-    
-    //OTHERVARIABLES
-    var SensorCog : Cog = null;
-    var TargetCog : Cog = null;
-    
 /*------------------------------------------------------------------------------------------*/
-    function Initialize(init : CogInitializer) /*We are setting the sensor up*/
+    function Initialize(init : CogInitializer) 
     {
         this.StateInitialize(init);
-        
-        if (this.SensorCogPath != null)
-            this.SensorCog = this.SensorCogPath.Cog;
-    }
-    
-    [Override] function Enter()
-        {
-            (this as SuperState)~>Enter();
-            
-            this.TargetCog = null;
-        
-            if(this.SensorCog != null)
-                Zero.Connect(this.SensorCog, Events.CollisionStarted, this.OnSensorEnter);
-        }
-        
-    [Override] function Exit()
-        {
-            if(this.SensorCog != null)
-                Zero.Disconnect(this.SensorCog, Events.CollisionStarted, this);
-            
-            (this as SuperState)~>Exit();
-        }
-        
-    [Override] function OnSensorEnter(event : CollisionEvent) /*Collision event with the Sensor */
-        {
-            ////("CollidedWithSensor");
-            if (event.OtherObject.Name == "PrototypePlayer")
-            {
-                this.TargetCog = event.OtherObject;
-                this.Owner.StateMachine.ChangeState(this.Owner.Archer_SeekTarget);
-            }
-        }
-        
-    [Override] function Update(event: UpdateEvent)
-        {
-            //this.SensorCog.BoxCollider.DebugDraw();
-        }
-}
-/*------------------------------------------------------------------------------------------*/
-class Archer_Patrol_Walking : State
-{
-    //PROPERTIES
-    [Property]
-    var Direction : Real = 1.0;
-    [Property]
-    var Duration : Real = 5.0;
-    
-    //OTHERVARIABLES
-    var MovementStateMachine : StateMachine = null;
-    
-    function Initialize(init :  CogInitializer)
-    {
-        this.StateInitialize(init);
-        this.MovementStateMachine = this.Owner.StateMachine.FindStateMachineFromRoot("Movement");
-    }
-    /*Entering the walking from the Patrol since we start in this state*/
-    [Override] function Enter()
-        {
-            this.Direction *= -1;
-            
-            if (this.MovementStateMachine != null)
-            {
-                this.MovementStateMachine.Owner.Move_Walk.Direction = this.Direction;
-                this.MovementStateMachine.ChangeState("Move_Walk");
-            }
-        }
-    
-    [Override] function Update(event : UpdateEvent)
-    {
-        if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
-                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Stuned");
-        /*Making him wait after walking, and changing his State*/
-        if(this.TimeInState >= this.Duration)
-            this.Owner.StateMachine.ChangeState(this.Owner.Archer_Patrol_Wait);
     }
 }
-/*------------------------------------------------------------------------------------------*/
-class Archer_Patrol_Wait : State
+class Archer_Patrol_LookingForEnemies : State
 {
     //PROPERTIES
     [Property]
     var Duration : Real = 3.0;
     
+    var Direction : Real = 1;
     //OTHERVARIABLES
+    var Timer : Real = 0;
     var MovementStateMachine : StateMachine = null;
     
     function Initialize(init :  CogInitializer)
@@ -114,10 +34,18 @@ class Archer_Patrol_Wait : State
         
     [Override] function Update(event : UpdateEvent)
         {
+            
+            var playerPos = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+            var ownerPos = this.Owner.Parent.Parent.Parent.Transform.Translation;
+            var distanceToPlayer = Math.Distance(playerPos, ownerPos);
+            
             if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
                 this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Stuned");
-            /*This is the waiting time*/
-            if (this.TimeInState >= this.Duration)
-                this.Owner.StateMachine.ChangeState(this.Owner.Archer_Patrol_Walking);
+            
+            if(distanceToPlayer < 35)
+            {
+                
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Attack");
+            }
         }
 }
