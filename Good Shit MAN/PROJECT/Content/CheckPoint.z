@@ -1,5 +1,6 @@
 class Checkpoint : ZilchComponent
 {
+    
     function Initialize(init : CogInitializer)
     {
         Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
@@ -7,9 +8,16 @@ class Checkpoint : ZilchComponent
 
     function OnCollisionStarted(event : CollisionEvent)
     {
+        var buyaka = false;
         //when hitting a checkpoint, save this position in the level
         if(event.OtherObject.BoxCollider.CollisionGroup == CollisionGroup.Player)
         {
+            if(!buyaka)
+            {
+                this.Space.FindObjectByName("PrototypePlayer").PlayerHealth.Health = 100;
+                this.Space.FindObjectByName("PrototypePlayer").PlayerHealth.CurrentHealth = 100;
+                buyaka = true;
+            }
             this.Owner.FindChildByName("BlueParticle").SpriteParticleSystem.Tint = Real4(1,1,0,1);
             
             if(this.Owner.Transform.Translation.X > this.Space.GlobalVariables.StartPosition.X)

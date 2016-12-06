@@ -6,6 +6,8 @@ class HUDInteraction : ZilchComponent
         this.Space.ComboText.Scale = 0;
         this.Space.ComboText.ComboTime = 0;
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        
+        //this.Owner.HUDCreator.HudSpace.FindObjectByName("ComboText").SpriteText.Text = "";
     }
 
     function OnLogicUpdate(event : UpdateEvent)

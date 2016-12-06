@@ -11,6 +11,11 @@ class PlayerDetectionCollider : ZilchComponent
     {
         if(event.OtherObject.Name == "PrototypePlayer")
         {
+            this.Space.ComboText.ComboText = 0;
+            this.Space.ComboText.Scale = 0;
+            this.Space.ComboText.ComboTime = 0;
+            Console.WriteLine("pene");
+            this.GameSession.FindSpaceByName("HudSpace").Destroy();
             this.Space.ReloadLevel();
         }
     }
