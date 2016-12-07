@@ -1,0 +1,42 @@
+class MaskMenu : ZilchComponent
+{
+    var Time : Real = 0;
+
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Time == 0)
+            this.GoUp();
+        
+        if(this.Time > 2 && this.Time < 4)
+            this.Space.FindObjectByName("Smoke").BoxParticleEmitter.EmitRate = Math.Lerp(this.Space.FindObjectByName("Smoke").BoxParticleEmitter.EmitRate,65,0.5);
+        else
+            this.Space.FindObjectByName("Smoke").BoxParticleEmitter.EmitRate = Math.Lerp(this.Space.FindObjectByName("Smoke").BoxParticleEmitter.EmitRate,0,0.5);
+            
+        if(this.Time < 4)
+            this.Time += event.Dt;
+        else
+            this.Time = 0;
+    }
+    function GoUp()
+    {
+        Action.Property(this.Owner.Actions,
+                            @this.Owner.Transform.Translation,
+                            Real3(this.Owner.Transform.Translation.X,this.Owner.Transform.Translation.Y + 1,this.Owner.Transform.Translation.Z),
+                            2,
+                            Ease.SinInOut);
+        
+        var goingDown = Action.Sequence(this.Owner.Actions);
+        Action.Delay(goingDown, 2);
+        
+        Action.Property(goingDown,
+                            @this.Owner.Transform.Translation,
+                            this.Owner.Transform.Translation,
+                            2,
+                            Ease.QuadOut);
+    }
+}

@@ -17,6 +17,10 @@ class GeneralAlgorithms : ZilchComponent
         }
         return true;
     }
+    function CompareCartelByY (x : Cartel, y : Cartel) : Boolean
+    {
+        return x.Object.Transform.Translation.Y < y.Object.Transform.Translation.Y;
+    }
     
     
     //Quicksort "Divive and Conquer" algorithm. It uses recursion
@@ -62,6 +66,7 @@ class GeneralAlgorithms : ZilchComponent
         return j;           // returns middle subscript  
     }
     
+    
     function InpreciseLerp (v0 : Real3, v1 : Real3, t : Real) : Real3
     {
         return v0 + t*(v1-v0);
@@ -71,4 +76,6 @@ class GeneralAlgorithms : ZilchComponent
     {
         return (1-t)*v0 + t*v1;
     }
+    
+    
 }
