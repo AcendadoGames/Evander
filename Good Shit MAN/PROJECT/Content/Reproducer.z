@@ -40,7 +40,7 @@ class Reproducer : ZilchComponent
                 this.Index += 1;
             }
         }
-        //Console.WriteLine(this.Index);
+        ////(this.Index);
                 
                 
         /*this.Time2 += event.Dt;
