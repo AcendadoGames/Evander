@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "RageBar",
-		uint64 ResourceId = 584c253b6bf6ddb6,
-	},
-},

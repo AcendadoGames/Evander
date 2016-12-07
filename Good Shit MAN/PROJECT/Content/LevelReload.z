@@ -1,7 +1,0 @@
-class LevelReload : ZilchComponent
-{
-    function Initialize(init : CogInitializer)
-    {
-        this.Space.FindObjectByName("PrototypePlayer").Transform.Translation = this.Space.GlobalVariables.StartPosition;
-    }
-}

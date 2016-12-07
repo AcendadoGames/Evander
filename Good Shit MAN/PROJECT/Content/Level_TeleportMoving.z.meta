@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "Level_TeleportMoving",
-		uint64 ResourceId = 58163819f220dcab,
-	},
-},

@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "FallingGround",
-		uint64 ResourceId = 587a966785da086f,
-	},
-},

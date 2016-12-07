@@ -1,7 +1,0 @@
-class StartPosition : ZilchComponent
-{
-    function Initialize(init : CogInitializer)
-    {
-        this.Space.GlobalVariables.StartPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
-    }
-}

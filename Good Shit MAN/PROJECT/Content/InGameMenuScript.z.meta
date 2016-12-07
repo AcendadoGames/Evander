@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "InGameMenuScript",
-		uint64 ResourceId = 58be43de48479462,
-	},
-},

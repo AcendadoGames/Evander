@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "SpawnPoint",
-		uint64 ResourceId = 580239c1bf83ddf8,
-	},
-},

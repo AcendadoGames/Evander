@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "DecimalToRoman",
-		uint64 ResourceId = 5834830f708ee1c2,
-	},
-},

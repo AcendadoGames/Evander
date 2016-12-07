@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "BallLogic",
-		uint64 ResourceId = 588736a5306a6da6,
-	},
-},

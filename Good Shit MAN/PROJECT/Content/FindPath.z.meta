@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "FindPath",
-		uint64 ResourceId = 583159eef726799d,
-	},
-},

@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "FallingLimit",
-		uint64 ResourceId = 587a9364897bd6a1,
-	},
-},

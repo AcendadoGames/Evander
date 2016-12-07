@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "ComboData",
-		uint64 ResourceId = 57df7e1b75f881d9,
-	},
-},

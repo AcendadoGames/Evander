@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "RKeyReset",
-		uint64 ResourceId = 577494ae58c92889,
-	},
-},

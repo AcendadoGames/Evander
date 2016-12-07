@@ -1,8 +1,0 @@
-TextContent = 
-{
-	ZilchScriptBuilder = 
-	{
-		string Name = "StartPosition",
-		uint64 ResourceId = 580239c1bf820dfb,
-	},
-},

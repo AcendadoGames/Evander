@@ -1,8 +1,0 @@
-class SpawnPoint : ZilchComponent
-{
-    function Initialize(init : CogInitializer)
-    {
-        if(this.Space.GlobalVariables.StartPosition == Real3(-199,-199,-199))
-            this.Space.GlobalVariables.StartPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
-    }
-}

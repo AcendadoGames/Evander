@@ -1,8 +1,0 @@
-FontContent = 
-{
-	FontBuilder = 
-	{
-		string Name = "DIOGENES",
-		uint64 ResourceId = 58196eb9b494b2f8,
-	},
-},
