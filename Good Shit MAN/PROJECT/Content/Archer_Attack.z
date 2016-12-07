@@ -1,0 +1,165 @@
+class Archer_Attack : SuperState
+{
+    //PROPERTIES
+    [Property]
+    var Duration : Real = 10.0;
+    [Property]
+    var MaxDistance : Real = 40.0;
+    [Property]
+    var MeleeDistance : Real = 5;
+    [Property]
+    var ShootingMaxDistance : Real = 35;
+    
+    //OTHERVARIABLES
+    var ShootingMinDistance : Real;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    
+    //This is just to set the minimum of confusion when it comes to this code.
+    [Override] function Enter()
+        {
+            this.ShootingMinDistance = this.MeleeDistance;
+            Console.WriteLine("Attack");
+        }
+        
+    [Override] function Update(event : UpdateEvent)
+        {
+            //Setting some variables to define the distance to the player
+            var playerPos : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+            var ownerPos : Real3 = this.Actor.Transform.Translation;
+            var distanceToPlayer : Real = Math.Distance( ownerPos, playerPos );
+            
+            if (distanceToPlayer < 35)
+            {
+                this.Owner.StateMachine.ChangeState(this.Owner.Archer_Attack_DistanceA);
+            }
+            else
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Patrol");
+        }
+}
+/*-------------------------------------------------------------------------------------------------------------------------------------------------*/
+class Archer_Attack_DistanceA : State /* The Enemy stops and starts shooting arrows at the Player*/
+{
+    //DEPENDENCIES
+    [Dependency]
+    var Transform : Transform;
+    //PROPERTIES
+    [Property] 
+    var FireRate : Real = 1.0;
+    [Property] 
+    var BulletArchetype : Archetype = Archetype.Arrow;
+    [Property] 
+    var BulletSpeed : Real = 20.0;
+    [Property]
+    var MeleeDistance : Real = 5.0;
+    [Property]
+    var LosingDistance : Real = 35;
+    
+    //OTHERVARIABLES
+    var ShootingMinDistance : Real;
+    var Timer : Real = 0.0;
+    var ShootingAngle : Real;
+    var MuzzleObject : Cog = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+        this.MuzzleObject = this.Owner.FindChildByName("Muzzle");
+    }
+    
+    [Override] function Enter()
+        {
+            Console.WriteLine("Distance Attack");
+        }
+        
+    [Override] function Update(event: UpdateEvent)
+        {
+            if (this.Owner.Parent.Parent.Parent.EnemyHealth.BeenDamaged == true)
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Stuned");
+            
+            this.Timer += event.Dt;
+            
+            //Setting variables that wiil be needed to compute the distance to player and the angle for the Fire() function
+            var playerPosition : Real3 = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+            var ownerPosition : Real3 = this.Actor.Transform.Translation;
+            var vectorToPlayer = playerPosition - ownerPosition;
+            var distanceToPlayer = Math.Distance(playerPosition, ownerPosition);
+            
+            
+            this.ShootingAngle = Math.ATan2(vectorToPlayer.Y, vectorToPlayer.X);
+            
+            if (this.Timer >= this.FireRate) /*Setting a FireRate*/
+            {
+                this.Fire();
+                this.Timer = 0;
+            } 
+            if (distanceToPlayer >= this.LosingDistance)    /* If the player is out of range, get closer*/
+            {
+                this.Owner.StateMachine.FindStateMachineFromRoot("ArcherAI").ChangeState("Archer_Patrol");
+            }
+        }
+        function Fire()
+        {
+            Console.WriteLine("Firing");
+            //TimeInTheAirToTarget
+            var t : Real = 0.8;
+            //DistanceToPlayer
+            var distanceToTarget: Real = 0.0;
+            //OwnerPosition
+            var ownerPosition: Real3 = this.StateMachine.Actor.Transform.Translation;
+            //Finding to Player
+            var target : Cog = this.Space.FindObjectByName("PrototypePlayer");
+            //The shooting Angle
+            var alpha : Real = 0.0;
+            //Adding the velocity vector
+            var velocity : Real = 0.0;
+            
+            //Bullet Information
+            var bulletPosition = this.MuzzleObject.Transform.WorldTranslation;
+            var bullet = this.Space.CreateAtPosition(this.BulletArchetype, bulletPosition);
+            
+            //Setting the Initial velocity
+            var iniVelocity : Real3 = Real3(0, 0, 0);
+            
+            //Getting the games gravity
+            var gravity = this.Space.LevelSettings.GravityEffect.Strength;
+            
+
+                //Computing distance to player
+                distanceToTarget = Math.Distance(ownerPosition, target.Transform.Translation);
+                
+                //Modifing the time in the aire depending on the distanceToTraget
+                t *= distanceToTarget / 30;
+                
+                //Getting the angle with the parabolic equations
+                alpha = Math.ATan((target.Transform.Translation.Y - ownerPosition.Y - 
+                                    (-gravity * t * t) / 2) / (target.Transform.Translation.X  
+                                    - (target.RigidBody.Velocity.X * t) - ownerPosition.X));
+                
+                //Finding the velocity with the angle
+                velocity = ((target.Transform.Translation.X - ownerPosition.X) / (t * Math.Cos(alpha)));
+                
+                
+                //INFORMATION WRITELINES
+                /*
+                //("PlayerDistance `distanceToTarget`");
+                //(t);
+                //("The angle is `Math.ToDegrees(radians :alpha)`");
+                //("The velocity is `velocity`");
+                //("The distance to target`distanceToTarget`");
+                //("--------------------------------");
+                */
+                
+                //Modifing the inicial velocity
+                iniVelocity.X = Math.Cos(alpha) * velocity;
+                iniVelocity.Y = Math.Sin(alpha) * velocity;
+                
+                //Creating the Bullet
+                bullet.RigidBody.Velocity = iniVelocity;
+            
+        }
+}
+/*-------------------------------------------------------------------------------------------------------------------------------------------------*/

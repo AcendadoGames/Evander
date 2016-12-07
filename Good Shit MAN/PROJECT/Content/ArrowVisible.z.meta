@@ -1,0 +1,15 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "ArrowVisible",
+		uint64 ResourceId = 5818275e19b43aa0,
+	},
+	ContentTags = 
+	{
+		Array Tags = 
+		[
+			"Package",
+		],
+	},
+},

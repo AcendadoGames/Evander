@@ -1,0 +1,93 @@
+class Move_Idle : State
+{
+    /*---------------------------------------------------------------------------------------------------------*/
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    [Override] function Enter()
+    {
+       
+    }
+}
+/*---------------------------------------------------------------------------------------------------------*/
+
+class Move_Walk : State
+{
+    /*It depends on who you are putting this, you have to change it to every enemy*/
+    
+    //For Archers
+    [Property]
+    var SpeedArcher : Real = 0.5;
+    //For Melees
+    [Property]
+    var SpeedMelee : Real = 0.5;
+    [Property]
+    var Direction : Real = 1.0;
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    [Override]function Update(event : UpdateEvent)
+    {
+        var body = this.Actor.RigidBody;
+        
+        if (this.Direction == -1 && this.Actor.Name == "Melee")
+            this.Actor.Sprite.FlipX = true;
+            
+        if (this.Direction == 1 && this.Actor.Name == "Melee")
+            this.Actor.Sprite.FlipX = false;
+        
+        if (this.Direction == -1  && this.Actor.Name == "Archer")
+            this.Actor.Sprite.FlipX = false;
+            
+        if (this.Direction == 1 && this.Actor.Name == "Archer")
+            this.Actor.Sprite.FlipX = true;
+            
+        if (this.Actor.Name == "Archer")
+        {
+            body.Velocity += Real3(this.SpeedArcher * this.Direction, 0, 0);
+        }
+        
+        if (this.Actor.Name == "Melee")
+        {
+            body.Velocity += Real3(this.SpeedMelee * this.Direction, 0, 0);
+        }
+    }
+    
+}
+/*---------------------------------------------------------------------------------------------------------*/
+class Move_Jump : State
+{
+    [Property] 
+    var Impulse : Real = 5.0;
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    function Initialize(init : CogInitializer)
+    {
+        this.StateInitialize(init);
+    }
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    [Override]function Enter()
+    {
+        Zero.Connect(this.Actor, Events.CollisionStarted, this.OnCollisionStarted);
+        var body = this.Actor.RigidBody;
+        
+        if (body != null)
+            body.Velocity += Real3(0, this.Impulse, 0);
+    }
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    [Override] function Exit()
+    {
+        Zero.Disconnect(this.Actor, Events.CollisionStarted, this);
+    }
+    /*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        if (event.OtherObject.Collider.CollisionGroup == CollisionGroup.Ground)
+            this.Owner.StateMachine.ChangeState(this.Owner.Move_Idle);
+    }
+    /*---------------------------------------------------------------------------------------------------------*/
+}

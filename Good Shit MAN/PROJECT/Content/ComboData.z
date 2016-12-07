@@ -1,0 +1,261 @@
+/*class ComboData : ZilchComponent
+{
+    var Combos : Array[Combo] = new Array[Combo]();
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Combos.Push(new L());
+        this.Combos.Push(new R());
+        this.Combos.Push(new LL());
+        this.Combos.Push(new LR());
+        this.Combos.Push(new RR());
+        this.Combos.Push(new RL());
+        this.Combos.Push(new LLR());
+        this.Combos.Push(new LRL());
+        this.Combos.Push(new LRR());
+        this.Combos.Push(new RRL());
+        this.Combos.Push(new RLR());
+        this.Combos.Push(new RLL());
+    }
+}
+
+class ComboState
+{
+    var Duration : Real = 1;
+    var Anim : CogPath = null;
+}
+
+class Combo
+{
+    var PRE_ATTACK : Integer = 0;
+    var ON_ATTACK : Integer = 1;
+    var POST_ATTACK : Integer = 2;
+    var RECOVER : Integer = 3;
+    
+    var InputTiming : Real = 0.2;
+    
+    var States : Array[ComboState] = new Array[ComboState]();
+    
+     constructor()
+     {
+        this.States.Push(new ComboState()); 
+        this.States.Push(new ComboState());
+        this.States.Push(new ComboState());
+        this.States.Push(new ComboState());
+        
+        this.InitializeCombo();
+     }
+    
+    var Left : String = "L";
+    var Right : String = "R";
+    
+    var ComboName : Array[String] = new Array[String]();
+    [Virtual] function InitializeCombo(){}
+    [Virtual] function ExecuteCombo(){}
+    
+}
+
+class L : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Left);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class R : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Right);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class LL : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Left);this.ComboName.Push(this.Left);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class LR : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Left);this.ComboName.Push(this.Right);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class RR : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Right);this.ComboName.Push(this.Right);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class RL : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Right);this.ComboName.Push(this.Left);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class LLR : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Left);this.ComboName.Push(this.Left);this.ComboName.Push(this.Right);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class LRL : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Left);this.ComboName.Push(this.Right);this.ComboName.Push(this.Left);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class LRR : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Left);this.ComboName.Push(this.Right);this.ComboName.Push(this.Right);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class RRL : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Right);this.ComboName.Push(this.Right);this.ComboName.Push(this.Left);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class RLR : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Right);this.ComboName.Push(this.Left);this.ComboName.Push(this.Right);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}
+class RLL : Combo
+{
+    [Override] function InitializeCombo()
+    {
+        this.ComboName.Push(this.Right);this.ComboName.Push(this.Left);this.ComboName.Push(this.Left);
+        
+        this.States[this.PRE_ATTACK].Duration = 1;
+        this.States[this.ON_ATTACK].Duration = 1;
+        this.States[this.POST_ATTACK].Duration = 1;
+        this.States[this.RECOVER].Duration = 1;
+    }
+    [Override] function ExecuteCombo()
+    {
+        //("Executing", this.ComboName);
+    }
+
+}*/
