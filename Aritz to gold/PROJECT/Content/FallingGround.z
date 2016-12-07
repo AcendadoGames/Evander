@@ -1,0 +1,47 @@
+class FallingGround : ZilchComponent
+{
+    [Property]
+    var TimeToFall : Real = 0.5;
+    
+    var Contact : Boolean = false;
+    var Timer : Real = 0.0;
+    var Rand : Random = Random();
+    var NormalPosition : Real3;
+    
+    var Spawn :Boolean  = false;
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.NormalPosition = this.Owner.Transform.Translation;
+    }
+
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        if (event.OtherObject.Name == "PrototypePlayer")
+        {
+             this.Contact = true;
+        }
+        if (event.OtherObject.Name == "Ground")
+        {
+             this.Owner.Sprite.Visible = false;
+             this.Owner.BoxCollider.Ghost = true;
+        }
+    }
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var randomShake = Real3(this.Rand.Range(-0.2,0.2),this.Rand.Range(-0.2,0.2),0);
+        
+        if(this.Contact == true && this.Timer <= this.TimeToFall)
+        {
+
+            this.Timer += event.Dt;
+            this.Owner.Transform.Translation = this.NormalPosition + randomShake;
+        }
+        if(this.Timer >= this.TimeToFall)
+        {
+            this.Owner.RigidBody.DynamicState = RigidBodyDynamicState.Dynamic;
+            this.Spawn = true;
+        }
+    }
+}

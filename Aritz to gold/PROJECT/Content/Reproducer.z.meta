@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "Reproducer",
+		uint64 ResourceId = 58fe2ab485ef4f6e,
+	},
+},

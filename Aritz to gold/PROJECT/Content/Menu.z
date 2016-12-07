@@ -1,0 +1,113 @@
+class Menu : ZilchComponent
+{
+    
+    var MainMenu : Array[Cartel] = new Array[Cartel]();
+    var Limit : Boolean = true;
+    var Timer : Real = 0.2;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.InitializeMenu();
+        Zero.Connect(Zero.Keyboard, Events.KeyDown, this.Input);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+     
+    function InitializeMenu()
+    {
+        var children = this.Owner.Children;
+        
+        foreach (var child in children)
+            this.MainMenu.Push(Cartel(child));
+    }
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(!this.Limit)
+        {
+            if(this.Timer > 0)
+                this.Timer -= event.Dt;
+            else
+            {
+                this.Limit = true;
+                this.Timer = 0.2;
+            }
+        }
+    }
+    function Input(event : KeyboardEvent)
+    {
+        if(this.Limit)
+        {
+            if(event.Key == Keys.Down)
+                this.MoveTexts(-1);
+            else if(event.Key == Keys.Up)
+                this.MoveTexts(1);
+        }
+        
+    }
+    
+    function MoveTexts(move : Integer)
+    {
+        this.MainMenu.Sort(this.Space.GeneralAlgorithms.CompareCartelByY);
+        this.Limit = false;
+        var index = 0;
+        
+        for (var i = 0; i < Cartel.Counter; i+=1)
+        {
+            index = i + move;
+            if(index < 0)
+                index = Cartel.Counter-1;
+            else if(index >= Cartel.Counter)
+                index = 0;
+            
+            Action.Property(this.Owner.Actions,
+                            @this.MainMenu[i].Object.Transform.Translation,
+                            Cartel.Positions[index],
+                            0.2,
+                            Ease.SinInOut);    
+        }
+    }
+}
+
+class Cartel
+{
+    [Static]
+    var Offset_ : Real3 = Real3(0,0,0);
+    
+    [Static]
+    var Offset : Real3{get{return Cartel.Offset_;}
+                       set{Cartel.Offset_ = value;}}
+    
+    [Static]
+    var OffsetIncrease : Real3{get{return Real3(0,1.5,-5);}}
+    
+    [Static]
+    var Counter : Integer = 0;
+    
+    [Static]
+    var Positions : Array[Real3] = new Array[Real3]();
+    
+    var Object : Cog;
+    
+    
+    constructor (object : Cog)
+    {
+        this.Object = object;
+        Cartel.SetOffset();
+        Cartel.PushPosition();
+        this.Object.Transform.Translation = Cartel.Offset;
+        Cartel.Counter += 1;
+    }
+    
+    [Static] function SetOffset()
+    {
+        Cartel.Offset = Real3(Cartel.Offset.X,
+                             (Cartel.Offset.Y + Cartel.Counter*Cartel.OffsetIncrease.Y) + (Cartel.Counter*2*Cartel.OffsetIncrease.Y*(-Cartel.Counter%2)),
+                              Cartel.Offset.Z + ((Cartel.OffsetIncrease.Z) * (Cartel.Counter%2)));
+    }
+    [Static]function PushPosition()
+    {
+        if(Cartel.Counter%2 == 0)
+            Cartel.Positions.Push(Cartel.Offset);
+        else
+            Cartel.Positions.Insert(0,Cartel.Offset);
+    }
+}

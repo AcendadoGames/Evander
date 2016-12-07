@@ -1,0 +1,37 @@
+class PlayerDamageTempo : ZilchComponent
+{
+    var Controller:Gamepad = null;
+    var Counter : Real = 0;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionPersisted,this.OnCollisionPersisted);
+    }
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Owner.BoxCollider.SendsEvents = false;
+        
+        if (this.Controller.IsButtonPressed(Buttons.X))
+        {
+            this.Owner.BoxCollider.SendsEvents = true;
+        }
+    }
+    function OnCollisionPersisted(event : CollisionEvent)
+    {
+        var otherObj = event.OtherObject;
+
+        
+        if (otherObj.Name == "Archer" || otherObj.Name == "Melee")
+        {
+            this.Counter += 1;
+            if (this.Counter == 2)
+            {
+                otherObj.Destroy();
+                this.Owner.BoxCollider.SendsEvents = false;
+                this.Counter = 0;
+            }
+        }
+    }
+}

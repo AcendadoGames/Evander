@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "FlipArcher",
+		uint64 ResourceId = 5816793f2d68c8f8,
+	},
+},

@@ -1,0 +1,69 @@
+class PlayerHealth : ZilchComponent
+{
+    var Health : Integer = 100;
+    var CurrentHealth : Integer;
+    var Timer : Real = 0;
+    var DeadDone : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        this.CurrentHealth = this.Health;
+        this.Owner.Transform.Translation = this.Space.GlobalVariables.StartPosition;
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (this.CurrentHealth != this.Health)
+        {
+            this.Space.FindObjectByName("PrototypePlayer").HUDBlood.ReceiveDamage();
+            
+            if(this.CurrentHealth > 0)
+            {
+                this.Health = this.CurrentHealth;
+            }
+            else 
+            {
+                this.Timer += event.Dt;
+                this.Health = 0;
+                this.Space.FindObjectByName("Camera").Camera.Size -= 0.5;
+                this.Owner.Sprite.AnimationActive = false;
+                this.Owner.KeyboardController.Enablemovement = false;
+                this.Owner.ComboTree.EnableCombo = false;
+                this.Owner.Sprite.Color = Real4(0,0,0,1);
+                this.Owner.MovementController.MoveSpeed = 0;
+                this.Owner.MovementController.DashSpeed = 0;
+                this.Owner.MovementController.JumpSpeed = 0;
+                this.Space.GlobalVariables.CanDash = false;
+                this.Space.GlobalVariables.OnGroundCanDash = false;
+                this.Space.GlobalVariables.Aiming = false;
+                this.Space.GlobalVariables.Dashing = false;
+                this.Space.GlobalVariables.RageMode = false;
+                this.Owner.MovementController.CanPlay = false;
+                if(this.Timer >= 2)
+                {
+                    this.Space.ComboText.ComboText = 0;
+                    this.Space.ComboText.Scale = 0;
+                    this.Space.ComboText.ComboTime = 0;
+                    Console.WriteLine("pene");
+                    this.GameSession.FindSpaceByName("HudSpace").Destroy();
+                    this.Space.ReloadLevel();
+                }
+            }
+        }
+    }
+    function PlayerHurt()
+    {
+        if(this.CurrentHealth > 0)
+        {
+            this.Space.FindObjectByName("PlayerHurtSound").SimpleSound.Cue = SoundCue.HurtEvander;
+            this.Space.FindObjectByName("PlayerHurtSound").SimpleSound.Play();
+        } 
+        else if(!this.DeadDone)
+        {
+            this.DeadDone = true;
+            this.Space.FindObjectByName("PlayerHurtSound").SimpleSound.Cue = SoundCue.DeathEvander;
+            this.Space.FindObjectByName("PlayerHurtSound").SimpleSound.Play();
+        }
+    }
+}

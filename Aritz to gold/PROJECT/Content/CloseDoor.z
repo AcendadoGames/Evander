@@ -1,0 +1,20 @@
+class CloseDoor : ZilchComponent
+{
+    var InArena : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.OnCollisionStarted);
+    }
+
+    function OnCollisionStarted(event :CollisionEvent)
+    {
+        if(event.OtherObject.Name == "PrototypePlayer")
+        {
+            this.InArena = true;
+            this.Space.FindObjectByName("Door").RigidBody.DynamicState = RigidBodyDynamicState.Dynamic;
+            this.Space.FindObjectByName("Camera").NewCameraLogic.Arena = true;
+            this.LevelSettings.Spawner.InArena = true;
+        }
+    }
+}

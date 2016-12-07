@@ -1,0 +1,20 @@
+class ClickSelect : ZilchComponent
+{
+    [Property]
+    var Level : Level = null;
+    
+    var Controller:Gamepad = null;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLeftMouseDown);
+    }
+    function OnLeftMouseDown(event : UpdateEvent)
+    {
+        if(this.Owner.Fading.Enabled == true)
+            if(this.Controller.IsButtonPressed(Buttons.Start))
+                this.Space.LoadLevel(this.Level);
+    }
+    
+}

@@ -1,0 +1,13 @@
+class PrototypeEnemiesSpawn : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Space.FindObjectByName("FallingGround").FallingGround.Spawn == true)
+            this.Owner.Transform.Translation = Real3(this.Owner.Transform.Translation.X,this.Owner.Transform.Translation.Y, 0.0);
+    }
+}

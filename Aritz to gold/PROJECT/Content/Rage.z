@@ -1,0 +1,70 @@
+class Rage : ZilchComponent
+{
+    var Controller:Gamepad = null;
+    var Duration : Real = 5;
+    var Temp : Real;
+    var ThunderAnimDone : Boolean = false;
+    function Initialize(init : CogInitializer)
+    {
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        this.Temp = this.Duration;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.Space.ComboText.ComboText >= 15 && !this.Space.GlobalVariables.RageMode && 
+           this.Controller.IsButtonHeld(Buttons.LeftThumb) && this.Controller.IsButtonHeld(Buttons.RightThumb))
+        {
+            if(!this.ThunderAnimDone)
+            {
+                this.Space.GlobalVariables.TransitioningToRage = true;
+                this.Space.TimeSpace.TimeScale = 0.2;
+                this.Space.FindObjectByName("thunder").ThunderAnim.OpacityAnim();
+                this.Space.FindObjectByName("thunder").ThunderAnim.OpacityToCero();
+                this.Space.FindObjectByName("BlackySky").ThunderAnim.OpacityAnim();
+                this.Space.FindObjectByName("ThunderWhiteSky").ThunderAnim.OpacityAnim();
+                this.ThunderAnimDone = true;
+                this.Space.FindObjectByName("thunder").SimpleSound.Play();
+            
+                var seq = Action.Sequence(this.Owner.Actions);
+                Action.Delay(seq, this.Space.FindObjectByName("thunder").ThunderAnim.FadeInDelay);
+                Action.Call(seq, this.StartEffect);
+                var seq2 = Action.Sequence(this.Owner.Actions);
+                Action.Delay(seq2, 5);
+                Action.Call(seq2, this.ChangeWeather);
+            }
+        }
+        
+        if(this.Space.GlobalVariables.RageMode && this.Duration > 0)
+        {
+            this.Duration -= event.Dt;
+        }
+        else if (this.Space.GlobalVariables.RageMode && this.Duration < 0)
+        {
+            this.Space.GlobalVariables.RageMode = false;
+            this.Space.FindObjectByName("Thunders").ThunderPlayerTracking.FollowPlayer = true;
+            this.ThunderAnimDone = false;
+            this.Duration = this.Temp;
+            this.Space.ComboText.ComboText = 0;
+        }
+    }
+    
+    function StartEffect()
+    {
+        this.Space.GlobalVariables.TransitioningToRage = false;
+        this.Space.FindObjectByName("Thunders").ThunderPlayerTracking.FollowPlayer = false;
+        this.Space.GlobalVariables.RageMode = true;
+        this.Space.TimeSpace.TimeScale = 1;
+        this.Space.FindObjectByName("thunder").ThunderShake.SingleShake();
+        this.Space.FindObjectByName("Camera").CameraShake.SingleShake(true);
+        if(this.Space.FindObjectByName("RainMaker").BoxParticleEmitter.EmitRate == 0)
+            this.Space.DynamicWeather.RainIn();
+        if(this.Space.FindObjectByName("SnowMaker").BoxParticleEmitter.EmitRate != 0)
+            this.Space.DynamicWeather.SnowOut();
+    }
+    function ChangeWeather()
+    {
+        this.Space.DynamicWeather.RandomWeather();
+    }
+}

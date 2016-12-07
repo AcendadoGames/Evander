@@ -1,0 +1,103 @@
+class EnemyHealth : ZilchComponent
+{
+    [Property]
+    var EnemyLife : Real = 100;
+    
+    var Rand : Random = Random();
+    var BeenDamaged : Boolean = false;
+    var Timer : Real = 3;
+    var Dead : Boolean = false;
+    var X1Vel : Real = 20;
+    var X2Vel : Real = 50;
+    var Y1Vel : Real = 20;
+    var Y2Vel : Real = 50;
+    var Z1Vel : Real = -70;
+    var Z2Vel : Real = 70;
+    
+    var Z1AngVel : Real = -0.65;
+    var Z2AngVel : Real = 0.65;
+    var AngVel : Real = 0;
+    var XVel : Real = 0;
+    var YVel : Real = 0;
+    
+    var DeadVelocity : Real3;
+
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.AngVel = this.Rand.Range(this.Z2AngVel, this.Z1AngVel);
+        
+        this.XVel = this.Rand.Range(this.X1Vel, this.X2Vel);
+            
+        this.YVel = this.Rand.Range(this.Y1Vel, this.Y2Vel);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted, this.DamageReceived);
+    }
+
+    function DamageReceived(event : CollisionEvent)
+    {
+        this.BeenDamaged = false;
+        if(event.OtherObject.Name == "damage")
+        {
+            if(event.OtherObject.Attack.Swish)
+                this.Owner.SimpleSound.Cue = SoundCue.SwordNormalHit;
+            else
+                this.Owner.SimpleSound.Cue = SoundCue.SwordGround;
+                
+            this.Owner.SimpleSound.Play(); 
+            this.BeenDamaged = true;
+            ////(event.OtherObject.Attack.Damage);
+            this.EnemyLife -= event.OtherObject.Attack.Damage;
+            this.Space.ComboText.AddCombo();
+        }
+    }
+    
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.EnemyLife <= 0)
+        {
+            this.Owner.IgnoreSpaceEffects.IgnoreGravity = true;
+            this.Owner.VelRotDampening.VelocityDampening = 1;
+            this.Owner.VelRotDampening.JumpDampening = 1;
+            this.Owner.VelRotDampening.NegativeJumpDampening = 1;
+            this.Owner.VelRotDampening.RotationDampening = 1;
+            this.Owner.Name = "DeadEnemy";
+            
+            this.Owner.BoxCollider.Ghost = true;
+            if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX && !this.Dead)
+            {
+                Console.WriteLine("here");
+                this.XVel = -this.XVel;
+                //("here");
+            }
+            if(!this.Dead)
+            {
+                this.Owner.SimpleSound.Cue = SoundCue.MeleeDead;
+                this.Owner.SimpleSound.Play();
+                this.Dead = true;    
+            }
+            this.Timer -= event.Dt;
+            this.Timer = Math.Round(this.Timer, -2);
+            if (this.Timer > 1)
+            {
+                this.Owner.RigidBody.Velocity = Real3(this.XVel,
+                                                      this.YVel,
+                                                      -1.5);
+                                                             
+                this.Owner.RigidBody.AngularVelocity = Real3(0,
+                                                             0,
+                                                             this.Owner.RigidBody.AngularVelocity.Z + this.AngVel);
+            }
+            /*else if(this.SpawnOnce)
+            {
+                this.Space.CreateAtPosition(this.Explosion, this.Owner.Parent.Transform.Translation);
+                this.SpawnOnce = false;
+            }*/
+            else if (this.Timer <= 0.75)
+            {
+                this.Owner.Destroy();
+            }
+        }
+    }
+}

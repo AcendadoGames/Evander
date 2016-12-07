@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "TimeRotation",
+		uint64 ResourceId = 58b9c5c3ef83f12b,
+	},
+},
