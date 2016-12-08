@@ -24,7 +24,11 @@ class PlayerAnimation : ZilchComponent
 
     function OnLogicUpdate(event : UpdateEvent)
     {
+<<<<<<< HEAD
         if (!this.InCombo && !this.TimeRewinding )
+=======
+        if (!this.InCombo && !this.TimeRewinding)
+>>>>>>> origin/master
         {
             //Idle Animation
             if (this.Owner.MovementController.NotMoving == true && this.Owner.Sprite.SpriteSource.Name != "Evander_IDLE")

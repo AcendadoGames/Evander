@@ -107,7 +107,11 @@ Level =
 		},
 		Transform = 
 		{
+<<<<<<< HEAD
 			Vec3 Translation = [2.64307213, -0.613078296, 50],
+=======
+			Vec3 Translation = [-0.013605102, 0, 50],
+>>>>>>> origin/master
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -119,7 +123,11 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
+<<<<<<< HEAD
 			float Size = 29.8365326,
+=======
+			float Size = 14.81639,
+>>>>>>> origin/master
 		},
 		EditorCameraController = 
 		{
@@ -127,7 +135,11 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
+<<<<<<< HEAD
 			Vec3 LookTarget = [2.64307213, -0.613078296, 1.15532373e-07],
+=======
+			Vec3 LookTarget = [-0.013605102, 0, -5.94697902e-10],
+>>>>>>> origin/master
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -143,6 +155,7 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 4,
 		},
 		Named = 
@@ -171,12 +184,41 @@ Level =
 			TextAlign Align = Center,
 			float PixelsPerUnit = 64,
 			bool Smoothing = true,
+=======
+			uint Id = 2,
+		},
+		Named = 
+		{
+			string Name = "Camera",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 0, 30],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		Camera = 
+		{
+			ProjectionMode ProjectionMode = Orthographic,
+			Facing Facing = NegativeZ,
+			CameraTransparentSort TransparentSort = InheritFromSpace,
+			float FieldOfView = 45,
+			float NearPlane = 0.5,
+			float FarPlane = 200,
+			float Size = 20,
+		},
+		SoundListener = 
+		{
+			bool Active = true,
+			float Volume = 1,
+>>>>>>> origin/master
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 5,
 		},
 		Named = 
@@ -190,11 +232,27 @@ Level =
 			Quat Rotation = [0, 0, 0, 1],
 		},
 		SpriteText = 
+=======
+			uint Id = 4,
+		},
+		Named = 
+		{
+			string Name = "MenuBackground",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0, 0, 0],
+			Vec3 Scale = [1.5, 2.5, 1],
+			Quat Rotation = [0, 0, 0.707106829, 0.707106829],
+		},
+		Sprite = 
+>>>>>>> origin/master
 		{
 			bool Visible = true,
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
+<<<<<<< HEAD
 			Vec4 Color = [0.220000029, 0.108988009, 0.0286000073, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
@@ -205,12 +263,26 @@ Level =
 			TextAlign Align = Center,
 			float PixelsPerUnit = 64,
 			bool Smoothing = true,
+=======
+			Vec4 Color = [1, 1, 1, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "58bd0497c60324c2:InGameMenu",
+			string SpriteSource = "58be773ed59fc067:pergamino",
+			bool RenderMask = false,
+			bool FlipX = false,
+			bool FlipY = false,
+			bool AnimationActive = true,
+			float AnimationSpeed = 1,
+			uint StartFrame = 0,
+>>>>>>> origin/master
 		},
 	},
 	Cog = 
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 6,
 		},
 		Named = 
@@ -220,6 +292,17 @@ Level =
 		Transform = 
 		{
 			Vec3 Translation = [9.983778e-07, 6.6238184, 0],
+=======
+			uint Id = 5,
+		},
+		Named = 
+		{
+			string Name = "Restart",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [0.0249964297, -0.649882317, 0],
+>>>>>>> origin/master
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -235,7 +318,11 @@ Level =
 			string SpriteLayer = "58bd0497c60324c2:InGameMenu",
 			string FontName = "5834f2942b1781f1:Outrun future Bold Italic",
 			uint FontSize = 90,
+<<<<<<< HEAD
 			string Text = "CONTINUE",
+=======
+			string Text = "RESTART",
+>>>>>>> origin/master
 			TextAlign Align = Center,
 			float PixelsPerUnit = 64,
 			bool Smoothing = true,
@@ -245,6 +332,7 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 7,
 		},
 		Named = 
@@ -286,6 +374,17 @@ Level =
 		Transform = 
 		{
 			Vec3 Translation = [0.0249964297, 1.18189538, 0],
+=======
+			uint Id = 6,
+		},
+		Named = 
+		{
+			string Name = "Continue",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [9.983778e-07, 6.6238184, 0],
+>>>>>>> origin/master
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [0, 0, 0, 1],
 		},
@@ -301,7 +400,11 @@ Level =
 			string SpriteLayer = "58bd0497c60324c2:InGameMenu",
 			string FontName = "5834f2942b1781f1:Outrun future Bold Italic",
 			uint FontSize = 90,
+<<<<<<< HEAD
 			string Text = "OPTIONS",
+=======
+			string Text = "CONTINUE",
+>>>>>>> origin/master
 			TextAlign Align = Center,
 			float PixelsPerUnit = 64,
 			bool Smoothing = true,
@@ -311,7 +414,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 9,
+=======
+			uint Id = 7,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -345,6 +452,7 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 10,
 		},
 		Named = 
@@ -358,11 +466,27 @@ Level =
 			Quat Rotation = [0, 0, 0.707106829, 0.707106829],
 		},
 		Sprite = 
+=======
+			uint Id = 8,
+		},
+		Named = 
+		{
+			string Name = "Controls",
+		},
+		Transform = 
+		{
+			Vec3 Translation = [9.983778e-07, 3.17443323, 0],
+			Vec3 Scale = [1, 1, 1],
+			Quat Rotation = [0, 0, 0, 1],
+		},
+		SpriteText = 
+>>>>>>> origin/master
 		{
 			bool Visible = true,
 			bool VisibilityCulling = true,
 			bool VisibilityEvents = true,
 			bool CastShadows = false,
+<<<<<<< HEAD
 			Vec4 Color = [1, 1, 1, 1],
 			BlendMode BlendMode = Alpha,
 			SpriteGeometryMode GeometryMode = ZPlane,
@@ -374,6 +498,18 @@ Level =
 			bool AnimationActive = true,
 			float AnimationSpeed = 1,
 			uint StartFrame = 0,
+=======
+			Vec4 Color = [0.220000029, 0.108988009, 0.0286000073, 1],
+			BlendMode BlendMode = Alpha,
+			SpriteGeometryMode GeometryMode = ZPlane,
+			string SpriteLayer = "58bd0497c60324c2:InGameMenu",
+			string FontName = "5834f2942b1781f1:Outrun future Bold Italic",
+			uint FontSize = 90,
+			string Text = "Controls",
+			TextAlign Align = Center,
+			float PixelsPerUnit = 64,
+			bool Smoothing = true,
+>>>>>>> origin/master
 		},
 	},
 },

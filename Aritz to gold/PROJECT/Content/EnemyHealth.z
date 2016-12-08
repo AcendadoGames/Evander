@@ -7,7 +7,10 @@ class EnemyHealth : ZilchComponent
     var BeenDamaged : Boolean = false;
     var Timer : Real = 3;
     var Dead : Boolean = false;
+<<<<<<< HEAD
     var Done : Boolean = false;
+=======
+>>>>>>> origin/master
     var X1Vel : Real = 20;
     var X2Vel : Real = 50;
     var Y1Vel : Real = 20;
@@ -56,6 +59,7 @@ class EnemyHealth : ZilchComponent
     
     function OnLogicUpdate(event : UpdateEvent)
     {
+<<<<<<< HEAD
         
         if(this.EnemyLife <= 0)
         {
@@ -66,6 +70,10 @@ class EnemyHealth : ZilchComponent
             }
             
             
+=======
+        if(this.EnemyLife <= 0)
+        {
+>>>>>>> origin/master
             this.Owner.IgnoreSpaceEffects.IgnoreGravity = true;
             this.Owner.VelRotDampening.VelocityDampening = 1;
             this.Owner.VelRotDampening.JumpDampening = 1;

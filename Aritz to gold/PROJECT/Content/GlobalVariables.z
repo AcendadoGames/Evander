@@ -19,9 +19,12 @@ class GlobalVariables : ZilchComponent
     var EnablePlay : Boolean = false;
     var ComboSlowTime : Real = 0;
     var TransitioningToRage : Boolean = false;
+<<<<<<< HEAD
     var Master : Real = 1.0;
     var Music : Real = 1.0;
     var FX : Real = 1.0;
+=======
+>>>>>>> origin/master
     
     function Initialize(init : CogInitializer)
     {

@@ -125,7 +125,11 @@ Level =
 		},
 		Transform = 
 		{
+<<<<<<< HEAD
 			Vec3 Translation = [-101.29599, -0.0492407829, 49.9999962],
+=======
+			Vec3 Translation = [-39.0794373, 2.30498743, 50],
+>>>>>>> origin/master
 			Vec3 Scale = [1, 1, 1],
 			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
@@ -137,7 +141,11 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
+<<<<<<< HEAD
 			float Size = 40.6570053,
+=======
+			float Size = 100,
+>>>>>>> origin/master
 		},
 		EditorCameraController = 
 		{
@@ -145,7 +153,11 @@ Level =
 			float LookDistance = 50,
 			float VerticalAngle = 0,
 			float HorizontalAngle = 0,
+<<<<<<< HEAD
 			Vec3 LookTarget = [-101.29599, -0.0492407829, -4.45555588e-06],
+=======
+			Vec3 LookTarget = [-39.0794373, 2.30498743, -1.73598232e-06],
+>>>>>>> origin/master
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -1767,7 +1779,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 5,
+=======
+			uint Id = 56,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -1900,7 +1916,11 @@ Level =
 			{
 				LinkId = 
 				{
+<<<<<<< HEAD
 					uint Id = 56,
+=======
+					uint Id = 57,
+>>>>>>> origin/master
 				},
 				Named = 
 				{
@@ -1950,7 +1970,11 @@ Level =
 					{
 						LinkId = 
 						{
+<<<<<<< HEAD
 							uint Id = 57,
+=======
+							uint Id = 58,
+>>>>>>> origin/master
 						},
 						Named = 
 						{
@@ -1996,7 +2020,11 @@ Level =
 							{
 								LinkId = 
 								{
+<<<<<<< HEAD
 									uint Id = 58,
+=======
+									uint Id = 59,
+>>>>>>> origin/master
 								},
 								Named = 
 								{
@@ -2042,7 +2070,11 @@ Level =
 									{
 										LinkId = 
 										{
+<<<<<<< HEAD
 											uint Id = 59,
+=======
+											uint Id = 60,
+>>>>>>> origin/master
 										},
 										Named = 
 										{
@@ -2087,7 +2119,11 @@ Level =
 									{
 										LinkId = 
 										{
+<<<<<<< HEAD
 											uint Id = 60,
+=======
+											uint Id = 61,
+>>>>>>> origin/master
 										},
 										Named = 
 										{
@@ -2133,7 +2169,11 @@ Level =
 											{
 												LinkId = 
 												{
+<<<<<<< HEAD
 													uint Id = 61,
+=======
+													uint Id = 62,
+>>>>>>> origin/master
 												},
 												Named = 
 												{
@@ -2179,7 +2219,11 @@ Level =
 													{
 														LinkId = 
 														{
+<<<<<<< HEAD
 															uint Id = 62,
+=======
+															uint Id = 63,
+>>>>>>> origin/master
 														},
 														Named = 
 														{
@@ -2225,7 +2269,11 @@ Level =
 															{
 																LinkId = 
 																{
+<<<<<<< HEAD
 																	uint Id = 63,
+=======
+																	uint Id = 64,
+>>>>>>> origin/master
 																},
 																Named = 
 																{
@@ -2271,7 +2319,11 @@ Level =
 																	{
 																		LinkId = 
 																		{
+<<<<<<< HEAD
 																			uint Id = 64,
+=======
+																			uint Id = 65,
+>>>>>>> origin/master
 																		},
 																		Named = 
 																		{
@@ -2317,7 +2369,11 @@ Level =
 																			{
 																				LinkId = 
 																				{
+<<<<<<< HEAD
 																					uint Id = 65,
+=======
+																					uint Id = 66,
+>>>>>>> origin/master
 																				},
 																				Named = 
 																				{
@@ -2377,7 +2433,11 @@ Level =
 							{
 								LinkId = 
 								{
+<<<<<<< HEAD
 									uint Id = 66,
+=======
+									uint Id = 67,
+>>>>>>> origin/master
 								},
 								Named = 
 								{
@@ -2423,7 +2483,11 @@ Level =
 									{
 										LinkId = 
 										{
+<<<<<<< HEAD
 											uint Id = 67,
+=======
+											uint Id = 68,
+>>>>>>> origin/master
 										},
 										Named = 
 										{
@@ -2468,7 +2532,11 @@ Level =
 									{
 										LinkId = 
 										{
+<<<<<<< HEAD
 											uint Id = 68,
+=======
+											uint Id = 69,
+>>>>>>> origin/master
 										},
 										Named = 
 										{
@@ -2520,7 +2588,11 @@ Level =
 					{
 						LinkId = 
 						{
+<<<<<<< HEAD
 							uint Id = 69,
+=======
+							uint Id = 70,
+>>>>>>> origin/master
 						},
 						Named = 
 						{
@@ -2540,7 +2612,11 @@ Level =
 							float OnAttackTime = 0.200000003,
 							string OnAttackAnim = "4e07948c35993095:DefaultSprite",
 							float PostAttackTime = 0.200000003,
+<<<<<<< HEAD
 							string PostAttackAnim = "5818424aa75d3ec1:2",
+=======
+							string PostAttackAnim = "4e07948c35993095:DefaultSprite",
+>>>>>>> origin/master
 							float InputTiming = 0.100000001,
 							string Text = "R",
 							string DamageArchetype = "58632e238f16a281:damage",
@@ -2566,7 +2642,11 @@ Level =
 							{
 								LinkId = 
 								{
+<<<<<<< HEAD
 									uint Id = 70,
+=======
+									uint Id = 71,
+>>>>>>> origin/master
 								},
 								Named = 
 								{
@@ -2612,7 +2692,11 @@ Level =
 									{
 										LinkId = 
 										{
+<<<<<<< HEAD
 											uint Id = 71,
+=======
+											uint Id = 72,
+>>>>>>> origin/master
 										},
 										Named = 
 										{
@@ -2658,7 +2742,11 @@ Level =
 											{
 												LinkId = 
 												{
+<<<<<<< HEAD
 													uint Id = 72,
+=======
+													uint Id = 73,
+>>>>>>> origin/master
 												},
 												Named = 
 												{
@@ -2704,7 +2792,11 @@ Level =
 													{
 														LinkId = 
 														{
+<<<<<<< HEAD
 															uint Id = 73,
+=======
+															uint Id = 74,
+>>>>>>> origin/master
 														},
 														Named = 
 														{
@@ -2750,7 +2842,11 @@ Level =
 															{
 																LinkId = 
 																{
+<<<<<<< HEAD
 																	uint Id = 74,
+=======
+																	uint Id = 75,
+>>>>>>> origin/master
 																},
 																Named = 
 																{
@@ -2798,7 +2894,11 @@ Level =
 															{
 																LinkId = 
 																{
+<<<<<<< HEAD
 																	uint Id = 75,
+=======
+																	uint Id = 76,
+>>>>>>> origin/master
 																},
 																Named = 
 																{
@@ -2845,7 +2945,11 @@ Level =
 													{
 														LinkId = 
 														{
+<<<<<<< HEAD
 															uint Id = 76,
+=======
+															uint Id = 77,
+>>>>>>> origin/master
 														},
 														Named = 
 														{
@@ -2891,7 +2995,11 @@ Level =
 															{
 																LinkId = 
 																{
+<<<<<<< HEAD
 																	uint Id = 77,
+=======
+																	uint Id = 78,
+>>>>>>> origin/master
 																},
 																Named = 
 																{
@@ -2937,7 +3045,11 @@ Level =
 																	{
 																		LinkId = 
 																		{
+<<<<<<< HEAD
 																			uint Id = 78,
+=======
+																			uint Id = 79,
+>>>>>>> origin/master
 																		},
 																		Named = 
 																		{
@@ -2983,7 +3095,11 @@ Level =
 																			{
 																				LinkId = 
 																				{
+<<<<<<< HEAD
 																					uint Id = 79,
+=======
+																					uint Id = 80,
+>>>>>>> origin/master
 																				},
 																				Named = 
 																				{
@@ -3029,7 +3145,11 @@ Level =
 																					{
 																						LinkId = 
 																						{
+<<<<<<< HEAD
 																							uint Id = 80,
+=======
+																							uint Id = 81,
+>>>>>>> origin/master
 																						},
 																						Named = 
 																						{
@@ -3074,7 +3194,11 @@ Level =
 																					{
 																						LinkId = 
 																						{
+<<<<<<< HEAD
 																							uint Id = 81,
+=======
+																							uint Id = 82,
+>>>>>>> origin/master
 																						},
 																						Named = 
 																						{
@@ -3120,7 +3244,11 @@ Level =
 																							{
 																								LinkId = 
 																								{
+<<<<<<< HEAD
 																									uint Id = 82,
+=======
+																									uint Id = 83,
+>>>>>>> origin/master
 																								},
 																								Named = 
 																								{
@@ -3166,7 +3294,11 @@ Level =
 																									{
 																										LinkId = 
 																										{
+<<<<<<< HEAD
 																											uint Id = 83,
+=======
+																											uint Id = 84,
+>>>>>>> origin/master
 																										},
 																										Named = 
 																										{
@@ -3212,7 +3344,11 @@ Level =
 																											{
 																												LinkId = 
 																												{
+<<<<<<< HEAD
 																													uint Id = 84,
+=======
+																													uint Id = 85,
+>>>>>>> origin/master
 																												},
 																												Named = 
 																												{
@@ -3258,7 +3394,11 @@ Level =
 																													{
 																														LinkId = 
 																														{
+<<<<<<< HEAD
 																															uint Id = 85,
+=======
+																															uint Id = 86,
+>>>>>>> origin/master
 																														},
 																														Named = 
 																														{
@@ -3304,7 +3444,11 @@ Level =
 																															{
 																																LinkId = 
 																																{
+<<<<<<< HEAD
 																																	uint Id = 86,
+=======
+																																	uint Id = 87,
+>>>>>>> origin/master
 																																},
 																																Named = 
 																																{
@@ -3364,7 +3508,11 @@ Level =
 																			{
 																				LinkId = 
 																				{
+<<<<<<< HEAD
 																					uint Id = 87,
+=======
+																					uint Id = 88,
+>>>>>>> origin/master
 																				},
 																				Named = 
 																				{
@@ -3410,7 +3558,11 @@ Level =
 																					{
 																						LinkId = 
 																						{
+<<<<<<< HEAD
 																							uint Id = 88,
+=======
+																							uint Id = 89,
+>>>>>>> origin/master
 																						},
 																						Named = 
 																						{
@@ -3455,7 +3607,11 @@ Level =
 																					{
 																						LinkId = 
 																						{
+<<<<<<< HEAD
 																							uint Id = 89,
+=======
+																							uint Id = 90,
+>>>>>>> origin/master
 																						},
 																						Named = 
 																						{
@@ -3509,7 +3665,11 @@ Level =
 															{
 																LinkId = 
 																{
+<<<<<<< HEAD
 																	uint Id = 90,
+=======
+																	uint Id = 91,
+>>>>>>> origin/master
 																},
 																Named = 
 																{
@@ -3560,7 +3720,11 @@ Level =
 									{
 										LinkId = 
 										{
+<<<<<<< HEAD
 											uint Id = 91,
+=======
+											uint Id = 92,
+>>>>>>> origin/master
 										},
 										Named = 
 										{
@@ -3607,7 +3771,11 @@ Level =
 							{
 								LinkId = 
 								{
+<<<<<<< HEAD
 									uint Id = 92,
+=======
+									uint Id = 93,
+>>>>>>> origin/master
 								},
 								Named = 
 								{
@@ -3627,12 +3795,20 @@ Level =
 									float OnAttackTime = 0.200000003,
 									string OnAttackAnim = "4e07948c35993095:DefaultSprite",
 									float PostAttackTime = 0.200000003,
+<<<<<<< HEAD
 									string PostAttackAnim = "5818424aa75affcd:4",
+=======
+									string PostAttackAnim = "4e07948c35993095:DefaultSprite",
+>>>>>>> origin/master
 									float InputTiming = 0.100000001,
 									string Text = "RR",
 									string DamageArchetype = "58632e238f16a281:damage",
 									float Damage = 0,
+<<<<<<< HEAD
 									Vec4 Color = [1, 0, 0, 0],
+=======
+									Vec4 Color = [1, 0, 0, 1],
+>>>>>>> origin/master
 									float LifeTime = 0.100000001,
 									Vec3 ImpulsePre = [0, -60, 0],
 									bool OnlyPushEnemyPre = false,
@@ -3653,7 +3829,11 @@ Level =
 									{
 										LinkId = 
 										{
+<<<<<<< HEAD
 											uint Id = 93,
+=======
+											uint Id = 94,
+>>>>>>> origin/master
 										},
 										Named = 
 										{
@@ -3699,7 +3879,11 @@ Level =
 											{
 												LinkId = 
 												{
+<<<<<<< HEAD
 													uint Id = 94,
+=======
+													uint Id = 95,
+>>>>>>> origin/master
 												},
 												Named = 
 												{
@@ -3745,7 +3929,11 @@ Level =
 													{
 														LinkId = 
 														{
+<<<<<<< HEAD
 															uint Id = 95,
+=======
+															uint Id = 96,
+>>>>>>> origin/master
 														},
 														Named = 
 														{
@@ -3791,7 +3979,11 @@ Level =
 															{
 																LinkId = 
 																{
+<<<<<<< HEAD
 																	uint Id = 96,
+=======
+																	uint Id = 97,
+>>>>>>> origin/master
 																},
 																Named = 
 																{
@@ -3836,7 +4028,11 @@ Level =
 															{
 																LinkId = 
 																{
+<<<<<<< HEAD
 																	uint Id = 97,
+=======
+																	uint Id = 98,
+>>>>>>> origin/master
 																},
 																Named = 
 																{
@@ -3882,7 +4078,11 @@ Level =
 																	{
 																		LinkId = 
 																		{
+<<<<<<< HEAD
 																			uint Id = 98,
+=======
+																			uint Id = 99,
+>>>>>>> origin/master
 																		},
 																		Named = 
 																		{
@@ -3928,7 +4128,11 @@ Level =
 																			{
 																				LinkId = 
 																				{
+<<<<<<< HEAD
 																					uint Id = 99,
+=======
+																					uint Id = 100,
+>>>>>>> origin/master
 																				},
 																				Named = 
 																				{
@@ -3974,7 +4178,11 @@ Level =
 																					{
 																						LinkId = 
 																						{
+<<<<<<< HEAD
 																							uint Id = 100,
+=======
+																							uint Id = 101,
+>>>>>>> origin/master
 																						},
 																						Named = 
 																						{
@@ -4020,7 +4228,11 @@ Level =
 																							{
 																								LinkId = 
 																								{
+<<<<<<< HEAD
 																									uint Id = 101,
+=======
+																									uint Id = 102,
+>>>>>>> origin/master
 																								},
 																								Named = 
 																								{
@@ -4066,7 +4278,11 @@ Level =
 																									{
 																										LinkId = 
 																										{
+<<<<<<< HEAD
 																											uint Id = 102,
+=======
+																											uint Id = 103,
+>>>>>>> origin/master
 																										},
 																										Named = 
 																										{
@@ -4126,7 +4342,11 @@ Level =
 													{
 														LinkId = 
 														{
+<<<<<<< HEAD
 															uint Id = 103,
+=======
+															uint Id = 104,
+>>>>>>> origin/master
 														},
 														Named = 
 														{
@@ -4172,7 +4392,11 @@ Level =
 															{
 																LinkId = 
 																{
+<<<<<<< HEAD
 																	uint Id = 104,
+=======
+																	uint Id = 105,
+>>>>>>> origin/master
 																},
 																Named = 
 																{
@@ -4217,7 +4441,11 @@ Level =
 															{
 																LinkId = 
 																{
+<<<<<<< HEAD
 																	uint Id = 105,
+=======
+																	uint Id = 106,
+>>>>>>> origin/master
 																},
 																Named = 
 																{
@@ -4271,7 +4499,11 @@ Level =
 									{
 										LinkId = 
 										{
+<<<<<<< HEAD
 											uint Id = 106,
+=======
+											uint Id = 107,
+>>>>>>> origin/master
 										},
 										Named = 
 										{
@@ -4320,7 +4552,11 @@ Level =
 					{
 						LinkId = 
 						{
+<<<<<<< HEAD
 							uint Id = 107,
+=======
+							uint Id = 108,
+>>>>>>> origin/master
 						},
 						Named = 
 						{
@@ -4366,7 +4602,11 @@ Level =
 							{
 								LinkId = 
 								{
+<<<<<<< HEAD
 									uint Id = 108,
+=======
+									uint Id = 109,
+>>>>>>> origin/master
 								},
 								Named = 
 								{
@@ -4415,7 +4655,11 @@ Level =
 			{
 				LinkId = 
 				{
+<<<<<<< HEAD
 					uint Id = 109,
+=======
+					uint Id = 110,
+>>>>>>> origin/master
 				},
 				Named = 
 				{
@@ -4494,7 +4738,11 @@ Level =
 			{
 				LinkId = 
 				{
+<<<<<<< HEAD
 					uint Id = 110,
+=======
+					uint Id = 111,
+>>>>>>> origin/master
 				},
 				Named = 
 				{
@@ -4528,7 +4776,11 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 111,
+=======
+			uint Id = 112,
+>>>>>>> origin/master
 		},
 		Transform = 
 		{
@@ -4545,7 +4797,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 112,
+=======
+			uint Id = 113,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -4581,7 +4837,11 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 113,
+=======
+			uint Id = 114,
+>>>>>>> origin/master
 		},
 		Transform = 
 		{
@@ -4599,7 +4859,11 @@ Level =
 		string Name = "58385de8037338d4:Limit",
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 114,
+=======
+			uint Id = 115,
+>>>>>>> origin/master
 		},
 		Transform = 
 		{
@@ -4616,7 +4880,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 115,
+=======
+			uint Id = 116,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -4684,7 +4952,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 116,
+=======
+			uint Id = 117,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -4723,7 +4995,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 117,
+=======
+			uint Id = 118,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -4805,7 +5081,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 118,
+=======
+			uint Id = 119,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -4887,7 +5167,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 119,
+=======
+			uint Id = 120,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -4969,7 +5253,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 120,
+=======
+			uint Id = 121,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -5004,7 +5292,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 121,
+=======
+			uint Id = 122,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -5049,7 +5341,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 122,
+=======
+			uint Id = 123,
+>>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -5074,7 +5370,11 @@ Level =
 			{
 				LinkId = 
 				{
+<<<<<<< HEAD
 					uint Id = 123,
+=======
+					uint Id = 124,
+>>>>>>> origin/master
 				},
 				Named = 
 				{
@@ -5138,7 +5438,11 @@ Level =
 	{
 		LinkId = 
 		{
+<<<<<<< HEAD
 			uint Id = 124,
+=======
+			uint Id = 125,
+>>>>>>> origin/master
 		},
 		Named = 
 		{

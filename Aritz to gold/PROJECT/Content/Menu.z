@@ -1,5 +1,6 @@
 class Menu : ZilchComponent
 {
+<<<<<<< HEAD
     var Controller : Gamepad = null;
     var MainMenu : Array[Cartel] = new Array[Cartel]();
     var Limit : Boolean = true;
@@ -12,6 +13,20 @@ class Menu : ZilchComponent
         Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
     }
     
+=======
+    
+    var MainMenu : Array[Cartel] = new Array[Cartel]();
+    var Limit : Boolean = true;
+    var Timer : Real = 0.2;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.InitializeMenu();
+        Zero.Connect(Zero.Keyboard, Events.KeyDown, this.Input);
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+     
+>>>>>>> origin/master
     function InitializeMenu()
     {
         var children = this.Owner.Children;
@@ -19,6 +34,7 @@ class Menu : ZilchComponent
         foreach (var child in children)
             this.MainMenu.Push(Cartel(child));
     }
+<<<<<<< HEAD
     
     function OnLogicUpdate(event : UpdateEvent)
     {
@@ -26,6 +42,20 @@ class Menu : ZilchComponent
             this.MoveTexts(-1);
         else if(Zero.Keyboard.KeyIsPressed(Keys.Up) || Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.StickUp))
             this.MoveTexts(1);
+=======
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(!this.Limit)
+        {
+            if(this.Timer > 0)
+                this.Timer -= event.Dt;
+            else
+            {
+                this.Limit = true;
+                this.Timer = 0.2;
+            }
+        }
+>>>>>>> origin/master
     }
     function Input(event : KeyboardEvent)
     {

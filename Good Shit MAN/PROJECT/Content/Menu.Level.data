@@ -113,9 +113,9 @@ Level =
 		},
 		Transform = 
 		{
-			Vec3 Translation = [11.3548584, -2.07165956, 50.0537529],
+			Vec3 Translation = [-2.88574576, -3.61176515, 70.4925995],
 			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [-0.0113160471, 0.0706223994, 0.000801218557, 0.997438669],
+			Quat Rotation = [-0, -1.09278471e-08, 0, 1],
 		},
 		Camera = 
 		{
@@ -125,15 +125,15 @@ Level =
 			float FieldOfView = 45,
 			float NearPlane = 0.5,
 			float FarPlane = 500,
-			float Size = 60.6530991,
+			float Size = 100,
 		},
 		EditorCameraController = 
 		{
-			ControlMode ControlMode = Orbit,
+			ControlMode ControlMode = ZPlane,
 			float LookDistance = 50,
-			float VerticalAngle = 0.0226892382,
-			float HorizontalAngle = -0.141371593,
-			Vec3 LookTarget = [4.31161404, -3.20602417, 0.565309763],
+			float VerticalAngle = 0,
+			float HorizontalAngle = 0,
+			Vec3 LookTarget = [-2.88574576, -3.61176515, 20.4925995],
 			float MoveSensitivity = 1,
 		},
 		EditorRenderer = 
@@ -187,7 +187,7 @@ Level =
 		},
 		SimpleSound = 
 		{
-			bool StartPlaying = false,
+			bool StartPlaying = true,
 			string CueName = "58eadb0afcb14ee8:Respiracion",
 		},
 	},
@@ -196,212 +196,6 @@ Level =
 		LinkId = 
 		{
 			uint Id = 4,
-		},
-		Named = 
-		{
-<<<<<<< HEAD
-=======
-			string Name = "MenuBackground",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [55.7791328, 0, 0],
-			Vec3 Scale = [3.42000008, 3.41000009, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "58886c9e24c7c98e:rome",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 5,
-		},
-		Named = 
-		{
->>>>>>> origin/master
-			string Name = "Logo",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [62.4956436, 6.5638628, 0],
-			Vec3 Scale = [2.25904346, 1.44635725, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 0],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "58886fbe506bf396:acendado games2",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		Fading = 
-		{
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-<<<<<<< HEAD
-			uint Id = 5,
-=======
-			uint Id = 6,
-		},
-		Named = 
-		{
-			string Name = "Board",
-		},
-		EditorFlags = 
-		{
-			bool Locked = false,
-			bool Hidden = true,
-		},
-		Transform = 
-		{
-			Vec3 Translation = [55.8052597, -0.0497539863, 2.9476837e-08],
-			Vec3 Scale = [32.4507294, 18.679863, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [0.699999988, 0.666749954, 0.367500007, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "5275aa4d802dd6dc:Square",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		White = 
-		{
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 7,
-		},
-		Named = 
-		{
-			string Name = "AGpresents",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [42.7831192, 6.93806124, 1.40830252e-07],
-			Vec3 Scale = [1, 1, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		SpriteText = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [0, 0, 0, 1],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string FontName = "5880890e7c40be6a:CANDY___",
-			uint FontSize = 150,
-			string Text = "Acendado Games presents",
-			TextAlign Align = Left,
-			float PixelsPerUnit = 28.3501129,
-			bool Smoothing = true,
-		},
-		Title = 
-		{
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-			uint Id = 8,
->>>>>>> origin/master
-		},
-		Named = 
-		{
-			string Name = "Start Demo",
-		},
-		Transform = 
-		{
-			Vec3 Translation = [45.3973312, -0.902467251, 1.40830252e-07],
-			Vec3 Scale = [1.5, 1.5, 1],
-			Quat Rotation = [0, 0, 0, 1],
-		},
-		Sprite = 
-		{
-			bool Visible = true,
-			bool VisibilityCulling = true,
-			bool VisibilityEvents = true,
-			bool CastShadows = false,
-			Vec4 Color = [1, 1, 1, 0],
-			BlendMode BlendMode = Alpha,
-			SpriteGeometryMode GeometryMode = ZPlane,
-			string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
-			string SpriteSource = "588082b53e768487:startdemo_0",
-			bool RenderMask = false,
-			bool FlipX = false,
-			bool FlipY = false,
-			bool AnimationActive = true,
-			float AnimationSpeed = 1,
-			uint StartFrame = 0,
-		},
-		Fading = 
-		{
-		},
-		ClickSelect = 
-		{
-			string Level = "587ab0e863b8654d:Level1",
-		},
-	},
-	Cog = 
-	{
-		LinkId = 
-		{
-<<<<<<< HEAD
-			uint Id = 6,
-=======
-			uint Id = 9,
->>>>>>> origin/master
 		},
 		Named = 
 		{
@@ -436,11 +230,7 @@ Level =
 	{
 		LinkId = 
 		{
-<<<<<<< HEAD
-			uint Id = 7,
-=======
-			uint Id = 10,
->>>>>>> origin/master
+			uint Id = 5,
 		},
 		Named = 
 		{
@@ -461,11 +251,7 @@ Level =
 			{
 				LinkId = 
 				{
-<<<<<<< HEAD
-					uint Id = 8,
-=======
-					uint Id = 11,
->>>>>>> origin/master
+					uint Id = 6,
 				},
 				Named = 
 				{
@@ -503,11 +289,7 @@ Level =
 			{
 				LinkId = 
 				{
-<<<<<<< HEAD
-					uint Id = 9,
-=======
-					uint Id = 12,
->>>>>>> origin/master
+					uint Id = 7,
 				},
 				Named = 
 				{
@@ -587,11 +369,7 @@ Level =
 			{
 				LinkId = 
 				{
-<<<<<<< HEAD
-					uint Id = 10,
-=======
-					uint Id = 13,
->>>>>>> origin/master
+					uint Id = 8,
 				},
 				Named = 
 				{
@@ -671,11 +449,7 @@ Level =
 			{
 				LinkId = 
 				{
-<<<<<<< HEAD
-					uint Id = 11,
-=======
-					uint Id = 14,
->>>>>>> origin/master
+					uint Id = 9,
 				},
 				Named = 
 				{
@@ -743,11 +517,7 @@ Level =
 			{
 				LinkId = 
 				{
-<<<<<<< HEAD
-					uint Id = 12,
-=======
-					uint Id = 15,
->>>>>>> origin/master
+					uint Id = 10,
 				},
 				Named = 
 				{
@@ -768,11 +538,7 @@ Level =
 					{
 						LinkId = 
 						{
-<<<<<<< HEAD
-							uint Id = 13,
-=======
-							uint Id = 16,
->>>>>>> origin/master
+							uint Id = 11,
 						},
 						Named = 
 						{
@@ -806,11 +572,7 @@ Level =
 					{
 						LinkId = 
 						{
-<<<<<<< HEAD
-							uint Id = 14,
-=======
-							uint Id = 17,
->>>>>>> origin/master
+							uint Id = 12,
 						},
 						Named = 
 						{
@@ -844,11 +606,7 @@ Level =
 					{
 						LinkId = 
 						{
-<<<<<<< HEAD
-							uint Id = 15,
-=======
-							uint Id = 18,
->>>>>>> origin/master
+							uint Id = 13,
 						},
 						Named = 
 						{
@@ -882,11 +640,7 @@ Level =
 					{
 						LinkId = 
 						{
-<<<<<<< HEAD
-							uint Id = 16,
-=======
-							uint Id = 19,
->>>>>>> origin/master
+							uint Id = 14,
 						},
 						Named = 
 						{
@@ -920,11 +674,7 @@ Level =
 					{
 						LinkId = 
 						{
-<<<<<<< HEAD
-							uint Id = 17,
-=======
-							uint Id = 20,
->>>>>>> origin/master
+							uint Id = 15,
 						},
 						Named = 
 						{
@@ -962,11 +712,7 @@ Level =
 	{
 		LinkId = 
 		{
-<<<<<<< HEAD
-			uint Id = 18,
-=======
-			uint Id = 21,
->>>>>>> origin/master
+			uint Id = 16,
 		},
 		Named = 
 		{
@@ -1056,11 +802,7 @@ Level =
 	{
 		LinkId = 
 		{
-<<<<<<< HEAD
-			uint Id = 19,
-=======
-			uint Id = 22,
->>>>>>> origin/master
+			uint Id = 17,
 		},
 		Named = 
 		{
@@ -1091,11 +833,7 @@ Level =
 	{
 		LinkId = 
 		{
-<<<<<<< HEAD
-			uint Id = 20,
-=======
-			uint Id = 23,
->>>>>>> origin/master
+			uint Id = 18,
 		},
 		Named = 
 		{

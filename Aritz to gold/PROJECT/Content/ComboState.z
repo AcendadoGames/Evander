@@ -61,10 +61,15 @@ class ComboState : ZilchComponent
     }
     function ExecuteCombo(time : Real)
     {
+<<<<<<< HEAD
         
         if(time < this.PreAttackTime)
         {
             
+=======
+        if(time < this.PreAttackTime)
+        {
+>>>>>>> origin/master
             //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PreAttackAnim;
             if(this.LifeTime > 0 && !this.Space.GlobalVariables.DamageDealt)
             {
@@ -108,7 +113,11 @@ class ComboState : ZilchComponent
         }
         else if(time > this.Temp1)
         {
+<<<<<<< HEAD
             this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PostAttackAnim;
+=======
+            //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PostAttackAnim;
+>>>>>>> origin/master
            
         }
         
