@@ -1,0 +1,55 @@
+class DecimalToRoman : ZilchComponent
+{
+    var Nums : Array[Integer] = new Array[Integer]();
+    var Rum : Array[String] = new Array[String]();
+
+    function Initialize(init : CogInitializer)
+    {
+        this.Nums.Push(1000);
+        this.Nums.Push(900);
+        this.Nums.Push(500);
+        this.Nums.Push(400);
+        this.Nums.Push(100);
+        this.Nums.Push(90);
+        this.Nums.Push(50);
+        this.Nums.Push(40);
+        this.Nums.Push(10);
+        this.Nums.Push(9);
+        this.Nums.Push(5);
+        this.Nums.Push(4);
+        this.Nums.Push(1);
+        
+        this.Rum.Push("M");
+        this.Rum.Push("CM");
+        this.Rum.Push("D");
+        this.Rum.Push("CD");
+        this.Rum.Push("C");
+        this.Rum.Push("XC");
+        this.Rum.Push("L");
+        this.Rum.Push("XL");
+        this.Rum.Push("X");
+        this.Rum.Push("IX");
+        this.Rum.Push("V");
+        this.Rum.Push("IV");
+        this.Rum.Push("I");
+        
+        this.ToRoman(666);
+
+        
+    }
+    function ToRoman(number : Integer) : String
+    {
+        var romanNumber : String = "";
+        for (var i = 0; i < this.Nums.Count && number != 0; i += 1)
+        {
+            while (number >= this.Nums[i])
+            {
+                number -= this.Nums[i];
+                romanNumber = String.Concatenate(romanNumber, this.Rum[i]);
+            }
+        }
+        ////(romanNumber);
+        return romanNumber;
+    }
+
+}

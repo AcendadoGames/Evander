@@ -1,0 +1,116 @@
+class ComboState : ZilchComponent
+{
+    [Property]
+    var NoneAttack : SpriteSource;
+    [Property]
+    var PreAttackTime : Real = 0.2;
+    [Property]
+    var PreAttackAnim : SpriteSource;
+    [Property]
+    var OnAttackTime : Real = 0.2;
+    [Property]
+    var OnAttackAnim : SpriteSource;
+    [Property]
+    var PostAttackTime : Real = 0.2;
+    [Property]
+    var PostAttackAnim : SpriteSource;
+    [Property]
+    var InputTiming : Real = 0.2;
+    [Property]
+    var Text : String = null;
+    [Property]
+    var DamageArchetype : Archetype = Archetype.Find("damage");
+    [Property]
+    var Damage : Real = 0;
+    [Property]
+    var Color : Real4 = Real4(0,0,0,1);
+    [Property]
+    var LifeTime : Real = 0.0;
+    [Property]
+    var ImpulsePre : Real3;
+    [Property]
+    var OnlyPushEnemyPre : Boolean = false;
+    [Property]
+    var Shake : Boolean = false;
+    [Property]
+    var GroundShake : Boolean = false;
+    [Property]
+    var ImpulsePost : Real3;
+    [Property]
+    var OnlyPushEnemyPost : Boolean = false;
+    [Property]
+    var GroundExplosion : Boolean = false;
+    [Property]
+    var Scale : Real3 = Real3(2,3,1);
+    [Property]
+    var Vibrate : Boolean = false;
+    [Property]
+    var LightShake : Boolean = false;
+    [Property]
+    var SlowMotionPre : Boolean = false;
+    [Property]
+    var SlowMotionPost : Boolean = false;
+    
+    
+    var Temp1 : Real;
+
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.Temp1 = this.PreAttackTime + this.OnAttackTime + this.PostAttackTime;
+    }
+    function ExecuteCombo(time : Real)
+    {
+        
+        if(time < this.PreAttackTime)
+        {
+            
+            //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PreAttackAnim;
+            if(this.LifeTime > 0 && !this.Space.GlobalVariables.DamageDealt)
+            {
+                this.Space.GlobalVariables.DamageDealt = true;
+                this.Space.GlobalVariables.EnablePlay = false;
+                if(this.Shake)
+                    this.Space.FindObjectByName("Camera").CameraShake.SingleShake(this.Vibrate);
+                else if(this.LightShake)
+                    this.Space.FindObjectByName("Camera").CameraShake.LightShake();
+                var position = this.Owner.Transform.WorldTranslation;
+                if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
+                    position.X -= 1; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
+                else
+                    position.X += 1;
+                var damage = this.Space.CreateAtPosition(this.DamageArchetype, position);
+                damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime, this.ImpulsePre, this.OnlyPushEnemyPre, this.Scale, this.SlowMotionPre, true);
+            }
+        }
+        if (time == 0.32) // this is a madarfakin magician numbuh
+        {
+            if(this.GroundExplosion)
+            {
+                if(this.GroundShake)
+                    this.Space.FindObjectByName("Camera").CameraShake.SingleShake(this.Vibrate);
+                var position = this.Owner.Transform.WorldTranslation;
+                if(this.Space.FindObjectByName("PrototypePlayer").Sprite.FlipX)
+                    position.X -= 1; // la posicion de spawneo, hay que tener en cuenta el flip del personaje, osea hacia donde esta mirando
+                else
+                    position.X += 1;
+                var damage = this.Space.CreateAtPosition(this.DamageArchetype, position);
+                damage.Attack.SetValues(this.Damage, this.Color, this.LifeTime, this.ImpulsePost, this.OnlyPushEnemyPost, this.Scale, this.SlowMotionPost, false);
+            }
+            else if(this.SlowMotionPost)
+                this.Space.GlobalVariables.ComboSlowTime = 0.05;
+        }
+            
+        else if(time > this.OnAttackTime + this.PreAttackTime)
+        {
+            this.Space.GlobalVariables.EnablePlay = true;
+            //this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.OnAttackAnim;
+        }
+        else if(time > this.Temp1)
+        {
+            this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.PostAttackAnim;
+           
+        }
+        
+    }
+}

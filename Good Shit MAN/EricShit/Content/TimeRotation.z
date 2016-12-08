@@ -1,0 +1,29 @@
+class TimeRotation : ZilchComponent
+{
+    var TimeRotation : Boolean = false;
+    var TimeScale: Real = 1;
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if (this.TimeRotation)
+        {
+            if(this.TimeScale <= 2)
+            {
+                this.Owner.Transform.EulerAngles += Real3(0, 0, 0.1 * this.TimeScale);
+                this.TimeScale += 0.01;
+            }
+            else
+                this.Owner.Transform.EulerAngles += Real3(0, 0, 0.2 * this.TimeScale);
+        }
+        else
+        {
+            this.TimeScale = 1;
+            if(this.Owner.Transform.EulerAngles.Z < 180)
+                this.Owner.Transform.EulerAngles = Real3(0, 0, -Math.Lerp(this.Owner.Transform.EulerAngles.Z, 0, 0.05));
+        }
+    }
+}

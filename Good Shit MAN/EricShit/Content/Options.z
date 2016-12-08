@@ -1,0 +1,336 @@
+class Options : ZilchComponent
+{
+    var Selected : Integer = 1;
+    var Selected2 : Integer = 1;
+    
+    var Controller:Gamepad = null;
+    
+    var Menu : Level = Level.Menu;
+    
+    var ResolControler : Boolean = false;
+    
+    var Master : Boolean = false;
+    
+    var FX : Boolean = false;
+    
+    var Music : Boolean = false;
+    
+    var FormerResol : Real2 = Real2(0,0);
+    
+    var JustPressed : Boolean = false;
+    function Initialize(init : CogInitializer)
+    {
+        this.FormerResol = this.GameSession.Resolution;
+        
+        this.Controller = Zero.Gamepads.GetGamePad(0);
+        
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+
+        if(this.GameSession.FullScreen)
+        {
+            this.Space.FindObjectByName("Fullscreen2").SpriteText.Text = "TRUE";
+            this.FormerResol = this.GameSession.Resolution;
+            this.Space.FindObjectByName("Resolution2").SpriteText.Text = "`this.FormerResol.X` x `this.FormerResol.Y`";
+        }
+
+        else
+        {
+            this.Space.FindObjectByName("Fullscreen2").SpriteText.Text = "FALSE";
+            this.FormerResol = this.GameSession.Resolution;
+            this.Space.FindObjectByName("Resolution2").SpriteText.Text = "`this.FormerResol.X` x `this.FormerResol.Y`";
+        }
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        /*************************SWITCHING SELECTED***************************/
+        if(!this.ResolControler && !this.Master && !this.FX && !this.Music)
+        {
+            if(this.Selected != 1 && (Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.StickUp) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Up) || this.Controller.IsButtonPressed(Buttons.DpadUp) ))
+            {
+                this.Selected -= 1;
+            }
+
+            if(this.Selected != 5 && Zero.Keyboard.KeyIsPressed(Keys.S) || this.Controller.IsButtonPressed(Buttons.StickDown) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Down) || this.Controller.IsButtonPressed(Buttons.DpadDown ))
+            {
+                this.Selected += 1;
+            }
+        }
+
+        /******************************FOCUS************************************/
+        if(!this.Master && this.Selected == 1)
+        {
+            this.Space.FindObjectByName("Master Sound").SpriteText.Color = Real4(0.5 ,10/255,130/255 ,1);
+            this.Space.FindObjectByName("Sound Fx").SpriteText.Color = Real4(56/255 ,28/255 ,7.0/255 ,1);
+            this.Space.FindObjectByName("Music").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Fullscreen").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Resolution").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+        }
+        
+        if(!this.FX && this.Selected == 2)
+        {
+            this.Space.FindObjectByName("Music").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Master Sound").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Sound Fx").SpriteText.Color =  Real4(0.5 ,10/255,130/255 ,1);
+            this.Space.FindObjectByName("Fullscreen").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Resolution").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+        }
+        
+        if(!this.Music && this.Selected == 3)
+        {
+            this.Space.FindObjectByName("Master Sound").SpriteText.Color =  Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Sound Fx").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Fullscreen").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Resolution").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Music").SpriteText.Color = Real4(0.5 ,10/255,130/255 ,1);
+        }
+        
+        if(this.Selected == 4)
+        {
+            this.Space.FindObjectByName("Fullscreen").SpriteText.Color =  Real4(0.5 ,10/255,130/255 ,1);
+            this.Space.FindObjectByName("Sound Fx").SpriteText.Color = Real4(56.0/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Master Sound").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Music").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Resolution").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+        }
+        
+        if(!this.ResolControler && this.Selected == 5)
+        {
+            this.Space.FindObjectByName("Sound Fx").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Fullscreen").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Master Sound").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+            this.Space.FindObjectByName("Resolution").SpriteText.Color =  Real4(0.5 ,10/255,130/255 ,1);
+            this.Space.FindObjectByName("Music").SpriteText.Color = Real4(56/255 ,28/255 ,7/255 ,1);
+        }
+        /*************************SELECTING CASE*******************************/
+        if(!this.Master && this.Selected == 1 && (Zero.Keyboard.KeyIsPressed(Keys.Enter) ||  Zero.Keyboard.KeyIsPressed(Keys.D) || this.Controller.IsButtonPressed(Buttons.A)))
+        {
+            this.Space.FindObjectByName("MasterSoundBar").Sprite.Color = Real4(1,0,0,1);
+            this.JustPressed = true;
+            this.Space.FindObjectByName("Master Sound").SpriteText.Color = Real4(0,0,0,1);
+            this.Master = true;
+        }
+        
+        else if(this.Master)
+        {
+            if(this.Controller.IsButtonPressed(Buttons.StickLeft) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Left) || this.Controller.IsButtonPressed(Buttons.DpadLeft))
+                {
+                    if(this.Space.GlobalVariables.Master >= 0)
+                        this.Space.GlobalVariables.Master -= 0.1;
+                    this.Space.FindObjectByName("MasterSoundBar").Area.Size = Real2(this.Space.GlobalVariables.Master*10,1);
+                }
+            if(this.Controller.IsButtonPressed(Buttons.StickRight) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Right) || this.Controller.IsButtonPressed(Buttons.DpadRight))
+                {
+                    if(this.Space.GlobalVariables.Master < 1)
+                        this.Space.GlobalVariables.Master += 0.1;
+                    this.Space.FindObjectByName("MasterSoundBar").Area.Size = Real2(this.Space.GlobalVariables.Master*10,1);
+                }
+        }
+        
+        if(!this.FX && this.Selected == 2 && (Zero.Keyboard.KeyIsPressed(Keys.Enter) ||  Zero.Keyboard.KeyIsPressed(Keys.D) || this.Controller.IsButtonPressed(Buttons.A)))
+        {
+            this.Space.FindObjectByName("Sound FX").Sprite.Color = Real4(1,0,0,1);
+            this.JustPressed = true;
+            this.Space.FindObjectByName("Sound Fx").SpriteText.Color = Real4(0,0,0,1);
+            this.FX = true;
+        }
+        
+        else if(this.FX)
+        {
+            if(this.Controller.IsButtonPressed(Buttons.StickLeft) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Left) || this.Controller.IsButtonPressed(Buttons.DpadLeft))
+                {
+                    if(this.Space.GlobalVariables.FX >= 0)
+                        this.Space.GlobalVariables.FX -= 0.1;
+                    this.Space.FindObjectByName("Sound FX").Area.Size = Real2(this.Space.GlobalVariables.FX*10,1);
+                }
+            if(this.Controller.IsButtonPressed(Buttons.StickRight) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Right) || this.Controller.IsButtonPressed(Buttons.DpadRight))
+                {
+                    if(this.Space.GlobalVariables.FX < 1)
+                        this.Space.GlobalVariables.FX += 0.1;
+                    this.Space.FindObjectByName("Sound FX").Area.Size = Real2(this.Space.GlobalVariables.FX*10,1);
+                }
+        }
+        
+        if(!this.Music && this.Selected == 3 && (Zero.Keyboard.KeyIsPressed(Keys.Enter) ||  Zero.Keyboard.KeyIsPressed(Keys.D) || this.Controller.IsButtonPressed(Buttons.A)))
+        {
+            this.Space.FindObjectByName("MusicBar").Sprite.Color = Real4(1,0,0,1);
+            this.JustPressed = true;
+            this.Space.FindObjectByName("Music").SpriteText.Color = Real4(0,0,0,1);
+            this.Music = true;
+        }
+        
+        else if(this.Music)
+        {
+            if(this.Controller.IsButtonPressed(Buttons.StickLeft) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Left) || this.Controller.IsButtonPressed(Buttons.DpadLeft))
+                {
+                    if(this.Space.GlobalVariables.Music >= 0)
+                        this.Space.GlobalVariables.Music -= 0.1;
+                    this.Space.FindObjectByName("MusicBar").Area.Size = Real2(this.Space.GlobalVariables.Music*10,1);
+                }
+            if(this.Controller.IsButtonPressed(Buttons.StickRight) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Right) || this.Controller.IsButtonPressed(Buttons.DpadRight))
+                {
+                    if(this.Space.GlobalVariables.Music < 1)
+                        this.Space.GlobalVariables.Music += 0.1;
+                    this.Space.FindObjectByName("MusicBar").Area.Size = Real2(this.Space.GlobalVariables.Music*10,1);
+                }
+        }
+        
+        if(this.Selected == 4 && (Zero.Keyboard.KeyIsPressed(Keys.Enter) ||  Zero.Keyboard.KeyIsPressed(Keys.D) || this.Controller.IsButtonPressed(Buttons.A)))
+        {
+            this.GameSession.ChangeResolution(!this.GameSession.FullScreen, this.GameSession.Resolution);
+            
+            if(this.GameSession.FullScreen)
+                this.Space.FindObjectByName("Fullscreen2").SpriteText.Text = "TRUE";
+            else
+                this.Space.FindObjectByName("Fullscreen2").SpriteText.Text = "FALSE";
+        }
+
+        if(!this.ResolControler && this.Selected == 5 && (Zero.Keyboard.KeyIsPressed(Keys.Enter) ||  Zero.Keyboard.KeyIsPressed(Keys.D) || this.Controller.IsButtonPressed(Buttons.A)))
+        {
+            this.JustPressed = true;
+            this.Space.FindObjectByName("Resolution").SpriteText.Color =  Real4(0 ,0 ,0 ,1);
+            this.ResolControler = true;
+        }
+
+        else if(this.ResolControler)
+        {
+            this.Space.FindObjectByName("Resolution2").SpriteText.Color =  Real4(0.5 ,10/255,130/255 ,1);
+
+            if(this.Selected2 != 1 && (Zero.Keyboard.KeyIsPressed(Keys.W) || this.Controller.IsButtonPressed(Buttons.StickUp) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Up) || this.Controller.IsButtonPressed(Buttons.DpadUp) ))
+            {
+                this.Selected2 -= 1;
+            }
+            if(this.Selected2 != 4 && Zero.Keyboard.KeyIsPressed(Keys.S) || this.Controller.IsButtonPressed(Buttons.StickDown) 
+                || Zero.Keyboard.KeyIsPressed(Keys.Down) || this.Controller.IsButtonPressed(Buttons.DpadDown ))
+            {
+                this.Selected2 += 1;
+            }
+
+
+
+            if(this.Selected2 == 1)
+            {
+                this.Space.FindObjectByName("Resolution2").SpriteText.Text = "1920 x 1080";
+                this.FormerResol = Real2(1920,1080);
+            }
+                
+            if(this.Selected2 == 2)
+            {
+                this.Space.FindObjectByName("Resolution2").SpriteText.Text = "1600 x 900";
+                this.FormerResol = Real2(1600,900);
+            }
+                
+            if(this.Selected2 == 3)
+            {
+                this.Space.FindObjectByName("Resolution2").SpriteText.Text = "1280 x 720";
+                this.FormerResol = Real2(1280,720);
+            }
+                
+            if(this.Selected2 == 4)
+            {
+                this.Space.FindObjectByName("Resolution2").SpriteText.Text =  "960 x 540";
+                this.FormerResol = Real2(960,540);
+            }
+                
+            if(this.Selected2 == 1 && (Zero.Keyboard.KeyIsPressed(Keys.Enter) || this.Controller.IsButtonPressed(Buttons.A)))
+            {
+
+                this.Space.FindObjectByName("Resolution2").SpriteText.Color =  Real4(0.309,0.309,0.309 ,1);
+                this.Space.FindObjectByName("Resolution").SpriteText.Color =  Real4(0.5 ,10/255,130/255 ,1);
+                this.ResolControler = false;
+                this.GameSession.ChangeResolution(false, Real2(1920, 1080));
+                this.Space.FindObjectByName("Fullscreen2").SpriteText.Text = "FALSE";
+            }
+            
+            if(this.Selected2 == 2 && (Zero.Keyboard.KeyIsPressed(Keys.Enter) || this.Controller.IsButtonPressed(Buttons.A)))
+            {
+                this.Space.FindObjectByName("Resolution2").SpriteText.Color =  Real4(0.309,0.309,0.309 ,1);
+                this.Space.FindObjectByName("Resolution").SpriteText.Color =  Real4(0.5 ,10/255,130/255 ,1);
+                this.ResolControler = false;
+                this.GameSession.ChangeResolution(false, Real2(1600, 900));
+                this.Space.FindObjectByName("Fullscreen2").SpriteText.Text = "FALSE";
+            }
+            
+            if(this.Selected2 == 3 && (Zero.Keyboard.KeyIsPressed(Keys.Enter) || this.Controller.IsButtonPressed(Buttons.A)))
+            {
+                this.Space.FindObjectByName("Resolution2").SpriteText.Color =  Real4(0.309,0.309,0.309 ,1);
+                this.Space.FindObjectByName("Resolution").SpriteText.Color =  Real4(0.5 ,10/255,130/255 ,1);
+                this.ResolControler = false;
+                this.GameSession.ChangeResolution(false, Real2(1280, 720));
+                this.Space.FindObjectByName("Fullscreen2").SpriteText.Text = "FALSE";
+            }
+            
+            if(this.Selected2 == 4 && (Zero.Keyboard.KeyIsPressed(Keys.Enter) || this.Controller.IsButtonPressed(Buttons.A)))
+            {
+                this.Space.FindObjectByName("Resolution2").SpriteText.Color =  Real4(0.309,0.309,0.309 ,1);
+                this.Space.FindObjectByName("Resolution").SpriteText.Color =  Real4(0.5 ,10/255,130/255 ,1);
+                this.ResolControler = false;
+                this.GameSession.ChangeResolution(false, Real2(960, 540));
+                this.Space.FindObjectByName("Fullscreen2").SpriteText.Text = "FALSE";
+            }
+        }
+        /**********************Getting Out of the menu****************************/
+        if(!this.JustPressed && (this.Controller.IsButtonPressed(Buttons.B) || this.Controller.IsButtonPressed(Buttons.A) 
+            || ((this.ResolControler || this.Music || this.FX || this.Master) && (Zero.Keyboard.KeyIsPressed(Keys.Enter)
+            || Zero.Keyboard.KeyIsPressed(Keys.A)))))
+        {
+            var spaces = this.GameSession.AllSpaces;
+            if(this.Music || this.FX || this.Master)
+            {
+                this.FX = false;
+                this.Music = false;
+                this.Master = false;
+                
+                this.Space.FindObjectByName("MusicBar").Sprite.Color = Real4(0.639,0.113,0.113,1);
+                this.Space.FindObjectByName("Sound FX").Sprite.Color = Real4(0.639,0.113,0.113,1);
+                this.Space.FindObjectByName("MasterSoundBar").Sprite.Color = Real4(0.639,0.113,0.113,1);
+            }
+
+            else if(this.ResolControler)
+            {
+                if(this.FormerResol != this.GameSession.Resolution)
+                {
+                    if(this.GameSession.Resolution.X == 1920)
+                        this.Space.FindObjectByName("Resolution2").SpriteText.Text = "1920 x 1080";
+
+                    if(this.GameSession.Resolution.X == 1600)
+                        this.Space.FindObjectByName("Resolution2").SpriteText.Text = "1600 x 900";
+
+                    if(this.GameSession.Resolution.X == 1280)
+                        this.Space.FindObjectByName("Resolution2").SpriteText.Text = "1280 x 720";
+
+                    if(this.GameSession.Resolution.X == 960)
+                        this.Space.FindObjectByName("Resolution2").SpriteText.Text = "960 x 540";
+                }
+                this.Space.FindObjectByName("Resolution2").SpriteText.Color =  Real4(0.309,0.309,0.309 ,1);
+                this.Space.FindObjectByName("Resolution").SpriteText.Color =  Real4(0.5 ,10/255,130/255 ,1);
+                this.ResolControler = false;
+            }
+
+            else if(!this.ResolControler && !this.Music && !this.FX && !this.Master && !this.Controller.IsButtonPressed(Buttons.A))
+            {
+                this.Space.TimeSpace.TogglePause();
+                this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = this.Space.TimeSpace.Paused;
+                this.Space.LoadLevel(Level.InGameMenu);
+            }
+        }
+        
+        if(Zero.Keyboard.KeyIsPressed(Keys.Escape) || this.Controller.IsButtonPressed(Buttons.Start))
+        {
+            this.Space.TimeSpace.TogglePause();
+            this.GameSession.FindSpaceByName("InGameMenuSpace").LevelSettings.CameraViewport.Active = this.Space.TimeSpace.Paused;
+            this.Space.LoadLevel(Level.InGameMenu);
+        }
+        
+        this.JustPressed = false;
+    }
+}

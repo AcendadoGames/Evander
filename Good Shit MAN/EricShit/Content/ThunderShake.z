@@ -1,0 +1,48 @@
+class ThunderShake : ZilchComponent
+{
+    var Rand : Random = Random();
+    var ShakeAmount : Real = 0.3;
+    var ShakeDuration : Real = 5;
+    var OriginalPos : Real3;
+    var DecreaseFactor : Real = 0.5;
+    var Shake : Boolean = false;
+    
+    function Initialize(init : CogInitializer)
+    {
+        this.OriginalPos = this.Owner.Transform.LocalTranslation;
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+            
+        if(this.Shake)
+        {
+            var randomShake = Real3(this.Rand.Range(-5,5),this.Rand.Range(-5,5),0);
+            if (this.ShakeDuration > 0)
+            {
+                this.Owner.Transform.LocalTranslation = this.OriginalPos + randomShake * this.ShakeAmount;
+                
+                this.ShakeDuration -= event.Dt * this.DecreaseFactor;
+                this.ShakeAmount -= event.Dt * this.DecreaseFactor;
+                if (this.ShakeAmount <= 0) this.ShakeAmount = 0;
+            }
+            else
+            {
+                this.ResetValues();
+                this.Shake = false;
+            }   
+        }
+    }
+    function ResetValues()
+    {
+        this.ShakeDuration = 5;
+        this.ShakeAmount = 0.3;
+        this.DecreaseFactor = 0.5;
+    }
+    function SingleShake()
+    {
+        this.Shake = true;
+        this.ResetValues();
+    }
+}

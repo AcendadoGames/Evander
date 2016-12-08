@@ -1,0 +1,19 @@
+class FEAbilities : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        //if(this.Space.CurrentLevel.Name == "FirstEncounterJanus")
+        //{
+            this.Space.GlobalVariables.CanDash = false;
+            this.Space.GlobalVariables.OnGroundCanDash = false;
+            this.Space.GlobalVariables.Aiming = false;
+            this.Space.GlobalVariables.Dashing = false;
+            this.Space.GlobalVariables.RageMode = false;
+        //}
+    }
+}

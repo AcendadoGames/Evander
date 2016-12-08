@@ -1,0 +1,85 @@
+Cog = 
+{
+	LinkId = 
+	{
+		uint Id = 1,
+	},
+	Named = 
+	{
+		string Name = "Thunders",
+	},
+	Transform = 
+	{
+		Vec3 Translation = [-50.3906898, 1.11191249, -3.90777222e-06],
+		Vec3 Scale = [1, 1, 1],
+		Quat Rotation = [0, 0, 0, 1],
+	},
+	ThunderPlayerTracking = 
+	{
+	},
+	Hierarchy = 
+	{
+		Cog = 
+		{
+			LinkId = 
+			{
+				uint Id = 2,
+			},
+			Named = 
+			{
+				string Name = "thunder",
+			},
+			Transform = 
+			{
+				Vec3 Translation = [-3.75017548, 11.1905699, 1.00000393],
+				Vec3 Scale = [2, 2, 1],
+				Quat Rotation = [0, 0, 0, 1],
+			},
+			Sprite = 
+			{
+				bool Visible = true,
+				bool VisibilityCulling = true,
+				bool VisibilityEvents = true,
+				bool CastShadows = false,
+				Vec4 Color = [1, 1, 1, 0],
+				BlendMode BlendMode = Additive,
+				SpriteGeometryMode GeometryMode = ZPlane,
+				string SpriteLayer = "52ad5fa30d7fcd50:DefaultSpriteLayer",
+				string SpriteSource = "5800898e31e0ba5c:Thunder",
+				bool RenderMask = false,
+				bool FlipX = false,
+				bool FlipY = false,
+				bool AnimationActive = true,
+				float AnimationSpeed = 1,
+				uint StartFrame = 0,
+			},
+			ThunderAnim = 
+			{
+				int Iterations = 15,
+				float StartOpacity = 0.699999988,
+				float EndOpacity = 1,
+				float FadeInDuration = 0.0399999991,
+				float FadeOutDuration = 0.0399999991,
+				float FadeInDelay = 0.104000002,
+				float FadeOutDelay = 0.123999998,
+			},
+			ThunderShake = 
+			{
+			},
+			SoundEmitter = 
+			{
+				float Volume = 1,
+				float Pitch = 0,
+				float PitchSemitones = 0,
+				bool UsePitchSemitones = false,
+				bool Positional = true,
+				int Version = 1,
+			},
+			SimpleSound = 
+			{
+				bool StartPlaying = false,
+				string CueName = "589c06f9002353d6:Thunder",
+			},
+		},
+	},
+},

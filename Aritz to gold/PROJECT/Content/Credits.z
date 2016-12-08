@@ -1,0 +1,21 @@
+class Credits : ZilchComponent
+{
+    [Property]
+    var Speed : Real = 1;
+    [Property]
+    var StopPosition : Real = 100;
+    
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        this.Owner.Transform.Translation += Real3(0, 0.1, 0) * this.Speed;
+        
+        if(this.Owner.Transform.Translation.Y >= this.StopPosition)
+        {
+            this.Space.LoadLevel(Level.Menu);
+        }
+    }
+}

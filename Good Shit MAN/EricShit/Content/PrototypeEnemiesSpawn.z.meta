@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "PrototypeEnemiesSpawn",
+		uint64 ResourceId = 587a9d3dd34879cf,
+	},
+},

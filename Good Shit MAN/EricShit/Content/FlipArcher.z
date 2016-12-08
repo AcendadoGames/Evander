@@ -1,0 +1,27 @@
+class FlipArcher : ZilchComponent
+{
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+    }
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        var ownerPosition = this.Owner.Transform.Translation;
+        var playerPosition = this.Space.FindObjectByName("PrototypePlayer").Transform.Translation;
+        
+        var vectorToPlayer = playerPosition - ownerPosition;
+        var xValue = vectorToPlayer.X;
+        
+        if (xValue == 0)
+        {
+        }
+        else if(xValue >= 0)
+        {
+            this.Owner.Sprite.FlipX = true;
+        }
+        else if(xValue <= 0)
+        {
+            this.Owner.Sprite.FlipX = false;
+        }
+    }
+}

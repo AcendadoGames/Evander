@@ -1,0 +1,8 @@
+TextContent = 
+{
+	ZilchScriptBuilder = 
+	{
+		string Name = "Level_CollumTrap",
+		uint64 ResourceId = 581856a1cecda278,
+	},
+},

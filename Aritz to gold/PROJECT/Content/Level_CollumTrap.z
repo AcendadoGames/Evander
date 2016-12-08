@@ -1,0 +1,123 @@
+class Level_CollumTrap : ZilchComponent
+{
+    [Property]
+    var StopPosition : Real = 25;
+    [Property]
+    var TimeInAnimation : Real = 4;
+    [Property]
+    var StartPosition : Real = 41;
+    [Property]
+    var StopSprite : SpriteSource = null;
+    [Property]
+    var EmitterTime : Real = 3.5;
+    
+    
+    var Archer : Archetype = Archetype.Archer;//Archetypes to spawn
+    var Melee : Archetype = Archetype.Melee;//Archetype to Spawn
+    
+    var Spawned : Boolean = false;
+    var InTrap : Boolean = false;
+    var EnemyCounter : Real = 4;
+    var TimerForEmitter : Real = 0;
+    var Timer : Real = 0;
+    function Initialize(init : CogInitializer)
+    {
+        Zero.Connect(this.Space, Events.LogicUpdate, this.OnLogicUpdate);
+        Zero.Connect(this.Owner, Events.CollisionStarted,this.OnCollisionStarted);
+    }
+    
+    function OnLogicUpdate(event : UpdateEvent)
+    {
+        if(this.InTrap)
+        {
+            this.Timer += event.Dt;
+            this.TimerForEmitter += event.Dt;
+            
+            if(this.TimerForEmitter <= this.EmitterTime)
+            {
+                this.Space.FindObjectByName("Spawner1").SphericalParticleEmitter.Active = true;
+                this.Space.FindObjectByName("Spawner2").SphericalParticleEmitter.Active = true;
+                this.Space.FindObjectByName("Spawner3").SphericalParticleEmitter.Active = true;
+                this.Space.FindObjectByName("Spawner4").SphericalParticleEmitter.Active = true;
+            }
+            else if (this.TimerForEmitter >= this.EmitterTime && this.Spawned == false)
+            {
+                this.Space.FindObjectByName("Spawner1").SphericalParticleEmitter.Active = false;
+                this.Space.FindObjectByName("Spawner2").SphericalParticleEmitter.Active = false;
+                this.Space.FindObjectByName("Spawner3").SphericalParticleEmitter.Active = false;
+                this.Space.FindObjectByName("Spawner4").SphericalParticleEmitter.Active = false;
+                
+                var archer = this.Space.CreateAtPosition(this.Archer, this.Space.FindObjectByName("Spawner1").Transform.Translation);
+                var melee = this.Space.CreateAtPosition(this.Melee, this.Space.FindObjectByName("Spawner2").Transform.Translation);
+                var melee2 = this.Space.CreateAtPosition(this.Melee, this.Space.FindObjectByName("Spawner3").Transform.Translation);
+                var archer2 = this.Space.CreateAtPosition(this.Archer, this.Space.FindObjectByName("Spawner4").Transform.Translation);
+                this.Spawned = true;
+            }
+            if(this.Timer <= this.TimeInAnimation)
+            {
+                this.Space.GlobalVariables.EnablePlay = false;
+                this.Space.FindObjectByName("Camera").NewCameraLogic.CameraCanMove = false;
+                this.Space.FindObjectByName("PrototypePlayer").MovementController.CanPlay = false;
+                this.Space.FindObjectByName("PrototypePlayer").Sprite.SpriteSource = this.StopSprite;
+                
+                
+                var cameraPos = this.Space.FindObjectByName("Camera").Transform.Translation;
+                var centerPosition = Real3(this.Owner.Transform.Translation.X, this.Owner.Transform.Translation.Y, this.Space.FindObjectByName("Camera").Transform.Translation.Z);
+                var newCameraPos = Math.Lerp(cameraPos,centerPosition, 0.02);
+                
+                this.Space.FindObjectByName("Camera").Transform.Translation = newCameraPos;
+                
+                
+                
+                
+                if (this.Space.FindObjectByName("Camera").Camera.Size <= 40)
+                    this.Space.FindObjectByName("Camera").Camera.Size += 0.1;
+                    
+                    /*GOING DOWN !*/
+                if (this.Space.FindObjectByName("CollumTrap1").Transform.Translation.Y >= this.StopPosition)
+                {
+                    this.Space.FindObjectByName("CollumTrap1").Transform.Translation -= Real3(0, 0.1, 0);
+                    this.Space.FindObjectByName("CollumTrap1").Sprite.Visible = true;
+                }
+                    
+                if (this.Space.FindObjectByName("CollumTrap2").Transform.Translation.Y >= this.StopPosition)
+                {
+                    this.Space.FindObjectByName("CollumTrap2").Transform.Translation -= Real3(0, 0.1, 0);
+                    this.Space.FindObjectByName("CollumTrap2").Sprite.Visible = true;
+                }
+                
+            }
+            else
+            {
+                this.Space.FindObjectByName("PrototypePlayer").MovementController.CanPlay = true;
+                this.Space.FindObjectByName("Camera").NewCameraLogic.CameraCanMove = true;
+                this.Space.GlobalVariables.EnablePlay = true;
+            }
+        }
+        
+        /*GOING UP !*/
+        if (this.EnemyCounter <= 0)
+        {
+            if (this.Space.FindObjectByName("CollumTrap1").Transform.Translation.Y <= this.StartPosition)
+                    this.Space.FindObjectByName("CollumTrap1").Transform.Translation += Real3(0, 0.1, 0);
+            else
+                this.Space.FindObjectByName("CollumTrap1").Sprite.Visible = false;
+                    
+                    
+            if (this.Space.FindObjectByName("CollumTrap2").Transform.Translation.Y <= this.StartPosition)
+                this.Space.FindObjectByName("CollumTrap2").Transform.Translation += Real3(0, 0.1, 0);
+            else
+                this.Space.FindObjectByName("CollumTrap1").Sprite.Visible = false;
+        }
+    }
+    
+    function OnCollisionStarted(event : CollisionEvent)
+    {
+        var otherObj = event.OtherObject;
+        
+        if (otherObj.Name == "PrototypePlayer")
+        {
+            this.InTrap = true;
+        }
+    }
+}
