@@ -527,7 +527,6 @@ Cog =
 				string MaterialName = "4de020863e872da8:DefaultPhysicsMaterial",
 				string SerializedGroupName = "5831f2a61e419268:Sensor",
 				Vec3 Offset = [0, 0, 0],
-<<<<<<< HEAD
 				Vec3 Size = [15, 5, 0.5],
 			},
 			RigidBody = 
@@ -541,9 +540,6 @@ Cog =
 				bool Inherit2DMode = true,
 				Vec3 Velocity = [0, 0, 0],
 				Vec3 AngularVelocity = [0, 0, 0],
-=======
-				Vec3 Size = [10, 5, 0.5],
->>>>>>> origin/master
 			},
 		},
 		Cog = 
